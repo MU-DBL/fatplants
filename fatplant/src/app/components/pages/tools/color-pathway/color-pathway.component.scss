@@ -36,7 +36,7 @@ mat-card {
 mat-card.base {
   width: 100%;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   background-image: none !important;
   margin: 6% 0 0 0 !important;
   min-height: 110%;
@@ -173,4 +173,7 @@ th, td.mat-cell {
   white-space: nowrap;
   padding-left: 5px;
   padding-right: 5px;
+}
+.row{
+  margin:2%
 }

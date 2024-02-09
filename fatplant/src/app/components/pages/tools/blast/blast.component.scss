@@ -84,15 +84,16 @@ a:hover {
 .database-selector {
   display: inline-block;
   background-color: inherit;
-  width: 40%;
+  width: 48%;
   height: 50%;
-  margin: 2%;
   border: 1px solid black;
   text-align: center;
   padding: 2%;
   cursor: pointer;
   transition: all 0.5s;
   box-shadow: 2px 2px 2px grey;
+  box-sizing: border-box;
+  margin-right: 2%
 }
 
 .database-selector.selected {
@@ -129,7 +130,9 @@ a:hover {
 }
 
 .textali{
-  text-align: center;
+  text-align: left;
+  margin-left:2%;
+  margin-right:2%;
 }
 .blast{
   width: 60%;
