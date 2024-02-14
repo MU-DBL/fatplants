@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,14 +35,14 @@ export class FirestoreConnectionService {
   }
 
   searchSQLAPI(query: string, species: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/get_species_records/?species="+ species +"&expression=" + query);
+    return this.http.get(environment.BASE_API_URL+"get_species_records/?species="+ species +"&expression=" + query);
   }
 
   getDataSetSamples(species: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/sample/?species="+species)
+    return this.http.get(environment.BASE_API_URL+"sample/?species="+species)
   }
 
   searchFattyAcid(query: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/fatty_acid_search/?query=" + query);
+    return this.http.get(environment.BASE_API_URL+"fatty_acid_search/?query=" + query);
   }
 }

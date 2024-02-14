@@ -14,7 +14,8 @@
 
 .title-info {
     margin-bottom: 50px;
-    text-align: center;
+    text-align: left;
+    margin:2%;
 }
 .error-text {
     text-align: center;
@@ -60,8 +61,8 @@ a.active {
     transition: all 0.5s;
 }
 #table {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
     font-family: "PT Sans", sans-serif;
 }
 mat-header-cell {

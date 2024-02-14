@@ -15,6 +15,7 @@ import { StructureViewerComponent } from '../structure-viewer/structure-viewer.c
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -418,7 +419,7 @@ export class ShowresultsComponent implements OnInit {
 
   selectImage(pathway: string) {
     this.isLoadingImage = true;
-    this.selectedPathImage = "https://fatplantsmu.ddns.net:5000/highlighted_image/?species="+this.speciesName+"&uniprot_id="+this.extendedData.uniprot_id+"&pathway_id="+pathway;
+    this.selectedPathImage = environment.BASE_API_URL+"highlighted_image/?species="+this.speciesName+"&uniprot_id="+this.extendedData.uniprot_id+"&pathway_id="+pathway;
   }
 
   onImageLoad() {
@@ -444,7 +445,7 @@ export class ShowresultsComponent implements OnInit {
     var elemTop = canvas.offsetTop + canvas.clientTop;
     var elements = [];
     //this.http.get('https://us-central1-linux-shell-test.cloudfunctions.net/keggget?cfg=get&para=conf&id='+id, {responseType: 'text'}).subscribe(data => {
-      this.http.get('https://fatplantsmu.ddns.net:5000/getcoordinates/?pathway_id='+id, {responseType: 'text'}).subscribe(data => {
+      this.http.get(environment.BASE_API_URL+'getcoordinates/?pathway_id='+id, {responseType: 'text'}).subscribe(data => {
       for (const line of data.substr(1).slice(0, -1).split('\\n')) {
         if (line.slice(0, 4) === 'rect') {
           var linesplit = line.split('\\t');
@@ -527,7 +528,7 @@ export class ShowresultsComponent implements OnInit {
       
       }
         //img1.src = 'https://us-central1-linux-shell-test.cloudfunctions.net/keggget?cfg=get&para=image&id=' + id;
-        img1.src = "https://fatplantsmu.ddns.net:5000/highlighted_image/?species="+this.speciesName+"&uniprot_id="+this.uniprot_id+"&pathway_id="+id;
+        img1.src = environment.BASE_API_URL+"highlighted_image/?species="+this.speciesName+"&uniprot_id="+this.uniprot_id+"&pathway_id="+id;
 
 
     });

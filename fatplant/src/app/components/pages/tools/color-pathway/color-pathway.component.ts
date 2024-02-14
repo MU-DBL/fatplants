@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from 'angularfire2/firestore';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-color-pathway',
   templateUrl: './color-pathway.component.html',
@@ -175,7 +176,7 @@ export class ColorPathwayComponent implements OnInit {
     this.isLoadingImage = true;
     var id = pathway;
     
-    this.selectedImage = "https://fatplantsmu.ddns.net:5000/highlighted_image/?species="+this.selectedSpecies+"&uniprot_id="+this.uniprot+"&pathway_id="+pathway;
+    this.selectedImage = environment.BASE_API_URL+"highlighted_image/?species="+this.selectedSpecies+"&uniprot_id="+this.uniprot+"&pathway_id="+pathway;
 
     //TODO
     //Clear canvas before load new image
@@ -185,7 +186,7 @@ export class ColorPathwayComponent implements OnInit {
     var elemLeft = canvas.offsetLeft + canvas.clientLeft;
     var elemTop = canvas.offsetTop + canvas.clientTop;
     var elements = [];
-    this.http.get('https://fatplantsmu.ddns.net:5000/getcoordinates/?pathway_id='+id, {responseType: 'text'}).subscribe(data => {
+    this.http.get(environment.BASE_API_URL+'getcoordinates/?pathway_id='+id, {responseType: 'text'}).subscribe(data => {
       for (const line of data.substr(1).slice(0, -1).split('\\n')) {
         if (line.slice(0, 4) === 'rect') {
           var linesplit = line.split('\\t');
