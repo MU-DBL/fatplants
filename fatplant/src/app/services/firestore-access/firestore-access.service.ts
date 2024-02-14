@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -72,26 +73,26 @@ export class FirestoreAccessService {
   }
 
   getBaseProteinFromUniProt(uniprot_id: string, species: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/uniprot/?species="+ species +"&uniprot=" + uniprot_id);
+    return this.http.get(environment.BASE_API_URL+"uniprot/?species="+ species +"&uniprot=" + uniprot_id);
   }
 
   getBaseProteinFromTair(species: string, tair: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/tair/?species="+species+"&tair="+ tair);
+    return this.http.get(environment.BASE_API_URL+"tair/?species="+species+"&tair="+ tair);
   }
 
   getExtendedDetails(fp_id: string, species: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/details/?species="+species+"&id="+fp_id);
+    return this.http.get(environment.BASE_API_URL+"details/?species="+species+"&id="+fp_id);
   }
 
   searchSQLAPI(query: string, species: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/get_species_records/?species="+ species +"&expression=" + query);
+    return this.http.get(environment.BASE_API_URL+"get_species_records/?species="+ species +"&expression=" + query);
   }
 
   getHomoLogs(uniprot_id: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/homolog/?uniprot_id=" + uniprot_id);
+    return this.http.get(environment.BASE_API_URL+"homolog/?uniprot_id=" + uniprot_id);
   }
 
   getPathwaysByUniProt(species: string, uniprot_id: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/pathways/?species="+species+"&uniprot_id="+uniprot_id);
+    return this.http.get(environment.BASE_API_URL+"pathways/?species="+species+"&uniprot_id="+uniprot_id);
   }
 }

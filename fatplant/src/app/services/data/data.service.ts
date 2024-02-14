@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from "rxjs";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import { FirestoreAccessService } from '../firestore-access/firestore-access.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable(
@@ -39,7 +40,7 @@ export class DataService {
 
 
   getPathwaysByUniProt(species: string, uniprot_id: string) {
-    return this.http.get("https://fatplantsmu.ddns.net:5000/pathways/?species="+species+"&uniprot_id="+uniprot_id);
+    return this.http.get(environment.BASE_API_URL+"pathways/?species="+species+"&uniprot_id="+uniprot_id);
   }
 
 }
