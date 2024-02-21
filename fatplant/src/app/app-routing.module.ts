@@ -34,7 +34,8 @@ import { ExtendedPathwayComponent } from './components/pages/tools/extended-path
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
 import { HomeComponent } from './components/homecomponents/home/home.component';
 
-const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
+const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
+// {path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'homepage', component: HomepageComponent},
 {path: 'login', component: LoginComponent},
 {path: 'introduction', component: IntroductionComponent},
@@ -68,7 +69,8 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'extended-pathway', component: ExtendedPathwayComponent},
 {path: 'blast-internal', component:BlastInternalComponent},
 {path: 'home', component:HomeComponent},
-{path: '**', redirectTo: '/home'}];
+// {path: '**', redirectTo: '/home'}];
+{path: '**', redirectTo: '/homepage'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{ anchorScrolling: 'enabled'})],
