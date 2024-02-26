@@ -90,6 +90,7 @@ import { ProteinCamelinaComponent } from './components/pages/datapages/protein-c
 import { ExcludeListItemPipe, ExtendedPathwayComponent } from './components/pages/tools/extended-pathway/extended-pathway.component';
 import { GptDialogComponent } from './components/commons/gpt-dialog/gpt-dialog.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
+import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +140,8 @@ import { BlastInternalComponent } from './components/pages/tools/blast-internal/
     ExtendedPathwayComponent,
     ExcludeListItemPipe,
     GptDialogComponent,
-    BlastInternalComponent
+    BlastInternalComponent,
+    ProteinDetailsNewComponent
   ],
   entryComponents: [
     StructureViewerComponent,
