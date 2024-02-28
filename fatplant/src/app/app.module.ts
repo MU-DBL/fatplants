@@ -44,6 +44,7 @@ import { GlmolComponent } from './components/pages/tools/glmol/glmol.component';
 import { ColorPathwayComponent } from './components/pages/tools/color-pathway/color-pathway.component';
 import { IntroductionComponent } from './components/pages/introductions/introduction/introduction.component';
 import { InvestigatorComponent } from './components/pages/introductions/investigator/investigator.component';
+import { InvestigatorNewComponent } from './components/pages/introductions/investigatorNew/investigatorNew.component';
 import { DetailviewComponent } from './detailview/detailview.component';
 import { DropzoneDirective } from './directives/dropzone.directive';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -106,6 +107,7 @@ import { BlastInternalComponent } from './components/pages/tools/blast-internal/
     GraphComponent,
     IntroductionComponent,
     InvestigatorComponent,
+    InvestigatorNewComponent,
     BlastComponent,
     DetailviewComponent,
     NgCytoComponent,
