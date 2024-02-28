@@ -33,10 +33,12 @@ import { ProteinSoybeanComponent } from './components/pages/datapages/protein-so
 import { ProteinCamelinaComponent } from './components/pages/datapages/protein-camelina/protein-camelina.component';
 import { ExtendedPathwayComponent } from './components/pages/tools/extended-pathway/extended-pathway.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
+import { HomeComponent } from './components/homecomponents/home/home.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
 import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
+// {path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'homepage', component: HomepageComponent},
 {path: 'login', component: LoginComponent},
 {path: 'introduction', component: IntroductionComponent},
@@ -71,6 +73,8 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'pathway-viewer', component: PathwayViewerComponent},
 {path: 'extended-pathway', component: ExtendedPathwayComponent},
 {path: 'blast-internal', component:BlastInternalComponent},
+{path: 'home', component:HomeComponent},
+// {path: '**', redirectTo: '/home'}];
 {path: '**', redirectTo: '/homepage'}];
 
 @NgModule({
