@@ -10,6 +10,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 import { IntroductionComponent } from './components/pages/introductions/introduction/introduction.component';
 import { InvestigatorComponent } from './components/pages/introductions/investigator/investigator.component';
+import { InvestigatorNewComponent } from './components/pages/introductions/investigatorNew/investigatorNew.component';
 import { GraphComponent } from './components/pages/networks/protein-network/graph.component';
 // import { CytodemoComponent } from './cytodemo/cytodemo.component';
 import { LmpddetailviewComponent } from './components/pages/datapages/lmpddetailview/lmpddetailview.component';
@@ -38,6 +39,7 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'login', component: LoginComponent},
 {path: 'introduction', component: IntroductionComponent},
 {path: 'investigator', component: InvestigatorComponent},
+{path: 'investigatorNew', component: InvestigatorNewComponent},
 {path: 'lmpd_arapidopsis', component: LmpdArapidopsisComponent},
 {path: 'glmol', component: GlmolComponent},
 {path: 'color-pathway', component: ColorPathwayComponent},
