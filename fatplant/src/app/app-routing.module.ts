@@ -10,6 +10,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 import { IntroductionComponent } from './components/pages/introductions/introduction/introduction.component';
 import { InvestigatorComponent } from './components/pages/introductions/investigator/investigator.component';
+import { InvestigatorNewComponent } from './components/pages/introductions/investigatorNew/investigatorNew.component';
 import { GraphComponent } from './components/pages/networks/protein-network/graph.component';
 // import { CytodemoComponent } from './cytodemo/cytodemo.component';
 import { LmpddetailviewComponent } from './components/pages/datapages/lmpddetailview/lmpddetailview.component';
@@ -33,6 +34,8 @@ import { ProteinCamelinaComponent } from './components/pages/datapages/protein-c
 import { ExtendedPathwayComponent } from './components/pages/tools/extended-pathway/extended-pathway.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
 import { HomeComponent } from './components/homecomponents/home/home.component';
+import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
+import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -40,6 +43,7 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'login', component: LoginComponent},
 {path: 'introduction', component: IntroductionComponent},
 {path: 'investigator', component: InvestigatorComponent},
+{path: 'investigatorNew', component: InvestigatorNewComponent},
 {path: 'lmpd_arapidopsis', component: LmpdArapidopsisComponent},
 {path: 'glmol', component: GlmolComponent},
 {path: 'color-pathway', component: ColorPathwayComponent},
@@ -60,11 +64,12 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'soybean', component: SoybeanComponent},
 {path: 'add-news', component: AddNewsComponent},
 {path: 'datasets', redirectTo: '/datasets/arabidopsis', pathMatch: 'full'},
-{path: 'datasets/:dataset', component: UnifiedDatapageComponent},
+{path: 'datasets/:dataset', component: UnifiedDatapageComponent}, //component: DatasetsNewComponent
 {path: 'showresults/:uniprot_id/:cfg', component: ShowresultsComponent},
 {path: 'protein/:uniprot_id', component: ProteinDetailComponent},
-{path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent},
+{path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent}, 
 {path: 'camelina_prot/:uniprot_id', component: ProteinCamelinaComponent},
+// {path: 'details/:database_name/:uniprot_id',component:ProteinDetailsNewComponent},
 {path: 'pathway-viewer', component: PathwayViewerComponent},
 {path: 'extended-pathway', component: ExtendedPathwayComponent},
 {path: 'blast-internal', component:BlastInternalComponent},

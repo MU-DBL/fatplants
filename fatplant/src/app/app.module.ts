@@ -44,6 +44,7 @@ import { GlmolComponent } from './components/pages/tools/glmol/glmol.component';
 import { ColorPathwayComponent } from './components/pages/tools/color-pathway/color-pathway.component';
 import { IntroductionComponent } from './components/pages/introductions/introduction/introduction.component';
 import { InvestigatorComponent } from './components/pages/introductions/investigator/investigator.component';
+import { InvestigatorNewComponent } from './components/pages/introductions/investigatorNew/investigatorNew.component';
 import { DetailviewComponent } from './detailview/detailview.component';
 import { DropzoneDirective } from './directives/dropzone.directive';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -94,6 +95,7 @@ import { MenuComponent } from './components/homecomponents/menu/menu.component';
 import { FooterComponent } from './components/homecomponents/footer/footer.component';
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { SearchComponent } from './components/homecomponents/search/search.component';
+import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +112,7 @@ import { SearchComponent } from './components/homecomponents/search/search.compo
     GraphComponent,
     IntroductionComponent,
     InvestigatorComponent,
+    InvestigatorNewComponent,
     BlastComponent,
     DetailviewComponent,
     NgCytoComponent,
@@ -147,7 +150,8 @@ import { SearchComponent } from './components/homecomponents/search/search.compo
     MenuComponent,
     FooterComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    ProteinDetailsNewComponent
   ],
   entryComponents: [
     StructureViewerComponent,
