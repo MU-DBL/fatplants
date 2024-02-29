@@ -96,6 +96,13 @@ import { FooterComponent } from './components/homecomponents/footer/footer.compo
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { SearchComponent } from './components/homecomponents/search/search.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
+import { NetworkComponent } from './components/go-network-page/network.component';
+import { GlmolStructurePageComponent } from './components/glmol-structure-page/glmol-structure-page.component';
+import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pathway-viewer-page.component';
+import { BlastPageComponent } from './components/blast-page/blast-page.component';
+import { CustomPathwayViewerComponent } from './components/pathway-viewer-page/custom-pathway-viewer/custom-pathway-viewer.component';
+import { KeggPathwayViewerComponent } from './components/pathway-viewer-page/kegg-pathway-viewer/kegg-pathway-viewer.component';
+import { ExtendedPathwayViewerComponent } from './components/pathway-viewer-page/extended-pathway-viewer/extended-pathway-viewer.component';
 
 @NgModule({
   declarations: [
@@ -151,7 +158,14 @@ import { ProteinDetailsNewComponent } from './components/pages/datapages/protein
     FooterComponent,
     HomeComponent,
     SearchComponent,
-    ProteinDetailsNewComponent
+    ProteinDetailsNewComponent,
+    NetworkComponent,
+    GlmolStructurePageComponent,
+    PathwayViewerPageComponent,
+    BlastPageComponent,
+    CustomPathwayViewerComponent,
+    KeggPathwayViewerComponent,
+    ExtendedPathwayViewerComponent
   ],
   entryComponents: [
     StructureViewerComponent,

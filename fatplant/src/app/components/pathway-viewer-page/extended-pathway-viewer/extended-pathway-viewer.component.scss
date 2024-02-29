@@ -1,0 +1,23 @@
+@import "~src/variables.scss";
+
+div{
+  width:100%;
+  text-align: center;
+  /* background-color: #FCFF7B; */
+}
+
+.imageArea{
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+
+img {
+  width: 80%;
+}
+
+.selector{
+    margin-top: 10px;
+    width: 40%;
+}

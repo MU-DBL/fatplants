@@ -36,6 +36,10 @@ import { BlastInternalComponent } from './components/pages/tools/blast-internal/
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
 // import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
+import { NetworkComponent } from './components/go-network-page/network.component';
+import { BlastPageComponent } from './components/blast-page/blast-page.component';
+import { GlmolStructurePageComponent } from './components/glmol-structure-page/glmol-structure-page.component';
+import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pathway-viewer-page.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -75,6 +79,10 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'blast-internal', component:BlastInternalComponent},
 {path: 'home', component:HomeComponent},
 // {path: '**', redirectTo: '/home'}];
+{path: 'go-network-page', component:NetworkComponent},
+{path: 'blast-page', component:BlastPageComponent},
+{path: 'glmol-page', component:GlmolStructurePageComponent}, 
+{path: 'pathway-viewer-page', component:PathwayViewerPageComponent}, 
 {path: '**', redirectTo: '/homepage'}];
 
 @NgModule({
