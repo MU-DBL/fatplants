@@ -1,0 +1,19 @@
+.icon {
+  float: left;
+  border-radius: 2px;
+  height: 4vw;
+  width: 12vw;
+  box-sizing: border-box;
+  background-image: url("../../../assets/homepageAssets/icon.PNG");
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.nav-item a.nav-link:hover {
+  cursor: pointer;
+}
+
+.bg {
+  background-color: #efefef;
+}
