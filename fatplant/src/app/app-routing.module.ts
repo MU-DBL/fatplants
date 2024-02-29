@@ -33,7 +33,7 @@ import { ProteinCamelinaComponent } from './components/pages/datapages/protein-c
 import { ExtendedPathwayComponent } from './components/pages/tools/extended-pathway/extended-pathway.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
-import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
+// import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'homepage', component: HomepageComponent},
