@@ -35,7 +35,7 @@ import { ExtendedPathwayComponent } from './components/pages/tools/extended-path
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
-import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
+// import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
