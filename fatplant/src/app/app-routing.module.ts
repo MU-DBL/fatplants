@@ -32,6 +32,7 @@ import { ProteinSoybeanComponent } from './components/pages/datapages/protein-so
 import { ProteinCamelinaComponent } from './components/pages/datapages/protein-camelina/protein-camelina.component';
 import { ExtendedPathwayComponent } from './components/pages/tools/extended-pathway/extended-pathway.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
+import { DataComponent } from './components/pages/Data_Page/data/data.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'homepage', component: HomepageComponent},
@@ -59,6 +60,8 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'add-news', component: AddNewsComponent},
 {path: 'datasets', redirectTo: '/datasets/arabidopsis', pathMatch: 'full'},
 {path: 'datasets/:dataset', component: UnifiedDatapageComponent},
+// {path: 'data', component:DataComponent},
+// {path: 'data/:dataset', component: DataComponent},
 {path: 'showresults/:uniprot_id/:cfg', component: ShowresultsComponent},
 {path: 'protein/:uniprot_id', component: ProteinDetailComponent},
 {path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent},
