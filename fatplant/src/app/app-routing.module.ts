@@ -36,6 +36,7 @@ import { BlastInternalComponent } from './components/pages/tools/blast-internal/
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
 // import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
+import { DataComponent } from './components/pages/Data_Page/data/data.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -65,6 +66,8 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'add-news', component: AddNewsComponent},
 {path: 'datasets', redirectTo: '/datasets/arabidopsis', pathMatch: 'full'},
 {path: 'datasets/:dataset', component: UnifiedDatapageComponent}, //component: DatasetsNewComponent
+// {path: 'data', component:DataComponent},
+// {path: 'data/:dataset', component: DataComponent},
 {path: 'showresults/:uniprot_id/:cfg', component: ShowresultsComponent},
 {path: 'protein/:uniprot_id', component: ProteinDetailComponent},
 {path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent}, 
