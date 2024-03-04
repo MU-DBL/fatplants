@@ -40,6 +40,7 @@ import { NetworkComponent } from './components/go-network-page/network.component
 import { BlastPageComponent } from './components/blast-page/blast-page.component';
 import { GlmolStructurePageComponent } from './components/glmol-structure-page/glmol-structure-page.component';
 import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pathway-viewer-page.component';
+import { DataComponent } from './components/pages/Data_Page/data/data.component';
 
 const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -69,6 +70,8 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'add-news', component: AddNewsComponent},
 {path: 'datasets', redirectTo: '/datasets/arabidopsis', pathMatch: 'full'},
 {path: 'datasets/:dataset', component: UnifiedDatapageComponent}, //component: DatasetsNewComponent
+// {path: 'data', component:DataComponent},
+// {path: 'data/:dataset', component: DataComponent},
 {path: 'showresults/:uniprot_id/:cfg', component: ShowresultsComponent},
 {path: 'protein/:uniprot_id', component: ProteinDetailComponent},
 {path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent}, 
