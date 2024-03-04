@@ -91,6 +91,7 @@ import { ExcludeListItemPipe, ExtendedPathwayComponent } from './components/page
 import { GptDialogComponent } from './components/commons/gpt-dialog/gpt-dialog.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
+import { DatasetsNewComponent } from './components/pages/datapages/datasets-new/datasets-new.component';
 
 @NgModule({
   declarations: [
@@ -141,7 +142,8 @@ import { ProteinDetailsNewComponent } from './components/pages/datapages/protein
     ExcludeListItemPipe,
     GptDialogComponent,
     BlastInternalComponent,
-    ProteinDetailsNewComponent
+    ProteinDetailsNewComponent,
+    DatasetsNewComponent
   ],
   entryComponents: [
     StructureViewerComponent,

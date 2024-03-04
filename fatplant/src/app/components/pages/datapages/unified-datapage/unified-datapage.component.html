@@ -1,135 +1,144 @@
 <mat-card id="base">
-    <div class="left-menu">
-      <mat-form-field id="filter">
-        <input matInput [value]="searchQuery" (keyup)="onSearchChange($event)" placeholder="Search">
-      </mat-form-field>
-      <mat-icon (click)='applySearchQuery()' class="pointer" matTooltip="Search">search</mat-icon>
-      <mat-icon (click)='refreshData()' class="pointer" matTooltip="Clear Search">refresh</mat-icon>
-      
-      <br><br><br>
-        <p class="subheader protein">Protein Species</p>
-        <a class="menu" [class.active]='this.dataset == "arabidopsis"' (click)='changeDataset("arabidopsis")'>Arabidopsis</a>
-        <a class="menu" [class.active]='this.dataset == "camelina"' (click)='changeDataset("camelina")'>Camelina</a>
-        <a class="menu" [class.active]='this.dataset == "soybean"' (click)='changeDataset("soybean")'>Soybean</a>
-        <a class="menu" [class.active]='this.dataset == "cuphea"' (click)='changeDataset("cuphea")'>Cuphea</a>
-        <a class="menu" [class.active]='this.dataset == "pennycress"' (click)='changeDataset("pennycress")'>Pennycress</a>
-        <p class="subheader fattyacid">Fatty Acids</p>
-        <a class="menu" [class.active]='this.dataset == "fattyacid"' (click)='changeDataset("fattyacid")'>Chemical Data</a>
-    </div>
-    <div id='table'  *ngIf="!loading">
-      <mat-table [dataSource]='currentDataSource' style="width:100%">
-          
-        <ng-container matColumnDef="uniprot_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Uniprot Page </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> 
-            <a href="http://uniprot.org/uniprot/{{elem.uniprot_id}}" target="_blank">
-              {{elem.uniprot_id}} <mat-icon class="external-link">launch</mat-icon>
+  <div class="left-menu">
+    <mat-form-field id="filter">
+      <input matInput [value]="searchQuery" (keyup)="onSearchChange($event)" placeholder="Search">
+    </mat-form-field>
+    <mat-icon (click)='applySearchQuery()' class="pointer" matTooltip="Search">search</mat-icon>
+    <mat-icon (click)='refreshData()' class="pointer" matTooltip="Clear Search">refresh</mat-icon>
+
+    <br><br><br>
+    <p class="subheader protein">Protein Species</p>
+    <a class="menu" [class.active]='this.dataset == "arabidopsis"'
+      (click)='changeDataset("arabidopsis")'>Arabidopsis</a>
+    <a class="menu" [class.active]='this.dataset == "camelina"' (click)='changeDataset("camelina")'>Camelina</a>
+    <a class="menu" [class.active]='this.dataset == "soybean"' (click)='changeDataset("soybean")'>Soybean</a>
+    <a class="menu" [class.active]='this.dataset == "cuphea"' (click)='changeDataset("cuphea")'>Cuphea</a>
+    <a class="menu" [class.active]='this.dataset == "pennycress"' (click)='changeDataset("pennycress")'>Pennycress</a>
+    <p class="subheader fattyacid">Fatty Acids</p>
+    <a class="menu" [class.active]='this.dataset == "fattyacid"' (click)='changeDataset("fattyacid")'>Chemical Data</a>
+  </div>
+  <div id='table' *ngIf="!loading">
+    <mat-table [dataSource]='currentDataSource' style="width:100%">
+
+      <ng-container matColumnDef="uniprot_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Uniprot Page </mat-header-cell>
+        <mat-cell *matCellDef="let elem">
+          <a href="http://uniprot.org/uniprot/{{elem.uniprot_id}}" target="_blank">
+            {{elem.uniprot_id}} <mat-icon class="external-link">launch</mat-icon>
+          </a>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="refseq_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Refseq Page </mat-header-cell>
+        <mat-cell *matCellDef="let elem">
+          <a href="https://www.ncbi.nlm.nih.gov/protein/{{elem.refseq_id.split(';')[0]}}" target="_blank">
+            {{ elem.refseq_id.split(";")[0] }} <mat-icon *ngIf="elem.refseq_id" class="external-link">launch</mat-icon>
+          </a>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="tair_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tair Page </mat-header-cell>
+        <mat-cell *matCellDef="let elem">
+          <span *ngIf="elem.tair_id !== undefined">
+            <a class='link' href="https://www.arabidopsis.org/servlets/TairObject?type=locus&name={{elem.tair_id}}"
+              target="_blank">
+              {{elem.tair_id}} <mat-icon *ngIf="elem.tair_id" class="external-link">launch</mat-icon>
             </a>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="refseq_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Refseq Page </mat-header-cell>
-          <mat-cell *matCellDef="let elem">
-            <a href="https://www.ncbi.nlm.nih.gov/protein/{{elem.refseq_id.split(';')[0]}}" target="_blank">
-              {{ elem.refseq_id.split(";")[0] }} <mat-icon *ngIf="elem.refseq_id" class="external-link">launch</mat-icon>
-            </a>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="tair_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Tair Page </mat-header-cell>
-          <mat-cell *matCellDef="let elem">
-            <span *ngIf="elem.tair_id !== undefined">
-              <a class='link'
-                href="https://www.arabidopsis.org/servlets/TairObject?type=locus&name={{elem.tair_id}}" target="_blank">
-                {{elem.tair_id}} <mat-icon *ngIf="elem.tair_id" class="external-link">launch</mat-icon>
-              </a>
-            </span>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="gene_names">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Gene Names </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> {{ elem.gene_names.replaceAll(' ', ', ') }} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="gene_symbol">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Gene Symbol </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> {{ elem.gene_symbol }} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="protein_name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Protein Name </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> {{ elem.protein_name }} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="protein_entry">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
-          <mat-cell *matCellDef="let elem"><a [routerLink]="['/protein', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="cam_prot_entry">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
-          <mat-cell *matCellDef="let elem"><a [routerLink]="['/camelina_prot', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
-        </ng-container>
-        <!-- <ng-container matColumnDef="moreInfo">
+          </span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="gene_names">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Gene Names </mat-header-cell>
+        <mat-cell *matCellDef="let elem"> {{ elem.gene_names.replaceAll(' ', ', ') }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="gene_symbol">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Gene Symbol </mat-header-cell>
+        <mat-cell *matCellDef="let elem"> {{ elem.gene_symbol }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="protein_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Protein Name </mat-header-cell>
+        <mat-cell *matCellDef="let elem"> {{ elem.protein_name }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="protein_entry">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
+        <mat-cell *matCellDef="let elem"><a [routerLink]="['/protein', elem.uniprot_id]"><button mat-raised-button
+              color="primary">Details</button></a></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cam_prot_entry">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
+        <mat-cell *matCellDef="let elem"><a [routerLink]="['/camelina_prot', elem.uniprot_id]"><button mat-raised-button
+              color="primary">Details</button></a></mat-cell>
+      </ng-container>
+      <!-- <ng-container matColumnDef="moreInfo">
           <mat-header-cell *matHeaderCellDef mat-sort-header>More</mat-header-cell>
           <mat-cell *matCellDef="let elem"><button mat-raised-button [matMenuTriggerFor]="dropdownMenu" (click)="changeElem(elem)">More Info?</button></mat-cell>
         </ng-container> -->
 
-        <ng-container matColumnDef="camelina">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Camelina </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> {{ elem.cs_id }} </mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="camelina">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Camelina </mat-header-cell>
+        <mat-cell *matCellDef="let elem"> {{ elem.cs_id }} </mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="aralip_pathways">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Aralip Pathways </mat-header-cell>
-          <mat-cell *matCellDef="let elem">{{elem.Aralip_Pathways}}</mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="aralip_pathways">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Aralip Pathways </mat-header-cell>
+        <mat-cell *matCellDef="let elem">{{elem.Aralip_Pathways}}</mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="ath_description">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Ath Description </mat-header-cell>
-          <mat-cell *matCellDef="let elem">{{ elem.Ath_description }}</mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="ath_description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ath Description </mat-header-cell>
+        <mat-cell *matCellDef="let elem">{{ elem.Ath_description }}</mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="homeologs">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Homeologs </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> {{ elem.homeologs }} </mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="homeologs">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Homeologs </mat-header-cell>
+        <mat-cell *matCellDef="let elem"> {{ elem.homeologs }} </mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="soybean_uniprot_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Uniprot Page </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> <a href="http://uniprot.org/uniprot/{{elem.UniprotID}}" target="_blank">{{elem.UniprotID}}</a></mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="soybean_uniprot_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Uniprot Page </mat-header-cell>
+        <mat-cell *matCellDef="let elem"> <a href="http://uniprot.org/uniprot/{{elem.UniprotID}}"
+            target="_blank">{{elem.UniprotID}}</a></mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="soybean_refseq_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Refseq Pages </mat-header-cell>
-          <mat-cell *matCellDef="let elem" class="seq-cell">
-              <a *ngFor="let refSeq of elem.RefSeqList" class="seq-entry" href="https://www.ncbi.nlm.nih.gov/protein/{{refSeq}}" target="_blank">{{refSeq}}</a>
-          </mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="soybean_refseq_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Refseq Pages </mat-header-cell>
+        <mat-cell *matCellDef="let elem" class="seq-cell">
+          <a *ngFor="let refSeq of elem.RefSeqList" class="seq-entry"
+            href="https://www.ncbi.nlm.nih.gov/protein/{{refSeq}}" target="_blank">{{refSeq}}</a>
+        </mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="soybean_gene_name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Gene Name </mat-header-cell>
-          <mat-cell *matCellDef="let elem"> {{ elem.Genenames }} </mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="soybean_gene_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Gene Name </mat-header-cell>
+        <mat-cell *matCellDef="let elem"> {{ elem.Genenames }} </mat-cell>
+      </ng-container>
 
-        <!-- <ng-container matColumnDef="Alternativegenenames">
+      <!-- <ng-container matColumnDef="Alternativegenenames">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Alternative Gene Names </mat-header-cell>
           <mat-cell *matCellDef="let elem"> {{ elem.Alternativegenenames }} </mat-cell>
         </ng-container> -->
 
-        <ng-container matColumnDef="glyma_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Glyma ID </mat-header-cell>
-          <mat-cell *matCellDef="let elem">
-            <a [href]='"https://www.soybase.org/sbt/search/search_results.php?category=FeatureName&version=Glyma2.0&search_term=" + elem.glyma_id' target=_blank>
-              {{elem.glyma_id}} <mat-icon *ngIf="elem.glyma_id" class="external-link">launch</mat-icon>
-            </a>
-          </mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="glyma_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Glyma ID </mat-header-cell>
+        <mat-cell *matCellDef="let elem">
+          <a [href]='"https://www.soybase.org/sbt/search/search_results.php?category=FeatureName&version=Glyma2.0&search_term=" + elem.glyma_id'
+            target=_blank>
+            {{elem.glyma_id}} <mat-icon *ngIf="elem.glyma_id" class="external-link">launch</mat-icon>
+          </a>
+        </mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="soy_prot_entry">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
-          <mat-cell *matCellDef="let elem"><a [routerLink]="['/soybean_prot', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
-        </ng-container>
+      <ng-container matColumnDef="soy_prot_entry">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
+        <mat-cell *matCellDef="let elem"><a [routerLink]="['/soybean_prot', elem.uniprot_id]"><button mat-raised-button
+              color="primary">Details</button></a></mat-cell>
+      </ng-container>
 
-        <ng-container matColumnDef="picture">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Picture</mat-header-cell>
-          <mat-cell *matCellDef="let elem"><a href="http://opsin.ch.cam.ac.uk/opsin/{{elem.Name}}.png" target="_blank"><img src="http://opsin.ch.cam.ac.uk/opsin/{{elem.Name}}.png" height="40" width="100" alt="Fatty Acid Picture"></a></mat-cell>
+      <ng-container matColumnDef="picture">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Picture</mat-header-cell>
+        <mat-cell *matCellDef="let elem"><a href="http://opsin.ch.cam.ac.uk/opsin/{{elem.Name}}.png"
+            target="_blank"><img src="http://opsin.ch.cam.ac.uk/opsin/{{elem.Name}}.png" height="40" width="100"
+              alt="Fatty Acid Picture"></a></mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="lipidMapsID">
@@ -167,14 +176,14 @@
         <mat-cell *matCellDef="let elem">{{elem.delta_notation}}</mat-cell>
       </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-      <!-- <div *ngIf="!showingSearch">
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <!-- <div *ngIf="!showingSearch">
         <mat-icon (click)="changePage(false)" class="pointer" matTooltip="Previous">arrow_left</mat-icon>
         {{currentPage}}
         <mat-icon (click)="changePage(true)" class="pointer" matTooltip="Next">arrow_right</mat-icon>
       </div> -->
-    </div>
+  </div>
   <mat-progress-bar mode="indeterminate" *ngIf='loading'></mat-progress-bar>
 </mat-card>
