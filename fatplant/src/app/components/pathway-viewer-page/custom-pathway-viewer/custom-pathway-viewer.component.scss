@@ -1,13 +1,10 @@
 @import "~src/variables.scss";
 
-#base {
-    width: 100%;
-    min-height: 100%;
-    height: auto;
-    background-color: white;
-    background-image: none !important;
-    font-family: "PT Sans", sans-serif;
-    font-size: 1.0vw;
+mat-card {
+    box-sizing: border-box;
+    text-align: left;
+    padding: 1% !important;
+    margin: 0% !important;
 }
 
 .title-info {
@@ -65,13 +62,14 @@ a.active {
 }
 mat-header-cell {
     font-family: "PT Serif", serif;
+    font-weight:bold;
+    font-size: 15px;
     color: black;
     padding-right: 2%;
 }
 mat-header-row {
     border-bottom-color: rgba(grey, 0.5);
     font-size: 1.0vw;
-    padding-top: 5%;
 }
 mat-row {
     border-bottom-color: $pale-green;

@@ -31,6 +31,7 @@
             ],
             "styles": [
               "src/custom-theme.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -41,6 +42,7 @@
               "node_modules/webcola/WebCola/cola.min.js",
               "node_modules/webcola/WebCola/cola.js",
               "node_modules/jspdf/dist/jspdf.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "src/static/js/logojs.js"
             ]
           },

@@ -103,6 +103,7 @@ import { BlastPageComponent } from './components/blast-page/blast-page.component
 import { CustomPathwayViewerComponent } from './components/pathway-viewer-page/custom-pathway-viewer/custom-pathway-viewer.component';
 import { KeggPathwayViewerComponent } from './components/pathway-viewer-page/kegg-pathway-viewer/kegg-pathway-viewer.component';
 import { ExtendedPathwayViewerComponent } from './components/pathway-viewer-page/extended-pathway-viewer/extended-pathway-viewer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -174,6 +175,7 @@ import { ExtendedPathwayViewerComponent } from './components/pathway-viewer-page
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     AngularFireModule.initializeApp(environment.firebase, 'fatplant'),
     AngularFirestoreModule,
     AngularFireStorageModule,

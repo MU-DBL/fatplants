@@ -2,14 +2,11 @@
     <div class="page-title-bar">
         <p class="page-title">Pathway Viewer</p>
     </div>
-    <div class="row">
-        <p class="subtitle">Viewer Types</p>
-    </div>
-    <div>
+    <div style="margin-top: 1%;">
         <mat-tab-group [@.disabled]="true">
             <mat-tab>
                 <ng-template mat-tab-label>
-                    KGG Pathway Viewer
+                    KEGG Pathway Viewer
                 </ng-template>
                 <app-kegg-pathway-viewer></app-kegg-pathway-viewer>
             </mat-tab>

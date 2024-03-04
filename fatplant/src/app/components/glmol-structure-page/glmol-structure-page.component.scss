@@ -26,10 +26,6 @@ mat-card.base {
 
 @import "~src/variables.scss";
 
-div{
-  width:100%;
-  /* background-color: #FCFF7B; */
-}
 .click-zoom input[type=checkbox] {
   display: none
 }
@@ -166,4 +162,12 @@ a:hover {
 }
 .row{
   margin:2%;
+}
+
+.mat-header-cell {
+  font-family: "PT Serif", serif;
+  font-weight:bold;
+  font-size: 15px;
+  color: black;
+  padding-right: 2%;
 }

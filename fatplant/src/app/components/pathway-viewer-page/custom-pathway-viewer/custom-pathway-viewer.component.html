@@ -1,11 +1,8 @@
-<mat-card id="base">
-    <div class="title-info" style="min-width: 1000px">
-        <div class="col s10 small-centered textrow ">
-            <h1>Custom Pathway Viewer</h1>
-            <p>View and upload custom pathways.</p>
-            <p>Select a pathway from the table below, or submit JSON and image files to add a pathway to the database.</p>
-        </div>
-    
+<mat-card>
+    <div style="margin-left:2%">
+        <h2>Custom Pathway Viewer</h2>
+        <p>View and upload custom pathways.</p>
+        <p>Select a pathway from the table below, or submit JSON and image files to add a pathway to the database.</p>
     </div>
     <mat-expansion-panel *ngIf="user !== null" (opened)="panelOpenState = true"
                        (closed)="panelOpenState = false">

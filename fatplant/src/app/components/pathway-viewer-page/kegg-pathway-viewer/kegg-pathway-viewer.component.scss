@@ -30,16 +30,10 @@ textarea {
 }
 
 mat-card {
-  font-family: 'Catamaran', sans-serif;
-}
-
-mat-card.base {
-  width: 100%;
-  min-height: 100%;
   box-sizing: border-box;
   text-align: left;
-  background-image: none !important;
-  padding: 0% !important;
+  padding: 1% !important;
+  margin: 0% !important;
 }
 
 .wrapper {
@@ -138,7 +132,7 @@ a:hover {
   margin: 5px;
 }
 #canvas-container {
-  max-width: 90%;
+  max-width: 95%;
   max-height: 100%;
   margin: auto;
   overflow: scroll;
@@ -149,7 +143,6 @@ a:hover {
 }
 
 #genetable {
-  width: 50%;
   margin: 10px auto;
   table-layout: fixed;
 }
@@ -175,6 +168,16 @@ th, td.mat-cell {
   padding-left: 5px;
   padding-right: 5px;
 }
+
 .row{
-  margin:2%
+  margin:2%;
+  
+}
+
+.mat-header-cell {
+  font-family: "PT Serif", serif;
+  font-weight:bold;
+  font-size: 15px;
+  color: black;
+  padding-right: 2%;
 }

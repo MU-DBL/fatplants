@@ -17,10 +17,6 @@
     margin-block-start: 0.5rem;
 }
 
-div{
-  width:100%;
-  /* background-color: #FCFF7B; */
-}
 .click-zoom input[type=checkbox] {
   display: none
 }
@@ -246,4 +242,20 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.mat-header-cell {
+  font-family: "PT Serif", serif;
+  font-weight:bold;
+  font-size: 15px;
+  color: black;
+  padding-right: 2%;
+}
+
+mat-card {
+  box-sizing: border-box;
+  width:100% !important;
+  text-align: left;
+  padding: 1% !important;
+  margin: 0% !important;
 }
