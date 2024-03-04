@@ -1,0 +1,146 @@
+@import "~src/variables.scss";
+.bg{
+    background-color: #629B07;
+    color:white;  
+    height:5%; 
+    margin-top: 5%;
+}
+h2{
+    margin:2%;
+    padding-left:3%;
+    padding-top:4px;
+}
+#base {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    margin: auto;
+    background-color: white;
+    background-image: none !important;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1.0vw;
+    display: flex;
+}
+.left-menu {
+    position: sticky;
+    top: 4%;
+    left: 2%;
+    height: auto;
+    width: 14%;
+    align-self: flex-start;
+}
+a.menu {
+    display: block;
+    padding-left: 12%;
+    padding-bottom:8%;
+    color: gray;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+a.menu:not(.active):hover {
+    color: $lime-green;
+    transition: color 0.2s;
+}
+.right-content-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5% 2%; 
+    padding-bottom: 20px; 
+    box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
+    position: fixed;
+    top: 8%;
+    right: 3%;
+    left:16%;
+    bottom:2%;
+    width: 79%; 
+    max-height: 100%;
+    overflow-y: auto;
+    background-color: white; 
+    overflow-y: hidden;
+    &:hover {
+        overflow-y: auto; 
+    }
+    box-sizing: border-box;
+}
+
+.right-content-box::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+a.active {
+    color: black;
+    width: max-content;
+    padding-bottom: none;
+    font-size: 1.2vw;
+    transition: all 0.5s;
+    text-decoration: underline;
+    text-decoration-color:$lime-green ;
+}
+#table {
+    margin-left: 2%;
+    margin-right: 2%;
+    font-family: "PT Sans", sans-serif;
+    width: 95%;
+}
+mat-header-cell {
+    font-family: "PT Serif", serif;
+    color: black;
+    padding-right: 1%;
+    font-size: 1vw;
+    font-weight: bold;
+    background-color: #f9f9f9;  
+}
+mat-header-row {
+    border-bottom-color: rgba(grey, 0.5);
+    font-size: 1.0vw;
+    padding-top: 1%;
+}
+mat-row {
+    border-bottom-color: $pale-green;
+}
+mat-cell {
+    padding-right: 2%;
+}
+mat-cell>a, mat-cell>span>a {
+    text-decoration: none;
+    color: $light-green;
+}
+mat-cell>a:visited, mat-cell>span>a:visited {
+    color: $dark-green;
+}
+.pointer {
+    cursor: pointer;
+    padding: 5px;
+}
+.seq-cell {
+    flex-wrap: wrap;
+}
+
+.seq-entry {
+    margin: 2% 0;
+}
+
+.external-link{
+  font-size: 14px;
+}
+.custom-hr {
+    width: 90%; 
+    border: none;
+    border-top: 0.8px solid #ccc;
+    margin: 0;
+    padding: 0;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.left-menu .menu.active {
+    color: black; 
+    text-decoration: underline; 
+    text-decoration-color: limegreen;
+}
+.mat-form-field {
+    width: 20%; 
+}
+  
+input.mat-input-element {
+    padding-right: 10%; 
+}

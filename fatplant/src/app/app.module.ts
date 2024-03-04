@@ -96,6 +96,7 @@ import { FooterComponent } from './components/homecomponents/footer/footer.compo
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { SearchComponent } from './components/homecomponents/search/search.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
+import { DataComponent } from './components/pages/Data_Page/data/data.component';
 
 @NgModule({
   declarations: [
@@ -151,7 +152,8 @@ import { ProteinDetailsNewComponent } from './components/pages/datapages/protein
     FooterComponent,
     HomeComponent,
     SearchComponent,
-    ProteinDetailsNewComponent
+    ProteinDetailsNewComponent,
+    DataComponent
   ],
   entryComponents: [
     StructureViewerComponent,
