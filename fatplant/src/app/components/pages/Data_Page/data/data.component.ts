@@ -144,7 +144,7 @@ export class DataComponent implements OnInit {
       default :
         this.arabidopsisDataSource.filter = this.currentDataSource.filter;
     }
-    this.router.navigate(["data/" + newDataset]);
+    this.router.navigate(["test/" + newDataset]);
   }
 
   refreshData() {
