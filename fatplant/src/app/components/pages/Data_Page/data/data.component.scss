@@ -3,13 +3,14 @@
     background-color: #629B07;
     color:white;  
     height:5%; 
-    margin-top: 5%;
+    margin-top: 0%;
 }
 h2{
     margin:2%;
     padding-left:3%;
     padding-top:4px;
 }
+
 #base {
     width: 100%;
     min-height: 100%;
@@ -21,6 +22,7 @@ h2{
     font-size: 1.0vw;
     display: flex;
 }
+
 .left-menu {
     position: sticky;
     top: 4%;

@@ -105,6 +105,7 @@ import { KeggPathwayViewerComponent } from './components/pathway-viewer-page/keg
 import { ExtendedPathwayViewerComponent } from './components/pathway-viewer-page/extended-pathway-viewer/extended-pathway-viewer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataComponent } from './components/pages/Data_Page/data/data.component';
+import { DatasetsNewComponent } from './components/pages/datapages/datasets-new/datasets-new.component';
 
 @NgModule({
   declarations: [
@@ -168,7 +169,8 @@ import { DataComponent } from './components/pages/Data_Page/data/data.component'
     CustomPathwayViewerComponent,
     KeggPathwayViewerComponent,
     ExtendedPathwayViewerComponent,
-    DataComponent
+    DataComponent,
+    DatasetsNewComponent
   ],
   entryComponents: [
     StructureViewerComponent,

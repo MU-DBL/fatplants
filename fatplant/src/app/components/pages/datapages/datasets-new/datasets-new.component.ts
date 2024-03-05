@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { FatPlantDataSource } from 'src/app/interfaces/FatPlantDataSource';
 import { globalRefreshTime } from 'src/app/constants';
+
 import { Soybean } from 'src/app/interfaces/Soybean';
+import { catchError } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.scss']
+  selector: 'app-datasets-new',
+  templateUrl: './datasets-new.component.html',
+  styleUrls: ['./datasets-new.component.scss']
 })
-export class DataComponent implements OnInit {
+export class DatasetsNewComponent implements OnInit {
+
   dataset: string = "";
   loading: boolean = false;
   arabidopsisDataSource: MatTableDataSource<any>;
@@ -20,6 +23,7 @@ export class DataComponent implements OnInit {
   cupheaDataSource: MatTableDataSource<any>;
   pennycressDataSource: MatTableDataSource<any>;
   fattyAcidDataSource: MatTableDataSource<any>;
+
   showingSearch = false;
   currentPage = 1;
   searchQuery = "";
@@ -89,31 +93,80 @@ export class DataComponent implements OnInit {
 
    }
 
-  get displayedColumns(): String[] {
-    switch(this.dataset) {
-      case "camelina":
-        return ['camelina','refseq_id','protein_name', 'homeologs', 'cam_prot_entry'];
-      case "soybean":
-        return ['uniprot_id','refseq_id', 'glyma_id', 'gene_names','protein_name', 'soy_prot_entry'];
-      case "cuphea":
-        return ['uniprot_id','refseq_id', 'gene_names','protein_name', 'cuphea_prot_entry'];
-      case "pennycress":
-        return ['uniprot_id','refseq_id', 'gene_names','protein_name', 'pennycress_prot_entry'];
-      case "fattyacid":
-        return ['picture', 'lipidMapsID', 'name','mass','sofa_id','other_names','delta_notation'];
-      default :
-          return ['uniprot_id','refseq_id','tair_id','gene_names', 'protein_name', 'protein_entry'];
-    }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.currentDataSource.filter = filterValue;
   }
 
-  ngOnInit(): void {
+  onSearchChange(query) {
+    this.searchQuery = query.target.value;
   }
-  onFieldChange(field) {
-    this.selectedFilterField = field.value;
+
+  applySearchQuery(){
+    this.loading = true;
+    this.showingSearch = true;
+    if (this.dataset == "arabidopsis") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "lmpd").subscribe((data :any[]) => {
+          this.arabidopsisDataSource = new MatTableDataSource(data.slice(0, 50));
+          this.loading = false;
+      }, error => {
+          this.arabidopsisDataSource = new MatTableDataSource([]);
+          this.loading = false;
+      });
+    }
+    else if (this.dataset == "camelina") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "camelina").subscribe((data :any[]) => {
+        this.camelinaDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.camelinaDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else if (this.dataset == "soybean") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "soya").subscribe((data :any[]) => {
+        this.soybeanDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.soybeanDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else if (this.dataset == "cuphea") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "cuphea").subscribe((data :any[]) => {
+        this.cupheaDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.cupheaDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else if (this.dataset == "pennycress") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "pennycress").subscribe((data :any[]) => {
+        this.pennycressDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.pennycressDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else {
+      this.db.searchFattyAcid(encodeURIComponent(this.searchQuery)).subscribe((data: any[]) => {
+        this.fattyAcidDataSource = new MatTableDataSource(data);
+        this.loading = false;
+      }, error => {
+        this.fattyAcidDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+  
   }
 
   get currentDataSource(): MatTableDataSource<any> {
     switch(this.dataset) {
+      case "arabidopsis":
+        return this.arabidopsisDataSource;
       case "camelina":
         return this.camelinaDataSource;
       case "soybean":
@@ -122,15 +175,41 @@ export class DataComponent implements OnInit {
         return this.cupheaDataSource;
       case "pennycress":
         return this.pennycressDataSource;
-      case "fattyacid":
-        return this.fattyAcidDataSource;
       default:
-          return this.arabidopsisDataSource;
+        return this.fattyAcidDataSource;
     }
   }
+
+  get displayedColumns(): String[] {
+    switch(this.dataset) {
+      case "arabidopsis":
+        return ['uniprot_id','refseq_id','tair_id','gene_names', 'protein_name', 'protein_entry'];
+      case "camelina":
+        return ['camelina','refseq_id','protein_name', 'homeologs', 'cam_prot_entry'];
+      case "soybean":
+        return ['uniprot_id','refseq_id', 'glyma_id', 'gene_names','protein_name', 'soy_prot_entry'];
+      case "cuphea":
+        return ['uniprot_id','refseq_id', 'gene_names','protein_name', 'cuphea_prot_entry'];
+      case "pennycress":
+        return ['uniprot_id','refseq_id', 'gene_names','protein_name', 'pennycress_prot_entry'];
+      default:
+        return ['picture', 'lipidMapsID', 'name','mass','sofa_id','other_names','delta_notation'];
+    }
+  }
+
+  ngOnInit() {
+    
+  }
+
+  onFieldChange(field) {
+    this.selectedFilterField = field.value;
+  }
+
   changeDataset(newDataset: string) {
     // preserve filter for new dataset
     switch(newDataset) {
+      case "arabidopsis":
+        this.arabidopsisDataSource.filter = this.currentDataSource.filter;
       case "camelina":
         this.camelinaDataSource.filter = this.currentDataSource.filter;
       case "soybean":
@@ -139,10 +218,8 @@ export class DataComponent implements OnInit {
         this.cupheaDataSource.filter = this.currentDataSource.filter;
       case "pennycress":
         this.pennycressDataSource.filter = this.currentDataSource.filter;
-      case "fattyacid":
+      default:
         this.fattyAcidDataSource.filter = this.currentDataSource.filter;
-      default :
-        this.arabidopsisDataSource.filter = this.currentDataSource.filter;
     }
     this.router.navigate(["datasets/" + newDataset]);
   }
@@ -151,6 +228,8 @@ export class DataComponent implements OnInit {
     this.showingSearch = false;
     this.searchQuery = "";
     switch (this.dataset) {
+      case "arabidopsis":
+        this.refreshArapidopsisData();
       case "camelina":
         this.refreshCamelinaData();
       case "soybean":
@@ -159,16 +238,15 @@ export class DataComponent implements OnInit {
         this.refreshCupheaData();
       case "pennycress":
         this.refreshPennycressData();
-      case "fattyacid":
-        this.refreshFattyAcidData();
       default:
-        this.refreshArapidopsisData();
+        this.refreshFattyAcidData();
     }
   }
 
   changePage(isNext: boolean) {
     switch (this.dataset) {
-
+      case "arabidopsis":
+        this.changeArabidopsisPage(isNext);
       case "camelina":
         this.changeCamelinaPage(isNext);
       case "soybean":
@@ -177,10 +255,8 @@ export class DataComponent implements OnInit {
         this.changeCupheaPage(isNext);
       case "pennycress":
         this.refreshPennycressData();
-      case "fattyacid":
+      default:
         this.refreshFattyAcidData();
-      default :
-        this.changeArabidopsisPage(isNext);
     }
   }
 
@@ -203,6 +279,7 @@ export class DataComponent implements OnInit {
       });
     }
   }
+
   changeCamelinaPage(next: boolean) {
     if (next) {
       this.loading = true;
@@ -379,6 +456,7 @@ export class DataComponent implements OnInit {
       this.loading = false;
     });
   }
+
   convertSoybeanData(data: Soybean[]) {
     data.forEach(value => {
       if (value.RefSeq == "") value.RefSeqList = [];
@@ -394,4 +472,3 @@ export class DataComponent implements OnInit {
   }
 
 }
-
