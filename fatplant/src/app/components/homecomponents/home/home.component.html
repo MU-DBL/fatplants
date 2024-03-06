@@ -1,3 +1,183 @@
-<div class="container">
-  <!-- <app-search></app-search> -->
+<app-search></app-search>
+<div class="container-fluid">
+  <div class="information-box bg my-4">
+    <h1 class="my-3">Analysis Tools</h1>
+    <div class="row justify-content-center">
+      <div class="col-sm-3">
+        <div routerLink="/blast" class="content-box bg-tools icon1">
+          <div class="card-overlay">
+            <h3>Blast</h3>
+            <p>
+              Identifying similarities between biological sequences by comparing
+              nucleotide or protein sequences to databases, determining
+              statistical significance.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div routerLink="/glmol" class="content-box bg-tools icon2">
+          <div class="card-overlay">
+            <h3>3d Structure</h3>
+            <p>Utilizing GLmol to display 3D molecular structures.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div routerLink="/pathway-viewer" class="content-box bg-tools icon3">
+          <div class="card-overlay">
+            <h3>Pathway Viewer</h3>
+            <p>
+              This tool facilitates the visualization of KEGG pathway figures
+              and allows for the viewing and uploading of custom pathways.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div routerLink="/go-network" class="content-box bg-tools icon4">
+          <div class="card-overlay">
+            <h3>Go Enrichment Networks</h3>
+            <p>A tool specifically designed to showcase the Arabidopsis GO Enrichment Network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="information-box bg my-4">
+    <h1 class="my-3">Information</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="content-box">
+          <h3>Introduction</h3>
+          <p>
+            Fatplants is a web portal with analysis and visualization tools for
+            plant fat-related genes, proteins and metabolism. It empowers
+            researchers to develop and test hypotheses, and design crops with
+            value-added compositions. In particular, collating data in Fatplants
+            on oilseed engineering through can accelerate the process of
+            knowledge discovery and crop design for biology researchers with
+            little computer skills. For example, increasing seed oil content by
+            plant breeding has resulted in trade-offs or penalties with respect
+            to protein content, seed size, or seed set, and FatPlants provides
+            useful information to address this issue.
+            <br /><br />
+            We have developed this “one-stop-shop” community web resource using
+            various data of Glycine max, Arabidopsis thaliana, and Camelina
+            sativa generated from our studies, curated from the public sources,
+            and collected from the literature to help understand metabolism
+            synthesis pathways and related protein interactions. Some data and
+            annotations come from Uniprot, TAIR, LIPIDMAPS, OPSIN, LMPD,
+            PlantFAdb and ARALIPS. FatPlants also includes gene and protein
+            information cards, Blast search function, and similar structure
+            search function.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="content-box">
+          <h3>Site Features</h3>
+
+          <h6>Data</h6>
+          <ul>
+            <li>
+              Integrated data of fatty acid-related proteins, genes for
+              Arabidopsis, Soybean and Camellia.
+            </li>
+            <li>
+              Functional information for each protein, including the
+              modification region, post-translation modification or functional
+              structure region.
+            </li>
+            <li>Physicochemical information of fatty acids.</li>
+          </ul>
+
+          <h6>Analysis</h6>
+          <ul>
+            <li>
+              Sequence similarity search based on Blastp against the fatty-acid
+              related proteins.
+            </li>
+            <li>
+              3D-structure similarity search and visualization using in-house
+              G2S against the fatty-acid related proteins.
+            </li>
+            <li>Pathway mapping to KEGG and Reactome.</li>
+            <li>
+              Collection of fatty-acid related pathway pictures from the
+              literature and interactive visualization using our in-house
+              machine learning image understanding tool.
+            </li>
+          </ul>
+
+          <h6>Visualization</h6>
+          <ul>
+            <li>
+              Visualization of protein-protein interaction for fatty-related
+              proteins.
+            </li>
+            <li>
+              Visualization of GO Enrichment network for fatty acid related
+              proteins.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="content-box">
+          <h3>Latest News</h3>
+          <ul>
+            <li>Fatplants of Angular version is deployed.</li>
+            <li>Fatplants is presented in PAG 2019.</li>
+            <li>Pathway picture from Literature could be browsed now.</li>
+            <li>
+              <a
+                href="https://yield10bioscienceinc.gcs-web.com/news-releases/news-release-details/yield10-bioscience-obtains-positive-response-usda-aphis"
+                >Commercialization of C3007 Trait in Camelina.</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="content-box">
+          <h3>Research Papers</h3>
+          <ul>
+            <li>
+              <a
+                href="https://link.springer.com/protocol/10.1007/978-1-0716-1362-7_13"
+              >
+                Jenkins L M, Nam J W, Evans B S, et al. Quantification of
+                Acyl-Acyl Carrier Proteins for Fatty Acid Synthesis Using
+                LC-MS/MS. In: Plant Lipids. Humana, New York, NY, 2021: 219-247.
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.sciencedirect.com/science/article/pii/S1570023220300246?casa_token=85SEr3IoLPoAAAAA:ZT56FKuvVW-lAUUZ0fUS4K_XPFQebdNSAWytmhKd0JnRRfAxxcnW1i1WSC60WSldaqDgiBcBZIV_"
+              >
+                Kotapati H K, Bates P D. Normal phase HPLC method for combined
+                separation of both polar and neutral lipid classes with
+                application to lipid metabolic flux. Journal of Chromatography
+                B, 2020, 1145: 122099.
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://academic.oup.com/plcell/article/32/4/820/6115733?login=true"
+              >
+                Nam JW, Jenkins LM, Li J, Evans BS, Jaworski JG, Allen DK (2020)
+                A General Method for Quantification and Discovery of Acyl Groups
+                Attached to Acyl Carrier Proteins in Fatty Acid Metabolism using
+                LC-MS/MS. Plant Cell: 32(4):820-832.
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
