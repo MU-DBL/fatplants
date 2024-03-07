@@ -590,3 +590,43 @@ a:visited, a:visited {
   
 
 
+  :host {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  :host ::ng-deep .mat-tab-labels {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  mat-tab-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  :host ::ng-deep .mat-tab-body-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  mat-tab-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  :host ::ng-deep mat-ink-bar {
+    display: none;
+  }
+
+  mat-card.base {
+    width: 100%;
+    box-sizing: border-box;
+    background-image: none !important;
+    margin: 0 !important;
+    padding:0 !important;
+  }

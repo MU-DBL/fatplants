@@ -124,8 +124,6 @@ export class ProteinDetailsNewComponent implements OnInit {
             // this.getUniprotData();
           });
           // this.loadedDatabase = this.proteinDatabase['database'];
-        
-
 
       });
     
@@ -210,9 +208,11 @@ export class ProteinDetailsNewComponent implements OnInit {
   getExtendedSpecies() {
     this.homologs = null;
     this.dataService.loading = true;
+    console.log("result is : ", "nothing");
     this.fsaccess.getExtendedDetails(this.baseDetails.fp_id, this.speciesName).subscribe(res => {
       this.SelectConfig();
       if (res && res[0]) {
+        
         this.extendedData = res[0];
         this.splitGeneNames = this.extendedData.gene_names.split(' ');
         this.selectedGPTQuery = this.splitGeneNames[0];
