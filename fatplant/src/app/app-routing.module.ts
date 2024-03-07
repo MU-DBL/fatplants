@@ -8,6 +8,7 @@ import { BlastComponent } from './components/pages/tools/blast/blast.component';
 import { GoNetworkComponent } from './components/pages/networks/go-network/go-network.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
+import { ContactUsComponent } from './components/pages/ContactUs/ContactUs.component';
 import { IntroductionComponent } from './components/pages/introductions/introduction/introduction.component';
 import { InvestigatorComponent } from './components/pages/introductions/investigator/investigator.component';
 import { InvestigatorNewComponent } from './components/pages/introductions/investigatorNew/investigatorNew.component';
@@ -21,10 +22,10 @@ import { UploadFilesComponent } from './components/pages/fileuploads/upload-file
 import { FileviewComponent } from './components/pages/fileuploads/fileview/fileview.component';
 import { SoybeanComponent } from './components/pages/datapages/soybean/soybean.component';
 import { ShowresultsComponent } from './components/pages/onestopsearch/showresults/showresults.component';
-import {LoginComponent} from './login/login.component';
+import { LoginComponent } from './login/login.component';
 import { UnifiedDatapageComponent } from './components/pages/datapages/unified-datapage/unified-datapage.component';
 import { ProteinDetailComponent } from './components/pages/datapages/protein-detail/protein-detail.component';
-import {AddNewsComponent} from './components/pages/add-news/add-news.component';
+import { AddNewsComponent } from './components/pages/add-news/add-news.component';
 import { PathwayAralipsComponent } from "./components/pages/tools/pathway-aralips/pathway-aralips.component";
 import { CustomPathwayComponent } from './components/pages/tools/custom-pathway/custom-pathway.component';
 import { CustomPathwayListComponent } from './components/pages/tools/custom-pathway-list/custom-pathway-list/custom-pathway-list.component';
@@ -38,50 +39,51 @@ import { ProteinDetailsNewComponent } from './components/pages/datapages/protein
 // import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
 import { DataComponent } from './components/pages/Data_Page/data/data.component';
 
-const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
+const routes: Routes = [{ path: '', redirectTo: '/homepage', pathMatch: 'full' },
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
-{path: 'homepage', component: HomepageComponent},
-{path: 'login', component: LoginComponent},
-{path: 'introduction', component: IntroductionComponent},
-{path: 'investigator', component: InvestigatorComponent},
-{path: 'investigatorNew', component: InvestigatorNewComponent},
-{path: 'lmpd_arapidopsis', component: LmpdArapidopsisComponent},
-{path: 'glmol', component: GlmolComponent},
-{path: 'color-pathway', component: ColorPathwayComponent},
-{path: 'aralips-pathway', component: PathwayAralipsComponent},
-{path: 'custom-pathway', component: CustomPathwayComponent},
-{path: 'custom-pathway-list', component: CustomPathwayListComponent},
-{path: 'camelina', component: CameliaComponent},
-{path: 'fatty_acid', component: FattyacidComponent},
-{path: 'protein-network', component: GraphComponent},
-{path: 'go-network', component: GoNetworkComponent},
-{path: 'one_click', component: DataAnalysisComponent},
-{path: 'one_click/:uniprot_id/:cfg', component: DataAnalysisComponent},
-{path: 'blast', component: BlastComponent},
-{path: 'files', component:UploadFilesComponent, canActivate: [AngularFireAuthGuard]},
-{path:'viewfiles',component:FileviewComponent},
-{path: 'lmpddetailview/:uniprot_id', component: LmpddetailviewComponent},
-{path: 'fatty_acid', component: FattyacidComponent},
-{path: 'soybean', component: SoybeanComponent},
-{path: 'add-news', component: AddNewsComponent},
-{path: 'datasets', redirectTo: '/datasets/arabidopsis', pathMatch: 'full'},
-{path: 'datasets/:dataset', component: UnifiedDatapageComponent}, //component: DatasetsNewComponent
+{ path: 'homepage', component: HomepageComponent },
+{ path: 'login', component: LoginComponent },
+{ path: 'introduction', component: IntroductionComponent },
+{ path: 'investigator', component: InvestigatorComponent },
+{ path: 'investigatorNew', component: InvestigatorNewComponent },
+{ path: 'lmpd_arapidopsis', component: LmpdArapidopsisComponent },
+{ path: 'glmol', component: GlmolComponent },
+{ path: 'color-pathway', component: ColorPathwayComponent },
+{ path: 'aralips-pathway', component: PathwayAralipsComponent },
+{ path: 'custom-pathway', component: CustomPathwayComponent },
+{ path: 'custom-pathway-list', component: CustomPathwayListComponent },
+{ path: 'camelina', component: CameliaComponent },
+{ path: 'fatty_acid', component: FattyacidComponent },
+{ path: 'protein-network', component: GraphComponent },
+{ path: 'go-network', component: GoNetworkComponent },
+{ path: 'one_click', component: DataAnalysisComponent },
+{ path: 'one_click/:uniprot_id/:cfg', component: DataAnalysisComponent },
+{ path: 'blast', component: BlastComponent },
+{ path: 'files', component: UploadFilesComponent, canActivate: [AngularFireAuthGuard] },
+{ path: 'viewfiles', component: FileviewComponent },
+{ path: 'lmpddetailview/:uniprot_id', component: LmpddetailviewComponent },
+{ path: 'fatty_acid', component: FattyacidComponent },
+{ path: 'soybean', component: SoybeanComponent },
+{ path: 'add-news', component: AddNewsComponent },
+{ path: 'datasets', redirectTo: '/datasets/arabidopsis', pathMatch: 'full' },
+{ path: 'datasets/:dataset', component: UnifiedDatapageComponent }, //component: DatasetsNewComponent
 // {path: 'data', component:DataComponent},
 // {path: 'data/:dataset', component: DataComponent},
-{path: 'showresults/:uniprot_id/:cfg', component: ShowresultsComponent},
-{path: 'protein/:uniprot_id', component: ProteinDetailComponent},
-{path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent}, 
-{path: 'camelina_prot/:uniprot_id', component: ProteinCamelinaComponent},
+{ path: 'showresults/:uniprot_id/:cfg', component: ShowresultsComponent },
+{ path: 'protein/:uniprot_id', component: ProteinDetailComponent },
+{ path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent },
+{ path: 'camelina_prot/:uniprot_id', component: ProteinCamelinaComponent },
 // {path: 'details/:database_name/:uniprot_id',component:ProteinDetailsNewComponent},
-{path: 'pathway-viewer', component: PathwayViewerComponent},
-{path: 'extended-pathway', component: ExtendedPathwayComponent},
-{path: 'blast-internal', component:BlastInternalComponent},
-{path: 'home', component:HomeComponent},
+{ path: 'pathway-viewer', component: PathwayViewerComponent },
+{ path: 'extended-pathway', component: ExtendedPathwayComponent },
+{ path: 'blast-internal', component: BlastInternalComponent },
+{ path: 'home', component: HomeComponent },
 // {path: '**', redirectTo: '/home'}];
-{path: '**', redirectTo: '/homepage'}];
+{ path: '**', redirectTo: '/homepage' }];
+{ path: 'ContactUs', component: ContactUsComponent },
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{ anchorScrolling: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
