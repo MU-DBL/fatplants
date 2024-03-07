@@ -42,6 +42,7 @@ import { GlmolStructurePageComponent } from './components/glmol-structure-page/g
 import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pathway-viewer-page.component';
 import { DataComponent } from './components/pages/Data_Page/data/data.component';
 import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
+import { ContactUsComponent } from './components/pages/contact/ContactUs.component';
 
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -88,6 +89,7 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'glmol-page', component:GlmolStructurePageComponent}, 
 {path: 'pathway-viewer-page', component:PathwayViewerPageComponent}, 
 {path: 'details/:database_name/:uniprot_id',component:ProteinDetailsNewComponent},
+{path: 'contact', component: ContactUsComponent },
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({

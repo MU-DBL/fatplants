@@ -15,6 +15,7 @@ import { G2SEntry } from "../../../../interfaces/G2SEntry";
 import { DomSanitizer } from "@angular/platform-browser";
 import { toNumbers } from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import { StructureViewerComponent } from '../../onestopsearch/structure-viewer/structure-viewer.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-protein-details-new',
@@ -124,13 +125,10 @@ export class ProteinDetailsNewComponent implements OnInit {
             // this.getUniprotData();
           });
           // this.loadedDatabase = this.proteinDatabase['database'];
-        
-
 
       });
     
   }
-
 
   ngOnChanges() {
     this.route.params.subscribe(params => {
@@ -152,22 +150,61 @@ export class ProteinDetailsNewComponent implements OnInit {
 
         this.speciesName = this.proteinDatabase['fullSearchSpecies']
 
-
-
-
-
         this.fsaccess.getBaseProteinFromUniProt(this.uniprot_id, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
           this.validateResult(data[0]);
           this.getExtendedSpecies();
           // this.getUniprotData();
         });
         // this.loadedDatabase = this.proteinDatabase['database'];
-
-
       });
     });
   }
 
+  tabChanged(event: MatTabChangeEvent): void {
+    switch (this.cfg) {
+      case 'summary':
+        this.isSummary = false;
+        break;
+      case 'alignments':
+        this.is3DStructure = false;
+        break;
+      case 'structure':
+        this.isStructure = false;
+        break;
+      case 'blast':
+        this.isBlast = false;
+        break;
+      default:
+        this.isPathway = false;
+        break;
+    }
+
+    switch (event.index) {
+      case 0:
+        this.cfg = "summary";
+        break;
+      case 1:
+        this.cfg = "alignments";
+        break;
+      case 2:
+        this.cfg = "structure";
+        break;
+      case 3:
+        this.cfg = "blast";
+        break;
+      case 4:
+        this.cfg = "pathway";
+        break;
+      default:
+        this.cfg = "summary";
+        break;
+    }
+
+    this.cdr.detectChanges();
+    this.location.replaceState(`/details/${this.database}/` + this.uniprot_id + `/` + this.cfg);
+    this.SelectConfig();
+
+  }
 
   validateResult(result: any): boolean {
 
@@ -210,9 +247,11 @@ export class ProteinDetailsNewComponent implements OnInit {
   getExtendedSpecies() {
     this.homologs = null;
     this.dataService.loading = true;
+    console.log("result is : ", "nothing");
     this.fsaccess.getExtendedDetails(this.baseDetails.fp_id, this.speciesName).subscribe(res => {
       this.SelectConfig();
       if (res && res[0]) {
+        
         this.extendedData = res[0];
         this.splitGeneNames = this.extendedData.gene_names.split(' ');
         this.selectedGPTQuery = this.splitGeneNames[0];
@@ -743,6 +782,4 @@ export class ProteinDetailsNewComponent implements OnInit {
       data: { pdbId: pdbId, pdbLinkBase: pdbLinkBase }
     });
   }
-
-
 }

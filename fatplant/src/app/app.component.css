@@ -28,6 +28,6 @@ button:focus {
 }
 
 .scrollable-container {
-    height: calc(120vh - 100px);
+    height: 100%;
     overflow-y: auto;
 }

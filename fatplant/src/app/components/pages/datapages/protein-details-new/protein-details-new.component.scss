@@ -1,5 +1,4 @@
 @import "~src/variables.scss";
-
 mat-card {
     font-family: "PT Sans", sans-serif;
     width: 100%;
@@ -7,7 +6,6 @@ mat-card {
     background-image: none !important;
     background-color: white;
     margin: 0;
-    margin-top: 6%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -26,7 +24,7 @@ mat-card {
     width: 100%;
 }
 .protein-info-card {
-    width: 45%;
+    width: 52%;
     margin-top: 1%;
     background-color: #FDFAF0;
     border-radius: 5px;
@@ -90,7 +88,7 @@ mat-card {
 .sequence-card {
     width: 100%;
     margin-top: 3%;
-    background-color: rgba(#86c786, 0.2);
+    background-color: rgba(#86C786, 0.2);
     border-radius: 5px;
     box-shadow: 0 1px 4px;
     box-sizing: border-box;
@@ -106,12 +104,10 @@ mat-card {
     margin: 0 0 0 1%;
     font-size: 0.85em;
 }
-
 #mainContainer {
     margin: 10px auto;
     width: 70%;
 }
-
 a {
     text-decoration: none;
     color: $light-green;
@@ -119,28 +115,22 @@ a {
 a:visited, a:visited {
     color: $dark-green;
 }
-
 .function-header {
     display: flex;
     justify-content: space-between;
     max-height: 50px;
 }
-
 .function-header > h3 {
     margin-top: 0;
     margin-bottom: 10px;
 }
-
 .function-header > button {
     height: 35px;
 }
-
 .function-header > mat-form-field {
     font-size: 12px;
 }
-
 @import '~src/variables.scss';
-
 table.blueTable {
   border: 1px solid $main-green;
   background-color: #EEEEEE;
@@ -171,15 +161,14 @@ table.blueTable thead th {
 table.blueTable thead th:first-child {
   border-left: none;
 }
-
 table.blueTable tfoot {
   font-size: 14px;
   font-weight: bold;
   color: #FFFFFF;
   background: #D0E4F5;
-  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  background: -moz-linear-gradient(top, #DCEBF7 0%, #D4E6F6 66%, #D0E4F5 100%);
+  background: -webkit-linear-gradient(top, #DCEBF7 0%, #D4E6F6 66%, #D0E4F5 100%);
+  background: linear-gradient(to bottom, #DCEBF7 0%, #D4E6F6 66%, #D0E4F5 100%);
   border-top: 2px solid #444444;
 }
 table.blueTable tfoot td {
@@ -195,85 +184,68 @@ table.blueTable tfoot .links a{
   padding: 2px 8px;
   border-radius: 5px;
 }
-
-
-
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
   background-color: #333;
 }
-
 /* Style the topnav links */
 .topnav a {
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: #F2F2F2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
-
 /* Change color on hover */
 .topnav a:hover {
   background-color: #ddd;
   color: black;
 }
-
 /* Create three unequal columns that floats next to each other */
 .column {
   float: left;
   padding: 10px;
 }
-
 /* Left and right column */
 .column.left {
   width: 15%;
   padding: 0;
 }
-
 .column.right {
   width: 20%;
 }
-
 /* Middle column */
 .column.middle {
   width: 60%;
 }
-
 .column.middleright {
   width: 70%;
 }
-
 /* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
-
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .column.side, .column.middle {
     width: 100%;
   }
 }
-
-
 table, td, th {
   border: 1px solid #ddd;
   text-align: left;
 }
-
 table {
   border-collapse: collapse;
   width: 100%;
 }
-
 th, td {
   padding: 15px;
 }
-
 textarea {
   width: 100%;
   min-height: 200px;
@@ -300,7 +272,6 @@ textarea {
   width: 80%;
   min-width: 910px;
 }
-
 .nav-item {
   color: grey;
   transition: color 0.5s;
@@ -312,7 +283,6 @@ textarea {
   color: black;
   transition: color 0.5s;
 }
-
 ::ng-deep .mat-step .mat-step-header .mat-step-icon-selected {
   background-color: $lime-green;
   height: 24px !important;
@@ -326,21 +296,17 @@ textarea {
   margin-left: 6px;
   transition: all 0.5s cubic-bezier(.35,0,.25,1);
 }
-
 #stepper {
   position: sticky;
   top: 20%;
 }
-
 #sequence-display {
   word-wrap: break-word;
   margin-top: 5px;
 }
-
 #pdb-loading-bar {
   width: 100%;
 }
-
 mat-header-cell {
   font-family: "PT Serif", serif;
   color: black;
@@ -357,13 +323,11 @@ mat-row {
 mat-cell {
   padding-right: 2%;
 }
-
 #sequence-button {
   margin: 15px auto;
   display: block;
   color: white;
 }
-
 .green-button {
   transition: background-color 0.5s;
 }
@@ -371,11 +335,9 @@ mat-cell {
   background-color: rgba($lime-green, 0.3);
   transition: all 0.5s;
 }
-
 .viewer-button {
   color: white;
 }
-
 .disabled-arrow {
   color: lightgrey;
 }
@@ -414,7 +376,6 @@ mat-cell {
   width: 100%;
   text-align: center;
   display: inline-block;
-
 }
 .pathway-label {
   width: 100%;
@@ -434,7 +395,6 @@ mat-cell {
   width: max-content;
   height: max-content;
 }
-
 mat-card {
   font-family: "PT Sans", sans-serif;
   width: 100%;
@@ -442,7 +402,7 @@ mat-card {
   background-image: none !important;
   background-color: white;
   margin: 0;
-  margin-top: 6%;
+
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -460,13 +420,7 @@ mat-card {
   justify-content: space-between;
   width: 100%;
 }
-.protein-info-card {
-  width: 45%;
-  margin-top: 1%;
-  background-color: #FDFAF0;
-  border-radius: 5px;
-  box-shadow: 0 1px 4px;
-}
+
 .protein-info-wrapper {
   margin-left: 2%;
 }
@@ -525,7 +479,7 @@ mat-card {
 .sequence-card {
   width: 100%;
   margin-top: 3%;
-  background-color: rgba(#86c786, 0.2);
+  background-color: rgba(#86C786, 0.2);
   border-radius: 5px;
   box-shadow: 0 1px 4px;
   box-sizing: border-box;
@@ -541,12 +495,10 @@ mat-card {
   margin: 0 0 0 1%;
   font-size: 0.85em;
 }
-
 #mainContainer {
   margin: 10px auto;
   width: 70%;
 }
-
 a {
   text-decoration: none;
   color: $light-green;
@@ -559,24 +511,20 @@ a:visited, a:visited {
   width: 100%;
   font-family: 'PT Sans', sans-serif;
 }
-
 .wrapper {
   display: flex;
   justify-content: space-between;
 }
-
 .main,
 .sidebar {
   padding: 15px;
 }
-
 .main {
   width: 100%;
   background-color: white;
   font-family: 'Catamaran', sans-serif;
   margin: 0;
 }
-
   .header {
     height: 4rem;
     display: flex;
@@ -587,6 +535,37 @@ a:visited, a:visited {
     color: whitesmoke;
     padding-left: 40px;
   }
-  
-
-
+  :host {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  :host ::ng-deep .mat-tab-labels {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  mat-tab-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+  }
+  :host ::ng-deep .mat-tab-body-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  mat-tab-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  :host ::ng-deep mat-ink-bar {
+    display: none;
+  }
+  mat-card.base {
+    width: 100%;
+    box-sizing: border-box;
+    background-image: none !important;
+    margin: 0 !important;
+    padding:0 !important;
+  }

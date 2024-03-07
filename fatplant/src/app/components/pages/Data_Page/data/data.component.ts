@@ -107,6 +107,13 @@ export class DataComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.searchQuery = params['searchTerm'];
+      if(this.searchQuery === undefined){
+        this.searchQuery = "";
+      }
+      this.applySearchQuery();
+    });
   }
   onFieldChange(field) {
     this.selectedFilterField = field.value;
@@ -393,5 +400,68 @@ export class DataComponent implements OnInit {
     return [...new Set(tairIds.map(id => {return id.split('.')[0]}))];
   }
 
-}
+  onSearchChange(query) {
+    this.searchQuery = query.target.value;
+  }
+  
+  applySearchQuery(){
+    this.loading = true;
+    this.showingSearch = true;
+    if (this.dataset == "arabidopsis") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "lmpd").subscribe((data :any[]) => {
+          this.arabidopsisDataSource = new MatTableDataSource(data.slice(0, 50));
+          this.loading = false;
+      }, error => {
+          this.arabidopsisDataSource = new MatTableDataSource([]);
+          this.loading = false;
+      });
+    }
+    else if (this.dataset == "camelina") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "camelina").subscribe((data :any[]) => {
+        this.camelinaDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.camelinaDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else if (this.dataset == "soybean") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "soya").subscribe((data :any[]) => {
+        this.soybeanDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.soybeanDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else if (this.dataset == "cuphea") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "cuphea").subscribe((data :any[]) => {
+        this.cupheaDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.cupheaDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else if (this.dataset == "pennycress") {
+      this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "pennycress").subscribe((data :any[]) => {
+        this.pennycressDataSource = new MatTableDataSource(data.slice(0, 50));
+        this.loading = false;
+      }, error => {
+        this.pennycressDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+    else {
+      this.db.searchFattyAcid(encodeURIComponent(this.searchQuery)).subscribe((data: any[]) => {
+        this.fattyAcidDataSource = new MatTableDataSource(data);
+        this.loading = false;
+      }, error => {
+        this.fattyAcidDataSource = new MatTableDataSource([]);
+        this.loading = false;
+      });
+    }
+  
+  }
 
+}
