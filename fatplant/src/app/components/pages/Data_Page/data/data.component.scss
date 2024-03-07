@@ -3,7 +3,6 @@
     background-color: #629B07;
     color:white;  
     height:6%; 
-    margin-top: 5%;
 }
 h2{
     margin:2%;
@@ -15,7 +14,7 @@ h2{
     width: 100%;
     min-height: 100%;
     height: auto;
-    margin: auto;
+    margin: 0;
     background-color: white;
     background-image: none !important;
     font-family: "PT Sans", sans-serif;
@@ -47,10 +46,9 @@ a.menu:not(.active):hover {
 .right-content-box {
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 5% 2%; 
+    margin: 0% 2%; 
     padding-bottom: 20px; 
     box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
-    position: fixed;
     top: 8%;
     right: 3%;
     left:16%;

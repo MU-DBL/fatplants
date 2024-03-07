@@ -23,6 +23,7 @@ export class DataComponent implements OnInit {
   showingSearch = false;
   currentPage = 1;
   searchQuery = "";
+  resultsLength = 0;
   selectedFilterField = {
     name: "Gene Name",
     value: "gene_names"
