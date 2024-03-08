@@ -16,6 +16,21 @@
   position: relative;
 }
 
+.content-box-analysis {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  height: 300px;
+  overflow: auto;
+  margin-bottom: 20px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.content-box-analysis:hover {
+  transform: scale(1.05);
+}
+
 .information-box {
   padding: 20px;
   overflow: visible;
@@ -26,10 +41,12 @@
 a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease;
 }
 
 a:hover {
   cursor: pointer;
+  color: blue;
 }
 
 .bg-tools:hover {
