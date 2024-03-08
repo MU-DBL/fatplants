@@ -7,7 +7,13 @@ mat-card.base {
     padding:0% !important;
   }
 
-.left-sidebar {
+.mat-form-field {
+    width: 40%; 
+    height:45px;
+    margin: 1%; 
+} 
+
+.left-menu {
   color: black;
   width: 13%;
   padding: 1%;
@@ -15,34 +21,25 @@ mat-card.base {
   height: auto;
 }
 
-.left-sidebar p {
-  font-size: 1.2vw;
-  font-weight: 500;
-  margin-block-start: 0.1em;
-  margin-block-end: 0.1em;
+.left-menu .menu.active {
+  color: black; 
+  text-decoration: underline; 
+  text-decoration-color: limegreen;
 }
 
-.left-sidebar hr{
-  width: 60%;
-  margin-left: 0;
-  text-align: left;
+a.menu {
+  display: block;
+  padding-left: 12%;
+  padding-bottom:8%;
+  color: gray;
+  cursor: pointer;
+  transition: all 0.5s;
+  text-decoration: none;
 }
 
-.left-sidebar ul{
-  list-style-type: none;
-  padding: 5%;
-  margin-block-start: 0.1em;
-  margin-block-end: 0.1em;
-}
-
-.left-sidebar ul li{
-  padding: 0.3rem;
-  font-size: 1vw;
-}
-
-.left-sidebar ul li:hover {
-  background-color: #efefef; /* Change color on hover */
-  width: 80%;
+a.menu:not(.active):hover {
+  color: limegreen;
+  transition: color 0.2s;
 }
 
 .main-content{

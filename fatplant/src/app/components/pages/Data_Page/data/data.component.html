@@ -1,5 +1,5 @@
-<div class="bg">
-    <h2>Data</h2>
+<div class="page-title-bar">
+    <p class="page-title">Data</p>
 </div>
 <mat-card id="base">
     <div class="left-menu">
@@ -8,7 +8,7 @@
         <a class="menu" [class.active]='this.dataset == "soybean"' (click)='changeDataset("soybean")'>Soybean</a>
         <a class="menu active" [class.active]='this.dataset == "arabidopsis"' (click)='changeDataset("arabidopsis")'>Arabidopsis</a>
         <hr class="custom-hr">
-        <p class="subheader fattyacid" style="font-size: 16px;padding-left: 5%;">Fatty Acids</p>
+        <p class="subheader fattyacid" style="font-size: 16px; padding-left: 5%; margin-top: 1%;">Fatty Acids</p>
         <a class="menu" [class.active]='this.dataset == "fattyacid"' (click)='changeDataset("fattyacid")'>Chemical Data</a>
         <hr class="custom-hr">
     </div>
