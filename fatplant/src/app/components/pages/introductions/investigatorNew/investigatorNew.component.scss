@@ -1,5 +1,4 @@
-.container {
-  margin-top: 5rem;
+.container-fluid {
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -44,7 +43,6 @@
   padding-top: 8px;
   padding-left: 15px;
   height: auto;
-  width: 20%;
   min-width: 350px;
   display: flex;
   position: relative;
@@ -85,5 +83,10 @@ a {
   font-size: 35px;
   background: #40a146 !important;
   color: whitesmoke;
-  padding: 10px 50px;
+  padding: 10px 15px;
+  margin: 0; 
+  box-sizing: border-box;
+  margin-left: -13px;
+  width: 100%;
 }
+
