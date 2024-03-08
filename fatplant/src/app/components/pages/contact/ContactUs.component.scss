@@ -1,0 +1,93 @@
+.container {
+    margin-top: 5rem;
+    background-color: white !important;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    height: 5rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 3rem;
+    background: linear-gradient(90deg, rgba(124, 179, 66, 0.75) 0%, rgba(92, 145, 35, 1) 30%, rgba(49, 90, 5, 1) 60%);
+    color: whitesmoke;
+    padding-left: 35px;
+}
+
+.contact-form-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 20px;
+
+}
+
+.form-row .form-group:last-child {
+    margin-right: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group input[type="email"],
+.form-group input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.send-button {
+    background-color: #4caf50;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-right: 0;
+    }
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}

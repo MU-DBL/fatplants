@@ -23,6 +23,7 @@ export class DataComponent implements OnInit {
   showingSearch = false;
   currentPage = 1;
   searchQuery = "";
+  resultsLength = 0;
   selectedFilterField = {
     name: "Gene Name",
     value: "gene_names"
@@ -151,7 +152,7 @@ export class DataComponent implements OnInit {
       default :
         this.arabidopsisDataSource.filter = this.currentDataSource.filter;
     }
-    this.router.navigate(["data/" + newDataset]);
+    this.router.navigate(["datasets/" + newDataset]);
   }
 
   refreshData() {
@@ -463,6 +464,5 @@ export class DataComponent implements OnInit {
     }
   
   }
-
 }
-
+}

@@ -62,11 +62,11 @@
             </ng-container>
             <ng-container matColumnDef="protein_entry">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
-                <mat-cell *matCellDef="let elem"><a [routerLink]="['/protein', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
+                <mat-cell *matCellDef="let elem"><a [routerLink]="['/details', 'Arabidopsis',elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
             </ng-container>
             <ng-container matColumnDef="cam_prot_entry">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
-                <mat-cell *matCellDef="let elem"><a [routerLink]="['/camelina_prot', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
+                <mat-cell *matCellDef="let elem"><a [routerLink]="['/details', 'Camelina', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
             </ng-container>   
             <ng-container matColumnDef="camelina">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Camelina </mat-header-cell>
@@ -115,7 +115,7 @@
     
             <ng-container matColumnDef="soy_prot_entry">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
-                <mat-cell *matCellDef="let elem"><a [routerLink]="['/soybean_prot', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
+                <mat-cell *matCellDef="let elem"><a [routerLink]="['/details', 'Soybean', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
             </ng-container>
     
             <ng-container matColumnDef="picture">

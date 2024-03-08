@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { FunctionEntry } from 'src/app/interfaces/FunctionEntry';
@@ -7,14 +7,15 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { GptDialogComponent } from 'src/app/components/commons/gpt-dialog/gpt-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {DataService} from "../../../../services/data/data.service";
-import {Location} from '@angular/common';
+import { DataService } from "../../../../services/data/data.service";
+import { Location } from '@angular/common';
 import { MatStep } from '@angular/material/stepper';
-import {HttpClient} from "@angular/common/http";
-import {G2SEntry} from "../../../../interfaces/G2SEntry";
-import {DomSanitizer} from "@angular/platform-browser";
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
+import { HttpClient } from "@angular/common/http";
+import { G2SEntry } from "../../../../interfaces/G2SEntry";
+import { DomSanitizer } from "@angular/platform-browser";
+import { toNumbers } from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import { StructureViewerComponent } from '../../onestopsearch/structure-viewer/structure-viewer.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-protein-details-new',
@@ -29,17 +30,17 @@ export class ProteinDetailsNewComponent implements OnInit {
   baseDetails: any;
   extendedData: any;
 
-  constructor(private access: FirestoreAccessService, 
-              private afs: AngularFirestore, 
-              private route: ActivatedRoute,
-              public dataService: DataService,
-              private location: Location,
-              private cdr: ChangeDetectorRef,
-              public notificationService: NotificationService,
-              public dialog: MatDialog,private fsaccess : FirestoreAccessService,
-              private http: HttpClient,
-              private sanitizer: DomSanitizer) { }
-
+  constructor(private access: FirestoreAccessService,
+    private afs: AngularFirestore,
+    private route: ActivatedRoute,
+    public dataService: DataService,
+    private location: Location,
+    private cdr: ChangeDetectorRef,
+    public notificationService: NotificationService,
+    public dialog: MatDialog, private fsaccess: FirestoreAccessService,
+    private http: HttpClient,
+    private sanitizer: DomSanitizer) { }
+  database: string;
   private cfg: string;
   translationObject;
   uniprotId;
@@ -63,7 +64,7 @@ export class ProteinDetailsNewComponent implements OnInit {
   pathwayLoading = false;
   leftArrowEnabled: boolean;
   rightArrowEnabled: boolean;
-  showBlastResList=[];
+  showBlastResList = [];
   loadedDatabase: any;
   selectedGPTQuery = "";
   splitGeneNames = [];
@@ -77,18 +78,18 @@ export class ProteinDetailsNewComponent implements OnInit {
   context: CanvasRenderingContext2D;
   currPath: string;
   displayedColumns = ['entryId', 'gene', 'uniprotAccession', 'taxId', 'uniprotStart', 'uniprotEnd', '3DViewer'];
-  Databases : any;
+  Databases: any;
   query: string = "Fucosyltransferase";
   fp_id: string = null;
   searchError: boolean = false;
   loadingSearch = false;
   hasSearched: boolean = false;
-  headingName:String;
+  headingName: String;
 
   get g2sLoading(): boolean {
     return this.dataService.g2sLoading;
   }
-  
+
   get prettyConfig(): string {
     if (this.cfg != undefined) return this.cfg[0].toUpperCase() + this.cfg.slice(1);
     else return "";
@@ -96,73 +97,118 @@ export class ProteinDetailsNewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.http.get('/static/json_config/Databases.json', {responseType: 'json'}).subscribe(data => 
-      {
-        this.Databases = data;
-       
-        this.proteinDatabase = this.Databases['Soybean'];
-        
-        this.speciesName = this.proteinDatabase['fullSearchSpecies']
-      
-
-      
-      this.route.params.subscribe(params => {
-      this.isSummary = false;
-      this.is3DStructure = false;
-      this.isStructure = false;
-      this.isBlast = false;
-      this.isPathway = false;
-  
-      if (this.uniprot_id == undefined) this.uniprot_id = params['uniprot_id'];
-      if (this.cfg == undefined) this.cfg = "summary";
-      
-      
-          this.hasSearched = true;
-      
-          this.fsaccess.getBaseProteinFromUniProt(this.uniprot_id, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
-          this.validateResult(data[0]);
-          this.getExtendedSpecies();
-      });
-      // this.loadedDatabase = this.proteinDatabase['database'];
-  
-      
-      }); 
-    });
-  }
-
-
-  ngOnChanges() {
-    this.http.get('/static/json_config/Databases.json', {responseType: 'json'}).subscribe(data => 
-      {
-        this.Databases = data;
-        this.proteinDatabase = this.Databases['Soybean'];
-        this.speciesName = this.proteinDatabase['fullSearchSpecies']
-      
     this.route.params.subscribe(params => {
       this.isSummary = false;
       this.is3DStructure = false;
       this.isStructure = false;
       this.isBlast = false;
       this.isPathway = false;
-  
-      if (this.uniprot_id == undefined) this.uniprot_id = params['uniprot_id'];
 
+      if (this.uniprot_id == undefined) this.uniprot_id = params['uniprot_id'];
       if (this.cfg == undefined) this.cfg = "summary";
-      this.hasSearched=true;
-      this.fsaccess.getBaseProteinFromUniProt(this.uniprot_id, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
-        this.validateResult(data);
-        this.getExtendedSpecies();
-      });
-      // this.loadedDatabase = this.proteinDatabase['database'];
+      this.database = params['database_name'];
     });
+      this.hasSearched = true;
+      this.http.get('/static/json_config/Databases.json', { responseType: 'json' }).subscribe(data => {
+        this.Databases = data;
+        console.log("this is databases data : ",this.Databases['Arabidopsis']);
+        this.proteinDatabase = this.Databases[this.database];
+
+          this.speciesName = this.proteinDatabase['fullSearchSpecies'];
       
+          console.log("this.database : ", this.database);
+      
+          this.fsaccess.getBaseProteinFromUniProt(this.uniprot_id, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
+            
+            this.validateResult(data[0]);
+            this.getExtendedSpecies();
+            // this.getUniprotData();
+          });
+          // this.loadedDatabase = this.proteinDatabase['database'];
+
       });
+    
   }
 
+  ngOnChanges() {
+    this.route.params.subscribe(params => {
+      this.isSummary = false;
+      this.is3DStructure = false;
+      this.isStructure = false;
+      this.isBlast = false;
+      this.isPathway = false;
+
+      if (this.uniprot_id == undefined) this.uniprot_id = params['uniprot_id'];
+      if (this.cfg == undefined) this.cfg = "summary";
+      this.database = params['database_name'];
+
+      this.hasSearched = true;
+      this.http.get('/static/json_config/Databases.json', { responseType: 'json' }).subscribe(data => {
+        this.Databases = data;
+
+        this.proteinDatabase = this.Databases[this.database];
+
+        this.speciesName = this.proteinDatabase['fullSearchSpecies']
+
+        this.fsaccess.getBaseProteinFromUniProt(this.uniprot_id, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
+          this.validateResult(data[0]);
+          this.getExtendedSpecies();
+          // this.getUniprotData();
+        });
+        // this.loadedDatabase = this.proteinDatabase['database'];
+      });
+    });
+  }
+
+  tabChanged(event: MatTabChangeEvent): void {
+    switch (this.cfg) {
+      case 'summary':
+        this.isSummary = false;
+        break;
+      case 'alignments':
+        this.is3DStructure = false;
+        break;
+      case 'structure':
+        this.isStructure = false;
+        break;
+      case 'blast':
+        this.isBlast = false;
+        break;
+      default:
+        this.isPathway = false;
+        break;
+    }
+
+    switch (event.index) {
+      case 0:
+        this.cfg = "summary";
+        break;
+      case 1:
+        this.cfg = "alignments";
+        break;
+      case 2:
+        this.cfg = "structure";
+        break;
+      case 3:
+        this.cfg = "blast";
+        break;
+      case 4:
+        this.cfg = "pathway";
+        break;
+      default:
+        this.cfg = "summary";
+        break;
+    }
+
+    this.cdr.detectChanges();
+    this.location.replaceState(`/details/${this.database}/` + this.uniprot_id + `/` + this.cfg);
+    this.SelectConfig();
+
+  }
 
   validateResult(result: any): boolean {
 
-    console.log("result uniprot : ",result);
+    console.log("result uniprot : ", result);
     this.loadingSearch = false;
     this.baseDetails = [];
     this.uniprot_id = null;
@@ -171,17 +217,17 @@ export class ProteinDetailsNewComponent implements OnInit {
 
     if (result == undefined) {
       this.searchError = true;
-      this.location.replaceState('details');
+      this.location.replaceState(`details/${this.database}/`);
       this.cdr.detectChanges();
       return false;
     }
     else {
-      console.log("validate result data : ",result);
+      console.log("validate result data : ", result);
       if (!result.fp_id) {
-        this.fsaccess.getBaseProteinFromUniProt(result.uniprot_id,this.proteinDatabase['fullSearchSpecies']).subscribe((data:any[]) => {
+        this.fsaccess.getBaseProteinFromUniProt(result.uniprot_id, this.proteinDatabase['fullSearchSpecies']).subscribe((data: any[]) => {
           if (data && data.length > 0) {
             this.uniprot_id = data[0].uniprot_id;
-            this.location.replaceState('details/' + this.uniprot_id + "/summary");
+            this.location.replaceState(`details/${this.database}/` + this.uniprot_id + `/summary`);
             this.baseDetails = data[0];
             this.cdr.detectChanges();
             return true;
@@ -190,7 +236,7 @@ export class ProteinDetailsNewComponent implements OnInit {
       }
 
       this.uniprot_id = result.uniprot_id;
-      this.location.replaceState('details/' + this.uniprot_id + "/summary");
+      this.location.replaceState(`details/${this.database}/` + this.uniprot_id + `/summary`);
       this.baseDetails = result;
       this.cdr.detectChanges();
       return true;
@@ -201,12 +247,16 @@ export class ProteinDetailsNewComponent implements OnInit {
   getExtendedSpecies() {
     this.homologs = null;
     this.dataService.loading = true;
+    console.log("result is : ", "nothing");
     this.fsaccess.getExtendedDetails(this.baseDetails.fp_id, this.speciesName).subscribe(res => {
       this.SelectConfig();
-      if (res && res[0]){
+      if (res && res[0]) {
+        
         this.extendedData = res[0];
-        this.headingName = this.extendedData.protein_name;
-        console.log("extended details : ",this.extendedData);
+        this.splitGeneNames = this.extendedData.gene_names.split(' ');
+        this.selectedGPTQuery = this.splitGeneNames[0];
+        if(this.database === "Arabidopsis") this.headingName = this.extendedData.protein_names
+        else this.headingName = this.extendedData.protein_name;
         this.noPdb = false;
         this.dataService.loading = false;
         this.dataService.BlastNeedUpdate = true;
@@ -215,24 +265,23 @@ export class ProteinDetailsNewComponent implements OnInit {
       }
     });
     if (this.speciesName == "lmpd") {
-      this.fsaccess.getMapForArabidopsis(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
+      this.fsaccess.getMapForArabidopsis(this.baseDetails.uniprot_id).subscribe((data: any[]) => {
         if (data && data.length > 0) {
           this.homologs = data[0];
         }
       });
     }
     else if (this.speciesName == "camelina") {
-      this.fsaccess.getMapForCamelina(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
+      this.fsaccess.getMapForCamelina(this.baseDetails.uniprot_id).subscribe((data: any[]) => {
         if (data && data.length > 0) {
           this.homologs = data[0];
         }
       });
     }
     else if (this.speciesName == "soya") {
-      this.fsaccess.getMapForSoybean(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
+      this.fsaccess.getMapForSoybean(this.baseDetails.uniprot_id).subscribe((data: any[]) => {
         if (data && data.length > 0) {
           this.homologs = data[0];
-          console.log("homologs data : ",this.homologs);
         }
       });
     }
@@ -240,8 +289,8 @@ export class ProteinDetailsNewComponent implements OnInit {
 
   searchG2S() {
     this.dataService.g2sLoading = true;
-    this.http.get(`https://alphafold.ebi.ac.uk/api/prediction/${this.uniprot_id}?key=AIzaSyCeurAJz7ZGjPQUtEaerUkBZ3TaBkXrY94`).subscribe((result: any) => { 
-    this.G2SDataSource = new MatTableDataSource(result);
+    this.http.get(`https://alphafold.ebi.ac.uk/api/prediction/${this.uniprot_id}?key=AIzaSyCeurAJz7ZGjPQUtEaerUkBZ3TaBkXrY94`).subscribe((result: any) => {
+      this.G2SDataSource = new MatTableDataSource(result);
       if (result != undefined && result.length >= 1) {
         this.defaultPdb = this.sanitizer.bypassSecurityTrustResourceUrl("/static/display3d.html?pdbId=" + result[0].pdbUrl);
         this.noPdb = false;
@@ -255,49 +304,133 @@ export class ProteinDetailsNewComponent implements OnInit {
 
   openGptDialog() {
     const dialogRef = this.dialog.open(GptDialogComponent, {
-      data: {identifier: this.selectedGPTQuery}
+      data: { identifier: this.selectedGPTQuery }
     });
   }
 
   getUniprotData() {
-    this.afs.collection('/New_Soybean', ref => ref.limit(1).where('uniprot_id', '==', this.uniprot_id)).valueChanges().subscribe((res: any) => {
-      this.arapidopsisData = res[0];
-      console.log("arabidopsis data : ",this.arapidopsisData);
-      if (this.arapidopsisData !== undefined) {
-        this.arapidopsisData.gene_names = this.arapidopsisData.gene_names.replaceAll(' ', ', ');
+    if(this.database === "Arabidopsis"){
+      this.afs.collection('/New_Lmpd_Arabidopsis', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
+        this.arapidopsisData = res[0];
+        console.log("arabidopsis data : ",this.arapidopsisData);
+        if (this.arapidopsisData !== undefined) {
+          this.arapidopsisData.gene_names = this.arapidopsisData.gene_names.replaceAll(' ', ', ');
+          this.proteinEntry = this.arapidopsisData.protein_entry;
+          this.proteinDataSource = new MatTableDataSource<FunctionEntry>(this.arapidopsisData.features);
+          
+          this.access.getMapForArabidopsis(this.arapidopsisData.uniprot_id).subscribe(translation => {
+            this.translationObject = translation;
+          })
+          
+          this.getProteinEntry();
+        }
+        else {
+          this.isLoadingProtein = false;
+        }
+        this.isLoadingArapidopsis = false;
+      });
 
-        this.access.getMapForSoybean(this.arapidopsisData.uniprot_id).subscribe(translation => {
-          console.log("transaltion object : ",translation);
-          this.translationObject = translation;
-        })
-
-        this.proteinEntry = this.arapidopsisData.protein_entry;
-        this.proteinDataSource = new MatTableDataSource<FunctionEntry>(this.arapidopsisData.features);
-        this.getProteinEntry();
-      }
-      else {
-        this.isLoadingProtein = false;
-      }
-      this.isLoadingArapidopsis = false;
-    });
+    }else if(this.database === "Camelina"){
+      this.afs.collection('/New_Camelina', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
+        this.arapidopsisData = res[0];
+        console.log("arabidopsis data : ",this.arapidopsisData);
+        if (this.arapidopsisData !== undefined) {
+          this.proteinEntry = this.arapidopsisData.protein_entry;
+          this.proteinDataSource = new MatTableDataSource<FunctionEntry>(this.arapidopsisData.features);
+          
+          this.access.getMapForCamelina(this.arapidopsisData.uniprot_id).subscribe(translation => {
+            this.translationObject = translation;
+          })
+          
+          this.getProteinEntry();
+        }
+        else {
+          this.isLoadingProtein = false;
+        }
+        this.isLoadingArapidopsis = false;
+      });
+    }else if(this.database === "Soybean"){
+      this.afs.collection('/New_Soybean', ref => ref.limit(1).where('uniprot_id', '==', this.uniprot_id)).valueChanges().subscribe((res: any) => {
+        this.arapidopsisData = res[0];
+        console.log("arabidopsis data : ", this.arapidopsisData);
+        if (this.arapidopsisData !== undefined) {
+          this.arapidopsisData.gene_names = this.arapidopsisData.gene_names.replaceAll(' ', ', ');
+  
+          this.access.getMapForSoybean(this.arapidopsisData.uniprot_id).subscribe(translation => {
+            console.log("transaltion object : ", translation);
+            this.translationObject = translation;
+          })
+  
+          this.proteinEntry = this.arapidopsisData.protein_entry;
+          this.proteinDataSource = new MatTableDataSource<FunctionEntry>(this.arapidopsisData.features);
+          this.getProteinEntry();
+        }
+        else {
+          this.isLoadingProtein = false;
+        }
+        this.isLoadingArapidopsis = false;
+      });
+    }
+    
   }
   getProteinEntry() {
-    this.afs.collection('/New_Soybean_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprot_id)).valueChanges().subscribe((res: any) => {
-      this.proteinData = res[0];
-      console.log(this.proteinData);
-      if (this.proteinData === undefined) {
-        this.afs.collection('/New_Soybean_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprot_id)).valueChanges().subscribe((res: any) => {
-          this.proteinData = res[0];
+    if(this.database === "Arabidopsis"){
+      this.afs.collection('/New_Lmpd_Arabidopsis_Details', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
+        this.proteinData = res[0];
+        console.log("protein Data is : ",this.proteinData);
+        if (this.proteinData === undefined) {
+          this.afs.collection('/New_Lmpd_Arabidopsis_Details', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
+            this.proteinData = res[0];
+            this.isLoadingProtein = false;
+          });
+        }
+        else {
           this.isLoadingProtein = false;
-        });
-      }
-      else {
-        this.isLoadingProtein = false;
-      }
-
-      this.splitGeneNames = this.proteinData.gene_names.split(' ');
-      this.selectedGPTQuery = this.splitGeneNames[0];
-    });
+        }
+        console.log("protein Data is : ",this.proteinData);
+        this.splitGeneNames = this.proteinData.gene_names.split(' ');
+        this.selectedGPTQuery = this.splitGeneNames[0];
+      });
+    }else if(this.database === "Camelina"){
+      this.afs.collection('/New_Camelina_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
+        this.proteinData = res[0];
+        console.log("protein Data is : ",this.proteinData);
+        if (this.proteinData === undefined) {
+          this.afs.collection('/New_Camelina_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
+            this.proteinData = res[0];
+            this.proteinData.gene_names = this.proteinData.gene_names.replaceAll(' ', ', ');
+  
+            this.splitGeneNames = this.proteinData.gene_names.split(',');
+  
+            this.isLoadingProtein = false;
+          });
+        }
+        else {
+          this.splitGeneNames = this.proteinData.gene_names.split(' ');
+          this.isLoadingProtein = false;
+        }
+  
+        this.selectedGPTQuery = this.splitGeneNames[0];
+      });
+    }else if(this.database === "Soybean"){
+      this.afs.collection('/New_Soybean_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprot_id)).valueChanges().subscribe((res: any) => {
+        this.proteinData = res[0];
+        console.log("protein Data is : ",this.proteinData);
+        if (this.proteinData === undefined) {
+          this.afs.collection('/New_Soybean_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprot_id)).valueChanges().subscribe((res: any) => {
+            this.proteinData = res[0];
+            this.isLoadingProtein = false;
+          });
+        }
+        else {
+          this.isLoadingProtein = false;
+        }
+        console.log("protein Data is : ",this.proteinData);
+        this.splitGeneNames = this.proteinData.gene_names.split(' ');
+        this.selectedGPTQuery = this.splitGeneNames[0];
+      });
+    }
+    
   }
   parseKeywords(originalKeywords) {
     let keywordList = originalKeywords.split(';');
@@ -351,8 +484,8 @@ export class ProteinDetailsNewComponent implements OnInit {
     }
     this.cfg = newConfig;
     this.cdr.detectChanges();
-    this.location.replaceState('/details/' + this.uniprot_id + '/' + this.cfg);
-    
+    this.location.replaceState(`/details/${this.database}/` + this.uniprot_id + `/` + this.cfg);
+
     this.SelectConfig();
   }
 
@@ -362,18 +495,18 @@ export class ProteinDetailsNewComponent implements OnInit {
         this.isSummary = true;
         break;
       case 'structure':
-        this.isStructure=true;
+        this.isStructure = true;
         break;
       case 'alignments':
         this.is3DStructure = true;
         break;
       case 'blast':
-        if (!this.dataService.BlastNeedUpdate && this.dataService.getBlastRes()){
+        if (!this.dataService.BlastNeedUpdate && this.dataService.getBlastRes()) {
           this.SplitRes(this.dataService.getBlastRes());
           this.isBlast = true;
         }
         else {
-          this.percent=0;
+          this.percent = 0;
           const getDownloadProgress = () => {
             if (this.percent <= 99) {
               this.percent = this.percent + 10;
@@ -385,7 +518,7 @@ export class ProteinDetailsNewComponent implements OnInit {
           this.intervalId = setInterval(getDownloadProgress, 700);
           this.isBlast = true;
           this.showProgress = true;
-          if(this.proteinDatabase === undefined){
+          if (this.proteinDatabase === undefined) {
             // UPDATE THIS
             this.proteinDatabase = 'Arabidopsis';
           }
@@ -394,7 +527,7 @@ export class ProteinDetailsNewComponent implements OnInit {
           // this may acutally be fine and not need changes
           //===============================================================================
 
-          this.dataService.updateBlastRes(this.proteinDatabase['database'], this.uniprot_id).subscribe(res=>{
+          this.dataService.updateBlastRes(this.proteinDatabase['database'], this.uniprot_id).subscribe(res => {
             this.SplitRes(res);
             this.showProgress = false;
             clearInterval(this.intervalId);
@@ -407,14 +540,14 @@ export class ProteinDetailsNewComponent implements OnInit {
         this.pathwayList = [];
         this.noimg = false;
         this.pathwayLoading = true;
-        this.dataService.getPathwaysByUniProt(this.speciesName, this.extendedData.uniprot_id).subscribe((data:any) => {
+        this.dataService.getPathwaysByUniProt(this.speciesName, this.extendedData.uniprot_id).subscribe((data: any) => {
           if (data && data.pathway_ids && data.pathway_ids.length > 0) {
-        
+
             data.pathway_ids.forEach(id => {
               let slicedPathway = id.split(':');
               this.pathwayList.push(slicedPathway[1]);
             });
-            
+
             this.noimg = false;
           }
           else {
@@ -426,7 +559,7 @@ export class ProteinDetailsNewComponent implements OnInit {
           this.pathwayLoading = false;
         });
         // this.SearchPathway(this.uniprot_id);
-        this.isPathway=true;
+        this.isPathway = true;
         break;
       default:
         break;
@@ -477,8 +610,8 @@ export class ProteinDetailsNewComponent implements OnInit {
 
 
     for (var i in tmp) {
-      this.showBlastResList.push([tmp[i].split(/\r?\n/)[0],tmp[i]])
-      }
+      this.showBlastResList.push([tmp[i].split(/\r?\n/)[0], tmp[i]])
+    }
 
     this.dataService.BlastNeedUpdate = false;
   }
@@ -530,14 +663,14 @@ export class ProteinDetailsNewComponent implements OnInit {
 
   selectImage(pathway: string) {
     this.isLoadingImage = true;
-    this.selectedPathImage = "https://fatplantsmu.ddns.net:5000/highlighted_image/?species="+this.speciesName+"&uniprot_id="+this.extendedData.uniprot_id+"&pathway_id="+pathway;
+    this.selectedPathImage = "https://fatplantsmu.ddns.net:5000/highlighted_image/?species=" + this.speciesName + "&uniprot_id=" + this.extendedData.uniprot_id + "&pathway_id=" + pathway;
   }
 
   onImageLoad() {
     this.isLoadingImage = false;
   }
 
-  loadImage(pathway){
+  loadImage(pathway) {
     //var id = selected[0]._value.slice(5);
     this.isLoadingImage = true;
     var id = pathway;
@@ -547,12 +680,12 @@ export class ProteinDetailsNewComponent implements OnInit {
     //Clear canvas before load new image
     this.context = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
     var canvas = (this.canvasEl.nativeElement as HTMLCanvasElement);
-    this.context.clearRect(0,0,canvas.width,canvas.height);
+    this.context.clearRect(0, 0, canvas.width, canvas.height);
     var elemLeft = canvas.offsetLeft + canvas.clientLeft;
     var elemTop = canvas.offsetTop + canvas.clientTop;
     var elements = [];
     //this.http.get('https://us-central1-linux-shell-test.cloudfunctions.net/keggget?cfg=get&para=conf&id='+id, {responseType: 'text'}).subscribe(data => {
-      this.http.get('https://fatplantsmu.ddns.net:5000/getcoordinates/?pathway_id='+id, {responseType: 'text'}).subscribe(data => {
+    this.http.get('https://fatplantsmu.ddns.net:5000/getcoordinates/?pathway_id=' + id, { responseType: 'text' }).subscribe(data => {
       for (const line of data.substr(1).slice(0, -1).split('\\n')) {
         if (line.slice(0, 4) === 'rect') {
           var linesplit = line.split('\\t');
@@ -561,16 +694,16 @@ export class ProteinDetailsNewComponent implements OnInit {
           var possplit = pos.split(' ');
           var topleft = possplit[1];
           var bottomright = possplit[2];
-          topleft = topleft.slice(1,-1);
-          bottomright = bottomright.slice(1,-1);
+          topleft = topleft.slice(1, -1);
+          bottomright = bottomright.slice(1, -1);
           var top = toNumbers(topleft.split(',')[1])[0];
           var left = toNumbers(topleft.split(',')[0])[0];
           var bottom = toNumbers(bottomright.split(',')[1])[0];
           var right = toNumbers(bottomright.split(',')[0])[0];
           elements.push({
             colour: '#FFFFFF',
-            width: right-left,
-            height: bottom-top,
+            width: right - left,
+            height: bottom - top,
             top: top,
             left: left,
             url: url
@@ -578,43 +711,44 @@ export class ProteinDetailsNewComponent implements OnInit {
 
         }
       }
-      canvas.addEventListener('click',function(event) {
+      canvas.addEventListener('click', function (event) {
         // var x = event.pageX - elemLeft;
         // var y = event.pageY - elemTop;
         var x = event.offsetX
         var y = event.offsetY
         // Collision detection between clicked offset and element.
 
-        elements.forEach(function(element) {
+        elements.forEach(function (element) {
           if (y > element.top && y < element.top + element.height
             && x > element.left && x < element.left + element.width) {
             //alert('clicked an element');
-            window.open('http://www.kegg.jp'+element.url);
+            window.open('http://www.kegg.jp' + element.url);
 
           }
-        })},false);
+        })
+      }, false);
 
-      canvas.addEventListener('mousemove',function(event) {
+      canvas.addEventListener('mousemove', function (event) {
         var x = event.offsetX;
         var y = event.offsetY;
         var isIn = false;
-        elements.forEach(function(element) {
+        elements.forEach(function (element) {
           if (y > element.top && y < element.top + element.height
             && x > element.left && x < element.left + element.width) {
             isIn = true;
             canvas.style.cursor = "pointer";
           }
         })
-        if (!isIn){
+        if (!isIn) {
           canvas.style.cursor = "default";
         }
-      },false);
+      }, false);
 
       var ctx = this.context;
-      elements.forEach(function(element) {
+      elements.forEach(function (element) {
         ctx.fillStyle = element.colour;
         ctx.fillRect(element.left, element.top, element.width, element.height);
-      });​
+      });
 
       // var img1 = document.getElementById('pathway1') as HTMLImageElement;
       // ctx.drawImage(img1,0,0);
@@ -623,7 +757,7 @@ export class ProteinDetailsNewComponent implements OnInit {
         this.isLoadingImage = false;
         ctx.canvas.height = img1.height;
         ctx.canvas.width = img1.width;
-        ctx.drawImage(img1,0,0)
+        ctx.drawImage(img1, 0, 0)
         // THESE LINES WOULD SCALE THE IMAGE DOWN
         // if so, set the max height/width in the html
         /* var scale = Math.min(canvas.width / img1.width, canvas.height / img1.height);
@@ -632,10 +766,10 @@ export class ProteinDetailsNewComponent implements OnInit {
         var y = (canvas.height / 2) - (img1.height / 2) * scale;
         ctx.drawImage(img1, x, y, img1.width * scale, img1.height * scale);
         */
-      
+
       }
-        //img1.src = 'https://us-central1-linux-shell-test.cloudfunctions.net/keggget?cfg=get&para=image&id=' + id;
-        img1.src = "https://fatplantsmu.ddns.net:5000/highlighted_image/?species="+this.speciesName+"&uniprot_id="+this.uniprot_id+"&pathway_id="+id;
+      //img1.src = 'https://us-central1-linux-shell-test.cloudfunctions.net/keggget?cfg=get&para=image&id=' + id;
+      img1.src = "https://fatplantsmu.ddns.net:5000/highlighted_image/?species=" + this.speciesName + "&uniprot_id=" + this.uniprot_id + "&pathway_id=" + id;
 
 
     });
@@ -645,9 +779,7 @@ export class ProteinDetailsNewComponent implements OnInit {
     this.dialog.open(StructureViewerComponent, {
       width: '1000px',
       height: '700px',
-      data: {pdbId: pdbId, pdbLinkBase: pdbLinkBase}
+      data: { pdbId: pdbId, pdbLinkBase: pdbLinkBase }
     });
   }
-
-
 }
