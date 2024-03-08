@@ -15,7 +15,7 @@
     <div class="right-content-box">
         <div class="filter">
         <mat-form-field id="filter" >
-            <input type="search" matInput [value]="searchQuery" (keyup)="onSearchChange($event)"/>
+            <input type="search" matInput [value]="searchQuery" (keyup)="onSearchChange($event)" placeholder="Enter your search query"/>
         </mat-form-field>
         <button (click)='applySearchQuery()' class="search-button" matTooltip="Search">Search</button>
         </div>
@@ -161,7 +161,6 @@
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
-            <mat-paginator [length]="100" [pageSize]="30" aria-label="Select page of search results"></mat-paginator>
         </div>
         <mat-progress-bar mode="indeterminate" *ngIf='loading'></mat-progress-bar>
     </div>

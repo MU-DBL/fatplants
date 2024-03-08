@@ -3,6 +3,7 @@
     background-color: #629B07;
     color:white;  
     height:6%; 
+    margin-top: 5%;
 }
 h2{
     margin:2%;
@@ -46,27 +47,19 @@ a.menu:not(.active):hover {
 .right-content-box {
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 0% 2%; 
+    margin-top:1%;
+    margin-left:1%;
     padding-bottom: 20px; 
     box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
-    top: 8%;
-    right: 3%;
-    left:16%;
-    bottom:2%;
-    width: 79%; 
+    width: 85%; 
     max-height: 100%;
     overflow-y: auto;
     background-color: white; 
-    overflow-y: hidden;
+    height: 79vh;
     &:hover {
         overflow-y: auto; 
     }
     box-sizing: border-box;
-}
-
-.right-content-box::-webkit-scrollbar {
-    width: 0;
-    display: none;
 }
 a.active {
     color: black;
@@ -156,9 +149,9 @@ input.mat-input-element {
 } 
 
 .search-button {
-    margin: 0 auto;
     background-color: #629B07;
     justify-content: center;
+    margin-top:2px;
     align-items: center;
     color: white;
     font-size: 120%;
