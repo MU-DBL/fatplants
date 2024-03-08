@@ -36,15 +36,22 @@ import { BlastInternalComponent } from './components/pages/tools/blast-internal/
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
 // import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
+import { NetworkComponent } from './components/go-network-page/network.component';
+import { BlastPageComponent } from './components/blast-page/blast-page.component';
+import { GlmolStructurePageComponent } from './components/glmol-structure-page/glmol-structure-page.component';
+import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pathway-viewer-page.component';
 import { DataComponent } from './components/pages/Data_Page/data/data.component';
+import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
+import { ContactUsComponent } from './components/pages/contact/ContactUs.component';
 
-const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
+
+const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'homepage', component: HomepageComponent},
 {path: 'login', component: LoginComponent},
 {path: 'introduction', component: IntroductionComponent},
 {path: 'investigator', component: InvestigatorComponent},
-{path: 'investigatorNew', component: InvestigatorNewComponent},
+{path: 'team', component: InvestigatorNewComponent},
 {path: 'lmpd_arapidopsis', component: LmpdArapidopsisComponent},
 {path: 'glmol', component: GlmolComponent},
 {path: 'color-pathway', component: ColorPathwayComponent},
@@ -64,21 +71,27 @@ const routes: Routes = [{path: '', redirectTo: '/homepage', pathMatch: 'full'},
 {path: 'fatty_acid', component: FattyacidComponent},
 {path: 'soybean', component: SoybeanComponent},
 {path: 'add-news', component: AddNewsComponent},
+// {path: 'data', redirectTo: '/data/arabidopsis', pathMatch: 'full'},
+// {path: 'data/:dataset', component: DataComponent },
+//{path: 'datasets/:dataset', component: UnifiedDatapageComponent}, //component: DatasetsNewComponent
 {path: 'datasets', redirectTo: '/datasets/arabidopsis', pathMatch: 'full'},
-{path: 'datasets/:dataset', component: UnifiedDatapageComponent}, //component: DatasetsNewComponent
-// {path: 'data', component:DataComponent},
-// {path: 'data/:dataset', component: DataComponent},
+{path: 'datasets/:dataset', component: DataComponent},
 {path: 'showresults/:uniprot_id/:cfg', component: ShowresultsComponent},
 {path: 'protein/:uniprot_id', component: ProteinDetailComponent},
 {path: 'soybean_prot/:uniprot_id', component: ProteinSoybeanComponent}, 
 {path: 'camelina_prot/:uniprot_id', component: ProteinCamelinaComponent},
-// {path: 'details/:database_name/:uniprot_id',component:ProteinDetailsNewComponent},
 {path: 'pathway-viewer', component: PathwayViewerComponent},
 {path: 'extended-pathway', component: ExtendedPathwayComponent},
 {path: 'blast-internal', component:BlastInternalComponent},
 {path: 'home', component:HomeComponent},
-// {path: '**', redirectTo: '/home'}];
-{path: '**', redirectTo: '/homepage'}];
+//{path: '**', redirectTo: '/home'}],
+{path: 'go-network-page', component:NetworkComponent},
+{path: 'blast-page', component:BlastPageComponent},
+{path: 'glmol-page', component:GlmolStructurePageComponent}, 
+{path: 'pathway-viewer-page', component:PathwayViewerPageComponent}, 
+{path: 'details/:database_name/:uniprot_id',component:ProteinDetailsNewComponent},
+{path: 'contact', component: ContactUsComponent },
+{path: '**', redirectTo: '/home'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{ anchorScrolling: 'enabled'})],

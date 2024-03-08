@@ -1,0 +1,81 @@
+<mat-card class="base">
+    <div class="page-title-bar">
+        <p class="page-title">Arabidopsis Go Enrichment Network</p>
+    </div>
+    <div class="left-sidebar">
+        <p>Graph Shape</p>
+        <ul>
+            <li><a [class.active]="layout?.name == 'cose'" 
+                title="Dynamic Node Cluster" value="cose" (click)="layoutChange('cose')">CoSE</a></li>
+            <li><a [class.active]="layout?.name == 'cola'" 
+                title="D3 Force Graph" value="cola" (click)="layoutChange('cola')">Cola</a></li> 
+            <li><a [class.active]="layout?.name == 'circle'" 
+                title="Circluar Pattern" value="circle" (click)="layoutChange('circle')">Circle</a></li>
+            <li><a [class.active]="layout?.name == 'concentric'" 
+                title="Symetric" value="concentric" (click)="layoutChange('concentric')">Concentric</a></li>
+            <li><a [class.active]="layout?.name == 'concentric'" 
+                title="Symetric" value="concentric" (click)="layoutChange('avsdf')">Avsdf</a></li>
+        </ul>
+        <hr>
+    </div>
+    <div class="main-content">
+      <mat-form-field style="margin:1%">
+        <mat-label>Filter by Identifier</mat-label>
+        <input matInput id="entity-identifier-textbox" type="text" name="entity-name" placeholder="Gene/RefSeq_id/mRna_id" [(ngModel)]="filter">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="filterClick()">Submit</button>
+
+      <div class="graph-container">
+        <div *ngIf="!visiable" class="loading-bar">
+          <p>Loading...</p>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <ng2-cytoscape 
+        [elements]="graphData" 
+        [layout]="layout" 
+        [style]="style" 
+        [data]="node_description" 
+        [graph]="graph" 
+        (description)="nodeChange($event)" 
+        *ngIf="visiable">
+      </ng2-cytoscape>
+    </div>
+    <mat-expansion-panel *ngIf="node_name!=null && node_name.GO != null" class="ac" style="margin:1%">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+            <b>{{node_name.GO}}</b>
+          </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item>
+          <mat-icon mat-list-icon>chevron_right</mat-icon>
+          <p style="margin-top: 15px">
+            <b>Description:</b> {{node_name.Description}}
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>chevron_right</mat-icon>
+          <p style="margin-top: 15px"><b>Enrichment:</b> {{node_name.Enrichment}} 
+            <mat-icon 
+              style="font-size: small;" 
+              matTooltip="The enrichment score in gene ontology (GO) enrichment analysis is a measure that represents the statistical significance of the association between a specific GO term and a given gene set.
+              
+              The score is calculated using various statistical tests and is often adjusted for multiple testing to reduce the false discovery rate."
+              matTooltipPosition="after">help
+            </mat-icon> 
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>chevron_right</mat-icon>
+          <p style="margin-top: 15px"><b>Hit Count:</b> {{node_name.counts}}
+            <mat-icon 
+              style="font-size: small;" 
+              matTooltip="The node size, or the counts, represents the number of proteins/genes that can be categorized under this particular annotation."
+              matTooltipPosition="after">help
+            </mat-icon> 
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    </div>
+</mat-card>

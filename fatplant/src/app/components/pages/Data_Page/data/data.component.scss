@@ -2,19 +2,20 @@
 .bg{
     background-color: #629B07;
     color:white;  
-    height:5%; 
+    height:6%; 
     margin-top: 5%;
 }
 h2{
     margin:2%;
     padding-left:3%;
     padding-top:4px;
+    font-family: "PT Sans", sans-serif;
 }
 #base {
     width: 100%;
     min-height: 100%;
     height: auto;
-    margin: auto;
+    margin: 0;
     background-color: white;
     background-image: none !important;
     font-family: "PT Sans", sans-serif;
@@ -36,6 +37,7 @@ a.menu {
     color: gray;
     cursor: pointer;
     transition: all 0.5s;
+    text-decoration: none;
 }
 
 a.menu:not(.active):hover {
@@ -45,28 +47,19 @@ a.menu:not(.active):hover {
 .right-content-box {
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 5% 2%; 
+    margin-top:1%;
+    margin-left:1%;
     padding-bottom: 20px; 
     box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
-    position: fixed;
-    top: 8%;
-    right: 3%;
-    left:16%;
-    bottom:2%;
-    width: 79%; 
+    width: 85%; 
     max-height: 100%;
     overflow-y: auto;
     background-color: white; 
-    overflow-y: hidden;
+    height: 79vh;
     &:hover {
         overflow-y: auto; 
     }
     box-sizing: border-box;
-}
-
-.right-content-box::-webkit-scrollbar {
-    width: 0;
-    display: none;
 }
 a.active {
     color: black;
@@ -137,10 +130,47 @@ mat-cell>a:visited, mat-cell>span>a:visited {
     text-decoration: underline; 
     text-decoration-color: limegreen;
 }
-.mat-form-field {
-    width: 20%; 
-}
   
 input.mat-input-element {
     padding-right: 10%; 
+}
+.mat-form-field {
+    width: 40%; 
+    height:45px;
+    margin-left:2%; 
+    margin-top:2%; 
+    margin-bottom:1.5%;
+    border: 2px solid #ccc; 
+    box-sizing: border-box; 
+    box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
+    flex: 1;
+    margin-right: 8px;
+    
+} 
+
+.search-button {
+    background-color: #629B07;
+    justify-content: center;
+    margin-top:2px;
+    align-items: center;
+    color: white;
+    font-size: 120%;
+    text-align: center;
+    width: 80px;
+    font-family: "PT Sans", sans-serif;
+    box-sizing: border-box; 
+    border: 3px solid #ccc;
+    height: 44px;
+    border:10px;
+    border-radius: 3px;
+    box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
+}
+::ng-deep .mat-form-field-underline {
+    display: none; 
+}
+.filter {
+    display: flex;
+    align-items: center;
+    width:60%;
+    margin-left:6px;
 }
