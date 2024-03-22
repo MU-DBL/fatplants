@@ -1,0 +1,17 @@
+<mat-card>
+    <div style="margin-left:2%">
+        <h2>Pathway Viewer</h2>
+        <p>A tool for viewing pathway figures.</p>
+        <mat-form-field appearance="fill" class="selector">
+            <mat-label>Pathways</mat-label>
+            <mat-select (selectionChange)="onChange($event.value)" value="/app/assets/pathwayImages/Cutin Synthesis & Transport 1.png">
+                <mat-option *ngFor="let option of pathwayOptions" [value]="option.link">{{ option.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="selectedLink != ''"  class="imageArea">
+            <div>
+                <img [src]="selectedLink">
+            </div>       
+        </div>
+    </div>
+  </mat-card>

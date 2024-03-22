@@ -1,0 +1,28 @@
+@import "~src/variables.scss";
+
+div{
+  width:100%;
+  /* background-color: #FCFF7B; */
+}
+
+.imageArea{
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+img {
+  width: 95%;
+}
+
+.selector{
+    margin-top: 10px;
+    width: 40%;
+}
+
+mat-card {
+  box-sizing: border-box;
+  text-align: left;
+  padding: 1% !important;
+  margin: 0% !important;
+}

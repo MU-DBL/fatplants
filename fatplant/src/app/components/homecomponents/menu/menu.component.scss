@@ -17,3 +17,15 @@
 .bg {
   background-color: #efefef;
 }
+
+.hit-counter {
+  float: right;
+  margin-top: 10px;
+  margin-right:10px;
+  background-color:  #629B07;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
