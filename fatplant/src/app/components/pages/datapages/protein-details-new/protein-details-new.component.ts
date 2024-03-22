@@ -16,6 +16,8 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { toNumbers } from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import { StructureViewerComponent } from '../../onestopsearch/structure-viewer/structure-viewer.component';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { ClipboardService } from 'ngx-clipboard';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-protein-details-new',
@@ -39,7 +41,8 @@ export class ProteinDetailsNewComponent implements OnInit {
     public notificationService: NotificationService,
     public dialog: MatDialog, private fsaccess: FirestoreAccessService,
     private http: HttpClient,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    public clipboardService: ClipboardService) { }
   database: string;
   private cfg: string;
   translationObject;
@@ -160,6 +163,10 @@ export class ProteinDetailsNewComponent implements OnInit {
     });
   }
 
+  copyToClipboard(sequence_data) {
+    this.clipboardService.copyFromContent(sequence_data);
+    this.notificationService.popup('Copied to Clipboard!');
+  }
   tabChanged(event: MatTabChangeEvent): void {
     switch (this.cfg) {
       case 'summary':

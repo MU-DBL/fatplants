@@ -115,11 +115,13 @@
                                 </div>
                             </mat-card>
                             <mat-card class='sequence-card'>
-                                <h2>Sequence <button mat-raised-button ngxClipboard id="sequence-button"
-                                        color="primary" [cbContent]="extendedData.sequence"
-                                        (click)="this.notificationService.popup('Copied to Clipboard!')">Copy
-                                        Sequence</button></h2>
-                                <div id="sequence-display">{{extendedData.sequence}}</div>
+                            <div class="sequence-header">
+                                <div class="header-content">
+                                    <h2>Sequence</h2>
+                                    <button id="sequence-button" color="primary" (click)="copyToClipboard(this.extendedData.sequence)" >Copy Sequence</button>
+                                </div>
+                            </div>
+                            <div id="sequence-display">{{this.extendedData.sequence}}</div>
                             </mat-card>
                         </div>
                     </div>
