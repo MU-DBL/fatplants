@@ -343,11 +343,35 @@ mat-cell {
   padding-right: 2%;
 }
 
+.sequence-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sequence-header .header-content {
+  display: flex;
+  align-items: center;
+}
+
+.sequence-header h2 {
+  margin-right: 50px; 
+}
+
 #sequence-button {
-  margin: 15px auto;
-  display: block;
   color: white;
-  margin-left: 2vw;
+  background-color: #4caf50;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #4caf50;
+  cursor: pointer;
+  text-align: center;
+  min-width: 64px; 
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;  
+  font-weight: 500;
 }
 
 .green-button {
