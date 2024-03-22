@@ -66,7 +66,6 @@
             </ng-container>
             <ng-container matColumnDef="cam_prot_entry">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
-
                 <mat-cell *matCellDef="let elem"><a [routerLink]="['/details', 'Camelina', elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>
             </ng-container>   
             <ng-container matColumnDef="camelina">
