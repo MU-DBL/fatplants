@@ -87,7 +87,7 @@ export class ProteinDetailsNewComponent implements OnInit {
   searchError: boolean = false;
   loadingSearch = false;
   hasSearched: boolean = false;
-  headingName: String;
+  headingName: string = '';
 
   get g2sLoading(): boolean {
     return this.dataService.g2sLoading;
@@ -788,5 +788,15 @@ export class ProteinDetailsNewComponent implements OnInit {
       height: '700px',
       data: { pdbId: pdbId, pdbLinkBase: pdbLinkBase }
     });
+  }
+
+  getDynamicFontSize(proteinName: string): string {
+    if (proteinName.length < 50) {
+      return '2rem';
+    } else if (proteinName.length < 150) {
+      return '1.5rem';
+    } else {
+      return '1.25rem';
+    }
   }
 }

@@ -1,6 +1,6 @@
 <mat-card id="protein-page">
-    <div class="header">
-        {{ this.headingName }}
+    <div class="header" [ngStyle]="{'font-size': getDynamicFontSize(headingName)}">
+        {{ headingName }}
     </div>
     <button mat-button routerLink='/datasets/arabidopsis'>
         <mat-icon>keyboard_arrow_left</mat-icon><span class='back-text'>Back</span>
