@@ -32,10 +32,16 @@ mat-card {
 
 .protein-info {
   margin-top: 0;
+  margin-left: 1%;
+}
+
+.protein-function {
+  margin-left: 1%;
 }
 
 .protein-subtitle {
   color: #205434;
+  margin-left: 1%;
 }
 
 .no-data-message {
@@ -89,6 +95,8 @@ a:visited {
   display: flex;
   justify-content: space-between;
   max-height: 50px;
+  margin-top: 1%;
+  margin-right: 1%;
 }
 
 .function-header>h3 {
