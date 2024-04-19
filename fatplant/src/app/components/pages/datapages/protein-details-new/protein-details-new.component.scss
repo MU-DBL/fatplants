@@ -325,6 +325,8 @@ textarea {
 #sequence-display {
   word-wrap: break-word;
   margin-top: 5px;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 #pdb-loading-bar {
@@ -359,6 +361,8 @@ mat-cell {
 .sequence-header .header-content {
   display: flex;
   align-items: center;
+  margin-top: 1%;
+  margin-left: 1%;
 }
 
 .sequence-header h2 {
