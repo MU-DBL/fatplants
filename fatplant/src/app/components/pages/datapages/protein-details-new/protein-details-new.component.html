@@ -55,14 +55,14 @@
                                     <h3 class='protein-subtitle'>Identification</h3>
                                     <div class='protein-info-wrapper'>
                                         <p class='protein-info'>Gene: {{ extendedData.gene_names }}</p>
-                                        <p class='protein-info'>Protein Names: {{
+                                        <p class='protein-info protein-subtitle'>Protein Names: {{
                                             headingName }}
                                         </p>
                                         <p class='protein-info'>RefSeq ID: {{ extendedData.refseq_id }}</p>
                                         <p class='protein-info' *ngIf="extendedData.tair_id">Tair ID: {{
                                             extendedData.tair_id }}
                                         </p>
-                                        <p class='protein-info'>Uniprot ID: {{
+                                        <p class='protein-info protein-subtitle'>Uniprot ID: {{
                                             extendedData.uniprot_id }}</p>
                                         <p class='protein-info'>Organism ID: {{ extendedData.organism_id }}</p>
                                     </div>
