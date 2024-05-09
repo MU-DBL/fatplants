@@ -15,7 +15,7 @@ If you are running Windows, you should download Git Bash (https://gitforwindows.
 
 You will also need NodeJS and npm to run and install project dependencies: 
 
-1. Download NodeJS for your system at: https://nodejs.org/en/download/ 
+1. Download NodeJS for your system at: https://nodejs.org/en/download/ (for Windows, Node.js v12.22.12 is required, download at: https://nodejs.org/dist/v12.22.12/node-v12.22.12-x64.msi)
 
 2. npm should be installed along with node; if not, you can download it here: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm 
 
@@ -23,13 +23,13 @@ You will also need NodeJS and npm to run and install project dependencies:
 
 4. In the fatplant directory, run `npm i` which installs all dependencies for the project. 
 
-5. If you need to add a package to the project, run `npm I --save <package-name>`. If you only need this for development, use `--save-dev` instead.
+5. If you need to add a package to the project, run `npm I --save <package-name>`. If you only need this for development, use `--save-dev` instead. (npm reference: https://www.sitepoint.com/npm-guide/ )
 
-6. npm reference: https://www.sitepoint.com/npm-guide/ 
+   Note that these external packages are downloaded into node_modules which is ignored by git. Make sure to never check this directory in! Hint: you can add files/directories to the .gitignore file in order to automatically not track those files. This is good industry practice! 
 
-Note that these external packages are downloaded into node_modules which is ignored by git. Make sure to never check this directory in! Hint: you can add files/directories to the .gitignore file in order to automatically not track those files. This is good industry practice! 
+6. Acquire your Firebase API keys and save them into the project folder. (See: setupEnvironments.md)
 
-Once this is done and project dependencies are installed, you should have access to the Angular CLI (the ng command). To run a local development server, run ng serve. Then, you can access your development server on localhost:8100 in your web browser => whenever you update project files, this will recompile and reload the application. 
+Once this is done and project dependencies are installed, you should have access to the Angular CLI (the ng command). To run a local development server, run ng serve (for Windows, go to "fatplants\fatplant" and run "node_modules\\.bin\ng serve"(Command Prompt) or ".\node_modules\\.bin\ng serve"(Powershell)). Then, you can access your development server on localhost:4200 in your web browser => whenever you update project files, this will recompile and reload the application. 
 
 IDEs: Microsoft VS Code is a good free option, WebStorm is another good option for JS development.  
 
