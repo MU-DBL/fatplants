@@ -1,6 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg">
   <a class="navbar-brand icon ms-1" routerLink="/"> </a>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="sidebar" [class.active]="isSidebarVisible">
+    <ul class="navbar-nav">
+      <li class="nav-item" (click)="toggleSidebar()" routerLink="/home" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">Home</a>
+      </li>
+      <li class="nav-item" (click)="toggleSidebar()" routerLink="/datasets/arabidopsis" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">Datasets</a>
+      </li>
+      <li class="nav-item" (click)="toggleSidebar()" routerLink="/go-network-page" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">Go Enrichment Networks</a>
+      </li>
+      <li class="nav-item tools" [matMenuTriggerFor]="toolsMenu" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">Tools</a>
+      </li>
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse content" id="navbarNav" [class.blur]="isSidebarVisible">
     <ul class="navbar-nav">
       <li class="nav-item" routerLink="/home" routerLinkActive="desktop-active">
         <a class="nav-link fw-bold">Home</a>
@@ -28,32 +44,38 @@
       </li>
     </ul>
   </div>
+  <div class="navbar-header">
+    <button class="toggle-button" *ngIf="showHamburgerIcon" (click)="toggleSidebar()">☰</button>
   <div class="hit-counter">
     <a href="javascript:void(0)"><img src="https://www.cutercounter.com/hits.php?id=hxpaxkp&nd=6&style=64" border="0" alt="hit counter"></a>
   </div>
+  </div>
 </nav>
 
-<mat-menu #toolsMenu class="mat-menu-content">
-  <a
+<mat-menu #toolsMenu="matMenu" class="mat-menu-content">
+  <button
     mat-menu-item
     routerLink="/blast-page"
+    (click)="closeSidebar()"
     routerLinkActive="desktop-active-menu-item"
     class="menu-item"
-    >Blast</a
+    >Blast</button
   >
-  <a
+  <button
     mat-menu-item
     routerLink="/glmol-page"
+    (click)="closeSidebar()"
     routerLinkActive="desktop-active-menu-item"
     class="menu-item"
-    >3D Structure</a
+    >3D Structure</button
   >
-  <a
+  <button
     mat-menu-item
     routerLink="/pathway-viewer-page"
+    (click)="closeSidebar()"
     routerLinkActive="desktop-active-menu-item"
     class="menu-item"
-    >Pathway Viewer</a
+    >Pathway Viewer</button
   >
   <!-- <a
     mat-menu-item

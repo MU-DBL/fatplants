@@ -590,7 +590,7 @@ mat-card.base {
   align-items: flex-start;
 }
 
-.mat-tab-label{
+:host ::ng-deep .mat-tab-label{
   justify-content: left;
 }
 
