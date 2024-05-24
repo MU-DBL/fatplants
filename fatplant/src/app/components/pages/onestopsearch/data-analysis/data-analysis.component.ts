@@ -5,7 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { MatTabsModule } from '@angular/material/tabs';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import * as jsPDF from 'jspdf';
+import jsPDF from 'jspdf';
 import { ViewportScroller, Location } from '@angular/common';
 import { Lmpd_Arapidopsis } from '../../../../interfaces/lmpd_Arapidopsis';
 import { startWith, map, filter } from 'rxjs/operators';

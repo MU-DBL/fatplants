@@ -1,0 +1,26 @@
+#component-container{
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+    width: 80%;
+    height: fit-content;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(124, 179, 66, 0.65);
+}
+
+#title {
+    text-align: center;
+    font-family: "Lato",sans-serif ;
+    font-weight: bold;
+}
+
+
+
+/* .card{
+    margin: 10px 0 !important;
+} */
+.card pre{
+    font-family: "Lato",sans-serif ;
+}

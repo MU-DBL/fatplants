@@ -7,8 +7,8 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow|PT+Serif&display=swap');
 
 html, body {
-  height: 100%;
-  overflow-y: hidden;
+  //height: 100%;
+  //overflow-y: hidden;
 }
 
 .background {
@@ -19,12 +19,12 @@ html, body {
   background-size: cover;
 }
 
-mat-card {
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 10%;
-  background-image: linear-gradient($light, whitesmoke) !important;
-}
+// mat-card {
+//   width: 80%;
+//   margin-left: 10%;
+//   margin-top: 10%;
+//   /*background-image: linear-gradient($light, whitesmoke) !important;*/
+// }
 
 .pointer {
   cursor: pointer;
@@ -38,3 +38,4 @@ mat-card {
   font-size: 14px !important;
   white-space: pre-line !important;
 }
+
