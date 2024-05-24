@@ -32,7 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './components/pages/networks/protein-network/graph.component';
 import {NgCytoComponent} from './components/pages/networks/ng-cyto/ng-cyto.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { MatSliderModule } from '@angular/material/slider'; 
+
 
 // import { CytodemoComponent } from './cytodemo/cytodemo.component';
 // import { CytoscapeModule } from 'ngx-cytoscape';
@@ -234,8 +234,7 @@ import { GoCytoscapeNetworkComponent } from './components/go-cytoscape-network/g
     MatExpansionModule,
     MatDialogModule,
     MatSnackBarModule,
-    ClipboardModule,
-    MatSliderModule 
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

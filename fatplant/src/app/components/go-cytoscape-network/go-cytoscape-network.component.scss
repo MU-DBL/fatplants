@@ -179,6 +179,9 @@ h3{
   border: 10px  #141313;
   margin-bottom: 10px;
   width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .filter-box {
