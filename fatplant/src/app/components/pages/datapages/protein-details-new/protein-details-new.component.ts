@@ -44,6 +44,7 @@ export class ProteinDetailsNewComponent implements OnInit {
     private sanitizer: DomSanitizer,
     public clipboardService: ClipboardService) { }
   database: string;
+  sequence:string;
   private cfg: string;
   translationObject;
   uniprotId;
@@ -253,14 +254,17 @@ export class ProteinDetailsNewComponent implements OnInit {
 
   getExtendedSpecies() {
     this.homologs = null;
+    this.sequence = null;
     this.dataService.loading = true;
     console.log("result is : ", "nothing");
+    console.log(this.baseDetails.fp_id);
     this.fsaccess.getExtendedDetails(this.baseDetails.fp_id, this.speciesName).subscribe(res => {
       this.SelectConfig();
       if (res && res[0]) {
-        
+  
         this.extendedData = res[0];
         this.splitGeneNames = this.extendedData.gene_names.split(' ');
+        this.sequence = this.extendedData.sequence;
         this.selectedGPTQuery = this.splitGeneNames[0];
         if(this.database === "Arabidopsis") this.headingName = this.extendedData.protein_names
         else this.headingName = this.extendedData.protein_name;
@@ -529,17 +533,25 @@ export class ProteinDetailsNewComponent implements OnInit {
             // UPDATE THIS
             this.proteinDatabase = 'Arabidopsis';
           }
-
+          console.log("this.database")
           //===============================================================================
           // this may acutally be fine and not need changes
           //===============================================================================
 
-          this.dataService.updateBlastRes(this.proteinDatabase['database'], this.uniprot_id).subscribe(res => {
+          this.fsaccess.getblast(this.database.toLowerCase(), this.sequence, "").subscribe((res: any) => {
             this.SplitRes(res);
             this.showProgress = false;
             clearInterval(this.intervalId);
-
+            this.dataService.updateBlastResult(res)
           });
+
+
+          // this.dataService.updateBlastRes(this.proteinDatabase['database'], this.uniprot_id).subscribe(res => {
+          //   console.log(res)
+          //   this.SplitRes(res);
+          //   this.showProgress = false;
+          //   clearInterval(this.intervalId);
+          // });
         }
 
         break;

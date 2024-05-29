@@ -31,9 +31,13 @@ export class DataService {
       this.BlastNeedUpdate = false;
     })
     return this.blastResOb;
-
-
   }
+
+  public updateBlastResult(result: any){
+    this.BlastNeedUpdate = false;
+    this.blastRes = result;
+  }
+
   public getBlastRes(): string{
     return this.blastRes;
   }
@@ -42,5 +46,4 @@ export class DataService {
   getPathwaysByUniProt(species: string, uniprot_id: string) {
     return this.http.get(environment.BASE_API_URL+"pathways/?species="+species+"&uniprot_id="+uniprot_id);
   }
-
 }

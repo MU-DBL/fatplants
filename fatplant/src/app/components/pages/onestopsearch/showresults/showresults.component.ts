@@ -128,6 +128,7 @@ export class ShowresultsComponent implements OnInit {
   getExtendedSpecies() {
     this.homologs = null;
     this.dataService.loading = true;
+    console.log(this.baseDetails.fp_id)
     this.fsaccess.getExtendedDetails(this.baseDetails.fp_id, this.speciesName).subscribe(res => {
       this.SelectConfig();
       if (res && res[0]){

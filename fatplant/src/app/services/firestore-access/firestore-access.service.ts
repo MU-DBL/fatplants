@@ -95,4 +95,9 @@ export class FirestoreAccessService {
   getPathwaysByUniProt(species: string, uniprot_id: string) {
     return this.http.get(environment.BASE_API_URL+"pathways/?species="+species+"&uniprot_id="+uniprot_id);
   }
+
+  getblast(database: string, sequence:string, parameters: string){
+    return this.http.get(environment.BASE_API_URL+"blast/?database="+database+"&sequence="+sequence+"&parameters="+parameters);
+  }
+
 }

@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {MatTableDataSource} from "@angular/material/table";
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 
 @Component({
   selector: 'app-blast-page',
@@ -28,6 +29,7 @@ export class BlastPageComponent implements OnInit {
   public matrix: string;
   public evalue: string;
   public items: any;
+  
 
   isLoading: boolean;
   result: string;
@@ -36,7 +38,7 @@ export class BlastPageComponent implements OnInit {
   blastError = false;
   alertVisible = false;
   blastForm: FormGroup;
-  constructor(private http: HttpClient, private router: Router, db: AngularFirestore) {
+  constructor(private http: HttpClient, private router: Router, db: AngularFirestore, private fsaccess: FirestoreAccessService) {
     this.database = 'Arabidopsis';
     this.evalue = "1";
     this.matrix = "BLOSUM62";
@@ -54,11 +56,16 @@ export class BlastPageComponent implements OnInit {
     this.loading = true;
     this.blastError = false;
     // this.http.post('https://linux-shell-test.appspot.com/blastp', {fasta: this.proteinSeq, database: this.database, matrix: this.matrix, evalue: this.evalue}, {responseType: 'text'}).subscribe((res: any) => {
-    this.http.get('https://us-central1-fatplantsmu-eb07c.cloudfunctions.net/blastp?fasta=' + this.proteinSeq + '&database=' + this.database + '&matrix=' + this.matrix + '&evalue=' + this.evalue, {responseType: 'text'}).subscribe((res: any) => {
-      this.result = res;
-        this.SplitRes(res);
-        this.loading = false;
-        //console.log(res);
+    // this.http.get('https://us-central1-fatplantsmu-eb07c.cloudfunctions.net/blastp?fasta=' + this.proteinSeq + '&gith=' + this.database + '&matrix=' + this.matrix + '&evalue=' + this.evalue, {responseType: 'text'}).subscribe((res: any) => {
+    //   this.result = res;
+    //     this.SplitRes(res);
+       
+    // });
+
+    this.fsaccess.getblast(this.database.toLowerCase(), this.proteinSeq, "-matrix "+ this.matrix +" -evalue " + this.evalue).subscribe((res: any) => {
+      console.log(this.database.toLowerCase())
+      this.SplitRes(res);
+      this.loading = false;
     });
   }
   ngOnInit() {
@@ -83,11 +90,14 @@ export class BlastPageComponent implements OnInit {
         start+=1;
       }
     }
+    console.log("header");
     console.log(header);
 
     this.blastRes = [];
     let tmp: any;
     tmp = result.split('>');
+    // console.log("temp:");
+    // console.log(tmp);
     tmp.shift();
     let index: number;
     if (tmp[tmp.length - 1] == undefined) {
@@ -99,21 +109,28 @@ export class BlastPageComponent implements OnInit {
       tmp[tmp.length - 1] = tmp[tmp.length - 1].substring(0, index);
       for (var i in tmp) {
         var extract = tmp[i].split('\n');
-        var ScoreExpect = extract[4].split(',');
-        var IdentitiesPositivesGaps = extract[5].split(',');
-        var score = ScoreExpect[0].match(/=(.*)/)[1];
-        var expect = ScoreExpect[1].match(/=(.*)/)[1];
-        var identities = IdentitiesPositivesGaps[0].match(/=(.*)/)[1];
-        var positives = IdentitiesPositivesGaps[1].match(/=(.*)/)[1];
-        var gaps = IdentitiesPositivesGaps[2].match(/=(.*)/)[1];
+        for(var t = 0; t < extract.length; t++){
+          //console.log(extract[t])
+          if (extract[t].startsWith(" Score")){
+            //console.log("extract")
+            var ScoreExpect = extract[t].split(',');
+            var IdentitiesPositivesGaps = extract[t+1].split(',');
+    
+            // console.log(IdentitiesPositivesGaps);
+            // console.log(IdentitiesPositivesGaps[0]);
+            // console.log(IdentitiesPositivesGaps[0].match(/=(.*)/));
+            // console.log(score);
+            // console.log(expect);
 
-        //console.log(ScoreExpect);
-        //console.log(IdentitiesPositivesGaps);
-        //console.log(score);
-        //console.log(expect);
-        //console.log(identities);
-
-        this.blastRes.push({'sequences':header[headerIndex][0],'score':score,'evalue':expect,'expand':tmp[i],'identities':identities,'positives':positives,'gaps':gaps})
+            var score = ScoreExpect[0].match(/=(.*)/)[1];
+            var expect = ScoreExpect[1].match(/=(.*)/)[1];
+            var identities = IdentitiesPositivesGaps[0].match(/=(.*)/)[1];
+            var positives = IdentitiesPositivesGaps[1].match(/=(.*)/)[1];
+            var gaps = IdentitiesPositivesGaps[2].match(/=(.*)/)[1];
+            this.blastRes.push({'sequences':header[headerIndex][0],'score':score,'evalue':expect,'expand':tmp[i],'identities':identities,'positives':positives,'gaps':gaps})
+            break;
+          }
+        }
         headerIndex+=1;
       }
     }
