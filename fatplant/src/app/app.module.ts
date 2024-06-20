@@ -31,6 +31,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './components/pages/networks/protein-network/graph.component';
 import {NgCytoComponent} from './components/pages/networks/ng-cyto/ng-cyto.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 // import { CytodemoComponent } from './cytodemo/cytodemo.component';
 // import { CytoscapeModule } from 'ngx-cytoscape';
@@ -105,6 +107,8 @@ import { KeggPathwayViewerComponent } from './components/pathway-viewer-page/keg
 import { ExtendedPathwayViewerComponent } from './components/pathway-viewer-page/extended-pathway-viewer/extended-pathway-viewer.component';
 import { DataComponent } from './components/pages/Data_Page/data/data.component';
 import { DatasetsNewComponent } from './components/pages/datapages/datasets-new/datasets-new.component';
+import { GoCytoscapeComponent } from './components/pages/networks/go-cytoscape/go-cytoscape.component';
+import { GoCytoscapeNetworkComponent } from './components/go-cytoscape-network/go-cytoscape-network.component';
 
 @NgModule({
   declarations: [
@@ -169,7 +173,9 @@ import { DatasetsNewComponent } from './components/pages/datapages/datasets-new/
     KeggPathwayViewerComponent,
     ExtendedPathwayViewerComponent,
     DataComponent,
-    DatasetsNewComponent
+    DatasetsNewComponent,
+    GoCytoscapeComponent,
+    GoCytoscapeNetworkComponent
   ],
   entryComponents: [
     StructureViewerComponent,
@@ -215,6 +221,7 @@ import { DatasetsNewComponent } from './components/pages/datapages/datasets-new/
     MatSlideToggleModule,
     MatGridListModule,
     MatStepperModule,
+    MatProgressSpinnerModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,
