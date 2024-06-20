@@ -99,5 +99,7 @@ export class FirestoreAccessService {
   getblast(database: string, sequence:string, parameters: string){
     return this.http.get(environment.BASE_API_URL+"blast/?database="+database+"&sequence="+sequence+"&parameters="+parameters);
   }
-
+  getPSIBlast(database: string, sequence:string, parameters: string){
+    return this.http.get(environment.BASE_API_URL+"PSI_blast/?database="+database+"&sequence="+sequence+"&parameters="+parameters);
+  }
 }

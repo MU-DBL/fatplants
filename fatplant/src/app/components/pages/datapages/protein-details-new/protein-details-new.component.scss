@@ -615,3 +615,7 @@ mat-tab-body {
 :host ::ng-deep mat-ink-bar {
   display: none;
 }
+
+mat-slider {
+  width: 300px;
+}

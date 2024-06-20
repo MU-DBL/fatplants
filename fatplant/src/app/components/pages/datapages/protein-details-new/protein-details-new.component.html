@@ -7,7 +7,7 @@
     <div class="row" #results id="results" style="width: 100%">
         <div>
             <mat-tab-group (selectedTabChange)="tabChanged($event)">
-                <mat-tab>
+                <mat-tab *ngIf="showSummaryTab">
                     <ng-template mat-tab-label>
                         Summary
                     </ng-template>
@@ -121,7 +121,7 @@
                             <div class="sequence-header">
                                 <div class="header-content">
                                     <h2>Sequence</h2>
-                                    <button id="sequence-button" color="primary" (click)="copyToClipboard(this.extendedData.sequence)" >Copy Sequence</button>
+                                    <button id="sequence-button" color="primary" (click)="copyToClipboard(this.extendedData.sequence)">Copy Sequence</button>
                                 </div>
                             </div>
                             <div id="sequence-display">{{this.extendedData.sequence}}</div>
@@ -129,7 +129,33 @@
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab>
+                <mat-tab *ngIf="showSimpleSummaryTab">
+                    <ng-template mat-tab-label>
+                        Summary
+                    </ng-template>
+                    <p *ngIf='!extendedData.status || extendedData.status === "unreviewed"' class='status unreviewed'>
+                    <mat-icon class='info-icon'
+                        [matTooltip]='"This entry has not been reviewed by the UniProtKB curators, and may not have complete data."'>info</mat-icon>
+                    Unreviewed
+                </p>
+                <h2 class='title'>
+                    <span *ngIf='headingName !== undefined'>
+                        {{ headingName }}
+                    </span>
+                </h2>
+                <br>
+                    <mat-card class='sequence-card'>
+                        <div class="sequence-header">
+                            <div class="header-content">
+                                <h2>Sequence</h2>
+                                <button id="sequence-button" color="primary" (click)="copyToClipboard(this.extendedData.sequence)">Copy Sequence</button>
+                            </div>
+                        </div>
+                        <div id="sequence-display">{{this.extendedData.sequence}}</div>
+                        </mat-card>
+                        <br>
+                </mat-tab>
+                <mat-tab *ngIf="showAligmentsTab">
                     <ng-template mat-tab-label>
                         Alignments
                     </ng-template>
@@ -146,18 +172,20 @@
                                     *ngIf="!g2sLoading && !noPdb"></iframe>
                             </div>
                             <div class="row">
-                                <h2>Sequence</h2>
-                                <div id="sequence-display">{{this.extendedData.sequence}}
-                                    <button mat-raised-button ngxClipboard id="sequence-button" color="primary"
-                                        [cbContent]="this.extendedData.sequence"
-                                        (click)="this.notificationService.popup('Copied to Clipboard!')">Copy
-                                        Sequence</button>
-                                </div>
+                                <mat-card class='sequence-card'>
+                                    <div class="sequence-header">
+                                        <div class="header-content">
+                                            <h2>Sequence</h2>
+                                            <button id="sequence-button" color="primary" (click)="copyToClipboard(this.extendedData.sequence)">Copy Sequence</button>
+                                        </div>
+                                    </div>
+                                    <div id="sequence-display">{{this.extendedData.sequence}}</div>
+                                </mat-card>
                             </div>
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab>
+                <mat-tab *ngIf="showStructrueTab">
                     <ng-template mat-tab-label>
                         Structure
                     </ng-template>
@@ -224,8 +252,18 @@
                         <div class="centered" *ngIf="!showProgress && showBlastResList.length == 0">
                             There was a problem loading the BLAST results.
                         </div>
-
-                        <div class="row" *ngFor="let res of showBlastResList">
+                        <div *ngIf="!showProgress && showBlastResList.length !== 0">
+                            <p>Filter Blast Result by Percent Identity. Current Value: {{BlastFilterValue}}%</p>
+                            <mat-slider 
+                            min="1" 
+                            max="100" 
+                            step="5" 
+                            [(ngModel)]="BlastFilterValue" 
+                            thumbLabel tickInterval="10"
+                            (change)="onBlastFilterValueChange($event)">
+                        </mat-slider>
+                        </div>
+                        <div class="row" *ngFor="let res of showFilterBlastResList">                           
                             <mat-accordion>
                                 <mat-expansion-panel>
                                     <mat-expansion-panel-header>
@@ -240,7 +278,48 @@
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab >
+                <mat-tab *ngIf="showPsiBlastTab">
+                    <ng-template mat-tab-label>
+                        PSI-Blast
+                    </ng-template>
+                     <!--Blast-->
+                     <div class="column middleright" id="mainContainer">
+                        <div class="row centered" *ngIf="showProgress">
+                            <circle-progress [percent]="percent" [radius]="100" [outerStrokeWidth]="16"
+                                [innerStrokeWidth]="8" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'"
+                                [animation]="true" [animationDuration]="300"
+                                [startFromZero]="false"></circle-progress>
+                        </div>
+
+                        <div class="centered" *ngIf="!showProgress && showPSIBlastResList.length == 0">
+                            There was a problem loading the PSI BLAST results.
+                        </div>
+                        <div *ngIf="!showProgress && showPSIBlastResList.length !== 0">
+                            <p>Filter Blast Result by Percent Identity. Current Value: {{PSIBlastFilterValue}}%</p>
+                            <mat-slider 
+                            min="1" 
+                            max="100" 
+                            step="5" 
+                            [(ngModel)]="PSIBlastFilterValue" 
+                            thumbLabel tickInterval="10"
+                            (change)="onPSIBlastFilterValueChange($event)">
+                        </mat-slider>
+                        </div>
+                        <div class="row" *ngFor="let res of showFilterPSIBlastResList">
+                            <mat-accordion>
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            {{res[0]}}
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <pre>{{res[1]}}</pre>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </div>
+                </mat-tab> 
+                <mat-tab *ngIf="showPathwayTab">
                     <ng-template mat-tab-label>
                         Pathway
                     </ng-template>

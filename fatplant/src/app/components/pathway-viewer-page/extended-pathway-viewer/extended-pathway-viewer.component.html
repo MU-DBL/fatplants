@@ -4,7 +4,7 @@
         <p>A tool for viewing pathway figures.</p>
         <mat-form-field appearance="fill" class="selector">
             <mat-label>Pathways</mat-label>
-            <mat-select (selectionChange)="onChange($event.value)" value="selectedOption">
+            <mat-select (selectionChange)="onChange($event.value)" [(value)]="selectedOption">
                 <mat-option *ngFor="let option of pathwayOptions" [value]="option">{{ option.name }}</mat-option>
             </mat-select>
         </mat-form-field>

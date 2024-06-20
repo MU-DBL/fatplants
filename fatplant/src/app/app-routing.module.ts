@@ -44,6 +44,7 @@ import { DataComponent } from './components/pages/Data_Page/data/data.component'
 import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
 import { ContactUsComponent } from './components/pages/contact/ContactUs.component';
 import { GoCytoscapeComponent } from './components/pages/networks/go-cytoscape/go-cytoscape.component';
+import { GoCytoscapeNetworkComponent } from './components/go-cytoscape-network/go-cytoscape-network.component';
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},

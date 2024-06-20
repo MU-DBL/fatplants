@@ -97,9 +97,9 @@ export class DataComponent implements OnInit {
       case "soybean":
         return ['uniprot_id', 'refseq_id', 'glyma_id', 'gene_names', 'protein_name', 'soy_prot_entry'];
       case "cuphea":
-        return ['uniprot_id', 'refseq_id', 'gene_names', 'protein_name', 'cuphea_prot_entry'];
+        return ['protein_description', 'cuphea_entry'];
       case "pennycress":
-        return ['uniprot_id', 'refseq_id', 'gene_names', 'protein_name', 'pennycress_prot_entry'];
+        return ['protein_description', 'pennycress_entry'];
       case "fattyacid":
         return ['picture', 'lipidMapsID', 'name', 'mass', 'sofa_id', 'other_names', 'delta_notation'];
       default:
@@ -355,7 +355,7 @@ export class DataComponent implements OnInit {
   }
 
   getCupheaData() {
-    this.db.getDataSetSamples("soya").subscribe((data: any[]) => {
+    this.db.getDataSetSamples("cuphea").subscribe((data: any[]) => {
       this.cupheaDataSource = new MatTableDataSource(data);
       let cupheaData: FatPlantDataSource = {
         retrievalDate: Date.now(),
@@ -366,7 +366,7 @@ export class DataComponent implements OnInit {
     });
   }
   getPennycressData() {
-    this.db.getDataSetSamples("soya").subscribe((data: any[]) => {
+    this.db.getDataSetSamples("pennycress").subscribe((data: any[]) => {
       this.pennycressDataSource = new MatTableDataSource(data);
       let pennycressData: FatPlantDataSource = {
         retrievalDate: Date.now(),
@@ -409,6 +409,7 @@ export class DataComponent implements OnInit {
     this.loading = true;
     this.showingSearch = true;
     if (this.dataset == "arabidopsis") {
+      console.log(encodeURIComponent(this.searchQuery));
       this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "lmpd").subscribe((data: any[]) => {
         this.arabidopsisDataSource = new MatTableDataSource(data.slice(0, 50));
         this.loading = false;

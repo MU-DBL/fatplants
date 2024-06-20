@@ -2,7 +2,7 @@
 
 div{
   width:95%;
-  text-align: center;
+  // text-align: center;
   /* background-color: #FCFF7B; */
 }
 
@@ -31,13 +31,9 @@ mat-card {
 }
 .imageArea{
   display: flex;
-  justify-content: center;
-  margin: auto;
-  text-align: center;
 }
 .info-table {
   width: 80%;
-  margin: 20px auto;
 }
 .name-card {
   margin: 10px auto;

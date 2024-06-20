@@ -60,6 +60,12 @@ export class ProteinDetailsNewComponent implements OnInit {
   isStructure: boolean;
   isBlast: boolean;
   isPathway: boolean;
+  showPsiBlastTab:boolean;
+  showAligmentsTab:boolean;
+  showStructrueTab:boolean;
+  showPathwayTab :boolean;
+  showSummaryTab:boolean;
+  showSimpleSummaryTab:boolean;
   percent: number;
   private intervalId: any;
   showProgress: boolean;
@@ -69,6 +75,9 @@ export class ProteinDetailsNewComponent implements OnInit {
   leftArrowEnabled: boolean;
   rightArrowEnabled: boolean;
   showBlastResList = [];
+  showPSIBlastResList = [];
+  showFilterBlastResList = [];
+  showFilterPSIBlastResList = [];
   loadedDatabase: any;
   selectedGPTQuery = "";
   splitGeneNames = [];
@@ -89,6 +98,8 @@ export class ProteinDetailsNewComponent implements OnInit {
   loadingSearch = false;
   hasSearched: boolean = false;
   headingName: String;
+  BlastFilterValue:number;
+  PSIBlastFilterValue:number;
 
   get g2sLoading(): boolean {
     return this.dataService.g2sLoading;
@@ -112,6 +123,24 @@ export class ProteinDetailsNewComponent implements OnInit {
       if (this.cfg == undefined) this.cfg = "summary";
       this.database = params['database_name'];
     });
+
+    if(this.isCupheaPennycress(this.database)){
+      this.showTabForCupheaPennycress(true)
+      this.fsaccess.getExtendedDetails(this.uniprot_id, this.database.toLowerCase()).subscribe(res => {
+        if (res && res[0]) {
+          // console.log(res[0]);
+          this.extendedData = res[0];
+          this.sequence = this.extendedData.sequence;
+          this.extendedData.staus = "unreviewed";
+          this.headingName = this.extendedData.description;
+          this.dataService.BlastNeedUpdate = true;
+        }
+      });
+      return;
+    }
+    else
+      this.showTabForCupheaPennycress(false);
+
       this.hasSearched = true;
       this.http.get('/static/json_config/Databases.json', { responseType: 'json' }).subscribe(data => {
         this.Databases = data;
@@ -129,9 +158,7 @@ export class ProteinDetailsNewComponent implements OnInit {
             // this.getUniprotData();
           });
           // this.loadedDatabase = this.proteinDatabase['database'];
-
       });
-    
   }
 
   ngOnChanges() {
@@ -145,6 +172,12 @@ export class ProteinDetailsNewComponent implements OnInit {
       if (this.uniprot_id == undefined) this.uniprot_id = params['uniprot_id'];
       if (this.cfg == undefined) this.cfg = "summary";
       this.database = params['database_name'];
+
+      if(this.isCupheaPennycress(this.database)){
+        this.showTabForCupheaPennycress(true)
+      }
+
+      this.showTabForCupheaPennycress(false);
 
       this.hasSearched = true;
       this.http.get('/static/json_config/Databases.json', { responseType: 'json' }).subscribe(data => {
@@ -168,6 +201,7 @@ export class ProteinDetailsNewComponent implements OnInit {
     this.clipboardService.copyFromContent(sequence_data);
     this.notificationService.popup('Copied to Clipboard!');
   }
+
   tabChanged(event: MatTabChangeEvent): void {
     switch (this.cfg) {
       case 'summary':
@@ -192,10 +226,10 @@ export class ProteinDetailsNewComponent implements OnInit {
         this.cfg = "summary";
         break;
       case 1:
-        this.cfg = "alignments";
+        this.cfg = this.isCupheaPennycress(this.database) ? "blast" : "alignments";
         break;
       case 2:
-        this.cfg = "structure";
+        this.cfg = this.isCupheaPennycress(this.database) ? "psi_blast" : "structure";
         break;
       case 3:
         this.cfg = "blast";
@@ -533,19 +567,36 @@ export class ProteinDetailsNewComponent implements OnInit {
             // UPDATE THIS
             this.proteinDatabase = 'Arabidopsis';
           }
-          console.log("this.database")
+          // console.log("this.database")
           //===============================================================================
           // this may acutally be fine and not need changes
           //===============================================================================
+          
+          if(this.isCupheaPennycress(this.database)){
+            this.showBlastResList = [];
+            this.fsaccess.getblast('arabidopsis', this.sequence, "").subscribe((res: any) => {
+              this.SplitRes(res);
+            });
+            this.fsaccess.getblast('camelina', this.sequence, "").subscribe((res: any) => {
+              this.SplitRes(res);
+            });
+            this.fsaccess.getblast('soybean', this.sequence, "").subscribe((res: any) => {
+              this.SplitRes(res);
+            });
 
-          this.fsaccess.getblast(this.database.toLowerCase(), this.sequence, "").subscribe((res: any) => {
-            this.SplitRes(res);
             this.showProgress = false;
-            clearInterval(this.intervalId);
-            this.dataService.updateBlastResult(res)
-          });
+            this.dataService.updateBlastResult(this.showBlastResList)
 
-
+          }else{
+            this.showBlastResList = [];
+            this.fsaccess.getblast(this.database.toLowerCase(), this.sequence, "").subscribe((res: any) => {
+              this.SplitRes(res);
+              this.showProgress = false;
+              clearInterval(this.intervalId);
+              this.dataService.updateBlastResult(res)
+            });
+          }
+          
           // this.dataService.updateBlastRes(this.proteinDatabase['database'], this.uniprot_id).subscribe(res => {
           //   console.log(res)
           //   this.SplitRes(res);
@@ -553,6 +604,34 @@ export class ProteinDetailsNewComponent implements OnInit {
           //   clearInterval(this.intervalId);
           // });
         }
+        break; 
+      case 'psi_blast':
+          this.percent = 0;
+          const getDownloadProgress = () => {
+            if (this.percent <= 99) {
+              this.percent = this.percent + 10;
+            }
+            else {
+              clearInterval(this.intervalId);
+            }
+          };
+          this.intervalId = setInterval(getDownloadProgress, 700);
+          this.isBlast = true;
+          this.showProgress = true;
+          if(this.isCupheaPennycress(this.database)){
+            this.showPSIBlastResList = [];
+            this.fsaccess.getPSIBlast('arabidopsis', this.sequence, "").subscribe((res: any) => {
+              this.SplitPSIBlastRes(res);
+            });
+            this.fsaccess.getPSIBlast('camelina', this.sequence, "").subscribe((res: any) => {
+              this.SplitPSIBlastRes(res);
+            });
+            this.fsaccess.getPSIBlast('soybean', this.sequence, "").subscribe((res: any) => {
+              this.SplitPSIBlastRes(res);
+            });
+
+            this.showProgress = false;
+          }
 
         break;
       case 'pathway':
@@ -612,7 +691,6 @@ export class ProteinDetailsNewComponent implements OnInit {
   }
 
   SplitRes(result: string) {
-    this.showBlastResList = [];
     let tmp: any;
     tmp = result.split('>');
     tmp.shift();
@@ -627,12 +705,47 @@ export class ProteinDetailsNewComponent implements OnInit {
     index = tmp[tmp.length - 1].search('Lambda');
     tmp[tmp.length - 1] = tmp[tmp.length - 1].substring(0, index);
 
-
     for (var i in tmp) {
-      this.showBlastResList.push([tmp[i].split(/\r?\n/)[0], tmp[i]])
+      const identities = this.extractPercentIdentities(tmp[i]);
+      this.showBlastResList.push([tmp[i].split(/\r?\n/)[0], tmp[i], identities]);
     }
 
+    this.showFilterBlastResList = this.showBlastResList;
     this.dataService.BlastNeedUpdate = false;
+  }
+
+  extractPercentIdentities(blastResult) {
+    var regex = /Identities = \d+\/\d+ \((\d+)%\)/g;
+    var matches;
+    var lines = blastResult.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      matches = regex.exec(line);
+      if(matches != null)
+        break;
+    }
+    return matches == null ? null: matches[1];
+  }
+
+  SplitPSIBlastRes(result: string) {
+    let tmp: any;
+    tmp = result.split('>');
+    tmp.shift();
+    let index: number;
+
+    if (!tmp[tmp.length - 1]) {
+      this.showPSIBlastResList = [];
+      return;
+    }
+
+    index = tmp[tmp.length - 1].search('Lambda');
+    tmp[tmp.length - 1] = tmp[tmp.length - 1].substring(0, index);
+
+    for (var i in tmp) {
+      const identities = this.extractPercentIdentities(tmp[i]);
+      this.showPSIBlastResList.push([tmp[i].split(/\r?\n/)[0], tmp[i], identities]);
+    }
+    this.showFilterPSIBlastResList = this.showPSIBlastResList;
   }
 
   arrowSelect(arrow: string, summaryStep: MatStep, structure3DStep: MatStep, structureStep: MatStep, blastStep: MatStep, pathwayStep: MatStep) { // arrow = "left" or "right" depending on what arrow was clicked
@@ -799,6 +912,33 @@ export class ProteinDetailsNewComponent implements OnInit {
       width: '1000px',
       height: '700px',
       data: { pdbId: pdbId, pdbLinkBase: pdbLinkBase }
+    });
+  }
+
+  showTabForCupheaPennycress(isCupheaPennycress: boolean){
+    this.showAligmentsTab = !isCupheaPennycress;
+    this.showStructrueTab = !isCupheaPennycress;
+    this.showPathwayTab = !isCupheaPennycress;
+    this.showSummaryTab = !isCupheaPennycress;
+    this.showSimpleSummaryTab = isCupheaPennycress;
+    this.showPsiBlastTab = isCupheaPennycress;
+  }
+
+  isCupheaPennycress(dataset:string){
+    return (dataset === "Cuphea" || dataset === "Pennycress") ? true : false;
+  }
+
+  onBlastFilterValueChange(event: any) {
+    var filterValue = parseFloat(event.value) || 0;
+    this.showFilterBlastResList =  this.showBlastResList.filter(function(item) {
+      return item[2] > filterValue;
+    });
+  }
+
+  onPSIBlastFilterValueChange(event: any) {
+    var filterValue = parseFloat(event.value) || 0;
+    this.showFilterPSIBlastResList =  this.showPSIBlastResList.filter(function(item) {
+      return item[2] > filterValue;
     });
   }
 }
