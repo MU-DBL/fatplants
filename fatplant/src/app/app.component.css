@@ -20,6 +20,6 @@ button:focus {
 }
 
 .scrollable-container {
-    overflow: auto;
     height: 100%;
+    overflow: hidden;
 }
