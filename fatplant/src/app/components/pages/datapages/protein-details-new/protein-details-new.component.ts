@@ -18,6 +18,7 @@ import { StructureViewerComponent } from '../../onestopsearch/structure-viewer/s
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ClipboardService } from 'ngx-clipboard';
 import {MatButtonModule} from '@angular/material/button';
+import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
 
 @Component({
   selector: 'app-protein-details-new',
@@ -42,7 +43,8 @@ export class ProteinDetailsNewComponent implements OnInit {
     public dialog: MatDialog, private fsaccess: FirestoreAccessService,
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    public clipboardService: ClipboardService) { }
+    public clipboardService: ClipboardService, 
+    private db: FirestoreConnectionService) { }
   database: string;
   sequence:string;
   private cfg: string;
@@ -309,6 +311,7 @@ export class ProteinDetailsNewComponent implements OnInit {
         this.searchG2S();
       }
     });
+      /*
     if (this.speciesName == "lmpd") {
       this.fsaccess.getMapForArabidopsis(this.baseDetails.uniprot_id).subscribe((data: any[]) => {
         if (data && data.length > 0) {
@@ -325,6 +328,28 @@ export class ProteinDetailsNewComponent implements OnInit {
     }
     else if (this.speciesName == "soya") {
       this.fsaccess.getMapForSoybean(this.baseDetails.uniprot_id).subscribe((data: any[]) => {
+        if (data && data.length > 0) {
+          this.homologs = data[0];
+        }
+      });
+    }
+      */
+    if (this.speciesName == "lmpd") {
+      this.db.searchSpeciesMapper("arabidopsis",encodeURIComponent(this.baseDetails.uniprot_id)).subscribe((data:any[]) => {
+        if (data && data.length > 0) {
+          this.homologs = data[0];
+        }
+      });
+    }
+    else if (this.speciesName == "camelina") {
+      this.db.searchSpeciesMapper("camelina",encodeURIComponent(this.baseDetails.uniprot_id)).subscribe((data:any[]) => {
+        if (data && data.length > 0) {
+          this.homologs = data[0];
+        }
+      });
+    }
+    else if (this.speciesName == "soya") {
+      this.db.searchSpeciesMapper("glymine_max",encodeURIComponent(this.baseDetails.uniprot_id)).subscribe((data:any[]) => {
         if (data && data.length > 0) {
           this.homologs = data[0];
         }

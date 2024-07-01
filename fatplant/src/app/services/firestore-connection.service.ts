@@ -45,4 +45,13 @@ export class FirestoreConnectionService {
   searchFattyAcid(query: string) {
     return this.http.get(environment.BASE_API_URL+"fatty_acid_search/?query=" + query);
   }
+
+  //by Sam, for phase out Firestore
+  searchSpeciesMapper(speciesName: string, q: string) {
+    return this.http.get(environment.BASE_API_URL+"species_mapper/?speciesName=" + speciesName +"&q=" + q);
+  }
+
+  getDetailByUniprotid(speciesName: string, id: string) {
+    return this.http.get(environment.BASE_API_URL+"details_uniprotid/?species=" + speciesName +"&id=" + id);
+  }
 }

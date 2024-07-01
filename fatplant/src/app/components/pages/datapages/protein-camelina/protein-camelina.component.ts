@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GptDialogComponent } from 'src/app/components/commons/gpt-dialog/gpt-dialog.component';
+import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
 
 @Component({
   selector: 'app-protein-camelina',
@@ -19,7 +20,8 @@ export class ProteinCamelinaComponent implements OnInit {
               private afs: AngularFirestore, 
               private route: ActivatedRoute, 
               public notificationService: NotificationService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog, 
+              private db: FirestoreConnectionService) { }
 
   translationObject;
   uniprotId;
@@ -48,15 +50,16 @@ export class ProteinCamelinaComponent implements OnInit {
     });
   }
 
+/*
   getUniprotData() {
     this.afs.collection('/New_Camelina', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
       this.arapidopsisData = res[0];
-
       if (this.arapidopsisData !== undefined) {
         this.proteinEntry = this.arapidopsisData.protein_entry;
         this.proteinDataSource = new MatTableDataSource<FunctionEntry>(this.arapidopsisData.features);
         
-        this.access.getMapForCamelina(this.arapidopsisData.uniprot_id).subscribe(translation => {
+        //this.access.getMapForCamelina(this.arapidopsisData.uniprot_id).subscribe(translation => {
+        this.db.searchSpeciesMapper("camelina",encodeURIComponent(this.arapidopsisData.uniprot_id)).subscribe(translation => {
           this.translationObject = translation;
         })
         
@@ -68,9 +71,48 @@ export class ProteinCamelinaComponent implements OnInit {
       this.isLoadingArapidopsis = false;
     });
   }
+    */
+
+  //switched from Firestore to MySQL
+  getUniprotData() {
+    //this.afs.collection('/New_Camelina', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
+    this.db.getDetailByUniprotid("camelina",encodeURIComponent(this.uniprotId)).subscribe((res: any) => {
+      this.arapidopsisData = res[0];
+      if (this.arapidopsisData !== undefined) {
+        this.proteinEntry = this.arapidopsisData.protein_entry;
+        this.proteinDataSource = new MatTableDataSource<FunctionEntry>(this.arapidopsisData.features);
+        
+        //this.access.getMapForCamelina(this.arapidopsisData.uniprot_id).subscribe(translation => {
+        this.db.searchSpeciesMapper("camelina",encodeURIComponent(this.arapidopsisData.uniprot_id)).subscribe(translation => {
+          this.translationObject = translation;
+          this.proteinData = res[0];
+          if (this.proteinData === undefined) {
+            this.proteinData.gene_names = this.proteinData.gene_names.replaceAll(' ', ', ');
+
+            this.splitGeneNames = this.proteinData.gene_names.split(',');
+
+            this.isLoadingProtein = false;
+          }
+          else {
+            this.splitGeneNames = this.proteinData.gene_names.split(' ');
+            this.isLoadingProtein = false;
+          }
+          this.selectedGPTQuery = this.splitGeneNames[0];
+        })
+      }
+      else {
+        this.isLoadingProtein = false;
+      }
+      this.isLoadingArapidopsis = false;
+    });
+  }
+
+//combined into getUniprotData() since they're now using the same table
+/*
   getProteinEntry() {
     this.afs.collection('/New_Camelina_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
       this.proteinData = res[0];
+      console.log("hello2, protein Data is : ",this.proteinData);
       if (this.proteinData === undefined) {
         this.afs.collection('/New_Camelina_Detail', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
           this.proteinData = res[0];
@@ -89,6 +131,8 @@ export class ProteinCamelinaComponent implements OnInit {
       this.selectedGPTQuery = this.splitGeneNames[0];
     });
   }
+    */
+
   parseKeywords(originalKeywords) {
     let keywordList = originalKeywords.split(';');
     let output = "";

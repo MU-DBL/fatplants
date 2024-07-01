@@ -154,6 +154,7 @@ export class CustomPathwayViewerComponent implements OnInit {
     });
 
     // populate graph
+    /*
     this.pathwayService.getAllPathways().subscribe(pathways => {
       this.dataSource = [];
       pathways.forEach(graph => {
@@ -170,5 +171,24 @@ export class CustomPathwayViewerComponent implements OnInit {
         this.loading = false;
       });
     });
+    */
+   //code below will get datas from sql instead of firestore
+      this.pathwayService.getAllPathways().subscribe((pathways:any[]) => {
+        this.dataSource = [];
+        //Object.keys(pathways).forEach(graph => {
+        pathways.forEach(graph => {
+          //let graphAny: any = graph.payload.doc.data();
+  
+          this.dataSource.push({
+            title: graph.title,
+            paper: graph.paper,
+            link: '/custom-pathway?id=' + graph.pathway_id,
+            id: graph.pathway_id,
+            imgPath: graph.imgPath
+          });
+  
+          this.loading = false;
+        });
+      });
   }
 }
