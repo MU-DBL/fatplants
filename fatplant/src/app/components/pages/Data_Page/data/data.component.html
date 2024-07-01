@@ -62,6 +62,17 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Protein Description </mat-header-cell>
                 <mat-cell *matCellDef="let elem"> {{ elem.description }} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="is_longest">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Is Longest </mat-header-cell>
+                <mat-cell *matCellDef="let elem">
+                  <ng-container *ngIf="elem.is_longest === 1; else notLongest">
+                    <mat-icon>check</mat-icon> <!-- Replace 'check' with your desired icon -->
+                  </ng-container>
+                  <ng-template #notLongest>
+                    {{ elem.is_longest }}
+                  </ng-template>
+                </mat-cell>
+              </ng-container>
             <ng-container matColumnDef="protein_entry">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Protein Entry </mat-header-cell>
                 <mat-cell *matCellDef="let elem"><a [routerLink]="['/details', 'Arabidopsis',elem.uniprot_id]"><button mat-raised-button color="primary">Details</button></a></mat-cell>

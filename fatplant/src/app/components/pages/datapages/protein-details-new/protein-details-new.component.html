@@ -253,6 +253,7 @@
                             There was a problem loading the BLAST results.
                         </div>
                         <div *ngIf="!showProgress && showBlastResList.length !== 0">
+                            <p>Blast against Arabidopsis, Camelina and Soybean databse.</p>
                             <p>Filter Blast Result by Percent Identity. Current Value: {{BlastFilterValue}}%</p>
                             <mat-slider 
                             min="1" 
@@ -295,7 +296,8 @@
                             There was a problem loading the PSI BLAST results.
                         </div>
                         <div *ngIf="!showProgress && showPSIBlastResList.length !== 0">
-                            <p>Filter Blast Result by Percent Identity. Current Value: {{PSIBlastFilterValue}}%</p>
+                            <p>PSI Blast against Arabidopsis, Camelina and Soybean databse.</p>
+                            <p>Filter Blast Result by Percent Identity. Current Value: {{PSIBlastFilterValue}}%</p>              
                             <mat-slider 
                             min="1" 
                             max="100" 

@@ -5,15 +5,15 @@
         <mat-select formControlName="searchType">
           <mat-option [value]="'id'"> ID </mat-option>
           <mat-option [value]="'description'"> Description </mat-option>
-          <mat-option [value]="'family'"> Family </mat-option>
+          <!-- <mat-option [value]="'family'"> Family </mat-option> -->
         </mat-select>
       </mat-form-field>
   
       <mat-form-field class="search-field">
-        <mat-label>Search Kinase Client (example: AT5G39440)...</mat-label>
+        <mat-label>Search for protein properties</mat-label>
         <input matInput formControlName="searchValue" />
       </mat-form-field>
-      <button mat-flat-button color="primary" class="button_search" [disabled]="!searchForm.valid" (click)="performSearch()">Search</button>
+      <button mat-flat-button color="primary" class="button_search" [disabled]="!searchForm?.valid" (click)="performSearch()">Search</button>
     </form>
   </mat-card>
   
@@ -152,14 +152,14 @@
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field class="filter-field" *ngIf="filterForm.get('filterType').value === 'node'">
+        <mat-form-field class="filter-field" *ngIf="filterForm?.get('filterType')?.value === 'node'">
           <mat-label>Property</mat-label>
           <mat-select matInput formControlName="filterProp">
             <mat-option *ngFor="let key of nodeKeys" [value]="key">{{key}}</mat-option>
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field class="filter-field" *ngIf="filterForm.get('filterType').value === 'edge'">
+        <mat-form-field class="filter-field" *ngIf="filterForm?.get('filterType')?.value === 'edge'">
           <mat-label>Property</mat-label>
           <mat-select matInput formControlName="filterProp">
             <mat-option *ngFor="let key of edgeKeys" [value]="key">{{key}}</mat-option>
@@ -180,10 +180,10 @@
         <mat-form-field class="filter-field">
           <mat-label>Value</mat-label>
           <input matInput formControlName="filterValue" />
-          <mat-error *ngIf="filterForm.get('filterValue').hasError('alphaNumericError')">Alphanumeric characters and spaces only.</mat-error>
+          <mat-error *ngIf="filterForm?.get('filterValue')?.hasError('alphaNumericError')">Alphanumeric characters and spaces only.</mat-error>
         </mat-form-field>
   
-        <button mat-flat-button color="primary" (click)="addFilter(); showSelected = false" [disabled]="!filterForm.valid"> Add Filter </button>
+        <button mat-flat-button color="primary" (click)="addFilter(); showSelected = false" [disabled]="!filterForm?.valid"> Add Filter </button>
         <!-- <mat-slide-toggle formControlName="filterAndOr">AND/OR</mat-slide-toggle> -->
       </form>
     </div>

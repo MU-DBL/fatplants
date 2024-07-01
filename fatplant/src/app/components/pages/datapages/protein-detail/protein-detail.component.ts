@@ -120,7 +120,8 @@ export class ProteinDetailComponent implements OnInit {
   }
 
   //combined into getUniprotData() since they're now using the same table
-  /*
+
+/*
   getProteinEntry() {
     this.afs.collection('/New_Lmpd_Arabidopsis_Details', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
       this.proteinData = res[0];
@@ -139,8 +140,8 @@ export class ProteinDetailComponent implements OnInit {
       this.selectedGPTQuery = this.splitGeneNames[0];
     });
   }
-    */
-   
+*/
+
   parseKeywords(originalKeywords) {
     let keywordList = originalKeywords.split(';');
     let output = "";

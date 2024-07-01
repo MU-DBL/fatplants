@@ -97,9 +97,9 @@ export class DataComponent implements OnInit {
       case "soybean":
         return ['uniprot_id', 'refseq_id', 'glyma_id', 'gene_names', 'protein_name', 'soy_prot_entry'];
       case "cuphea":
-        return ['protein_description', 'cuphea_entry'];
+        return ['protein_description', 'is_longest', 'cuphea_entry'];
       case "pennycress":
-        return ['protein_description', 'pennycress_entry'];
+        return ['protein_description', 'is_longest', 'pennycress_entry'];
       case "fattyacid":
         return ['picture', 'lipidMapsID', 'name', 'mass', 'sofa_id', 'other_names', 'delta_notation'];
       default:
@@ -113,6 +113,7 @@ export class DataComponent implements OnInit {
       if (this.searchQuery === undefined) {
         this.searchQuery = "";
       }
+      console.log(this.searchQuery)
       this.applySearchQuery();
     });
   }
@@ -176,7 +177,6 @@ export class DataComponent implements OnInit {
 
   changePage(isNext: boolean) {
     switch (this.dataset) {
-
       case "camelina":
         this.changeCamelinaPage(isNext);
       case "soybean":
@@ -448,6 +448,7 @@ export class DataComponent implements OnInit {
     else if (this.dataset == "pennycress") {
       this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "pennycress").subscribe((data: any[]) => {
         this.pennycressDataSource = new MatTableDataSource(data.slice(0, 50));
+        console.log(this.pennycressDataSource);
         this.loading = false;
       }, error => {
         this.pennycressDataSource = new MatTableDataSource([]);

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {
   FormBuilder,
+  FormGroup,
   FormControl,
   ValidationErrors,
   Validators,
@@ -32,7 +33,6 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   differ: any;
   @ViewChild('warningSearchDialog') warningSearchDialog: TemplateRef<any>;
   
-
   hover_data =[];
   graph;  
   graphElements;
@@ -58,10 +58,10 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   showProteinInfo = false;
   isPtmViewer = true;
   showNodeInfo = false;
-  searchForm;
-  filterForm;
+  searchForm: FormGroup;
+  filterForm: FormGroup;
   filters = [];
-  styleForm;
+  styleForm: FormGroup;
   styles = [];
 
 
@@ -89,18 +89,17 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.populateGraph();
     this.buildFilterForm();
     this.buildStyleForm();
     this.addDefaultStlyes();
     this.buildSearchForm();
+    this.populateGraph();
   }
 
   ngOnChanges(): void {
     this.populateGraph();
   }
 
-  
   changeLayout(layout) {
     this.graph
       .layout({
@@ -289,17 +288,18 @@ export class GoCytoscapeNetworkComponent implements OnInit {
       }
     }
   }
-  // 
+
   populateGraph() {
+
     console.log('populateGraph CytoData',this.cytoData)
     if (this.cytoData != null) {
-      // Resize nodes for kic assay
       console.log('entered populate Graph')
       if (this.cytoData.elements.nodes[0].data.network_type == 'kic')
         this.substrateRecount();
   
       if (this.cytoDataFull == null)
         this.cytoDataFull = JSON.parse(JSON.stringify(this.cytoData));
+
       this.originalElements = JSON.parse(JSON.stringify(this.cytoData.elements));
       this.cytoData['container'] = document.getElementById('cy');
       const options = {
@@ -307,9 +307,9 @@ export class GoCytoscapeNetworkComponent implements OnInit {
         minZoom: 0.3,
         autoResize: true,
       };
-      console.log('cytoData',this.cytoData);
+      // console.log('cytoData',this.cytoData);
+
       this.graph = cytoscape({ ...this.cytoData, ...options });
-      
 
       console.log("The graph is : ",this.graph);
       this.graph

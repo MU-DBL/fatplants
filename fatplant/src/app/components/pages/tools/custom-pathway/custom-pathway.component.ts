@@ -31,7 +31,7 @@ export class CustomPathwayComponent implements OnInit {
   graphTable = null;
   img;
 
-  displayedColumns = ["title", "fpLink", "uniProtLink", "geneName", "dataSet", "modified"];
+  displayedColumns = ["title", "uniProtLink", "geneName", "dataSet", "modified"];
   ngOnInit(): void {
 
     this.img = new Image();
@@ -288,10 +288,7 @@ export class CustomPathwayComponent implements OnInit {
   }
 
   openLink(rect) {
-    if (this.showingUniprot)
-      window.open(rect.uniProtLink, '_blank');
-    else
-      window.open(rect.fpLink, '_blank');
+    window.open(rect.uniProtLink, '_blank');
   }
 
 }

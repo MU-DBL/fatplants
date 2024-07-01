@@ -154,7 +154,7 @@ export class CustomPathwayListComponent implements OnInit {
     });
 
     // populate graph
-    this.pathwayService.getAllPathways().subscribe(pathways => {
+    this.pathwayService.getAllPathways().subscribe((pathways:any[]) => {
       this.dataSource = [];
       pathways.forEach(graph => {
         let graphAny: any = graph.payload.doc.data();
