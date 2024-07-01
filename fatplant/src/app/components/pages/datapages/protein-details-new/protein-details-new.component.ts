@@ -822,7 +822,7 @@ export class ProteinDetailsNewComponent implements OnInit {
 
   selectImage(pathway: string) {
     this.isLoadingImage = true;
-    this.selectedPathImage = + "highlighted_image/?species=" + this.speciesName + "&uniprot_id=" + this.extendedData.uniprot_id + "&pathway_id=" + pathway;
+    this.selectedPathImage = environment.BASE_API_URL + "highlighted_image/?species=" + this.speciesName + "&uniprot_id=" + this.extendedData.uniprot_id + "&pathway_id=" + pathway;
   }
 
   onImageLoad() {
