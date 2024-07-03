@@ -20,6 +20,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { animate } from '@angular/animations';
 
 @Component({
   selector: 'app-go-cytoscape-network',
@@ -34,6 +35,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   
 
   hover_data =[];
+  clickedEdge_Data=[];
   graph;  
   graphElements;
   details = [];
@@ -75,11 +77,19 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   clickedNode: any;
   originalElements: any;
   isResetEnabled = false;
+  layout;
 
-  constructor(private fb: FormBuilder, private differs: KeyValueDiffers , private gc: GoCytoscapeComponent,http: HttpClient,private dialog: MatDialog) {
+  constructor(
+    private fb: FormBuilder, 
+    private differs: KeyValueDiffers , 
+    private gc: GoCytoscapeComponent,
+    private http: HttpClient,
+    private dialog: MatDialog,
+  ){
     this.layouts.forEach((x) => {
       cytoscape.use(x['ref']);
     });
+
 
     this.differ = differs.find({}).create();
     // this.kc.getData();
@@ -94,6 +104,8 @@ export class GoCytoscapeNetworkComponent implements OnInit {
     this.buildStyleForm();
     this.addDefaultStlyes();
     this.buildSearchForm();
+    cytoscape.use(cola);
+    
   }
 
   ngOnChanges(): void {
@@ -102,6 +114,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
 
   
   changeLayout(layout) {
+
     this.graph
       .layout({
         name: layout.toLowerCase(),
@@ -136,7 +149,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
 
     let connectedNodeId = "";
     details.forEach(e => {
-      if (e.title == "Tair Id")
+      if (e.title == "Gene")
         connectedNodeId = e.detail;
     })
 
@@ -165,15 +178,14 @@ export class GoCytoscapeNetworkComponent implements OnInit {
 
     let elements = this.graph.elements('node:selected');
     let edge = this.graph.elements('edge:selected');
+
+    console.log('node and edge selected is:',edge,elements);
     
     
 
     elements.forEach((element) => {
       let newDetails = JSON.parse(JSON.stringify(element.data()));
       console.log("the newDetails data is as follows : ",newDetails);
-      // this.sayeeraField = newDetails["sayeera"];
-      console.log("sayeera is : ",newDetails["sayeera"]);
-      delete newDetails["sayeera"];
       for(let key in newDetails){      
         let key_upper = key[0].toUpperCase() + key.slice(1);
         key_upper = key_upper.replace(/_/g," ");
@@ -216,6 +228,8 @@ export class GoCytoscapeNetworkComponent implements OnInit {
     edge.forEach((element) => {
 
       let newDetails = JSON.parse(JSON.stringify(element.data()));
+
+      console.log('edge elements are:', newDetails);
       
       for(let key in newDetails){      
         let key_upper = key[0].toUpperCase() + key.slice(1);
@@ -244,7 +258,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
         delete newDetails["Id"];
         delete newDetails["Target"];
       }
-      console.log(newDetails);
+      console.log('line 247: ',newDetails);
 
       this.showDetails(newDetails);
     });
@@ -255,40 +269,18 @@ export class GoCytoscapeNetworkComponent implements OnInit {
     let element = document.getElementById('detail_info') as HTMLDivElement;
     this.details = [];
     for (let key in e) {
-
-      // we need to fix the names of our experimental data fields
-      if (key == "Experiment data") {
-        let newDetail = {};
-        let newData = JSON.parse(e[key]);
-        console.log("the newData is : ",newData);
-
-        for (let expKey in newData) {
-          const words = expKey.split('_');
-          words.forEach((e, i) => {words[i] = e.charAt(0).toUpperCase() + e.slice(1).toLowerCase()});
-          
-          newDetail[words.join(' ')] = newData[expKey];
-        }
-        this.details.push({
-          title: key,
-          detail: newDetail,
-        });
-
-        console.log("details data : ",this.details);
-      }
-      if (key=="Tair Id"){
-        this.details.push({
-          title:"Protein ID",
-          detail:e[key],
-        });
-      }
-      else {
+      
         this.details.push({
           title: key,
           detail: e[key],
         });
       }
+    console.log('details are:',this.details)
+    for (let item in this.details){
+      console.log(this.details[item]['title']);
     }
-  }
+    }
+  
   // 
   populateGraph() {
     console.log('populateGraph CytoData',this.cytoData)
@@ -304,22 +296,32 @@ export class GoCytoscapeNetworkComponent implements OnInit {
       this.cytoData['container'] = document.getElementById('cy');
       const options = {
         maxZoom: 2,
-        minZoom: 0.3,
+        minZoom: 0.1,
         autoResize: true,
+        layout:{
+          name: 'cose',
+          nodeSpacing: 30,
+          //edgeLengthVal: 10,
+          fit: true,
+        }
+        
       };
+      
       console.log('cytoData',this.cytoData);
-      this.graph = cytoscape({ ...this.cytoData, ...options });
+      this.graph = cytoscape({ ...this.cytoData, ...options, });
       
 
       console.log("The graph is : ",this.graph);
-      this.graph
-        .layout({
-          name: 'cola',
-          // animate: true,
-          // infinite: true,
-          // fit: true,
-        })
-        .run();
+      // this.graph
+      //   .layout({
+      //     name: 'cola',
+      //     maxSimulationTime: 3000,
+      //     animate: true,
+      //     infinite: true,
+      //     fit: true,
+      //   })
+      //   .run();
+        console.log('graph layout :', this.graph)
   
       this.graphElements = this.graph.elements().clone();
   
@@ -347,16 +349,24 @@ export class GoCytoscapeNetworkComponent implements OnInit {
         const clickedNode = event.target;
         this.displaySubNetwork(clickedNode.id());
       });
+      this.graph.on('tap','edge',(event)=>{
+        const clickedEdge =event.target;
+        console.log('clicked edge is:',clickedEdge);
+        this.showEdgeDetails(clickedEdge);
+
+      })
 
      this.setupEventListeners_mousehover()
     }
   }
   setupEventListeners_mousehover() {
+    this.clickedEdge_Data=[];
     console.log("Reapplying mouse hover event listeners.");
   this.graph.on('mouseover', 'node', (event) => {
     let node = event.target;
     console.log("Mouseover on node: ", node.id());
     this.details=[]
+    this.clickedEdge_Data=[];
     this.showNodeDetails(node);
   });
 
@@ -371,27 +381,22 @@ export class GoCytoscapeNetworkComponent implements OnInit {
     this.hover_data=[];
   }
   showNodeDetails(node: any) {
-    this.hover_data=[]
+    this.hover_data=[];
+    this.clickedEdge_Data=[];
     console.log('node',node)
     let content = `
     <b>ID: </b>${node.id()}<br/>
-    <b>Description: </b>${node.data('description')}`; 
+    <b>Description: </b>${node.data('Description')}`; 
     console.log('content for tooltip:', content);
-    let keys =['description','family','network_type','substrate_count','type']
+    let keys =['Gene','Description','Category','Enrichment']
     for (let k in keys){
-      if (keys[k]=='substrate_count'){
-        this.hover_data.push({
-          title: 'Substrate Count',
-          detail: node.data(keys[k]),
-        });
-      }
-      else {
-        this.hover_data.push({
-          title: keys[k],
-          detail: node.data(keys[k]),
-        });
-      }
+      this.hover_data.push({
+        title: keys[k],
+        detail: node.data(keys[k]),
+      });
+      
     }
+
     console.log('hover_data:',this.hover_data)
   let tooltip = document.getElementById('tooltip'); // Make sure this element exists in your HTML
 
@@ -405,9 +410,27 @@ export class GoCytoscapeNetworkComponent implements OnInit {
     //throw new Error('Method not implemented.');
   }
 
+  showEdgeDetails(edge :any){
+    this.clickedEdge_Data=[];
+    edge.forEach((element) => {
+
+      let newDetails = JSON.parse(JSON.stringify(element.data()));
+      let keys=['source','target','SCORE','TYPE',]
+      
+      for (let k in keys){
+        this.clickedEdge_Data.push({
+          title: keys[k],
+          detail: newDetails[keys[k]],
+        });
+      }
+      console.log('clicked edge elements:',this.clickedEdge_Data);
+    });
+  }
+
   
   displaySubNetwork(nodeId: string) {
-    this.details=[]
+    this.details=[];
+    this.clickedEdge_Data=[];
     //logic to filter nodes and edges based on the clicked node
     console.log('nodeID',nodeId);
 

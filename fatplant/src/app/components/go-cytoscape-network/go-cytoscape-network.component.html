@@ -4,13 +4,13 @@
         <mat-label>Filter Type</mat-label>
         <mat-select formControlName="searchType">
           <mat-option [value]="'id'"> ID </mat-option>
-          <mat-option [value]="'description'"> Description </mat-option>
-          <mat-option [value]="'family'"> Family </mat-option>
+          <mat-option [value]="'Description'"> Description </mat-option>
+          <mat-option [value]="'Category'"> Category </mat-option>
         </mat-select>
       </mat-form-field>
   
       <mat-form-field class="search-field">
-        <mat-label>Search Kinase Client (example: AT5G39440)...</mat-label>
+        <mat-label>Search Kinase Client (example: GO:0006631)...</mat-label>
         <input matInput formControlName="searchValue" />
       </mat-form-field>
       <button mat-flat-button color="primary" class="button_search" [disabled]="!searchForm.valid" (click)="performSearch()">Search</button>
@@ -42,7 +42,7 @@
       </mat-card-title>
       <mat-card-content>
         <mat-spinner *ngIf="!cytoData" style="margin: 60px auto"></mat-spinner>
-        <mat-card *ngIf="hover_data.length < 1 && this.cytoData" class="noBorder" >
+        <mat-card *ngIf="hover_data.length < 1 && clickedEdge_Data.length<1 && this.cytoData" class="noBorder" >
           <mat-card-content>
             <p style="text-align: center;">No Element Selected</p>
           </mat-card-content>
@@ -89,14 +89,13 @@
             </div>
           </div>
         </mat-card>
-        <div *ngFor="let item of details">
-          <mat-card-title style="margin: 10px; margin-bottom: 20px;" *ngIf="item.title == 'Experiment Data'">Experiment Data </mat-card-title>
-          <mat-card *ngIf="item.title == 'Experiment Data'" class="noBorder" >
+        <div *ngIf="clickedEdge_Data.length>1">
+          <mat-card  class="noBorder" >
             <mat-card-content>
-                <div *ngFor="let expData of item.detail | keyvalue">
+                <div *ngFor="let item of clickedEdge_Data">
                   
                   <span class="detailTitle">
-                    {{expData.key}} <br>
+                    {{item.title}} <br>
                   </span>
                   <!-- <span style="word-wrap: break-word; margin-left: 6px;" *ngIf="expData.key == 'Pubmed'">
                      <a href="https://pubmed.ncbi.nlm.nih.gov/">
@@ -104,7 +103,7 @@
                      </a> 
                   </span> -->
                   <span style="word-wrap: break-word; margin-left: 6px;" >
-                    {{expData.value}}
+                    {{item.detail}}
                   </span>
                   <br />
                 </div>
