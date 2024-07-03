@@ -8,6 +8,9 @@
                 <mat-option *ngFor="let option of pathwayOptions" [value]="option">{{ option.name }}</mat-option>
             </mat-select>
         </mat-form-field>
+        <mat-card>
+            
+        </mat-card>
         <div class="info-table">
             <mat-table [dataSource]="selectedProtein" *ngIf="selectedProtein">
                 <ng-container matColumnDef="In_Fatplants" >
@@ -28,7 +31,6 @@
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
               </mat-table>
         </div>
-
         <div [class.show]="selectedGraph" class="imageArea">
             <mat-progress-bar mode="indeterminate" *ngIf='loading' class="loading-bar"></mat-progress-bar>
             <div class="canvas-container">
