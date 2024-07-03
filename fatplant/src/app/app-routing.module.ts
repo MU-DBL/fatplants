@@ -87,13 +87,13 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'home', component:HomeComponent},
 //{path: '**', redirectTo: '/home'}],
 // path: 'go-network-page', component:NetworkComponent},
-{path: 'go-network-page', component:NetworkComponent},
+// {path: 'go-network-page', component:GoCytoscapeComponent},
 {path: 'blast-page', component:BlastPageComponent},
 {path: 'glmol-page', component:GlmolStructurePageComponent}, 
 {path: 'pathway-viewer-page', component:PathwayViewerPageComponent}, 
 {path: 'details/:database_name/:uniprot_id',component:ProteinDetailsNewComponent},
 {path: 'contact', component: ContactUsComponent },
-// {path: 'go-cyto-network', component:GoCytoscapeComponent},
+{path: 'go-cyto-network', component:GoCytoscapeComponent},
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({

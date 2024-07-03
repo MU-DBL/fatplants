@@ -24,6 +24,7 @@ export class DataService {
     this.BlastNeedUpdate = true;
   }
 
+  // Replace with Blast API in EC2 backend
   public updateBlastRes(database, uniprot_id): Observable<string>{
     this.blastResOb = this.http.get('https://us-central1-fatplantsmu-eb07c.cloudfunctions.net/oneclick?fasta=' + uniprot_id + '&database=' + database, { responseType: 'text' })
     this.blastResOb.subscribe(res=>{

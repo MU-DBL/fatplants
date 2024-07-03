@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
 import { Breakpoints } from '@angular/cdk/layout';
 import { environment } from 'src/environments/environment';
 import { CytographAdditionalData, ExtendableNode } from 'src/app/interfaces/cytograph-additional-data';
-import * as nodeData from '../../../../assets/new_node.json';
-import * as edgeData from '../../../../assets/new_edge.json';
+import * as node_Data from '../../../../assets/cyto_node.json';
+import * as edge_Data from '../../../../assets/cyto_edge.json';
 
 
 @Injectable({
@@ -31,11 +31,13 @@ export class GoCytoscapeComponent implements OnInit {
   constructor(private http: HttpClient){ }
   ELEMENT_DATA;
   showCyto = false;
-  
+  layout;
+  style=[];
     // we'll pass this onto the cytoscape network component
   experimentFilter:CytographAdditionalData = {kicExperimentId: "all"};
   
   ngOnInit(): void {
+    
     this.getData();
     //console.log('nodedata',nodeData.data);
     
@@ -43,19 +45,9 @@ export class GoCytoscapeComponent implements OnInit {
   
 
   async getData() {
-    // const nodeData$ = this.http.get('assets/new_node.json');
-    // const edgeData$ = this.http.get('assets/new_edge.json');
-    // let nested1, nested2; // declare variables here
-    // console.log('check');
-
-    // forkJoin([nodeData$, edgeData$]).subscribe(([nodeData, edgeData]) => {
-    //   const x = [nodeData, edgeData];
-    //   const c = this.mapEdgesNodes(x[0]['data'], x[1]['data']); //edge node details
-    //   console.log(c);
-    // });
-    const x = [nodeData, edgeData];
-    console.log('x',nodeData.data)
-    const c = this.mapEdgesNodes(nodeData.data, edgeData.data); //edge node details
+    const x = [node_Data, edge_Data];
+    console.log('x',node_Data.data)
+    const c = this.mapEdgesNodes(node_Data.data, edge_Data.data); //edge node details
     console.log(c);
     
   }
@@ -93,24 +85,24 @@ export class GoCytoscapeComponent implements OnInit {
   
       for (let i = 0; i < nodes.length; i++) {
         // nodes[i]['name'] = nodes[i]['node_name'];
-        nodes[i]['id'] = nodes[i]['tair_id'];
+        nodes[i]['id'] = nodes[i]['Gene'];
         // nodes[i]['Sayeera']=nodes[i]['sayeera']; if we want to add this field to entire nodes dataset
-        nodes[i]['width'] = nodes[i]['substrate_count'] * 5 + 25;
+        nodes[i]['width'] = nodes[i]['HitsCount'];
   
-        nodes[i].network_type = "kic";
+        nodes[i].network_type = "Direct";
         nodes[i] = { data: nodes[i] };
   
         
       }
       for (let i = 0; i < edges.length; i++) {
-        edges[i]['source'] = edges[i]['Kinase'];
-        edges[i].network_type = "kic";
-        delete edges[i]['Kinase'];
-        edges[i]['target'] = edges[i]['substrate'];
-        edges[i]['width'] = Math.log2(edges[i].Phosphorylated_Percentage) + 1;
+        edges[i]['source'] = edges[i]['node A'];
+        edges[i].network_type = "Direct";
+        delete edges[i]['node A'];
+        edges[i]['target'] = edges[i]['node B'];
+        edges[i]['width'] = 2;//Math.log2(edges[i].Phosphorylated_Percentage) + 1;
   
         
-        delete edges[i]['substrate'];
+        delete edges[i]['node B'];
   
         edges[i] = { data: edges[i], classes: 'tooltip' };
       }
@@ -120,20 +112,94 @@ export class GoCytoscapeComponent implements OnInit {
   
         style: [
           {
-            selector: 'node',
+            selector: 'node[HitsCount <=40]',
             css: {
-               content: 'data(tair_id)',
-              'border-color': '#99ccff',
+               content: 'data(Gene)',
+              'border-color': '#f74f68',
               'border-opacity': 1,
               'border-width': '1px',
-              'background-color': '#99ccff',
+              'background-color': '#ff1a1a', //red
+              'width': 'data(width)',
+              'height':'data(width)',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'color': '#000',
+              'font-size': '15px',
+              // 'shape':'diamond',
+            },
+          },
+          {
+            selector: 'node[HitsCount > 40][HitsCount <= 80]',
+            css: {
+               content: 'data(Gene)',
+              'border-color': '#f74f68',
+              'border-opacity': 1,
+              'border-width': '1px',
+              'background-color':'#ffff00', //yellow
+              'width': 'data(width)',
+              'height':'data(width)',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'color': '#000',
+              'font-size': '25px',
+              // 'shape':'diamond',
+            },
+          },
+          {
+            selector: 'node[HitsCount > 80][HitsCount <= 120]',
+            css: {
+               content: 'data(Gene)',
+              'border-color': '#f74f68',
+              'border-opacity': 1,
+              'border-width': '1px',
+              'background-color': '#3333ff', //blue
+              'width': 'data(width)',
+              'height':'data(width)',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'color': '#000',
+              'font-size': '30px',
+              // 'shape':'diamond',
+            },
+          },
+          {
+            selector: 'node[HitsCount > 120][HitsCount <= 150]',
+            css: {
+               content: 'data(Gene)',
+              'border-color': '#f74f68',
+              'border-opacity': 1,
+              'border-width': '1px',
+              'background-color': '#ff3399',  //pink
+              'width': 'data(width)',
+              'height':'data(width)',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'color': '#000',
+              'font-size': '40px',
+              // 'shape':'diamond',
+            },
+          },
+          {
+            selector: 'node[HitsCount >= 150]',
+            css: {
+               content: 'data(Gene)',
+              'border-color': '#f74f68',
+              'border-opacity': 1,
+              'border-width': '1px',
+              'background-color': '#00ff00', //green
+              'width': 'data(width)',
+              'height':'data(width)',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'color': '#000',
+              'font-size': '50px',
               // 'shape':'diamond',
             },
           },
           {
             selector: 'edge',
             css: {
-              content:'data(Phosphorylated_Percentage)',
+              content:'',
               width: 'data(width)',
               'target-arrow-shape': 'triangle',
               'line-color': '#401a4a',
@@ -153,48 +219,48 @@ export class GoCytoscapeComponent implements OnInit {
   
       };
   
-      console.log(this.ELEMENT_DATA)
-      let family_list = {
-        'Ser/Thr Protein Kinase Superfamily': '#ff0000',
-        'AME/AFC Family': '#ff3399',
-        'Casein Kinase Family': '#3366ff',
-        'RLCK Family': '#00cc00',
-        'CDPk Super Family': '#ff3399',
-        'Lectin Receptor Kinase family': '#FFFF33'
-      };
+      // console.log(this.ELEMENT_DATA)
+      // let family_list = {
+      //   'Ser/Thr Protein Kinase Superfamily': '#ff0000',
+      //   'AME/AFC Family': '#ff3399',
+      //   'Casein Kinase Family': '#3366ff',
+      //   'RLCK Family': '#00cc00',
+      //   'CDPk Super Family': '#ff3399',
+      //   'Lectin Receptor Kinase family': '#FFFF33'
+      // };
   
-      let experiment_color_list = {
-        'Nagib 2007(Thelen lab)': '#445941',
-        'Nagib 2021(Thelen lab)': '#414259',
-        'Gabriel 2024(Thelen lab&Stacy lab)': '#594141'
-      };
+      // let experiment_color_list = {
+      //   'Nagib 2007(Thelen lab)': '#445941',
+      //   'Nagib 2021(Thelen lab)': '#414259',
+      //   'Gabriel 2024(Thelen lab&Stacy lab)': '#594141'
+      // };
   
-      for (let e in experiment_color_list) {
-        // for (let j = 1; j <= 100; j++) {
-          this.ELEMENT_DATA.style.push({
-            selector: `edge[Experiments_ID="${e}"]`,
-            css: {
-              'line-color': `${experiment_color_list[e]}`,
-              // 'opacity': j / 100,
-            },
-          });
-        // }
-      }
+      // for (let e in experiment_color_list) {
+      //   // for (let j = 1; j <= 100; j++) {
+      //     this.ELEMENT_DATA.style.push({
+      //       selector: `edge[Experiments_ID="${e}"]`,
+      //       css: {
+      //         'line-color': `${experiment_color_list[e]}`,
+      //         // 'opacity': j / 100,
+      //       },
+      //     });
+      //   // }
+      // }
   
-      for (let e in family_list) {
-        this.ELEMENT_DATA.style.push({
-          selector: `node[family = "${e}" ]`,
-          css: {
-            content: 'data(tair_id)',
-            'border-color': `${family_list[e]}`,
-            'border-opacity': 1,
-            width: 'data(width)',
-            height: 'data(width)',
-            'border-width': '1px',
-            'background-color': `${family_list[e]}`,
-          },
-        });
-      }
+      // for (let e in family_list) {
+      //   this.ELEMENT_DATA.style.push({
+      //     selector: `node[family = "${e}" ]`,
+      //     css: {
+      //       content: 'data(tair_id)',
+      //       'border-color': `${family_list[e]}`,
+      //       'border-opacity': 1,
+      //       width: 'data(width)',
+      //       height: 'data(width)',
+      //       'border-width': '1px',
+      //       'background-color': `${family_list[e]}`,
+      //     },
+      //   });
+      // }
       console.log("Element Data is : ",this.ELEMENT_DATA);
       this.showCyto = true;
     }

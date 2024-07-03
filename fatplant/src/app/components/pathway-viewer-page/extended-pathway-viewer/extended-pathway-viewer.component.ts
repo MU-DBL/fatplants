@@ -1,9 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
-import { objList, tairDict } from '../../pages/tools/extended-pathway/existing_tairs';
 import {Pipe, PipeTransform} from '@angular/core';
+import {mappingData} from './mapping';
+@Pipe ({
+  name : 'excludeListItem'
+})
 
-
+export class ExcludeListItemPipe implements PipeTransform {
+  transform(items: any[], exclusion: any): any {
+      if (!items) {
+          return items;
+      }
+      return items.filter(item => item != exclusion);
+  }
+}
 
 @Component({
   selector: 'app-extended-pathway-viewer',
@@ -28,47 +38,16 @@ export class ExtendedPathwayViewerComponent implements OnInit {
   selectedOption;
   loading = true;
   selectedTair = "";
+  selectedProtein :any;
 
-  selectedDetails = [{ 
-    tair_id: "",
-    protein: "",
-    rna_seq: "",
-    trap_seq: "",
-    prot_log2FC: "",
-    prot_qvalue : "",
-    prot_pvalue: "",
-    trans_log2FC: "",
-    trans_qvalue: "",
-    log2_transcriptomeChanges: "",
-    log2_translatomeChanges: "",
-    log2_TE: "",
-    Zscore_Log2_TE: "",
-    description: ""
-  }];
-  selectedUniprot = "";
-  columnSections = [
-    ["in_fp","protein","rna_seq",	"trap_seq"],
-    ["in_fp","prot_log2FC",	"prot_qvalue", "prot_pvalue"],
-    ["in_fp","trans_log2FC",	"trans_qvalue"],
-    ["in_fp","log2_transcriptomeChanges","log2_translatomeChanges","log2_TE","Zscore_Log2_TE"]
-  ];
-
+ 
+  displayedColumns:string[] = ['In_Fatplants','Protein_Name','TAIR_ID','UniProt_ID'];
+  
   columnTitles = {
-    protein: "Protein",
-    rna_seq: "RNA-Seq",
-    trap_seq: "Trap-Seq",
-    prot_log2FC: "Log2FC",
-    prot_qvalue: "q Value",
-    prot_pvalue: "p Value",
-    trans_log2FC: "Log2FC",
-    trans_qvalue: "q Value",
-    log2_transcriptomeChanges: "log2_transcriptomeChanges",
-    log2_translatomeChanges: "log2_translatomeChanges",
-    log2_TE: "log2_TE",
-    Zscore_Log2_TE: "Zscore_Log2_TE"
-  };
-
-  displayedColumns = this.columnSections[0];
+    Protein_Name:'Protein Name',
+    TAIR_ID: 'TAIR ID',
+    UniProt_ID: 'UniProt ID'
+  }
 
   pathwayOptions = [
     {
@@ -138,22 +117,28 @@ export class ExtendedPathwayViewerComponent implements OnInit {
 
   // when the select input is changed
   onChange(newOption) {
-    console.log('entered onChange',newOption);
+    // console.log('entered onChange',newOption);
+    this.selectedProtein = [];
     this.loading = true;
     this.selectedOption = newOption;
     this.img = new Image();
     this.img.src = this.selectedOption.link;
-    console.log('calling load Coordinates');
+    // console.log('calling load Coordinates');
     this.img.onload = () => this.loadCoordinates();
     this.setupMousemove();
     this.setupClickEvent();
   }
+  navigateToProtein(element:any) {
+    if(element)
+      window.open('/protein/' + element.UniProt_ID, '_blank');
+      //window.open('/details/Arabidopsis/' + element.UniProt_ID, '_blank');
+  }
 
   loadCoordinates() {
-    console.log('loading Coordinates')
+    // console.log('loading Coordinates')
     this.loading = false;
     this.httpClient.get(this.selectedOption.data).subscribe((data:any) => {
-      console.log('loaded Data:', data);
+      // console.log('loaded Data:', data);
       let baseGraph = data.shapes;
       this.selectedGraph = [];
       baseGraph.forEach(box => {
@@ -171,7 +156,7 @@ export class ExtendedPathwayViewerComponent implements OnInit {
           height: height
         })
       });
-      console.log('selected graph',this.selectedGraph);
+      // console.log('selected graph',this.selectedGraph);
       this.drawMap();
     });
     
@@ -258,8 +243,11 @@ export class ExtendedPathwayViewerComponent implements OnInit {
         this.clickRects.forEach(rect => {
           if (this.ctx.isPointInPath(rect.path, e.offsetX, e.offsetY)) {
             if (this.hoveredRects.length == 1){
+              let clicked_protein = this.hoveredRects[0].label;
               // this.selectedDetails = [objList.find(o => o.tair_id == rect.label)];
               // this.selectedUniprot = tairDict[rect.label];
+              this.selectedProtein=mappingData.filter(item => item["Protein_Name"] === clicked_protein);
+              // console.log(this.selectedProtein);
               this.selectedTair = rect.label;
             }
             else if (this.hoveredRects.length != 0 && !hasOpenedDialog) {

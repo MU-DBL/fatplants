@@ -1,23 +1,29 @@
-<mat-card class="base">
-    <div class="page-title-bar">
-      <p class="page-title">Go Enrichment Network</p>
-    </div>
-    
-    <mat-card class="card" style="margin-top: 10px;">
-      <pre style="overflow-x:hidden;">
+<div>
+  <div class="header">
+      Go Enrichment Networks
+  </div>
+  <div style="margin: 2%;">
+    <app-go-cytoscape-network [optionalData]="experimentFilter" [cytoData]="ELEMENT_DATA"></app-go-cytoscape-network>
+  </div>
+</div>
+
+<!-- <mat-card id="component-container" style="margin-top: 5%; margin-bottom: 3%;">
+  
+    <mat-card class="card" style="margin-top: 10px;"> -->
+      <!-- <pre style="overflow-x:hidden;">
         <mat-form-field>
-          <mat-label>Target Pathway</mat-label>
+          <mat-label>Experiment ID</mat-label>
           <mat-select matInput [(value)]="experimentFilter.kicExperimentId">
             <mat-option value='all'>All</mat-option>
-            <!-- <mat-option value='Nagib 2007(Thelen lab)'>Nagib 2007(Thelen lab)</mat-option>
+            <mat-option value='Nagib 2007(Thelen lab)'>Nagib 2007(Thelen lab)</mat-option>
             <mat-option value='Nagib 2021(Thelen lab)'>Nagib 2021(Thelen lab)</mat-option>
-            <mat-option value='Gabriel 2024(Thelen lab&Stacy lab)'>Gabriel 2024(Thelen lab&Stacy lab)</mat-option>  -->
+            <mat-option value='Gabriel 2024(Thelen lab&Stacy lab)'>Gabriel 2024(Thelen lab&Stacy lab)</mat-option>
           </mat-select>
         </mat-form-field>
-          </pre>
-    <div>
-      <app-go-cytoscape-network [optionalData]="experimentFilter" [cytoData]="ELEMENT_DATA"></app-go-cytoscape-network>
-    </div>
-  </mat-card>
-  </mat-card>
+          </pre> -->
+    
+    
+    <!-- </mat-card>
+  
+  </mat-card> -->
   
