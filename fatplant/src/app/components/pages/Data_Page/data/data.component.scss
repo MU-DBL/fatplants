@@ -189,7 +189,7 @@ input.mat-input-element {
     box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
 }
 
-::ng-deep .mat-form-field-underline {
+mat-card::ng-deep .mat-form-field-underline {
     display: none;
 }
 
