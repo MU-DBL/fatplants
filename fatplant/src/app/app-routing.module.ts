@@ -44,6 +44,7 @@ import { DataComponent } from './components/pages/Data_Page/data/data.component'
 import {DatasetsNewComponent} from './components/pages/datapages/datasets-new/datasets-new.component';
 import { ContactUsComponent } from './components/pages/contact/ContactUs.component';
 import { GoCytoscapeComponent } from './components/pages/networks/go-cytoscape/go-cytoscape.component';
+import { GoCytoscapeNetworkComponent } from './components/go-cytoscape-network/go-cytoscape-network.component';
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 // {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -61,7 +62,7 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'camelina', component: CameliaComponent},
 {path: 'fatty_acid', component: FattyacidComponent},
 {path: 'protein-network', component: GraphComponent},
-{path: 'go-network', component: GoNetworkComponent},
+//{path: 'go-network', component: GoNetworkComponent},
 {path: 'one_click', component: DataAnalysisComponent},
 {path: 'one_click/:uniprot_id/:cfg', component: DataAnalysisComponent},
 {path: 'blast', component: BlastComponent},
@@ -85,13 +86,14 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'blast-internal', component:BlastInternalComponent},
 {path: 'home', component:HomeComponent},
 //{path: '**', redirectTo: '/home'}],
-{path: 'go-network-page', component:NetworkComponent},
+//{path: 'go-network-page', component:NetworkComponent},
 {path: 'blast-page', component:BlastPageComponent},
 {path: 'glmol-page', component:GlmolStructurePageComponent}, 
 {path: 'pathway-viewer-page', component:PathwayViewerPageComponent}, 
 {path: 'details/:database_name/:uniprot_id',component:ProteinDetailsNewComponent},
 {path: 'contact', component: ContactUsComponent },
-{path: 'go-cyto-network', component:GoCytoscapeComponent},
+{path: 'go-network', component:GoCytoscapeNetworkComponent},
+{path: 'go-network-page', component: GoCytoscapeComponent},
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({

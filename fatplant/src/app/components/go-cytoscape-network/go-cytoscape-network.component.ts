@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
+  FormGroup,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
@@ -60,7 +61,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   showProteinInfo = false;
   isPtmViewer = true;
   showNodeInfo = false;
-  searchForm;
+  searchForm: FormGroup;
   filterForm;
   filters = [];
   styleForm;
@@ -92,10 +93,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
 
 
     this.differ = differs.find({}).create();
-    // this.kc.getData();
-    console.log("Cytoscape constructor called");
-    // this.sayeeraField= this.kc.sayeeraField;
-    console.log('cytoData in Constructor',this.cytoData);
+    
   }
 
   ngOnInit(): void {
@@ -104,14 +102,9 @@ export class GoCytoscapeNetworkComponent implements OnInit {
     this.buildStyleForm();
     this.addDefaultStlyes();
     this.buildSearchForm();
-    cytoscape.use(cola);
+    
     
   }
-
-  ngOnChanges(): void {
-    this.populateGraph();
-  }
-
   
   changeLayout(layout) {
 
@@ -200,27 +193,6 @@ export class GoCytoscapeNetworkComponent implements OnInit {
         delete newDetails[key]
       }
 
-      if(newDetails["Network Type"] == "kic"){
-        
-        if(newDetails.Family){
-          delete newDetails["In Vitro Phosphosite"];
-          delete newDetails["In Vivo Phosphosite"];
-          delete newDetails["Id"];
-          delete newDetails["Width"];
-          delete newDetails["Network Type"];
-        }else{
-          delete newDetails["Family"];
-          delete newDetails["Substrate Count"];
-          delete newDetails["Id"];
-          delete newDetails["Width"];
-          delete newDetails["Network Type"];
-        }
-      }else if(newDetails["Network Type"] == "ppi"){
-        delete newDetails["Network Type"];
-        delete newDetails["Id"];
-
-      }
-    
       this.showDetails(newDetails);
 
     });
@@ -244,21 +216,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
         newDetails[key_new] = newDetails[key];
         delete newDetails[key];
       }
-      if(newDetails["Network Type"] == "kic"){
-        delete newDetails["Avg No Peptide"];
-        delete newDetails["Avg No Phosphopeptide"];
-        delete newDetails["Network Type"];
-        delete newDetails["Width"];
-        delete newDetails["Id"];
-        delete newDetails["Source"];
-        delete newDetails["Target"];
-      }else if(newDetails["Network Type"] == "ppi"){
-        delete newDetails["Network Type"];
-        delete newDetails["Source"];
-        delete newDetails["Id"];
-        delete newDetails["Target"];
-      }
-      console.log('line 247: ',newDetails);
+      
 
       this.showDetails(newDetails);
     });
@@ -283,12 +241,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   
   // 
   populateGraph() {
-    console.log('populateGraph CytoData',this.cytoData)
     if (this.cytoData != null) {
-      // Resize nodes for kic assay
-      console.log('entered populate Graph')
-      if (this.cytoData.elements.nodes[0].data.network_type == 'kic')
-        this.substrateRecount();
   
       if (this.cytoDataFull == null)
         this.cytoDataFull = JSON.parse(JSON.stringify(this.cytoData));
@@ -299,19 +252,24 @@ export class GoCytoscapeNetworkComponent implements OnInit {
         minZoom: 0.1,
         autoResize: true,
         layout:{
-          name: 'cose',
+          name: 'cola',
           nodeSpacing: 30,
-          //edgeLengthVal: 10,
+          
+          idealEdgeLength: 100,
+          nodeOverlap: 20,
+          refresh: 20,
           fit: true,
+          padding: 30,
+          randomize: false,
+          componentSpacing: 100,
+          nodeRepulsion: 400000,
+          edgeElasticity: 100,
+          nestingFactor: 5,
         }
         
       };
-      
-      console.log('cytoData',this.cytoData);
       this.graph = cytoscape({ ...this.cytoData, ...options, });
       
-
-      console.log("The graph is : ",this.graph);
       // this.graph
       //   .layout({
       //     name: 'cola',
@@ -321,7 +279,6 @@ export class GoCytoscapeNetworkComponent implements OnInit {
       //     fit: true,
       //   })
       //   .run();
-        console.log('graph layout :', this.graph)
   
       this.graphElements = this.graph.elements().clone();
   
@@ -361,13 +318,12 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   }
   setupEventListeners_mousehover() {
     this.clickedEdge_Data=[];
-    console.log("Reapplying mouse hover event listeners.");
-  this.graph.on('mouseover', 'node', (event) => {
-    let node = event.target;
-    console.log("Mouseover on node: ", node.id());
-    this.details=[]
-    this.clickedEdge_Data=[];
-    this.showNodeDetails(node);
+    this.graph.on('mouseover', 'node', (event) => {
+      let node = event.target;
+      console.log("Mouseover on node: ", node.id());
+      this.details=[]
+      this.clickedEdge_Data=[];
+      this.showNodeDetails(node);
   });
 
   this.graph.on('mouseout', 'node', () => {
@@ -423,7 +379,6 @@ export class GoCytoscapeNetworkComponent implements OnInit {
           detail: newDetails[keys[k]],
         });
       }
-      console.log('clicked edge elements:',this.clickedEdge_Data);
     });
   }
 
@@ -655,7 +610,7 @@ export class GoCytoscapeNetworkComponent implements OnInit {
       {
         selector: 'node',
         style: {
-          content: 'data(id)',
+          content: 'data(Gene)',
           'border-color': 'black',
           'border-opacity': 1,
           'border-width': '2px',
