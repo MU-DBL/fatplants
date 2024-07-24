@@ -109,6 +109,7 @@ import { DataComponent } from './components/pages/Data_Page/data/data.component'
 import { DatasetsNewComponent } from './components/pages/datapages/datasets-new/datasets-new.component';
 import { GoCytoscapeComponent } from './components/pages/networks/go-cytoscape/go-cytoscape.component';
 import { GoCytoscapeNetworkComponent } from './components/go-cytoscape-network/go-cytoscape-network.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [
@@ -175,7 +176,8 @@ import { GoCytoscapeNetworkComponent } from './components/go-cytoscape-network/g
     DataComponent,
     DatasetsNewComponent,
     GoCytoscapeComponent,
-    GoCytoscapeNetworkComponent
+    GoCytoscapeNetworkComponent,
+    CounterComponent
   ],
   entryComponents: [
     StructureViewerComponent,
