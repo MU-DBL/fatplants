@@ -21,7 +21,8 @@
         </mat-form-field>
         <button (click)='applySearchQuery()' class="search-button" matTooltip="Search">Search</button>
         </div>
-        <div id='table'  *ngIf="!loading">
+        <!--<div id='table'  *ngIf="!loading">-->
+        <div id='table'>
             <mat-table [dataSource]='currentDataSource' style="width:100%">            
             <ng-container matColumnDef="uniprot_id">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Uniprot Page </mat-header-cell>
@@ -192,7 +193,11 @@
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
-        </div>
-        <mat-progress-bar mode="indeterminate" *ngIf='loading'></mat-progress-bar>
+            <mat-paginator [pageSizeOptions]="[10, 20, 50]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div><!--
+        <mat-progress-bar mode="indeterminate" *ngIf='loading'></mat-progress-bar>-->
     </div>
 </mat-card>  
