@@ -15,7 +15,7 @@ import { Soybean } from 'src/app/interfaces/Soybean';
 })
 export class DataComponent implements OnInit {
   dataset: string = "";
-  loading: boolean = false;
+  loading: boolean = false;//to enable or disable the progress bar, which already be removed because confliction with the paginator. -Sam
   arabidopsisDataSource: MatTableDataSource<any>;
   camelinaDataSource: MatTableDataSource<any>;
   soybeanDataSource: MatTableDataSource<any>;
@@ -37,7 +37,7 @@ export class DataComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.dataset = params.get('dataset');
     });
-
+/*
     var localArabidopsisData: FatPlantDataSource = JSON.parse(localStorage.getItem('arabidopsis_data'));
     if (localArabidopsisData != null && (Date.now() - localArabidopsisData.retrievalDate <= globalRefreshTime)) {
       this.arabidopsisDataSource = new MatTableDataSource(localArabidopsisData.data);
@@ -91,7 +91,7 @@ export class DataComponent implements OnInit {
       this.loading = true;
       this.getFattyAcidData();
     }
-
+*/
   }
 
   get displayedColumns(): String[] {
@@ -162,22 +162,52 @@ export class DataComponent implements OnInit {
     this.router.navigate(["datasets/" + newDataset]);
     switch (newDataset) {
       case "arabidopsis":
-        this.arabidopsisDataSource.paginator = this.paginator;
+        this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "lmpd").subscribe((data: any[]) => {
+          this.arabidopsisDataSource = new MatTableDataSource(data);
+          this.arabidopsisDataSource.paginator = this.paginator;
+        }, error => {
+          this.arabidopsisDataSource = new MatTableDataSource([]);
+        });
         break;
       case "camelina":
-        this.camelinaDataSource.paginator = this.paginator;
+        this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "camelina").subscribe((data: any[]) => {
+          this.camelinaDataSource = new MatTableDataSource(data);
+          this.camelinaDataSource.paginator = this.paginator;
+        }, error => {
+          this.camelinaDataSource = new MatTableDataSource([]);
+        });
         break;
       case "soybean":
-        this.soybeanDataSource.paginator = this.paginator;
+        this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "soya").subscribe((data: any[]) => {
+          this.soybeanDataSource = new MatTableDataSource(data);
+          this.soybeanDataSource.paginator = this.paginator;
+        }, error => {
+          this.soybeanDataSource = new MatTableDataSource([]);
+        });
         break;
       case "cuphea":
-        this.cupheaDataSource.paginator = this.paginator;
+        this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "cuphea").subscribe((data: any[]) => {
+          this.cupheaDataSource = new MatTableDataSource(data);
+          this.cupheaDataSource.paginator = this.paginator;
+        }, error => {
+          this.cupheaDataSource = new MatTableDataSource([]);
+        });
         break;
       case "pennycress":
-        this.pennycressDataSource.paginator = this.paginator;
+        this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "pennycress").subscribe((data: any[]) => {
+          this.pennycressDataSource = new MatTableDataSource(data);
+          this.pennycressDataSource.paginator = this.paginator;
+        }, error => {
+          this.pennycressDataSource = new MatTableDataSource([]);
+        });
         break;
       case "fattyacid":
-        this.fattyAcidDataSource.paginator = this.paginator;
+        this.db.searchFattyAcid(encodeURIComponent(this.searchQuery)).subscribe((data: any[]) => {
+          this.fattyAcidDataSource = new MatTableDataSource(data);
+          this.fattyAcidDataSource.paginator = this.paginator;
+        }, error => {
+          this.fattyAcidDataSource = new MatTableDataSource([]);
+        });
         break;
     }
   }
@@ -436,7 +466,7 @@ export class DataComponent implements OnInit {
     this.showingSearch = true;
     if (this.dataset == "arabidopsis") {
       this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "lmpd").subscribe((data: any[]) => {
-        this.arabidopsisDataSource = new MatTableDataSource(data/*.slice(0, 50)*/);
+        this.arabidopsisDataSource = new MatTableDataSource(data);
         this.loading = false;
         this.currentDataSource.paginator = this.paginator;
       }, error => {
@@ -446,7 +476,7 @@ export class DataComponent implements OnInit {
     }
     else if (this.dataset == "camelina") {
       this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "camelina").subscribe((data: any[]) => {
-        this.camelinaDataSource = new MatTableDataSource(data/*.slice(0, 50)*/);
+        this.camelinaDataSource = new MatTableDataSource(data);
         this.loading = false;
         this.currentDataSource.paginator = this.paginator;
       }, error => {
@@ -456,7 +486,7 @@ export class DataComponent implements OnInit {
     }
     else if (this.dataset == "soybean") {
       this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "soya").subscribe((data: any[]) => {
-        this.soybeanDataSource = new MatTableDataSource(data/*.slice(0, 50)*/);
+        this.soybeanDataSource = new MatTableDataSource(data);
         this.loading = false;
         this.currentDataSource.paginator = this.paginator;
       }, error => {
@@ -466,7 +496,7 @@ export class DataComponent implements OnInit {
     }
     else if (this.dataset == "cuphea") {
       this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "cuphea").subscribe((data: any[]) => {
-        this.cupheaDataSource = new MatTableDataSource(data/*.slice(0, 50)*/);
+        this.cupheaDataSource = new MatTableDataSource(data);
         this.loading = false;
         this.currentDataSource.paginator = this.paginator;
       }, error => {
@@ -476,7 +506,7 @@ export class DataComponent implements OnInit {
     }
     else if (this.dataset == "pennycress") {
       this.db.searchSQLAPI(encodeURIComponent(this.searchQuery), "pennycress").subscribe((data: any[]) => {
-        this.pennycressDataSource = new MatTableDataSource(data/*.slice(0, 50)*/);
+        this.pennycressDataSource = new MatTableDataSource(data);
         console.log(this.pennycressDataSource);
         this.loading = false;
         this.currentDataSource.paginator = this.paginator;
