@@ -95,9 +95,7 @@ export class ExtendedPathwayViewerComponent implements OnInit {
     link: "/app/assets/pathwayImages/Oxylipin Metabolism 2.png",
     name: "Oxylipin Metabolism 2"
   },
-  
-  
-  ];
+];
 
   constructor(private httpClient: HttpClient, private renderer: Renderer2,) { 
     
@@ -111,7 +109,6 @@ export class ExtendedPathwayViewerComponent implements OnInit {
     this.img.onload = () => this.loadCoordinates();
     this.setupMousemove();
     this.setupClickEvent();
-
   }
   
 
@@ -123,7 +120,6 @@ export class ExtendedPathwayViewerComponent implements OnInit {
     this.selectedOption = newOption;
     this.img = new Image();
     this.img.src = this.selectedOption.link;
-    // console.log('calling load Coordinates');
     this.img.onload = () => this.loadCoordinates();
     this.setupMousemove();
     this.setupClickEvent();
@@ -137,32 +133,34 @@ export class ExtendedPathwayViewerComponent implements OnInit {
   loadCoordinates() {
     // console.log('loading Coordinates')
     this.loading = false;
-    this.httpClient.get(this.selectedOption.data).subscribe((data:any) => {
-      // console.log('loaded Data:', data);
-      let baseGraph = data.shapes;
-      this.selectedGraph = [];
-      baseGraph.forEach(box => {
-
-        let posX = box.points[0][0];
-        let posY = box.points[0][1];
-        let width = box.points[1][0] - posX;
-        let height = box.points[1][1] - posY;
-
-        this.selectedGraph.push({
-          label: box.label,
-          posX: posX,
-          posY: posY,
-          width: width,
-          height: height
-        })
-      });
-      // console.log('selected graph',this.selectedGraph);
-      this.drawMap();
-    });
-    
-  }
-
+    this.selectedGraph = [];
+    console.log('load Data:', this.selectedOption.data);
+    if(this.selectedOption.data){
+      this.httpClient.get(this.selectedOption.data).subscribe((data:any) => {
+        // console.log('loaded Data:', data);
+        let baseGraph = data.shapes;
+       
+        baseGraph.forEach(box => {
+          let posX = box.points[0][0];
+          let posY = box.points[0][1];
+          let width = box.points[1][0] - posX;
+          let height = box.points[1][1] - posY;
   
+          this.selectedGraph.push({
+            label: box.label,
+            posX: posX,
+            posY: posY,
+            width: width,
+            height: height
+          })
+        });
+        // console.log('selected graph',this.selectedGraph);
+        this.drawMap();
+      });
+    }else{
+      this.drawMap();
+    }
+  }
 
   drawMap() {
     this.ctx = this.canvas.nativeElement.getContext('2d');
@@ -171,9 +169,9 @@ export class ExtendedPathwayViewerComponent implements OnInit {
     createImageBitmap(this.img,0,0,this.img.width,this.img.height).then(bm => {
       this.bm = bm;
       this.ctx.drawImage(this.bm,0,0);
-
+      // console.log('selectedGraph: ',this.selectedGraph);
       this.selectedGraph.forEach(box => {
-
+        // console.log('enter loop');
         // adjust them for the rescaled canvas (only for pointer)
         var adjRectWidth = (box.width / this.img.width) * this.canvas.nativeElement.scrollWidth;
         var adjRectHeight = (box.height / this.img.height) * this.canvas.nativeElement.scrollHeight;
@@ -187,7 +185,6 @@ export class ExtendedPathwayViewerComponent implements OnInit {
 
         newPicPath.rect(box.posX, box.posY, box.width, box.height);
         newPath.rect(pointX, pointY, adjRectWidth, adjRectHeight);
-
         this.clickRects.push(
           { 
             path: newPath,
@@ -201,10 +198,8 @@ export class ExtendedPathwayViewerComponent implements OnInit {
             }
           });
       });
-      console.log('clickReacts',this.clickRects);
+      // console.log('clickReacts',this.clickRects);
       // now let's define the hover behavior for each of them
-      
-
     });  
     this.setupMousemove();
     this.setupClickEvent();  

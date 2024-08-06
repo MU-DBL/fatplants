@@ -75,7 +75,7 @@ export class GlmolStructurePageComponent implements OnInit {
 
       if (data && data.length > 0) {
         if (data.length > 1) {
-          this.relatedGeneNames = data.slice(0, 10);;
+          this.relatedGeneNames = data.slice(0, 10);
         }
 
         this.noRes = false;
@@ -97,11 +97,13 @@ export class GlmolStructurePageComponent implements OnInit {
       this.loading = false;
     });
   }
+  
   SafeUrl(input: string) {
     const tmpurl = '/static/viewer.html?' + input;
     console.log(tmpurl);
     return this.sanitizer.bypassSecurityTrustResourceUrl(tmpurl);
   }
+
   SearchPDB(pdb: string) {
     this.http.get('/static/uniprot_pdb_list.txt', {responseType: 'text'}).subscribe(data => {
       for (const line of data.split(/[\r\n]+/)) {
