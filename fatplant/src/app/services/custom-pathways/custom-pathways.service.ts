@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireStorageReference } from 'angularfire2/storage';
 import { forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +13,9 @@ export class CustomPathwaysService {
 
   ref: AngularFireStorageReference;
 
-  getAllPathways() {
-    //return this.afs.collection("CustomizedPathways").snapshotChanges();
-    return this.http.get(environment.BASE_API_URL+"customized_pathways/");
-  }
-
   //obsolete
   getPathwayByTitle(title:string) {
     return this.afs.collection("CustomizedPathways").doc(title).snapshotChanges();
-  }
-
-  //This function will get pathway area from sql, but not image path.--Sam
-  getPathwayAreaById(pathway_id:string) {
-    return this.http.get(environment.BASE_API_URL+"pathway_areas/?pathway_id="+pathway_id);
-  }
-
-  getPathwayImgById(pathway_id:string) {
-    return this.http.get(environment.BASE_API_URL+"pathway_img_path/?pathway_id="+pathway_id);
   }
 
   addPathway(pathway) {

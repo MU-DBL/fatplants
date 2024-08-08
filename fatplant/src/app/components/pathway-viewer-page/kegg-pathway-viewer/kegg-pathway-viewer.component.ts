@@ -3,10 +3,11 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser
 import {HttpClient} from '@angular/common/http';
 import { Lmpd_Arapidopsis } from 'src/app/interfaces/lmpd_Arapidopsis';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from 'angularfire2/firestore';
+// import { AngularFirestore } from 'angularfire2/firestore';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { environment } from 'src/environments/environment';
+import { APIService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-kegg-pathway-viewer',
@@ -67,8 +68,7 @@ export class KeggPathwayViewerComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer, 
     private http: HttpClient, 
-    private afs: AngularFirestore,
-    private db: FirestoreAccessService) {
+    private db: APIService) {
     this.pathwaydb = [];
 
     this.http.get('/static/reactome.csv', {responseType: 'text'}).subscribe(data => {

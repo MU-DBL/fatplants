@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 // import { TabService } from '../../../../tab.service';
 import {AngularFirestore,AngularFirestoreCollection} from 'angularfire2/firestore'
-import { FirestoreConnectionService } from '../../../../services/firestore-connection.service';
+import { FirestoreConnectionService } from '../../../../services/firestore-access/firestore-connection.service';
 import { ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {Observable} from 'rxjs';

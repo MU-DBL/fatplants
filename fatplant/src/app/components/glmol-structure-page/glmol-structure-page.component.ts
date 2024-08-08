@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {Observable} from "rxjs";
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {HttpClient} from '@angular/common/http';
 import { Lmpd_Arapidopsis } from 'src/app/interfaces/lmpd_Arapidopsis';
-import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
+import { APIService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-glmol-structure-page',
@@ -54,9 +53,9 @@ export class GlmolStructurePageComponent implements OnInit {
   selectedSpecies = this.species[0].value;
   
   constructor(private sanitizer: DomSanitizer, 
-    private afs: AngularFirestore, 
+    // private afs: AngularFirestore, 
     private http: HttpClient,
-    private db: FirestoreAccessService) { }
+    private apiService: APIService) { }
 
   ngOnInit() {
   }
@@ -71,7 +70,7 @@ export class GlmolStructurePageComponent implements OnInit {
     this.relatedGeneNames = [];
 
     
-    this.db.searchSQLAPI(this.glmolID, this.selectedSpecies).subscribe((data: any[]) => {
+    this.apiService.searchSQLAPI(this.glmolID, this.selectedSpecies).subscribe((data: any[]) => {
 
       if (data && data.length > 0) {
         if (data.length > 1) {

@@ -96,69 +96,69 @@ export class CustomPathwayComponent implements OnInit {
       });
     });*/
 
-    this.activatedRoute.queryParams.subscribe(params => {
-      var graphId = params['id'];
-      console.log("The params are : ",params);
-      this.pathwayService.getPathwayAreaById(graphId).subscribe((graph:any[]) => {
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   var graphId = params['id'];
+    //   console.log("The params are : ",params);
+    //   this.pathwayService.getPathwayAreaById(graphId).subscribe((graph:any[]) => {
        
-        //let graphAny: any = graph.payload.data();
+    //     //let graphAny: any = graph.payload.data();
         
         
-        if (graph == undefined) {
-          this.selectedGraph = null;
-        }
-        else {
-          console.log("The graph payload data is : ",graph);
-          this.selectedGraph = graph;
-          console.log("the selected graph if the graphAny is not null ",this.selectedGraph);
-          // we'll use this to quickly eliminate any duplicates
-          var graphHash = {};
-          this.graphTable = [];
+    //     if (graph == undefined) {
+    //       this.selectedGraph = null;
+    //     }
+    //     else {
+    //       console.log("The graph payload data is : ",graph);
+    //       this.selectedGraph = graph;
+    //       console.log("the selected graph if the graphAny is not null ",this.selectedGraph);
+    //       // we'll use this to quickly eliminate any duplicates
+    //       var graphHash = {};
+    //       this.graphTable = [];
 
-          // set the image source
-          //this.img.src = this.selectedGraph.imgPath;
-          //console.log("the selected path is : ",this.selectedGraph);
-          this.pathwayService.getPathwayImgById(graphId).subscribe((data:any[]) => {
-            if (data && data.length > 0) {
-              this.img.src = data[0].img_path;
-            }
-          });
+    //       // set the image source
+    //       //this.img.src = this.selectedGraph.imgPath;
+    //       //console.log("the selected path is : ",this.selectedGraph);
+    //       this.pathwayService.getPathwayImgById(graphId).subscribe((data:any[]) => {
+    //         if (data && data.length > 0) {
+    //           this.img.src = data[0].img_path;
+    //         }
+    //       });
 
-          this.selectedGraph.forEach((graphEntry) => {
-            // check the dictionary, if its not there, then
-            // we need to grab this for the table
-            if (graphHash[graphEntry.title] != 1) {
-              // add it to the dictionary
-              graphHash[graphEntry.title] = 1;
+    //       this.selectedGraph.forEach((graphEntry) => {
+    //         // check the dictionary, if its not there, then
+    //         // we need to grab this for the table
+    //         if (graphHash[graphEntry.title] != 1) {
+    //           // add it to the dictionary
+    //           graphHash[graphEntry.title] = 1;
 
-              let linkSeg = graphEntry.fp_link.split('/');
-              if (linkSeg[linkSeg.length - 1] != 'undefined') {
-                this.graphTable.push({
-                  title: graphEntry.title,
-                  fpLink: graphEntry.fp_link,
-                  uniProtLink: graphEntry.uniprot_link
-                });
-              } 
-            }
-          });
-          this.img.onload = () => this.drawMap();
-          this.pathwayService.getGeneInfoByProtId(this.graphTable).subscribe(vals => {
-            vals.forEach((doc, index) => {
-                if (doc.docs[0] != null) {
-                    this.graphTable[index].geneName = doc.docs[0].data().gene_name,
-                    this.graphTable[index].dataSet = doc.docs[0].data().dataset,
-                    this.graphTable[index].modified = doc.docs[0].data().modified
-                }
-                else {
-                    this.graphTable[index].geneName = "N/A",
-                    this.graphTable[index].dataSet = "N/A",
-                    this.graphTable[index].modified = "N/A"
-                }
-            });
-          });
-        }
-      });
-    });
+    //           let linkSeg = graphEntry.fp_link.split('/');
+    //           if (linkSeg[linkSeg.length - 1] != 'undefined') {
+    //             this.graphTable.push({
+    //               title: graphEntry.title,
+    //               fpLink: graphEntry.fp_link,
+    //               uniProtLink: graphEntry.uniprot_link
+    //             });
+    //           } 
+    //         }
+    //       });
+    //       this.img.onload = () => this.drawMap();
+    //       this.pathwayService.getGeneInfoByProtId(this.graphTable).subscribe(vals => {
+    //         vals.forEach((doc, index) => {
+    //             if (doc.docs[0] != null) {
+    //                 this.graphTable[index].geneName = doc.docs[0].data().gene_name,
+    //                 this.graphTable[index].dataSet = doc.docs[0].data().dataset,
+    //                 this.graphTable[index].modified = doc.docs[0].data().modified
+    //             }
+    //             else {
+    //                 this.graphTable[index].geneName = "N/A",
+    //                 this.graphTable[index].dataSet = "N/A",
+    //                 this.graphTable[index].modified = "N/A"
+    //             }
+    //         });
+    //       });
+    //     }
+    //   });
+    // });
   }
 
   // this function sets up the behavior for the canvas once

@@ -1,22 +1,18 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {ActivatedRoute} from "@angular/router";
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {HttpClient} from "@angular/common/http";
 import {Location} from '@angular/common';
-import {Observable} from "rxjs";
-import {DataService} from "../../../../services/data/data.service";
+import {DataService} from "../../../../services/blast_data/data.service";
 import {G2SEntry} from "../../../../interfaces/G2SEntry";
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStep } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { StructureViewerComponent } from '../structure-viewer/structure-viewer.component';
+import { StructureViewerComponent } from '../../../commons/structure-viewer/structure-viewer.component';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
-import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { environment } from 'src/environments/environment';
-
+import { APIService } from 'src/app/services/api/api.service';
+import { toNumbers } from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 @Component({
   selector: 'app-showresults',
@@ -86,7 +82,7 @@ export class ShowresultsComponent implements OnInit {
     private route: ActivatedRoute, private http: HttpClient, 
     public dataService: DataService, private location: Location, 
     public dialog: MatDialog, public notificationService: NotificationService, 
-    private fsaccess : FirestoreAccessService, private cdr: ChangeDetectorRef) {
+    private apiService : APIService, private cdr: ChangeDetectorRef) {
     }
 
   ngOnInit() {
@@ -129,7 +125,7 @@ export class ShowresultsComponent implements OnInit {
     this.homologs = null;
     this.dataService.loading = true;
     console.log(this.baseDetails.fp_id)
-    this.fsaccess.getExtendedDetails(this.baseDetails.fp_id, this.speciesName).subscribe(res => {
+    this.apiService.getExtendedDetails(this.baseDetails.fp_id, this.speciesName).subscribe(res => {
       this.SelectConfig();
       if (res && res[0]){
         this.extendedData = res[0];
@@ -141,33 +137,27 @@ export class ShowresultsComponent implements OnInit {
       }
     });
 
-    if (this.speciesName == "lmpd") {
-      this.fsaccess.getMapForArabidopsis(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
-        if (data && data.length > 0) {
-          this.homologs = data[0];
-        }
-      });
-    }
-    else if (this.speciesName == "camelina") {
-      this.fsaccess.getMapForCamelina(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
-        if (data && data.length > 0) {
-          this.homologs = data[0];
-        }
-      });
-    }
-    else if (this.speciesName == "soya") {
-      this.fsaccess.getMapForSoybean(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
-        if (data && data.length > 0) {
-          this.homologs = data[0];
-        }
-      });
-    }
-
-    // this.fsaccess.getHomoLogs(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
-    //   if (data && data.length > 0) {
-    //     this.homologs = data[0];
-    //   }
-    // });
+    // if (this.speciesName == "lmpd") {
+    //   this.apiService.getMapForArabidopsis(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
+    //     if (data && data.length > 0) {
+    //       this.homologs = data[0];
+    //     }
+    //   });
+    // }
+    // else if (this.speciesName == "camelina") {
+    //   this.apiService.getMapForCamelina(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
+    //     if (data && data.length > 0) {
+    //       this.homologs = data[0];
+    //     }
+    //   });
+    // }
+    // else if (this.speciesName == "soya") {
+    //   this.fsaccess.getMapForSoybean(this.baseDetails.uniprot_id).subscribe((data:any[]) => {
+    //     if (data && data.length > 0) {
+    //       this.homologs = data[0];
+    //     }
+    //   });
+    // }
   }
   
 
@@ -244,12 +234,12 @@ export class ShowresultsComponent implements OnInit {
           // this may acutally be fine and not need changes
           //===============================================================================
 
-          this.dataService.updateBlastRes(this.proteinDatabase['database'], this.uniprot_id).subscribe(res=>{
-            this.SplitRes(res);
-            this.showProgress = false;
-            clearInterval(this.intervalId);
+          // this.apiService.updateBlastRes(this.proteinDatabase['database'], this.uniprot_id).subscribe(res=>{
+          //   this.SplitRes(res);
+          //   this.showProgress = false;
+          //   clearInterval(this.intervalId);
 
-          });
+          // });
         }
 
         break;
@@ -257,7 +247,7 @@ export class ShowresultsComponent implements OnInit {
         this.pathwayList = [];
         this.noimg = false;
         this.pathwayLoading = true;
-        this.dataService.getPathwaysByUniProt(this.speciesName, this.extendedData.uniprot_id).subscribe((data:any) => {
+        this.apiService.getPathwaysByUniProt(this.speciesName, this.extendedData.uniprot_id).subscribe((data:any) => {
           if (data && data.pathway_ids && data.pathway_ids.length > 0) {
         
             data.pathway_ids.forEach(id => {

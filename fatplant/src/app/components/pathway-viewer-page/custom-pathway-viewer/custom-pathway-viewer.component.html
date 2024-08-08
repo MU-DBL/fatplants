@@ -32,7 +32,7 @@
             </div>
         </form>
         <p class="error-text">{{ error }}</p>
-        <button class="submit" mat-raised-button color="primary" (click)="submitFiles()" [disabled]="!addPathwayForm.valid || loading">Submit</button>
+        <!-- <button class="submit" mat-raised-button color="primary" (click)="submitFiles()" [disabled]="!addPathwayForm.valid || loading">Submit</button> -->
     </mat-expansion-panel>
     
     <mat-table [dataSource]='dataSource' id='table' *ngIf="!loading">

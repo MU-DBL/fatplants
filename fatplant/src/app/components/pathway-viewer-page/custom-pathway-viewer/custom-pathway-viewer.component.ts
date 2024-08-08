@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomPathwaysService } from '../../../services/custom-pathways/custom-pathways.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
-import { geneDict } from '../../../components/pages/tools/custom-pathway-list/custom-pathway-list/gene_dictionary';
+import { APIService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-custom-pathway-viewer',
@@ -11,9 +9,8 @@ import { geneDict } from '../../../components/pages/tools/custom-pathway-list/cu
 })
 export class CustomPathwayViewerComponent implements OnInit {
   
-  constructor(private pathwayService: CustomPathwaysService,
-    private formBuilder: FormBuilder,
-    private authService: AuthService) { }
+  constructor(private apiService: APIService,
+    private formBuilder: FormBuilder) { }
 
   panelOpenState = false;
   dataSource = [];
@@ -27,87 +24,8 @@ export class CustomPathwayViewerComponent implements OnInit {
 
   user: any = null;
 
-  submitFiles() {
-    this.error = "";
-    this.loading = true;
-
-    this.pathwayService.uploadPathwayImage(this.imgFile, this.imgFile.name).then(res => {
-      res.ref.getDownloadURL().then(url => {
-        let fileReader = new FileReader();
-        let pathObject = {
-          areas: [],
-          imgPath: url,
-          title: this.addPathwayForm.get("title").value,
-          paper: this.addPathwayForm.get("paper").value
-        };
-
-        // setup reader function
-        fileReader.onload = () => {
-          var jsonObj = JSON.parse(fileReader.result as string);
-
-          if (Array.isArray(jsonObj)) {
-            for (var i = 1; i < jsonObj.length; i++) {
-              var coords = jsonObj[i].coordinates[0]  + ',' + jsonObj[i].coordinates[1] + ',' + jsonObj[i].coordinates[2] + ',' + jsonObj[i].coordinates[3];
-              var linkEnd = geneDict[jsonObj[i].gene_name.trim()];
-
-              // if we don't get a result, try uppercase
-              if (linkEnd == undefined) {
-                linkEnd = geneDict[jsonObj[i].gene_name.toUpperCase()];
-
-                if (linkEnd == undefined) // try adding a number if that doesnt work
-                  linkEnd = geneDict[jsonObj[i].gene_name.toUpperCase() + '1'];
-
-                if (linkEnd == undefined) // try adding a number if that doesnt work
-                  linkEnd = geneDict[jsonObj[i].gene_name.toUpperCase() + '2'];
-              }
-
-              var documentObject = {
-                shape: 'rect',
-                coords: coords,
-                uniProtLink: "https://www.uniprot.org/uniprot/" + linkEnd,
-                fpLink: "https://www.fatplants.net/protein/" + linkEnd,
-                title: jsonObj[i].gene_name
-              };
-
-              pathObject.areas.push(documentObject);
-            }
-          }
-          else {
-            throw("Could not parse the JSON file.");
-          }
-
-          // upload the parsed coordinates
-          this.pathwayService.uploadPathwayCoords(pathObject).then(res => {
-            this.loading = false;
-            this.error = "Successfully uploaded " + this.addPathwayForm.get("title").value;
-          })
-          .catch(err => {
-            // signal error and delete image
-            this.loading = false;
-            this.error = "There was a problem uploading the coordinate file. Please contact an administrator or try again later.";
-            res.ref.delete();
-          });
-        }
-
-        // start file processing then upload
-        fileReader.readAsText(this.coordFile);
-      })
-      // catch clause for image upload
-      .catch(err => {
-        // signal error
-        this.error = "There was a problem uploading the image. Make sure it is a valid image file or verify your connection.";
-        this.loading = false;
-      });
-    });
-
-    
-  }
-
   deleteButton(pathwayId, imgSrc) {
     this.loading = true;
-    this.pathwayService.deletePathway(pathwayId, imgSrc).then(() => {
-      this.loading = false;
-    })
   }
 
   onImageFileChange(event) {
@@ -121,19 +39,6 @@ export class CustomPathwayViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // verify that user is signed in
-    this.authService.checkUser().subscribe(res => {
-      if (res !== null) {
-        this.authService.findUser(res.email).subscribe(ret => {
-          this.user = ret.docs[0].data();
-          this.displayedColumns = ["title", "paper", "link", "actions"];
-        });
-      }
-      else {
-        this.user= null;
-      }
-    });
 
     // construct form validation
     this.addPathwayForm = this.formBuilder.group({
@@ -153,27 +58,8 @@ export class CustomPathwayViewerComponent implements OnInit {
       ]]
     });
 
-    // populate graph
-    /*
-    this.pathwayService.getAllPathways().subscribe(pathways => {
-      this.dataSource = [];
-      pathways.forEach(graph => {
-        let graphAny: any = graph.payload.doc.data();
-
-        this.dataSource.push({
-          title: graphAny.title,
-          paper: graphAny.paper,
-          link: '/custom-pathway?id=' + graph.payload.doc.id,
-          id: graph.payload.doc.id,
-          imgPath: graphAny.imgPath
-        });
-
-        this.loading = false;
-      });
-    });
-    */
    //code below will get datas from sql instead of firestore
-      this.pathwayService.getAllPathways().subscribe((pathways:any[]) => {
+      this.apiService.getAllPathways().subscribe((pathways:any[]) => {
         this.dataSource = [];
         //Object.keys(pathways).forEach(graph => {
         pathways.forEach(graph => {

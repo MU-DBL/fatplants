@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
+import { FirestoreConnectionService } from 'src/app/services/firestore-access/firestore-connection.service';
 import { FatPlantDataSource } from 'src/app/interfaces/FatPlantDataSource';
 import {globalRefreshTime} from '../../../../constants';
 

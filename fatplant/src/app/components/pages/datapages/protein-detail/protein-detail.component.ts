@@ -9,7 +9,7 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GptDialogComponent } from 'src/app/components/commons/gpt-dialog/gpt-dialog.component';
-import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
+import { APIService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-protein-detail',
@@ -23,7 +23,7 @@ export class ProteinDetailComponent implements OnInit {
               public notificationService: NotificationService, 
               private access: FirestoreAccessService,
               public dialog: MatDialog, 
-              private db: FirestoreConnectionService) { }
+              private db: APIService) { }
 
   translationObject;
   uniprotId;

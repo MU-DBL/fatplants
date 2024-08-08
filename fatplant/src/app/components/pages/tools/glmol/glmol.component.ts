@@ -5,6 +5,7 @@ import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firesto
 import {HttpClient} from '@angular/common/http';
 import { Lmpd_Arapidopsis } from 'src/app/interfaces/lmpd_Arapidopsis';
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
+import { APIService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-glmol',
@@ -56,7 +57,7 @@ export class GlmolComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, 
     private afs: AngularFirestore, 
     private http: HttpClient,
-    private db: FirestoreAccessService) { }
+    private db: APIService) { }
 
   ngOnInit() {
   }

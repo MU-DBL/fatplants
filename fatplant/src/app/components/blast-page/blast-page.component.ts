@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {AngularFirestore} from 'angularfire2/firestore';
 import {MatTableDataSource} from "@angular/material/table";
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
+import { APIService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-blast-page',
@@ -38,7 +37,7 @@ export class BlastPageComponent implements OnInit {
   blastError = false;
   alertVisible = false;
   blastForm: FormGroup;
-  constructor(private http: HttpClient, private router: Router, db: AngularFirestore, private fsaccess: FirestoreAccessService) {
+  constructor(private http: HttpClient, private router: Router, private apiService: APIService) {
     this.database = 'Arabidopsis';
     this.evalue = "1";
     this.matrix = "BLOSUM62";
@@ -55,14 +54,8 @@ export class BlastPageComponent implements OnInit {
     }
     this.loading = true;
     this.blastError = false;
-    // this.http.post('https://linux-shell-test.appspot.com/blastp', {fasta: this.proteinSeq, database: this.database, matrix: this.matrix, evalue: this.evalue}, {responseType: 'text'}).subscribe((res: any) => {
-    // this.http.get('https://us-central1-fatplantsmu-eb07c.cloudfunctions.net/blastp?fasta=' + this.proteinSeq + '&gith=' + this.database + '&matrix=' + this.matrix + '&evalue=' + this.evalue, {responseType: 'text'}).subscribe((res: any) => {
-    //   this.result = res;
-    //     this.SplitRes(res);
-       
-    // });
 
-    this.fsaccess.getblast(this.database.toLowerCase(), this.proteinSeq, "-matrix "+ this.matrix +" -evalue " + this.evalue).subscribe((res: any) => {
+    this.apiService.getblast(this.database.toLowerCase(), this.proteinSeq, "-matrix "+ this.matrix +" -evalue " + this.evalue).subscribe((res: any) => {
       console.log(this.database.toLowerCase())
       this.SplitRes(res);
       this.loading = false;

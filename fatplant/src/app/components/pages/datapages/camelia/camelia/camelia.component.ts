@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 
 
-import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
+import { FirestoreConnectionService } from 'src/app/services/firestore-access/firestore-connection.service';
 import { FatPlantDataSource } from 'src/app/interfaces/FatPlantDataSource';
 import {globalRefreshTime} from '../../../../../constants';
 

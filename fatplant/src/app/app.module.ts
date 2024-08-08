@@ -5,8 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { TableComponent } from './table/table.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { DataAnalysisComponent } from './components/pages/onestopsearch/data-analysis/data-analysis.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -34,31 +32,14 @@ import {NgCytoComponent} from './components/pages/networks/ng-cyto/ng-cyto.compo
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider'; 
 
-// import { CytodemoComponent } from './cytodemo/cytodemo.component';
-// import { CytoscapeModule } from 'ngx-cytoscape';
-// import { GraphComponent } from './go-network/protein-network/protein-network.component';
-
-//Firestore modules
-import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { GlmolComponent } from './components/pages/tools/glmol/glmol.component';
 import { ColorPathwayComponent } from './components/pages/tools/color-pathway/color-pathway.component';
-import { IntroductionComponent } from './components/pages/introductions/introduction/introduction.component';
-import { InvestigatorComponent } from './components/pages/introductions/investigator/investigator.component';
-import { InvestigatorNewComponent } from './components/pages/introductions/investigatorNew/investigatorNew.component';
-import { DetailviewComponent } from './detailview/detailview.component';
+import { TeamComponent } from './components/team-page/team.component';
 import { DropzoneDirective } from './directives/dropzone.directive';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatDividerModule} from "@angular/material/divider";
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import * as firebase from 'firebase';
 
-firebase.initializeApp(environment.firebase);
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { BlastComponent } from './components/pages/tools/blast/blast.component';
 import { LmpddetailviewComponent } from './components/pages/datapages/lmpddetailview/lmpddetailview.component';
@@ -75,10 +56,9 @@ import { SoybeanComponent } from './components/pages/datapages/soybean/soybean.c
 import { ShowresultsComponent } from './components/pages/onestopsearch/showresults/showresults.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {DataService} from 'src/app/services/data/data.service';
-import { LoginComponent } from './login/login.component';
+import {DataService} from 'src/app/services/blast_data/data.service';
 import { UnifiedDatapageComponent } from './components/pages/datapages/unified-datapage/unified-datapage.component';
-import { StructureViewerComponent } from './components/pages/onestopsearch/structure-viewer/structure-viewer.component';
+import { StructureViewerComponent } from './components/commons/structure-viewer/structure-viewer.component';
 import { CdkDetailRowDirective } from './directives/cdk-detail-row.directive';
 import { UserModalComponent } from './components/commons/user-modal/user-modal.component';
 import { AddNewsComponent } from './components/pages/add-news/add-news.component';
@@ -97,25 +77,22 @@ import { MenuComponent } from './components/homecomponents/menu/menu.component';
 import { FooterComponent } from './components/homecomponents/footer/footer.component';
 import { HomeComponent } from './components/homecomponents/home/home.component';
 import { SearchComponent } from './components/homecomponents/search/search.component';
-import { ProteinDetailsNewComponent } from './components/pages/datapages/protein-details-new/protein-details-new.component';
-import { NetworkComponent } from './components/go-network-page/network.component';
+import { ProteinDetailsPageComponent } from './components/protein-details-page/protein-details-page.component';
 import { GlmolStructurePageComponent } from './components/glmol-structure-page/glmol-structure-page.component';
 import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pathway-viewer-page.component';
 import { BlastPageComponent } from './components/blast-page/blast-page.component';
 import { CustomPathwayViewerComponent } from './components/pathway-viewer-page/custom-pathway-viewer/custom-pathway-viewer.component';
 import { KeggPathwayViewerComponent } from './components/pathway-viewer-page/kegg-pathway-viewer/kegg-pathway-viewer.component';
 import { ExtendedPathwayViewerComponent } from './components/pathway-viewer-page/extended-pathway-viewer/extended-pathway-viewer.component';
-import { DataComponent } from './components/pages/Data_Page/data/data.component';
-import { DatasetsNewComponent } from './components/pages/datapages/datasets-new/datasets-new.component';
-import { GoCytoscapeComponent } from './components/pages/networks/go-cytoscape/go-cytoscape.component';
-import { GoCytoscapeNetworkComponent } from './components/go-cytoscape-network/go-cytoscape-network.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { DataComponent } from './components/datasets-page/data.component';
+import { GoCytoscapeComponent } from './components/go-cytoscape-page/go-cytoscape.component';
+import { GoCytoscapeNetworkComponent } from './components/commons/go-cytoscape-network/go-cytoscape-network.component';
+import { CounterComponent } from './components/homecomponents/counter/counter.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    TableComponent,
     LmpdArapidopsisComponent,
     HomepageComponent,
     DatatableComponent,
@@ -124,11 +101,8 @@ import { CounterComponent } from './components/counter/counter.component';
     CameliaComponent,
     FattyacidComponent,
     GraphComponent,
-    IntroductionComponent,
-    InvestigatorComponent,
-    InvestigatorNewComponent,
+    TeamComponent,
     BlastComponent,
-    DetailviewComponent,
     NgCytoComponent,
     UploadFilesComponent,
     UploadTaskComponent,
@@ -140,7 +114,6 @@ import { CounterComponent } from './components/counter/counter.component';
     LmpddetailviewComponent,
     SoybeanComponent,
     DataAnalysisComponent,
-    LoginComponent,
     UnifiedDatapageComponent,
     DataAnalysisComponent,
     ShowresultsComponent,
@@ -165,8 +138,7 @@ import { CounterComponent } from './components/counter/counter.component';
     FooterComponent,
     HomeComponent,
     SearchComponent,
-    ProteinDetailsNewComponent,
-    NetworkComponent,
+    ProteinDetailsPageComponent,
     GlmolStructurePageComponent,
     PathwayViewerPageComponent,
     BlastPageComponent,
@@ -174,7 +146,6 @@ import { CounterComponent } from './components/counter/counter.component';
     KeggPathwayViewerComponent,
     ExtendedPathwayViewerComponent,
     DataComponent,
-    DatasetsNewComponent,
     GoCytoscapeComponent,
     GoCytoscapeNetworkComponent,
     CounterComponent
@@ -186,16 +157,11 @@ import { CounterComponent } from './components/counter/counter.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase, 'fatplant'),
-    AngularFirestoreModule,
-    AngularFireStorageModule,
     MatTableModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    AngularFireAuthGuardModule,
-    AngularFireAuthModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatListModule,

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
+import { FirestoreConnectionService } from 'src/app/services/firestore-access/firestore-connection.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FatPlantDataSource } from 'src/app/interfaces/FatPlantDataSource';
 import { globalRefreshTime } from 'src/app/constants';
 
 import { Soybean } from 'src/app/interfaces/Soybean';
 import { catchError } from 'rxjs/operators';
+import { APIService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-unified-datapage',
@@ -32,7 +33,7 @@ export class UnifiedDatapageComponent implements OnInit {
     value: "gene_names"
   };
 
-  constructor(private route: ActivatedRoute, private router: Router, private db: FirestoreConnectionService) {
+  constructor(private route: ActivatedRoute, private router: Router, private db: APIService) {
     this.route.paramMap.subscribe(params => {
       this.dataset = params.get('dataset');
     });
@@ -240,103 +241,6 @@ export class UnifiedDatapageComponent implements OnInit {
         this.refreshPennycressData();
       default:
         this.refreshFattyAcidData();
-    }
-  }
-
-  changePage(isNext: boolean) {
-    switch (this.dataset) {
-      case "arabidopsis":
-        this.changeArabidopsisPage(isNext);
-      case "camelina":
-        this.changeCamelinaPage(isNext);
-      case "soybean":
-        this.changeSoybeanPage(isNext);
-      case "cuphea":
-        this.changeCupheaPage(isNext);
-      case "pennycress":
-        this.refreshPennycressData();
-      default:
-        this.refreshFattyAcidData();
-    }
-  }
-
-  changeArabidopsisPage(next: boolean) {
-    if (next) {
-      this.loading = true;
-      this.currentPage++;
-      this.db.nextPage('New_Lmpd_Arabidopsis', this.arabidopsisDataSource.data[this.arabidopsisDataSource.data.length - 1], "uniprot_id")
-      .subscribe(data =>{
-        this.arabidopsisDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
-    } else if (!next && this.currentPage > 1) {
-      this.loading = true;
-      this.currentPage--;
-      this.db.prevPage('New_Lmpd_Arabidopsis', this.arabidopsisDataSource.data[0], "uniprot_id")
-      .subscribe(data =>{
-        this.arabidopsisDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
-    }
-  }
-
-  changeCamelinaPage(next: boolean) {
-    if (next) {
-      this.loading = true;
-      this.currentPage++;
-      this.db.nextPage('New_Camelina', this.camelinaDataSource.data[this.camelinaDataSource.data.length - 1], "uniprot_id")
-      .subscribe(data =>{
-        this.camelinaDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
-    } else if (!next && this.currentPage > 1) {
-      this.loading = true;
-      this.currentPage--;
-      this.db.prevPage('New_Camelina', this.camelinaDataSource.data[0], "uniprot_id")
-      .subscribe(data =>{
-        this.camelinaDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
-    }
-  }
-
-  changeSoybeanPage(next: boolean) {
-    if (next) {
-      this.loading = true;
-      this.currentPage++;
-      this.db.nextPage('New_Camelina', this.cupheaDataSource.data[this.cupheaDataSource.data.length - 1], "uniprot_id")
-      .subscribe(data =>{
-        this.cupheaDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
-    } else if (!next && this.currentPage > 1) {
-      this.loading = true;
-      this.currentPage--;
-      this.db.prevPage('New_Camelina', this.cupheaDataSource.data[0], "uniprot_id")
-      .subscribe(data =>{
-        this.cupheaDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
-    }
-  }
-
-  changeCupheaPage(next: boolean) {
-    if (next) {
-      this.loading = true;
-      this.currentPage++;
-      this.db.nextPage('New_Camelina', this.pennycressDataSource.data[this.pennycressDataSource.data.length - 1], "uniprot_id")
-      .subscribe(data =>{
-        this.pennycressDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
-    } else if (!next && this.currentPage > 1) {
-      this.loading = true;
-      this.currentPage--;
-      this.db.prevPage('New_Camelina', this.pennycressDataSource.data[0], "uniprot_id")
-      .subscribe(data =>{
-        this.pennycressDataSource = new MatTableDataSource(data);
-        this.loading = false;
-      });
     }
   }
 

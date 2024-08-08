@@ -71,35 +71,4 @@ export class FirestoreAccessService {
   getMapForCamelina(id: string) {
     return this.afs.collection("Species_Mapper", ref => ref.where("camelina", "==", id)).valueChanges();
   }
-
-  getBaseProteinFromUniProt(uniprot_id: string, species: string) {
-    return this.http.get(environment.BASE_API_URL+"uniprot/?species="+ species +"&uniprot=" + uniprot_id);
-  }
-
-  getBaseProteinFromTair(species: string, tair: string) {
-    return this.http.get(environment.BASE_API_URL+"tair/?species="+species+"&tair="+ tair);
-  }
-
-  getExtendedDetails(fp_id: string, species: string) {
-    return this.http.get(environment.BASE_API_URL+"details/?species="+species+"&id="+fp_id);
-  }
-
-  searchSQLAPI(query: string, species: string) {
-    return this.http.get(environment.BASE_API_URL+"get_species_records/?species="+ species +"&expression=" + query);
-  }
-
-  getHomoLogs(uniprot_id: string) {
-    return this.http.get(environment.BASE_API_URL+"homolog/?uniprot_id=" + uniprot_id);
-  }
-
-  getPathwaysByUniProt(species: string, uniprot_id: string) {
-    return this.http.get(environment.BASE_API_URL+"pathways/?species="+species+"&uniprot_id="+uniprot_id);
-  }
-
-  getblast(database: string, sequence:string, parameters: string){
-    return this.http.get(environment.BASE_API_URL+"blast/?database="+database+"&sequence="+sequence+"&parameters="+parameters);
-  }
-  getPSIBlast(database: string, sequence:string, parameters: string){
-    return this.http.get(environment.BASE_API_URL+"PSI_blast/?database="+database+"&sequence="+sequence+"&parameters="+parameters);
-  }
 }

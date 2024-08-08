@@ -12,11 +12,12 @@ import { startWith, map, filter } from 'rxjs/operators';
 import {Router, ActivatedRoute} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {FatPlantDataSource} from "../../../../interfaces/FatPlantDataSource";
-import { DataService } from 'src/app/services/data/data.service';
+import { DataService } from 'src/app/services/blast_data/data.service';
 import { ShowresultsComponent } from '../showresults/showresults.component';
 
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { error } from '@angular/compiler/src/util';
+import { APIService } from 'src/app/services/api/api.service';
 
 
 @Component({
@@ -71,7 +72,7 @@ export class DataAnalysisComponent implements OnInit {
 
   constructor(private http: HttpClient, private afs: AngularFirestore, private sanitizer: DomSanitizer, private viewportScroller: ViewportScroller, private router: Router,
      private route: ActivatedRoute, private dataService: DataService, private location: Location,
-     private fsaccess: FirestoreAccessService,
+     private apiService: APIService,
      private detRef: ChangeDetectorRef) {
 
   }
@@ -95,17 +96,17 @@ export class DataAnalysisComponent implements OnInit {
           let field = this.proteinDatabase['query'][this.proteinDatabase['tabs'][this.proteinDatabase['tabIndex']]];
           console.log("field is :",field);
           if (!this.blastSelected) {
-            this.fsaccess.getBaseProteinFromUniProt(this.query, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
+            this.apiService.getBaseProteinFromUniProt(this.query, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
               this.relatedGeneNames = data;
     
               this.validateResult(data[0]);
             });
           }
-          else this.fsaccess.get(this.proteinDatabase['collection'], field, this.uniprot).subscribe((res : any) => {
-            if (this.validateResult(res[0])) this.query = res[0].sequence;
+          // else this.apiService.get(this.proteinDatabase['collection'], field, this.uniprot).subscribe((res : any) => {
+          //   if (this.validateResult(res[0])) this.query = res[0].sequence;
             
   
-          });
+          // });
           setTimeout(() => {
             console.log('timeout');
           }, 3000);
@@ -136,9 +137,9 @@ export class DataAnalysisComponent implements OnInit {
     this.relatedGeneNames = [];
 
     if(this.blastSelected){
-      this.fsaccess.get(this.proteinDatabase['collection'], 'sequence', this.query.toUpperCase(), 1).subscribe(res => {
-        this.validateResult(res[0]);
-      });
+      // this.fsaccess.get(this.proteinDatabase['collection'], 'sequence', this.query.toUpperCase(), 1).subscribe(res => {
+      //   this.validateResult(res[0]);
+      // });
     }
     else{
 
@@ -146,7 +147,7 @@ export class DataAnalysisComponent implements OnInit {
 
       // FULL SEARCH
       if (field == "fullSearch") {
-        this.fsaccess.searchSQLAPI(this.query, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
+        this.apiService.searchSQLAPI(this.query, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
 
           if (data.length > 10)
             this.relatedGeneNames = data.slice(0, 10);
@@ -160,7 +161,7 @@ export class DataAnalysisComponent implements OnInit {
         });
       }
       else if (field == "uniprot_id") {
-        this.fsaccess.getBaseProteinFromUniProt(this.query, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
+        this.apiService.getBaseProteinFromUniProt(this.query, this.proteinDatabase["fullSearchSpecies"]).subscribe((data: any) => {
           this.relatedGeneNames = data;
 
           this.validateResult(data[0]);
@@ -170,7 +171,7 @@ export class DataAnalysisComponent implements OnInit {
         });
       }
       else {
-        this.fsaccess.getBaseProteinFromTair(this.proteinDatabase["fullSearchSpecies"], this.query).subscribe((data: any) => {
+        this.apiService.getBaseProteinFromTair(this.proteinDatabase["fullSearchSpecies"], this.query).subscribe((data: any) => {
           this.relatedGeneNames = data;
 
           this.validateResult(data[0]);
@@ -199,7 +200,7 @@ export class DataAnalysisComponent implements OnInit {
     else {
 
       if (!result.fp_id) {
-        this.fsaccess.getBaseProteinFromUniProt(result.uniprot_id,this.proteinDatabase['fullSearchSpecies']).subscribe((data:any[]) => {
+        this.apiService.getBaseProteinFromUniProt(result.uniprot_id,this.proteinDatabase['fullSearchSpecies']).subscribe((data:any[]) => {
           if (data && data.length > 0) {
             this.uniprot = data[0].uniprot_id;
             this.location.replaceState('one_click/' + this.uniprot + "/summary");

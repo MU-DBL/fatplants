@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../services/auth.service';
-import {FirestoreConnectionService} from '../services/firestore-connection.service';
+import {AuthService} from '../services/firestore-access/auth.service';
+import {FirestoreConnectionService} from '../services/firestore-access/firestore-connection.service';
 import {animate, style, transition, trigger} from '@angular/animations';
 declare var require: any;
 @Component({

@@ -7,6 +7,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { environment } from 'src/environments/environment';
+import { APIService } from 'src/app/services/api/api.service';
 @Component({
   selector: 'app-color-pathway',
   templateUrl: './color-pathway.component.html',
@@ -67,7 +68,7 @@ export class ColorPathwayComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, 
     private http: HttpClient, 
     private afs: AngularFirestore,
-    private db: FirestoreAccessService) {
+    private db: APIService) {
     this.pathwaydb = [];
 
     this.http.get('/static/reactome.csv', {responseType: 'text'}).subscribe(data => {

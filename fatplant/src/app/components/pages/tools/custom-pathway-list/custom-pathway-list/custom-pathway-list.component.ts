@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomPathwaysService } from '../../../../../services/custom-pathways/custom-pathways.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from '../../../../../services/auth.service';
 import { geneDict } from './gene_dictionary';
+import { APIService } from 'src/app/services/api/api.service';
+import { CustomPathwaysService }from '../../../../../services/custom-pathways/custom-pathways.service'
 
 @Component({
   selector: 'app-custom-pathway-list',
@@ -11,9 +11,9 @@ import { geneDict } from './gene_dictionary';
 })
 export class CustomPathwayListComponent implements OnInit {
 
-  constructor(private pathwayService: CustomPathwaysService,
-              private formBuilder: FormBuilder,
-              private authService: AuthService) { }
+  constructor(private apiService: APIService,
+              private pathwayService: CustomPathwaysService,
+              private formBuilder: FormBuilder) { }
 
   panelOpenState = false;
   dataSource = [];
@@ -123,17 +123,17 @@ export class CustomPathwayListComponent implements OnInit {
   ngOnInit(): void {
 
     // verify that user is signed in
-    this.authService.checkUser().subscribe(res => {
-      if (res !== null) {
-        this.authService.findUser(res.email).subscribe(ret => {
-          this.user = ret.docs[0].data();
-          this.displayedColumns = ["title", "paper", "link", "actions"];
-        });
-      }
-      else {
-        this.user= null;
-      }
-    });
+    // this.authService.checkUser().subscribe(res => {
+    //   if (res !== null) {
+    //     this.authService.findUser(res.email).subscribe(ret => {
+    //       this.user = ret.docs[0].data();
+    //       this.displayedColumns = ["title", "paper", "link", "actions"];
+    //     });
+    //   }
+    //   else {
+    //     this.user= null;
+    //   }
+    // });
 
     // construct form validation
     this.addPathwayForm = this.formBuilder.group({
@@ -154,7 +154,7 @@ export class CustomPathwayListComponent implements OnInit {
     });
 
     // populate graph
-    this.pathwayService.getAllPathways().subscribe((pathways:any[]) => {
+    this.apiService.getAllPathways().subscribe((pathways:any[]) => {
       this.dataSource = [];
       pathways.forEach(graph => {
         let graphAny: any = graph.payload.doc.data();

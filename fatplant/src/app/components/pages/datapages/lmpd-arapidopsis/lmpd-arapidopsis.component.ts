@@ -6,7 +6,7 @@ import { FatPlantDataSource } from 'src/app/interfaces/FatPlantDataSource';
 import {AngularFirestore,AngularFirestoreCollection} from 'angularfire2/firestore'
 import { ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-import { FirestoreConnectionService } from 'src/app/services/firestore-connection.service';
+import { FirestoreConnectionService } from 'src/app/services/firestore-access/firestore-connection.service';
 import {globalRefreshTime} from '../../../../constants';
 
 
