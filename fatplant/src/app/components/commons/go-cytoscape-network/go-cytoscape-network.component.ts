@@ -429,6 +429,14 @@ export class GoCytoscapeNetworkComponent implements OnInit {
   performSearch() {
     let searchType = this.searchForm.get('searchType').value;
     let searchvalue = this.searchForm.get('searchValue').value;
+    console.log(searchType)
+    console.log(searchvalue)
+
+    if(searchType==='' || searchvalue === ''){
+      window.alert('Search type and value are required.');
+      return;
+    }
+    
     let SearchedNodeId = this.getGraphData().filter(item => item[searchType]?.toLowerCase().includes(searchvalue.toLowerCase()));
     console.log('searchedNodeID',SearchedNodeId);
 
