@@ -8,7 +8,8 @@
 /*page's title - font style*/
 .page-title {
     font-size: 1.8vw;
-    font-weight: 600;
+    font-family: Roboto;
+    font-weight: 500;
     padding-left: 2%;
     margin-block-end: 0.5rem;
     margin-block-start: 0.5rem;
@@ -168,7 +169,7 @@ a:hover {
 
 .mat-header-cell {
   font-family: "PT Serif", serif;
-  font-weight:bold;
+  font-weight:normal;
   font-size: 15px;
   color: black;
   padding-right: 2%;
