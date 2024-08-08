@@ -6,7 +6,6 @@ import { GlmolComponent } from './components/pages/tools/glmol/glmol.component';
 import { ColorPathwayComponent } from './components/pages/tools/color-pathway/color-pathway.component';
 import { BlastComponent } from './components/pages/tools/blast/blast.component';
 
-import { IntroductionComponent } from './components/pages/introductions/introduction/introduction.component';
 import { TeamComponent } from './components/team-page/team.component';
 import { GraphComponent } from './components/pages/networks/protein-network/graph.component';
 import { LmpddetailviewComponent } from './components/pages/datapages/lmpddetailview/lmpddetailview.component';
