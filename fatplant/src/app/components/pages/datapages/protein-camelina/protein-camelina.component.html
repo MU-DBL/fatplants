@@ -47,22 +47,22 @@
         <mat-card class='protein-function-card'>
             <div class="function-header">
                 <h3 class='protein-subtitle'>Protein Function</h3>
-                <mat-form-field appearance="fill">
-                    <mat-label>GPT Query</mat-label>
-                    <mat-select [value]="selectedGPTQuery" (selectionChange)="selectGPTOption($event)">
-                      <mat-option [value]="splitGeneNames[0]">
-                        {{splitGeneNames[0]}}
-                      </mat-option>
-                      <mat-option *ngIf="splitGeneNames[1]" [value]="splitGeneNames[1]">
-                        {{splitGeneNames[1]}}
-                      </mat-option>
-                      <mat-option [value]="arapidopsisData.protein_name">
-                        {{arapidopsisData.protein_name}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                <button mat-raised-button color="primary" (click)="openGptDialog()">Ask ChatGPT</button>
             </div>
+            <mat-form-field appearance="fill">
+                <mat-label>GPT Query</mat-label>
+                <mat-select [value]="selectedGPTQuery" (selectionChange)="selectGPTOption($event)">
+                  <mat-option [value]="splitGeneNames[0]">
+                    {{splitGeneNames[0]}}
+                  </mat-option>
+                  <mat-option *ngIf="splitGeneNames[1]" [value]="splitGeneNames[1]">
+                    {{splitGeneNames[1]}}
+                  </mat-option>
+                  <mat-option [value]="arapidopsisData.protein_name">
+                    {{arapidopsisData.protein_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <button mat-raised-button color="primary" (click)="openGptDialog()">Ask ChatGPT</button>
             <p class='protein-function' *ngIf='proteinData.function.length > 0'>{{ proteinData.function.substr(10) }}</p>
             <p class='protein-function' *ngIf='proteinData.function.length === 0'>No function specified for this entry.</p>
             <b class='protein-subtitle'>Keywords:</b>
