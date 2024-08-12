@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+//import { AngularFirestore } from 'angularfire2/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { FunctionEntry } from 'src/app/interfaces/FunctionEntry';
 import { MatTableDataSource } from '@angular/material/table';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
+//import { FirestoreAccessService } from 'src/app/services/firestore-access/firestore-access.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GptDialogComponent } from 'src/app/components/commons/gpt-dialog/gpt-dialog.component';
 import { APIService } from 'src/app/services/api/api.service';
@@ -16,8 +16,8 @@ import { APIService } from 'src/app/services/api/api.service';
 })
 export class ProteinCamelinaComponent implements OnInit {
 
-  constructor(private access: FirestoreAccessService, 
-              private afs: AngularFirestore, 
+  constructor(//private access: FirestoreAccessService, 
+              //private afs: AngularFirestore, 
               private route: ActivatedRoute, 
               public notificationService: NotificationService,
               public dialog: MatDialog, 
