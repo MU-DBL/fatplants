@@ -21,6 +21,7 @@
         </mat-form-field>
         <button (click)='applySearchQuery()' class="search-button" matTooltip="Search">Search</button>
         </div>
+        <p style="font-size: 16px; padding-left: 3%; padding-right: 3%; margin-top: 1%;" *ngIf="dataset === 'cuphea' || dataset === 'pennycress'">This table includes the original PacBio (Iso-Seq) isoform sequencing raw data; the marker labeled in 'longest' indicates whether it is the longest isoform. For each sequence, it will be used to run BlastP against our FatPlants lipid protein database. The results will be filtered by a minimum of 70% identity and at least 100 amino acids.</p>
         <!--<div id='table'  *ngIf="!loading">-->
         <div id='table'>
             <mat-table [dataSource]='currentDataSource' style="width:100%">            
