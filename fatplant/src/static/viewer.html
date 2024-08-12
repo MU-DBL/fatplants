@@ -168,10 +168,10 @@ Please also make sure that WebGL is enabled in your browser.
 <!--<script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>-->
 <script src="js/Three49custom.js"></script>
 <script type="text/javascript" src="js/GLmol.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>-->
 <script type="text/javascript">
 
 
@@ -188,7 +188,17 @@ query = prequery;
 if (query == '') download('pdb:2POR');
 else download(query);
 
+//This function directly download and load pdb from "query", so firebase can be phased out by alphafold. -Sam
 function download(query) {
+   $('#loading').show();
+   $.get(query, function(ret) {
+      $("#glmol01_src").val(ret);
+      glmol01.loadMolecule();
+      $('#loading').hide();
+   });
+}
+
+function download_firebase(query) {
     var uri;
     var firebaseConfig = {
         apiKey: "AIzaSyAizp5ydRlb-yGlrkY51StA4fXAEJ1OBms",
