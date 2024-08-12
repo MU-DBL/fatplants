@@ -80,7 +80,8 @@ export class GlmolStructurePageComponent implements OnInit {
         this.noRes = false;
         this.selectedFPID = data[0].fp_id;
         this.selectedUniProt = data[0].uniprot_id;
-        this.SearchPDB(this.selectedUniProt);
+        //this.SearchPDB(this.selectedUniProt);
+        this.searchG2S(this.selectedUniProt);
         this.isGlmol = true; // show iframe
       }
       else {
@@ -96,6 +97,32 @@ export class GlmolStructurePageComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  //load pdb url from alphafold -Sam
+  searchG2S(pdb: string) {
+    this.loading = true;
+    this.http.get(`https://alphafold.ebi.ac.uk/api/prediction/${pdb}`).subscribe((result: any) => { 
+      if (result != undefined && result.length >= 1) {
+        let defaultPdb = this.SafeUrl(result[0].pdbUrl);
+        this.pdbs.push({name:pdb,url:defaultPdb});
+        this.nopdb = false;
+      }
+      this.nopdb = false;
+      this.loading = false;
+      this.hasSearched = true;
+      if (this.pdbs.length === 0) {
+        this.nopdb = true;
+      }
+      else {
+        setTimeout(() => {
+          this.scroll();
+        }, 100);
+      }
+    }, error => {
+      this.nopdb = true;
+      this.loading = false;
+    });
+  }
   
   SafeUrl(input: string) {
     const tmpurl = '/static/viewer.html?' + input;
@@ -103,6 +130,7 @@ export class GlmolStructurePageComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(tmpurl);
   }
 
+  //load firebase file name from local txt, obsolete
   SearchPDB(pdb: string) {
     this.http.get('/static/uniprot_pdb_list.txt', {responseType: 'text'}).subscribe(data => {
       for (const line of data.split(/[\r\n]+/)) {
@@ -150,7 +178,8 @@ export class GlmolStructurePageComponent implements OnInit {
     this.hasSearched = false;
     this.selectedFPID = fp_id;
     this.selectedUniProt = uniprot_id;
-    this.SearchPDB(this.selectedUniProt);
+    //this.SearchPDB(this.selectedUniProt);
+    this.searchG2S(this.selectedUniProt);
     this.isGlmol = true; // show iframe
   }
 }
