@@ -72,18 +72,18 @@ a {
   color: darkgray;
 }
 
-.header {
-  height: 3rem;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  font-family: 'Arial', sans-serif;
-  font-size: 35px;
-  background: #629B07 !important;
-  color: whitesmoke;
-  padding: 10px 15px;
-  margin: 0; 
-  box-sizing: border-box;
-  width: 100%;
+.page-title-bar {
+  background-color: #629B07;
+  color: rgb(255, 255, 255);
+  padding: 0.1rem;
 }
 
+/*page's title - font style*/
+.page-title {
+  font-family: Roboto;
+  font-size: 1.8vw;
+  font-weight: 500;
+  padding-left: 2%;
+  margin-block-end: 0.5rem;
+  margin-block-start: 0.5rem;
+}

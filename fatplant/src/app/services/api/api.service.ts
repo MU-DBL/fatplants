@@ -35,6 +35,10 @@ export class APIService {
     return this.http.get(environment.BASE_API_URL+"pathways/?species="+species+"&uniprot_id="+uniprot_id);
   }
 
+  getGeneInfoByProtId(Uniprotids) {
+   return null;
+  }
+
   searchSQLAPI(query: string, species: string) {
     return this.http.get(environment.BASE_API_URL+"get_species_records/?species="+ species +"&expression=" + query);
   }

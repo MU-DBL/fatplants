@@ -64,9 +64,9 @@ import { UserModalComponent } from './components/commons/user-modal/user-modal.c
 import { AddNewsComponent } from './components/pages/add-news/add-news.component';
 import { ProteinDetailComponent } from './components/pages/datapages/protein-detail/protein-detail.component';
 import { PathwayAralipsComponent } from './components/pages/tools/pathway-aralips/pathway-aralips.component';
-import { CustomPathwayComponent } from './components/pages/tools/custom-pathway/custom-pathway.component';
+import { CustomPathwayComponent } from './components/custom-pathway-page/custom-pathway.component';
 import { CustomPathwayListComponent } from './components/pages/tools/custom-pathway-list/custom-pathway-list/custom-pathway-list.component';
-import { CustomPathwayDialogComponent } from './components/pages/tools/custom-pathway-dialog/custom-pathway-dialog.component';
+import { CustomPathwayDialogComponent } from './components/commons/custom-pathway-dialog/custom-pathway-dialog.component';
 import { PathwayViewerComponent } from './components/pages/tools/pathway-viewer/pathway-viewer.component';
 import { ProteinSoybeanComponent } from './components/pages/datapages/protein-soybean/protein-soybean.component';
 import { ProteinCamelinaComponent } from './components/pages/datapages/protein-camelina/protein-camelina.component';

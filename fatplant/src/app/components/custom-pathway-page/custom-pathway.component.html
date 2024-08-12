@@ -1,6 +1,10 @@
+<div class="page-title-bar">
+    <p class="page-title"> Custom Pathway Viewer</p>
+</div>
+
 <mat-card class="row columns base" style="min-width: 1000px">
+
     <div class="columns small-10 small-centered textrow ">
-      <h1>Custom Pathway Viewer</h1>
       <p *ngIf="selectedGraph == null">A tool for viewing custom pathway figures.</p>
       <p *ngIf="selectedGraph != null">{{selectedGraph.paper}}</p>
     </div>
@@ -64,7 +68,7 @@
         </div>
     </div>
 
-    <mat-card class="graph-card">
+    <!-- <mat-card class="graph-card">
         <mat-card-title class="graphTitle" *ngIf="graphTable != null">Clickable Gene Components</mat-card-title>
         <mat-table [dataSource]='graphTable' id='table' *ngIf="graphTable != null">
             <ng-container matColumnDef="title">
@@ -113,7 +117,7 @@
     
         </mat-table>
       <mat-progress-bar mode="indeterminate" *ngIf='graphTable == null'></mat-progress-bar>
-    </mat-card>
+    </mat-card> -->
     <ng-template *ngIf="selectedGraph == null" >
         <mat-card>
             <mat-card-title>No Graph Found</mat-card-title>

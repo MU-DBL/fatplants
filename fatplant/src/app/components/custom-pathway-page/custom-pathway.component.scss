@@ -1,9 +1,19 @@
 @import "~src/variables.scss";
 
-div{
-  width:100%;
-  text-align: center;
-  /* background-color: #FCFF7B; */
+.page-title-bar {
+  background-color: #629B07;
+  color: rgb(255, 255, 255);
+  padding: 0.1rem;
+}
+
+/*page's title - font style*/
+.page-title {
+  font-family: Roboto;
+  font-size: 1.8vw;
+  font-weight: 500;
+  padding-left: 2%;
+  margin-block-end: 0.5rem;
+  margin-block-start: 0.5rem;
 }
 
 #side-graph {
