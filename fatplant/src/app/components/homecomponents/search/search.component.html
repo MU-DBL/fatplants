@@ -8,10 +8,21 @@
     </h5>
     <div class="row align-items-center">
       <form
-        class="input-group"
         [formGroup]="searchForm"
         (submit)="submitSearch()"
       >
+      
+      <div class="mb-3">
+        <input
+          type="search"
+          class="form-control rounded input-search-style"
+          aria-label="Search"
+          aria-describedby="search-addon"
+          formControlName="searchTerm"
+        />
+      </div>
+      
+      <div class="input-group justify-content-center">
         <div class="mb-3">
           <div class="input-group-prepend">
             <select
@@ -27,15 +38,16 @@
             </select>
           </div>
         </div>
-        <div class="mb-3">
-          <input
-            type="search"
-            class="form-control rounded input-search-style"
-            aria-label="Search"
-            aria-describedby="search-addon"
-            formControlName="searchTerm"
-          />
+        <div class="input-group-append">
+          <button
+            class="btn btn-secondary search-style"
+            type="submit"
+            id="button-addon2"
+          >
+            Search
+          </button>
         </div>
+        
 
         <!-- <div class="text-left">
           <button
@@ -46,15 +58,7 @@
             Advanced
           </button>
         </div> -->
-        <div class="input-group-append">
-          <button
-            class="btn btn-secondary search-style"
-            type="submit"
-            id="button-addon2"
-          >
-            Search
-          </button>
-        </div>
+      </div>
       </form>
     </div>
     <p class="title mb-4 justify-content-left">
