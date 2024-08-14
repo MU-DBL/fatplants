@@ -48,13 +48,11 @@ export class ProteinSoybeanComponent implements OnInit {
 
 //switched from Firestore to MySQL
   getUniprotData() {
-    //this.afs.collection('/New_Camelina', ref => ref.limit(1).where('uniprot_id', '==', this.uniprotId)).valueChanges().subscribe((res: any) => {
     this.apiService.getDetailByUniprotid("soya",encodeURIComponent(this.uniprotId)).subscribe((res: any) => {
       this.arapidopsisData = res[0];
       if (this.arapidopsisData !== undefined) {
         this.arapidopsisData.gene_names = this.arapidopsisData.gene_names.replaceAll(' ', ', ');
         
-        //this.access.getMapForCamelina(this.arapidopsisData.uniprot_id).subscribe(translation => {
         this.apiService.searchSpeciesMapper("glymine_max",encodeURIComponent(this.arapidopsisData.uniprot_id)).subscribe(translation => {
           this.translationObject = translation;
           this.proteinData = res[0];
