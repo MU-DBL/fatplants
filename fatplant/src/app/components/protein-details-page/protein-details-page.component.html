@@ -46,7 +46,7 @@
                             </div>
                             <div style="margin-left: 15px;" *ngIf="homologs && speciesName == 'soya'">
                                 <a *ngIf="homologs.arabidopsis" target="_blank"
-                                    [routerLink]="['/protein', homologs.arabidopsis]">Camelina</a> |
+                                    [routerLink]="['/protein', homologs.arabidopsis]">Arabidopsis</a> |
                                 <a *ngIf="homologs.camelina" target="_blank"
                                     [routerLink]="['/camelina_prot', homologs.camelina]">Camelina</a>
                             </div>
@@ -70,24 +70,25 @@
                                 <mat-card class='protein-function-card'>
                                     <div class="function-header">
                                         <h3 class='protein-subtitle'>Protein Function</h3>
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>GPT Query</mat-label>
-                                            <mat-select [value]="selectedGPTQuery"
-                                                (selectionChange)="selectGPTOption($event)">
-                                                <mat-option [value]="splitGeneNames[0]">
-                                                    {{splitGeneNames[0]}}
-                                                </mat-option>
-                                                <mat-option *ngIf="splitGeneNames[1]" [value]="splitGeneNames[1]">
-                                                    {{splitGeneNames[1]}}
-                                                </mat-option>
-                                                <mat-option [value]="extendedData.protein_name">
-                                                    {{extendedData.protein_name || extendedData.protein_names}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        <button mat-raised-button color="primary" (click)="openGptDialog()">Ask
-                                            ChatGPT</button>
+                                        
                                     </div>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>GPT Query</mat-label>
+                                        <mat-select [value]="selectedGPTQuery"
+                                            (selectionChange)="selectGPTOption($event)">
+                                            <mat-option [value]="splitGeneNames[0]">
+                                                {{splitGeneNames[0]}}
+                                            </mat-option>
+                                            <mat-option *ngIf="splitGeneNames[1]" [value]="splitGeneNames[1]">
+                                                {{splitGeneNames[1]}}
+                                            </mat-option>
+                                            <mat-option [value]="extendedData.protein_name">
+                                                {{extendedData.protein_name || extendedData.protein_names}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <button mat-raised-button color="primary" (click)="openGptDialog()">Ask
+                                        ChatGPT</button>
                                     <p class='protein-function' *ngIf='extendedData.function.length > 0'>{{
                                         extendedData.function.substr(10) }}</p>
                                     <p class='protein-function' *ngIf='extendedData.function.length === 0'>No
