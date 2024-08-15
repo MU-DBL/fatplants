@@ -6,13 +6,14 @@
       The comprehensive platform for plant fat related genes, proteins, and
       metabolism
     </h5>
-    <div class="row align-items-center">
+    <div class="row align-items-center" style="width: 100%;">
       <form
         class="input-group"
         [formGroup]="searchForm"
         (submit)="submitSearch()"
       >
-        <div class="mb-3">
+      <div class="input-group justify-content-center" style="width: 100%;">
+        <div class="mb-3" style="width: 130px;">
           <div class="input-group-prepend">
             <select
               class="custom-select input-drop-style rounded"
@@ -27,7 +28,7 @@
             </select>
           </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-3" style="width: 60%;">
           <input
             type="search"
             class="form-control rounded input-search-style"
@@ -46,7 +47,7 @@
             Advanced
           </button>
         </div> -->
-        <div class="input-group-append">
+        <div class="input-group-append" style="margin-left: 10px;">
           <button
             class="btn btn-secondary search-style"
             type="submit"
@@ -55,6 +56,7 @@
             Search
           </button>
         </div>
+      </div>
       </form>
     </div>
     <p class="title mb-4 justify-content-left">
