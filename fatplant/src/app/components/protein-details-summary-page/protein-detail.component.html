@@ -61,7 +61,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="openGptDialog()">Ask ChatGPT</button>
+            <button style="margin-left: 1%;" mat-raised-button color="primary" (click)="openGptDialog()">Ask ChatGPT</button>
             <p class='protein-function' *ngIf='proteinData.function.length > 0'>{{ proteinData.function.substr(10) }}</p>
             <p class='protein-function' *ngIf='proteinData.function.length === 0'>No function specified for this entry.</p>
             <b class='protein-subtitle'>Keywords:</b>

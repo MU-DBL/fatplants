@@ -70,9 +70,8 @@
                                 <mat-card class='protein-function-card'>
                                     <div class="function-header">
                                         <h3 class='protein-subtitle'>Protein Function</h3>
-                                        
                                     </div>
-                                    <mat-form-field appearance="fill">
+                                    <mat-form-field appearance="fill" style="margin-left: 1%;">
                                         <mat-label>GPT Query</mat-label>
                                         <mat-select [value]="selectedGPTQuery"
                                             (selectionChange)="selectGPTOption($event)">
@@ -87,7 +86,7 @@
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <button mat-raised-button color="primary" (click)="openGptDialog()">Ask
+                                    <button style="margin-left: 1%;" mat-raised-button color="primary" (click)="openGptDialog()">Ask
                                         ChatGPT</button>
                                     <p class='protein-function' *ngIf='extendedData.function.length > 0'>{{
                                         extendedData.function.substr(10) }}</p>
@@ -158,12 +157,12 @@
                 </mat-tab>
                 <mat-tab *ngIf="showAligmentsTab">
                     <ng-template mat-tab-label>
-                        Alignments
+                        3D Model
                     </ng-template>
                     <!-- 3d structure-->
                     <div *ngIf="is3DStructure && (this.speciesName)">
                         <div class="column middleright" id="mainContainer">
-                            <h2>Summary</h2>
+                            <h2>3D Model</h2>
                             <div class="row">
                                 <mat-progress-bar id="pdb-loading-bar" mode="indeterminate"
                                     *ngIf="g2sLoading"></mat-progress-bar>

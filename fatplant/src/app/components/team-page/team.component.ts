@@ -12,12 +12,17 @@ export class TeamComponent implements OnInit {
   ppl3 = "/app/assets/homepageAssets/DX.png";
   ppl4 = "/app/assets/homepageAssets/JT.png";
   ppl5 = "/app/assets/homepageAssets/PB.png";
-  pp16 = "/app/assets/homepageAssets/BW.jpg";
-  pp17 = "/app/assets/homepageAssets/MH.jpg";
-  pp18 = "/app/assets/homepageAssets/YL.JPG";
-  pp19 = "/app/assets/homepageAssets/EC.jpg";
-  pp20 = "/app/assets/homepageAssets/TJ.jpg";
-  ppl6 = "/app/assets/homepageAssets/CH.jpg";
+  ppl6 = "/app/assets/homepageAssets/BW.jpg";
+  ppl7 = "/app/assets/homepageAssets/MH.jpg";
+  ppl8 = "/app/assets/homepageAssets/YL.JPG";
+  ppl9 = "/app/assets/homepageAssets/EC.jpg";
+  ppl10 = "/app/assets/homepageAssets/TJ.jpg";
+  ppl11 = "/app/assets/homepageAssets/CH.jpg";
+  ppl12 = "/app/assets/homepageAssets/CYG.png";
+  ppl13 = "/app/assets/homepageAssets/GH.png";
+  ppl14 = "/app/assets/homepageAssets/BAS.png";
+  ppl15 = "/app/assets/homepageAssets/YFQ.png";
+
   constructor() { }
 
   ngOnInit() {

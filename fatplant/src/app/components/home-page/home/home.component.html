@@ -4,13 +4,19 @@
     <h1 class="my-3">Analysis Tools</h1>
     <div class="row justify-content-center">
       <div class="col-sm-3">
+        <div routerLink="/go-network-page" class="content-box-analysis bg-tools icon4">
+          <div class="card-overlay">
+            <h3>Arabidopsis GO Network</h3>
+            <p>A tool designed to display the Arabidopsis GO network.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
         <div routerLink="/blast-page" class="content-box-analysis bg-tools icon1">
           <div class="card-overlay">
             <h3>Blast</h3>
             <p>
-              Identifying similarities between biological sequences by comparing
-              nucleotide or protein sequences to databases, determining
-              statistical significance.
+              Finding similarity between biological sequences. 
             </p>
           </div>
         </div>
@@ -18,7 +24,7 @@
       <div class="col-sm-3">
         <div routerLink="/glmol-page" class="content-box-analysis bg-tools icon2">
           <div class="card-overlay">
-            <h3>3d Structure</h3>
+            <h3>3D Structure</h3>
             <p>Utilizing GLmol to display 3D molecular structures.</p>
           </div>
         </div>
@@ -28,20 +34,12 @@
           <div class="card-overlay">
             <h3>Pathway Viewer</h3>
             <p>
-              This tool facilitates the visualization of KEGG pathway figures
-              and allows for the viewing and uploading of custom pathways.
+              A tool to visualize KEGG pathways.
             </p>
           </div>
         </div>
       </div>
-      <div class="col-sm-3">
-        <div routerLink="/go-network-page" class="content-box-analysis bg-tools icon4">
-          <div class="card-overlay">
-            <h3>Go Enrichment Networks</h3>
-            <p>A tool specifically designed to showcase the Arabidopsis GO Enrichment Network.</p>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 
@@ -125,7 +123,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-6">
         <div class="content-box">
           <h3>Latest News</h3>
@@ -172,6 +170,6 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

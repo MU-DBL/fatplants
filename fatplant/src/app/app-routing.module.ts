@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
 import { DataAnalysisComponent } from './components/pages/onestopsearch/data-analysis/data-analysis.component';
 import { GlmolComponent } from './components/pages/tools/glmol/glmol.component';
 import { ColorPathwayComponent } from './components/pages/tools/color-pathway/color-pathway.component';
@@ -15,17 +14,17 @@ import { CameliaComponent } from './components/pages/datapages/camelia/camelia/c
 import { FileviewComponent } from './components/pages/fileuploads/fileview/fileview.component';
 import { SoybeanComponent } from './components/pages/datapages/soybean/soybean.component';
 import { ShowresultsComponent } from './components/pages/onestopsearch/showresults/showresults.component';
-import { ProteinDetailComponent } from './components/pages/datapages/protein-detail/protein-detail.component';
+import { ProteinDetailComponent } from './components/protein-details-summary-page/protein-detail.component';
 import {AddNewsComponent} from './components/pages/add-news/add-news.component';
 import { PathwayAralipsComponent } from "./components/pages/tools/pathway-aralips/pathway-aralips.component";
 import { CustomPathwayComponent } from './components/custom-pathway-page/custom-pathway.component';
 import { CustomPathwayListComponent } from './components/pages/tools/custom-pathway-list/custom-pathway-list/custom-pathway-list.component';
 import { PathwayViewerComponent } from './components/pages/tools/pathway-viewer/pathway-viewer.component';
-import { ProteinSoybeanComponent } from './components/pages/datapages/protein-soybean/protein-soybean.component';
-import { ProteinCamelinaComponent } from './components/pages/datapages/protein-camelina/protein-camelina.component';
+import { ProteinSoybeanComponent } from './components/protein-soybean-summary-page/protein-soybean.component';
+import { ProteinCamelinaComponent } from './components/protein-camelina-summary-page/protein-camelina.component';
 import { ExtendedPathwayComponent } from './components/pages/tools/extended-pathway/extended-pathway.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
-import { HomeComponent } from './components/homecomponents/home/home.component';
+import { HomeComponent } from './components/home-page/home/home.component';
 import { ProteinDetailsPageComponent } from './components/protein-details-page/protein-details-page.component';
 import { BlastPageComponent } from './components/blast-page/blast-page.component';
 import { GlmolStructurePageComponent } from './components/glmol-structure-page/glmol-structure-page.component';
@@ -33,9 +32,10 @@ import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pat
 import { DataComponent } from './components/datasets-page/data.component';
 import { ContactUsComponent } from './components/contact-page/contactus.component';
 import { GoCytoscapeComponent } from './components/go-cytoscape-page/go-cytoscape.component';
+import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
+import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
-{path: 'homepage', component: HomepageComponent},
 {path: 'team', component: TeamComponent},
 {path: 'lmpd_arapidopsis', component: LmpdArapidopsisComponent},
 {path: 'glmol', component: GlmolComponent},
@@ -71,6 +71,8 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'pathway-viewer-page', component:PathwayViewerPageComponent}, 
 {path: 'details/:database_name/:uniprot_id',component:ProteinDetailsPageComponent},
 {path: 'contact', component: ContactUsComponent },
+{path: 'latest-news', component: LatestNewsPageComponent },
+{path: 'research-papers', component: ResearchPapersPageComponent },
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({

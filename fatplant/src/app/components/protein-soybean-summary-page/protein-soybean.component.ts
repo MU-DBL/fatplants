@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { GptDialogComponent } from 'src/app/components/commons/gpt-dialog/gpt-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { APIService } from '../../../../services/api/api.service';
+import { APIService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-protein-soybean',

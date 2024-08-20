@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomepageComponent } from './homepage/homepage.component';
 import { DataAnalysisComponent } from './components/pages/onestopsearch/data-analysis/data-analysis.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -62,21 +61,21 @@ import { StructureViewerComponent } from './components/commons/structure-viewer/
 import { CdkDetailRowDirective } from './directives/cdk-detail-row.directive';
 import { UserModalComponent } from './components/commons/user-modal/user-modal.component';
 import { AddNewsComponent } from './components/pages/add-news/add-news.component';
-import { ProteinDetailComponent } from './components/pages/datapages/protein-detail/protein-detail.component';
+import { ProteinDetailComponent } from './components/protein-details-summary-page/protein-detail.component';
 import { PathwayAralipsComponent } from './components/pages/tools/pathway-aralips/pathway-aralips.component';
 import { CustomPathwayComponent } from './components/custom-pathway-page/custom-pathway.component';
 import { CustomPathwayListComponent } from './components/pages/tools/custom-pathway-list/custom-pathway-list/custom-pathway-list.component';
 import { CustomPathwayDialogComponent } from './components/commons/custom-pathway-dialog/custom-pathway-dialog.component';
 import { PathwayViewerComponent } from './components/pages/tools/pathway-viewer/pathway-viewer.component';
-import { ProteinSoybeanComponent } from './components/pages/datapages/protein-soybean/protein-soybean.component';
-import { ProteinCamelinaComponent } from './components/pages/datapages/protein-camelina/protein-camelina.component';
+import { ProteinSoybeanComponent } from './components/protein-soybean-summary-page/protein-soybean.component';
+import { ProteinCamelinaComponent } from './components/protein-camelina-summary-page/protein-camelina.component';
 import { ExcludeListItemPipe, ExtendedPathwayComponent } from './components/pages/tools/extended-pathway/extended-pathway.component';
 import { GptDialogComponent } from './components/commons/gpt-dialog/gpt-dialog.component';
 import { BlastInternalComponent } from './components/pages/tools/blast-internal/blast-internal.component';
-import { MenuComponent } from './components/homecomponents/menu/menu.component';
-import { FooterComponent } from './components/homecomponents/footer/footer.component';
-import { HomeComponent } from './components/homecomponents/home/home.component';
-import { SearchComponent } from './components/homecomponents/search/search.component';
+import { MenuComponent } from './components/home-page/menu/menu.component';
+import { FooterComponent } from './components/home-page/footer/footer.component';
+import { HomeComponent } from './components/home-page/home/home.component';
+import { SearchComponent } from './components/home-page/search/search.component';
 import { ProteinDetailsPageComponent } from './components/protein-details-page/protein-details-page.component';
 import { GlmolStructurePageComponent } from './components/glmol-structure-page/glmol-structure-page.component';
 import { PathwayViewerPageComponent } from './components/pathway-viewer-page/pathway-viewer-page.component';
@@ -87,14 +86,16 @@ import { ExtendedPathwayViewerComponent } from './components/pathway-viewer-page
 import { DataComponent } from './components/datasets-page/data.component';
 import { GoCytoscapeComponent } from './components/go-cytoscape-page/go-cytoscape.component';
 import { GoCytoscapeNetworkComponent } from './components/commons/go-cytoscape-network/go-cytoscape-network.component';
-import { CounterComponent } from './components/homecomponents/counter/counter.component';
+import { CounterComponent } from './components/home-page/counter/counter.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
+import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LmpdArapidopsisComponent,
-    HomepageComponent,
     DatatableComponent,
     GlmolComponent,
     ColorPathwayComponent,
@@ -148,7 +149,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     DataComponent,
     GoCytoscapeComponent,
     GoCytoscapeNetworkComponent,
-    CounterComponent
+    CounterComponent,
+    ResearchPapersPageComponent,
+    LatestNewsPageComponent
   ],
   entryComponents: [
     StructureViewerComponent,
@@ -208,4 +211,5 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
