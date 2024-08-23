@@ -22,6 +22,7 @@ export class TeamComponent implements OnInit {
   ppl13 = "/app/assets/homepageAssets/GH.png";
   ppl14 = "/app/assets/homepageAssets/BAS.png";
   ppl15 = "/app/assets/homepageAssets/YFQ.png";
+  ppl16 = "/app/assets/homepageAssets/VPP.jpg";
 
   constructor() { }
 
