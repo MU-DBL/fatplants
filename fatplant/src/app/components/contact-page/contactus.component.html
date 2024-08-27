@@ -1,9 +1,15 @@
-<div>
-    <div class="page-title-bar">
-        <p class="page-title"> Contact Us</p>
-      </div>
 
-    <div class="contact-form-container">
+<div class="page-title-bar">
+    <p class="page-title"> Contact Us</p>
+</div>
+
+<div class="base">
+    <div style="margin-top: 2%;">
+        <p> Welcome to our Contact Us page! We're here to help with any questions or feedback you may have. Feel free to
+            reach out, and we'll get back to you as soon as possible.
+        </p>
+    </div>
+    <div style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 1%;">
         <form #contactForm (submit)="validateForm($event)">
             <div class="form-row">
                 <div class="form-group">
@@ -39,14 +45,15 @@
                 <div class="error-message"></div>
             </div>
             <br>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="attachments">Attachments</label>
                 <input type="file" id="attachments" name="attachments" multiple (change)="onFileChange($event)">
-            </div>
+            </div> -->
             <br>
-            <button type="submit" class="send-button">Send</button>
         </form>
     </div>
+    <button type="submit" class="send-button">Send</button>
+   
     <div #successMessage id="successMessage" class="contact-form-container"
         style="display: none; border: 0px solid darkgreen; background-color: #a0c474; padding: 10px;"></div>
     <div #errorMessage id="errorMessage" class="contact-form-container"
