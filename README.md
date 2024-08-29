@@ -1,1 +1,1 @@
-# FatPlant-Firebase
+# FatPlant
