@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef,OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -8,20 +8,14 @@ import { environment } from 'src/environments/environment';
   templateUrl: './contactus.component.html',
   styleUrls: ['./contactus.component.scss']
 })
-export class ContactUsComponent implements OnInit{
+export class ContactUsComponent{
   
   @ViewChild('contactForm') contactForm: ElementRef;
   @ViewChild('successMessage') successMessage: ElementRef;
   @ViewChild('errorMessage') errorMessage: ElementRef;
-  public attachments: File[] = [];
+  attachments: File[];
   
-  constructor(private http: HttpClient, private router: Router) {
-
-  }
-
-  ngOnInit(){
-    
-  }
+  constructor(private http: HttpClient, private router: Router) { }
 
   validateForm(event: Event) {
     event.preventDefault(); // Prevent default form submission
