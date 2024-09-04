@@ -8,12 +8,13 @@ import { environment } from 'src/environments/environment';
   templateUrl: './contactus.component.html',
   styleUrls: ['./contactus.component.scss']
 })
-export class ContactUsComponent {
+export class ContactUsComponent{
+  
   @ViewChild('contactForm') contactForm: ElementRef;
   @ViewChild('successMessage') successMessage: ElementRef;
   @ViewChild('errorMessage') errorMessage: ElementRef;
   attachments: File[];
-
+  
   constructor(private http: HttpClient, private router: Router) { }
 
   validateForm(event: Event) {
