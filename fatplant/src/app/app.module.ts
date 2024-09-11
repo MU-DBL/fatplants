@@ -91,8 +91,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 
-import { ContributionComponent } from './components/pages/aralip/about/Contribution/contribution.component'; 
-
+import { ContributionComponent } from './components/aralip/about/Contribution/contribution.component'; 
+import{MutantsComponent} from './components/aralip/mutant/mutant.component';
+import{DownloadComponent} from './components/aralip/download/download.component';
 
 
 @NgModule({
@@ -156,7 +157,9 @@ import { ContributionComponent } from './components/pages/aralip/about/Contribut
     ResearchPapersPageComponent,
     LatestNewsPageComponent,
 
-    ContributionComponent
+    ContributionComponent,
+    MutantsComponent,
+    DownloadComponent
   ],
   entryComponents: [
     StructureViewerComponent,

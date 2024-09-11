@@ -34,9 +34,11 @@ import { GoCytoscapeComponent } from './components/go-cytoscape-page/go-cytoscap
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 
-import { This_PageComponent } from './components/pages/aralip/about/This Page/This_Page.component';
-import {ContributionComponent} from './components/pages/aralip/about/Contribution/contribution.component';
-import { CommentsComponent } from './components/pages/aralip/comments/comments.component';
+import { This_PageComponent } from './components/aralip/about/This Page/This_Page.component';
+import {ContributionComponent} from './components/aralip/about/Contribution/contribution.component';
+import { CommentsComponent } from './components/aralip/comments/comments.component';
+import{MutantsComponent} from './components/aralip/mutant/mutant.component';
+import{DownloadComponent} from './components/aralip/download/download.component';
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'team', component: TeamComponent},
@@ -79,6 +81,8 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path : 'contribution',component:ContributionComponent},
 { path: 'This_Page', component: This_PageComponent },
 {path:'comments',component:CommentsComponent},
+{path:'mutant',component:MutantsComponent},
+{path:'download',component:DownloadComponent},
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({
