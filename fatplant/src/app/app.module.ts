@@ -92,6 +92,9 @@ import { ResearchPapersPageComponent } from './components/research-papers-page/r
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 
 import { ContributionComponent } from './components/pages/aralip/about/Contribution/contribution.component'; 
+import { EnzymePageComponent } from './components/enzyme-page/enzyme-page.component';
+import { LipidPageComponent } from './components/lipid-page/lipid-page.component';
+import { AralipMenuComponent } from './components/aralip-menu/aralip-menu.component';
 
 
 
@@ -156,7 +159,10 @@ import { ContributionComponent } from './components/pages/aralip/about/Contribut
     ResearchPapersPageComponent,
     LatestNewsPageComponent,
 
-    ContributionComponent
+    ContributionComponent,
+    EnzymePageComponent,
+    LipidPageComponent,
+    AralipMenuComponent
   ],
   entryComponents: [
     StructureViewerComponent,
