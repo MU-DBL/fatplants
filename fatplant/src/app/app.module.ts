@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DataAnalysisComponent } from './components/pages/onestopsearch/data-analysis/data-analysis.component';
@@ -91,9 +91,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 
-import { ContributionComponent } from './components/pages/aralip/about/Contribution/contribution.component'; 
-
-
 
 @NgModule({
   declarations: [
@@ -154,9 +151,7 @@ import { ContributionComponent } from './components/pages/aralip/about/Contribut
     GoCytoscapeNetworkComponent,
     CounterComponent,
     ResearchPapersPageComponent,
-    LatestNewsPageComponent,
-
-    ContributionComponent
+    LatestNewsPageComponent
   ],
   entryComponents: [
     StructureViewerComponent,
@@ -181,7 +176,6 @@ import { ContributionComponent } from './components/pages/aralip/about/Contribut
     CdkTableModule,
     HttpClientModule,
     FormsModule,
-    CommonModule,
     // CytoscapeModule,
     ReactiveFormsModule,
     MatPaginatorModule,
@@ -212,7 +206,6 @@ import { ContributionComponent } from './components/pages/aralip/about/Contribut
     MatDialogModule,
     MatSnackBarModule,
     ClipboardModule,
-
     MatSliderModule 
   ],
   providers: [],

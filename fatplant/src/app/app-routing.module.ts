@@ -4,6 +4,7 @@ import { DataAnalysisComponent } from './components/pages/onestopsearch/data-ana
 import { GlmolComponent } from './components/pages/tools/glmol/glmol.component';
 import { ColorPathwayComponent } from './components/pages/tools/color-pathway/color-pathway.component';
 import { BlastComponent } from './components/pages/tools/blast/blast.component';
+
 import { TeamComponent } from './components/team-page/team.component';
 import { GraphComponent } from './components/pages/networks/protein-network/graph.component';
 import { LmpddetailviewComponent } from './components/pages/datapages/lmpddetailview/lmpddetailview.component';
@@ -34,10 +35,6 @@ import { GoCytoscapeComponent } from './components/go-cytoscape-page/go-cytoscap
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 
-import { This_PageComponent } from './components/pages/aralip/about/This Page/This_Page.component';
-import {ContributionComponent} from './components/pages/aralip/about/Contribution/contribution.component';
-import { CommentsComponent } from './components/pages/aralip/comments/comments.component';
-
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'team', component: TeamComponent},
 {path: 'lmpd_arapidopsis', component: LmpdArapidopsisComponent},
@@ -49,6 +46,7 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'camelina', component: CameliaComponent},
 {path: 'fatty_acid', component: FattyacidComponent},
 {path: 'protein-network', component: GraphComponent},
+
 {path: 'one_click', component: DataAnalysisComponent},
 {path: 'one_click/:uniprot_id/:cfg', component: DataAnalysisComponent},
 {path: 'blast', component: BlastComponent},
@@ -75,10 +73,6 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'contact', component: ContactUsComponent },
 {path: 'latest-news', component: LatestNewsPageComponent },
 {path: 'research-papers', component: ResearchPapersPageComponent },
-
-{path : 'contribution',component:ContributionComponent},
-{ path: 'This_Page', component: This_PageComponent },
-{path:'comments',component:CommentsComponent},
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({
