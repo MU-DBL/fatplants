@@ -1,0 +1,73 @@
+<div class="page-title-bar">
+    <p class="page-title">Aralip Data</p>
+</div>
+<mat-card id="base">
+    <div class="left-menu">
+        <p class="subheader protein" style="font-size: 16px;padding-left: 5%;">Aralip Data</p>
+        <a class="menu active" [class.active]='this.page == "pathway"' (click)='changePage("pathway")'>Home & Pathways</a>
+        <a class="menu" [class.active]='this.page == "enzyme"' (click)='changePage("enzyme")'>Enzyme/Protein<br>Summary</a>
+        <a class="menu" [class.active]='this.page == "loci"' (click)='changePage("loci")'>Loci Summary</a>
+        <a class="menu" [class.active]='this.page === "structure" || this.page === "fatty" || this.page === "phospholipids" || this.page === "glycolipids" || this.page === "main" || this.page === "sphingolipid"' (click)='changePage("fatty")'>Structures & Schemas</a>
+        <div *ngIf='this.page === "structure" || this.page === "fatty" || this.page === "phospholipids" || this.page === "glycolipids" || this.page === "main" || this.page === "sphingolipid"'>
+            <a class="submenu" [class.subactive]='this.page == "fatty"' (click)='changePage("fatty")'>Fatty Acids</a>
+            <a class="submenu" [class.subactive]='this.page == "phospholipids"' (click)='changePage("phospholipids")'>Phospholipids</a>
+            <a class="submenu" [class.subactive]='this.page == "glycolipids"' (click)='changePage("glycolipids")'>Glycolipids</a>
+            <a class="submenu" [class.subactive]='this.page == "main"' (click)='changePage("main")'>Main lipids</a>
+            <a class="submenu" [class.subactive]='this.page == "sphingolipid"' (click)='changePage("sphingolipid")'>Sphingolipid</a>
+        </div>
+        <a class="menu" [class.active]='this.page == "lipid"' (click)='changePage("lipid")'>Lipid method &<br>compositions</a>
+        <a class="menu" [class.active]='this.page == "mutant"' (click)='changePage("mutant")'>Mutants</a>
+        <a class="menu" [class.active]='this.page == "download"' (click)='changePage("download")'>Downloads</a>
+        <a class="menu" [class.active]='this.page == "about"' (click)='changePage("about")'>About</a>
+        <a class="menu" [class.active]='this.page == "comment"' (click)='changePage("comment")'>Comments</a>
+    </div>
+    <div class="right-content-box">
+        <div *ngIf='this.page == "pathway"'>
+            <h4 class='title'>pathway</h4>
+        </div>
+        <div *ngIf='this.page == "enzyme"'>
+            <app-enzyme-page></app-enzyme-page>
+        </div>
+        <div *ngIf='this.page == "loci"'>
+            <h4 class='title'>loci</h4>
+        </div>
+        <div *ngIf='this.page == "structure"'>
+            <h4 class='title'>structure</h4>
+        </div>
+        <div *ngIf='this.page == "lipid"'>
+            <app-lipid-page></app-lipid-page>
+        </div>
+        <div *ngIf='this.page == "mutant"'>
+            <h4 class='title'>mutant</h4>
+        </div>
+        <div *ngIf='this.page == "download"'>
+            <h4 class='title'>download</h4>
+        </div>
+        <div *ngIf='this.page == "about"'>
+            <h4 class='title'>about</h4>
+        </div>
+        <div *ngIf='this.page == "comment"'>
+            <h4 class='title'>comment</h4>
+        </div>
+        <div *ngIf='this.page == "fatty"'>
+            <h4 class='title'>Structure Of Major Arabidopsis Fatty Acids</h4>
+            <img src="/static/major_plant_fatty_acids_structures.GIF" border="=0">
+        </div>
+        <div *ngIf='this.page == "phospholipids"'>
+            <h4 class='title'>Glycolipid Head Group Structures</h4>
+            <img src="/static/phospholipid_head_group_structures.GIF" border="=0">
+        </div>
+        <div *ngIf='this.page == "glycolipids"'>
+            <h4 class='title'>Phospholipid Head Group Structures</h4>
+            <img src="/static/glycolipid_head_group_structures.GIF" border="=0">
+        </div>
+        <div *ngIf='this.page == "main"'>
+            <h4 class='title'>Main Classes Of Storage & Membrane Lipid Structures</h4>
+            <img src="/static/main_classes_storage_and_membrane_lipid_structures.GIF" border="=0">
+        </div>
+        <div *ngIf='this.page == "sphingolipid"'>
+            <h4 class='title'>Sphingolipid Sample Structure</h4>
+            <img src="/static/sphingolipid_sample_structure.GIF" border="=0">
+        </div>
+    </div>
+</mat-card>  
