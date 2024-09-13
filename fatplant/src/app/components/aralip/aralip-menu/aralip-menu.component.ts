@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from '../../services/api/api.service';
+import { APIService } from '../../../services/api/api.service';
 
 @Component({
   selector: 'app-aralip-menu',

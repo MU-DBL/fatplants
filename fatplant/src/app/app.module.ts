@@ -90,12 +90,14 @@ import { CounterComponent } from './components/home-page/counter/counter.compone
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
-import { EnzymePageComponent } from './components/enzyme-page/enzyme-page.component';
-import { LipidPageComponent } from './components/lipid-page/lipid-page.component';
-import { AralipMenuComponent } from './components/aralip-menu/aralip-menu.component';
-import { ContributionComponent } from './components/aralip/about/Contribution/contribution.component'; 
-import{ MutantsComponent } from './components/aralip/mutant/mutant.component';
-import{ DownloadComponent } from './components/aralip/download/download.component';
+import { EnzymePageComponent } from './components/aralip/enzyme-page/enzyme-page.component';
+import { LipidPageComponent } from './components/aralip/lipid-page/lipid-page.component';
+import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
+import { ContributorsComponent } from './components/aralip/about/contributors/contributors.component'; 
+import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
+
+// import{ MutantsComponent } from './components/aralip/mutant/mutant.component';
+// import{ DownloadComponent } from './components/aralip/download/download.component';
 
 
 
@@ -159,12 +161,13 @@ import{ DownloadComponent } from './components/aralip/download/download.componen
     CounterComponent,
     ResearchPapersPageComponent,
     LatestNewsPageComponent,
-    ContributionComponent,
+    ContributorsComponent,
+    AralipSiteComponent,
     EnzymePageComponent,
     LipidPageComponent,
-    AralipMenuComponent,
-    MutantsComponent,
-    DownloadComponent
+    AralipMenuComponent
+    // MutantsComponent,
+    // DownloadComponent
   ],
   entryComponents: [
     StructureViewerComponent,

@@ -3,7 +3,6 @@
 </div>
 <mat-card id="base">
     <div class="left-menu">
-        <p class="subheader protein" style="font-size: 16px;padding-left: 5%;">Aralip Data</p>
         <a class="menu active" [class.active]='this.page == "pathway"' (click)='changePage("pathway")'>Home & Pathways</a>
         <a class="menu" [class.active]='this.page == "enzyme"' (click)='changePage("enzyme")'>Enzyme/Protein<br>Summary</a>
         <a class="menu" [class.active]='this.page == "loci"' (click)='changePage("loci")'>Loci Summary</a>
@@ -18,7 +17,11 @@
         <a class="menu" [class.active]='this.page == "lipid"' (click)='changePage("lipid")'>Lipid method &<br>compositions</a>
         <a class="menu" [class.active]='this.page == "mutant"' (click)='changePage("mutant")'>Mutants</a>
         <a class="menu" [class.active]='this.page == "download"' (click)='changePage("download")'>Downloads</a>
-        <a class="menu" [class.active]='this.page == "about"' (click)='changePage("about")'>About</a>
+        <a class="menu" [class.active]='this.page === "aralip-site" || this.page === "contributors"' (click)='changePage("aralip-site")'>About</a>
+        <div *ngIf='this.page === "aralip-site" || this.page === "contributors"'>
+            <a class="submenu" [class.subactive]='this.page == "aralip-site"' (click)='changePage("aralip-site")'>This Website</a>
+            <a class="submenu" [class.subactive]='this.page == "contributors"' (click)='changePage("contributors")'>Contributors</a>
+        </div>
         <a class="menu" [class.active]='this.page == "comment"' (click)='changePage("comment")'>Comments</a>
     </div>
     <div class="right-content-box">
@@ -68,6 +71,12 @@
         <div *ngIf='this.page == "sphingolipid"'>
             <h4 class='title'>Sphingolipid Sample Structure</h4>
             <img src="/static/sphingolipid_sample_structure.GIF" border="=0">
+        </div>
+        <div *ngIf='this.page == "aralip-site"'>
+            <app-aralip-site></app-aralip-site>
+        </div>
+        <div *ngIf='this.page == "contributors"'>
+            <app-contributors></app-contributors>
         </div>
     </div>
 </mat-card>  

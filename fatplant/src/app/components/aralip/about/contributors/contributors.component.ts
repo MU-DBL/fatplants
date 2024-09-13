@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-contribution',
-  templateUrl: './contribution.component.html',
-  styleUrls: ['./contribution.component.css']
+  selector: 'app-contributors',
+  templateUrl: './contributors.component.html',
+  styleUrls: ['./contributors.component.css']
 })
-export class ContributionComponent {
+export class ContributorsComponent {
   contributors = [
     {
       name: 'Sébastien Baud',

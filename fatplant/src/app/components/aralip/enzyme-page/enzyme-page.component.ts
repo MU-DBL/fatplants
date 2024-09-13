@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from '../../services/api/api.service';
+import { APIService } from '../../../services/api/api.service';
 
 @Component({
   selector: 'app-enzyme-page',
@@ -48,8 +48,5 @@ export class EnzymePageComponent implements OnInit {
       }, error => {
         this.arabidopsisDataSource = new MatTableDataSource([]);
       });
-    
-    
   }
-
 }
