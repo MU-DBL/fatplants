@@ -90,10 +90,13 @@ import { CounterComponent } from './components/home-page/counter/counter.compone
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
-
+import { EnzymePageComponent } from './components/enzyme-page/enzyme-page.component';
+import { LipidPageComponent } from './components/lipid-page/lipid-page.component';
+import { AralipMenuComponent } from './components/aralip-menu/aralip-menu.component';
 import { ContributionComponent } from './components/aralip/about/Contribution/contribution.component'; 
-import{MutantsComponent} from './components/aralip/mutant/mutant.component';
-import{DownloadComponent} from './components/aralip/download/download.component';
+import{ MutantsComponent } from './components/aralip/mutant/mutant.component';
+import{ DownloadComponent } from './components/aralip/download/download.component';
+
 
 
 @NgModule({
@@ -156,8 +159,10 @@ import{DownloadComponent} from './components/aralip/download/download.component'
     CounterComponent,
     ResearchPapersPageComponent,
     LatestNewsPageComponent,
-
     ContributionComponent,
+    EnzymePageComponent,
+    LipidPageComponent,
+    AralipMenuComponent,
     MutantsComponent,
     DownloadComponent
   ],

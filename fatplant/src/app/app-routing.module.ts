@@ -34,6 +34,9 @@ import { GoCytoscapeComponent } from './components/go-cytoscape-page/go-cytoscap
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 
+import { EnzymePageComponent } from './components/enzyme-page/enzyme-page.component';
+import { LipidPageComponent } from './components/lipid-page/lipid-page.component';
+import { AralipMenuComponent } from './components/aralip-menu/aralip-menu.component';
 import { This_PageComponent } from './components/aralip/about/This Page/This_Page.component';
 import {ContributionComponent} from './components/aralip/about/Contribution/contribution.component';
 import { CommentsComponent } from './components/aralip/comments/comments.component';
@@ -79,8 +82,11 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'research-papers', component: ResearchPapersPageComponent },
 
 {path : 'contribution',component:ContributionComponent},
-{ path: 'This_Page', component: This_PageComponent },
+{path: 'This_Page', component: This_PageComponent },
 {path:'comments',component:CommentsComponent},
+{path: 'enzyme-page', component: EnzymePageComponent },
+{path: 'lipid-page', component: LipidPageComponent },
+{path: 'aralip-menu/:page', component: AralipMenuComponent },
 {path:'mutant',component:MutantsComponent},
 {path:'download',component:DownloadComponent},
 {path: '**', redirectTo: '/home'}];

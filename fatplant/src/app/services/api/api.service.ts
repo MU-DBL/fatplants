@@ -78,4 +78,8 @@ export class APIService {
   askChatGPT(query: string) {
     return this.http.get(environment.BASE_API_URL+"chatgpt/?content=" + encodeURIComponent(query));
   }
+
+  searchEnzyme(query: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme_search/?query="+ query);
+  }
 }
