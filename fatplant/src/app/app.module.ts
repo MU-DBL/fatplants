@@ -92,12 +92,13 @@ import { ResearchPapersPageComponent } from './components/research-papers-page/r
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 import { EnzymePageComponent } from './components/aralip/enzyme-page/enzyme-page.component';
 import { LipidPageComponent } from './components/aralip/lipid-page/lipid-page.component';
+
 import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
 import { ContributorsComponent } from './components/aralip/about/contributors/contributors.component'; 
 import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
-
-// import{ MutantsComponent } from './components/aralip/mutant/mutant.component';
-// import{ DownloadComponent } from './components/aralip/download/download.component';
+import{MutantsComponent} from './components/aralip/mutant/mutant.component';
+import{DownloadComponent} from './components/aralip/download/download.component';
+//import { CommentsComponent } from './components/aralip/comments/comments.component';
 
 
 
@@ -161,13 +162,16 @@ import { AralipSiteComponent } from './components/aralip/about/aralip-site/arali
     CounterComponent,
     ResearchPapersPageComponent,
     LatestNewsPageComponent,
+
     ContributorsComponent,
     AralipSiteComponent,
     EnzymePageComponent,
     LipidPageComponent,
-    AralipMenuComponent
-    // MutantsComponent,
-    // DownloadComponent
+    AralipMenuComponent,
+    MutantsComponent,
+    //CommentsComponent,
+    DownloadComponent
+
   ],
   entryComponents: [
     StructureViewerComponent,
