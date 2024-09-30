@@ -169,7 +169,7 @@ import{DownloadComponent} from './components/aralip/download/download.component'
     EnzymePageComponent,
     LipidPageComponent,
     AralipMenuComponent,
-    AralipPathwayComponent
+    AralipPathwayComponent,
     MutantsComponent,
     //CommentsComponent,
     DownloadComponent
