@@ -96,6 +96,7 @@ import { LipidPageComponent } from './components/aralip/lipid-page/lipid-page.co
 import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
 import { ContributorsComponent } from './components/aralip/about/contributors/contributors.component'; 
 import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
+import { AralipPathwayComponent } from './components/aralip/aralip-pathway/aralip-pathway.component';
 import{MutantsComponent} from './components/aralip/mutant/mutant.component';
 import{DownloadComponent} from './components/aralip/download/download.component';
 //import { CommentsComponent } from './components/aralip/comments/comments.component';
@@ -168,6 +169,7 @@ import{DownloadComponent} from './components/aralip/download/download.component'
     EnzymePageComponent,
     LipidPageComponent,
     AralipMenuComponent,
+    AralipPathwayComponent
     MutantsComponent,
     //CommentsComponent,
     DownloadComponent

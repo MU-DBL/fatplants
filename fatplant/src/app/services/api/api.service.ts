@@ -82,4 +82,8 @@ export class APIService {
   searchEnzyme(query: string) {
     return this.http.get(environment.BASE_API_URL+"enzyme_search/?query="+ query);
   }
+
+  pathwayEnzyme(id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme_pathway/?id="+id);
+  }
 }

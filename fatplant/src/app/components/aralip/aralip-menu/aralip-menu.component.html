@@ -3,16 +3,18 @@
 </div>
 <mat-card id="base">
     <div class="left-menu">
-        <a class="menu active" [class.active]='this.page == "pathway"' (click)='changePage("pathway")'>Home & Pathways</a>
+        <a class="menu active" [class.active]='this.page == "pathway"' (click)='changePage("pathway")'>Pathways</a>
         <a class="menu" [class.active]='this.page == "enzyme"' (click)='changePage("enzyme")'>Enzyme/Protein<br>Summary</a>
         <a class="menu" [class.active]='this.page == "loci"' (click)='changePage("loci")'>Loci Summary</a>
-        <a class="menu" [class.active]='this.page === "structure" || this.page === "fatty" || this.page === "phospholipids" || this.page === "glycolipids" || this.page === "main" || this.page === "sphingolipid"' (click)='changePage("fatty")'>Structures & Schemas</a>
-        <div *ngIf='this.page === "structure" || this.page === "fatty" || this.page === "phospholipids" || this.page === "glycolipids" || this.page === "main" || this.page === "sphingolipid"'>
+        <a class="menu" [class.active]='this.page === "structure" || this.page === "fatty" || this.page === "phospholipids" || this.page === "glycolipids" || this.page === "main" || this.page === "sphingolipid" || this.page === "acc" || this.page === "pdc"' (click)='changePage("fatty")'>Structures & Schemas</a>
+        <div *ngIf='this.page === "structure" || this.page === "fatty" || this.page === "phospholipids" || this.page === "glycolipids" || this.page === "main" || this.page === "sphingolipid" || this.page === "acc" || this.page === "pdc"'>
             <a class="submenu" [class.subactive]='this.page == "fatty"' (click)='changePage("fatty")'>Fatty Acids</a>
             <a class="submenu" [class.subactive]='this.page == "phospholipids"' (click)='changePage("phospholipids")'>Phospholipids</a>
             <a class="submenu" [class.subactive]='this.page == "glycolipids"' (click)='changePage("glycolipids")'>Glycolipids</a>
             <a class="submenu" [class.subactive]='this.page == "main"' (click)='changePage("main")'>Main lipids</a>
             <a class="submenu" [class.subactive]='this.page == "sphingolipid"' (click)='changePage("sphingolipid")'>Sphingolipid</a>
+            <a class="submenu" [class.subactive]='this.page == "acc"' (click)='changePage("acc")'>ACC Schema</a>
+            <a class="submenu" [class.subactive]='this.page == "pdc"' (click)='changePage("pdc")'>PDC Schema</a>
         </div>
         <a class="menu" [class.active]='this.page == "lipid"' (click)='changePage("lipid")'>Lipid method &<br>compositions</a>
         <a class="menu" [class.active]='this.page == "mutant"' (click)='changePage("mutant")'>Mutants</a>
@@ -26,7 +28,7 @@
     </div>
     <div class="right-content-box">
         <div *ngIf='this.page == "pathway"'>
-            <h4 class='title'>pathway</h4>
+            <app-aralip-pathway></app-aralip-pathway>
         </div>
         <div *ngIf='this.page == "enzyme"'>
             <app-enzyme-page></app-enzyme-page>
@@ -71,6 +73,16 @@
         <div *ngIf='this.page == "sphingolipid"'>
             <h4 class='title'>Sphingolipid Sample Structure</h4>
             <img src="/static/sphingolipid_sample_structure.GIF" border="=0">
+        </div>
+        <div *ngIf='this.page == "acc"'>
+            <h4 class='title'>Acetyl-CoA Carboxylase (multisubunits; heteromeric ) Schematic</h4>
+            <p class='title'><span>Note:</span> Click on schematic for further information</p>
+            <iframe src="/static/acc_structure.html" width="100%" height="700"></iframe>
+        </div>
+        <div *ngIf='this.page == "pdc"'>
+            <h4 class='title'>Pyruvate Dehydrogenase Complex Schematic</h4>
+            <p class='title'><span>Note:</span> Click on schematic for further information</p>
+            <iframe src="/static/pdc_structure.html" width="100%" height="700"></iframe>
         </div>
         <div *ngIf='this.page == "aralip-site"'>
             <app-aralip-site></app-aralip-site>
