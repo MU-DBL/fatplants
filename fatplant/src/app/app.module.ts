@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -98,7 +99,9 @@ import { ContributorsComponent } from './components/aralip/about/contributors/co
 import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
 import{MutantsComponent} from './components/aralip/mutant/mutant.component';
 import{DownloadComponent} from './components/aralip/download/download.component';
-//import { CommentsComponent } from './components/aralip/comments/comments.component';
+import { CommentsComponent } from './components/aralip/comments/comments.component';
+import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summary.component';
+//import { ToastComponent } from './components/aralip/comments/toast/toast.component';
 
 
 
@@ -169,8 +172,10 @@ import{DownloadComponent} from './components/aralip/download/download.component'
     LipidPageComponent,
     AralipMenuComponent,
     MutantsComponent,
-    //CommentsComponent,
-    DownloadComponent
+    CommentsComponent,
+    DownloadComponent,
+    LociSummaryComponent,
+//    ToastComponent
 
   ],
   entryComponents: [
@@ -206,7 +211,6 @@ import{DownloadComponent} from './components/aralip/download/download.component'
     MatProgressBarModule,
     MatListModule,
     HttpClientModule,
-    FormsModule,
     MatMenuModule,
     MatSidenavModule,
     MatButtonModule,

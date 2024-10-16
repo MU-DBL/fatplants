@@ -1,0 +1,57 @@
+<h1 class="title">Loci-Summary</h1>
+
+<div class="filter">
+  <mat-form-field id="filter">
+    <input type="search" matInput [value]="searchQuery" (keyup)="onSearchChange($event)" />
+  </mat-form-field>
+  <button (click)='applySearchQuery()' class="search-button" matTooltip="Search">Search</button>
+</div>
+
+<div class="table-container">
+  <div id="table">
+    <mat-table [dataSource]='locationSummariesDataSource' style="width: 100%">
+
+      <!-- Loci Column -->
+      <ng-container matColumnDef="loci">
+        <mat-header-cell *matHeaderCellDef style="width: 10%"> Loci </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="width: 10%">
+          <a href="http://localhost:4200/home">{{ element.location_name }}</a>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Abbreviations Column -->
+      <ng-container matColumnDef="abbreviations">
+        <mat-header-cell *matHeaderCellDef style="width: 20%"> Abbreviations </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="width: 20%">
+          {{ element.abbreviations.join(', ') }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Activities/Proteins Column -->
+      <ng-container matColumnDef="activities-proteins">
+        <mat-header-cell *matHeaderCellDef style="width: 50%"> Activities/Proteins </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="width: 50%">
+          {{ element.activities.join(', ') }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Pathways Column -->
+      <ng-container matColumnDef="pathways">
+        <mat-header-cell *matHeaderCellDef style="width: 20%"> Pathways </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="width: 20%">
+          <div *ngFor="let pathway of element.pathways">
+            <a href="http://localhost:4200//pathway-viewer-page/{{ pathway.id }}" target="_blank">
+              {{ pathway.nameabbreviation }}
+            </a>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['loci', 'abbreviations', 'activities-proteins', 'pathways']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['loci', 'abbreviations', 'activities-proteins', 'pathways']"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 75]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

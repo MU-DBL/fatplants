@@ -39,9 +39,10 @@ import { LipidPageComponent } from './components/aralip/lipid-page/lipid-page.co
 import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
 import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
 import { ContributorsComponent } from './components/aralip/about/contributors/contributors.component';
- //import { CommentsComponent } from './components/aralip/comments/comments.component';
+ import { CommentsComponent } from './components/aralip/comments/comments.component';
  import{MutantsComponent} from './components/aralip/mutant/mutant.component';
  import{DownloadComponent} from './components/aralip/download/download.component';
+ import{LociSummaryComponent} from './components/aralip/loci-summary/loci-summary.component';
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'team', component: TeamComponent},
@@ -87,9 +88,10 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'enzyme-page', component: EnzymePageComponent },
 {path: 'lipid-page', component: LipidPageComponent },
 {path: 'aralip-menu/:page', component: AralipMenuComponent },
- //{path:'comments',component:CommentsComponent},
+ {path:'comments',component:CommentsComponent},
  {path:'mutant',component:MutantsComponent},
  {path:'download',component:DownloadComponent},
+{path:'locisummary',component:LociSummaryComponent},
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -82,4 +82,18 @@ export class APIService {
   searchEnzyme(query: string) {
     return this.http.get(environment.BASE_API_URL+"enzyme_search/?query="+ query);
   }
+
+//comments form
+  submitComment(commentData: any) {
+    return this.http.post(environment.BASE_API_URL + "submitform/", commentData);
+  }
+
+// loci-summary
+/*get_location_summary(location_summaries:any){
+  return this.http.get(environment.BASE_API_URL+"locations_summary/",location_summaries)
+}*/
+get_location_summary(): Observable<any> {
+  return this.http.get(environment.BASE_API_URL + 'locations_summary/');
+}
+
 }
