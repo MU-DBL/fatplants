@@ -1,117 +1,126 @@
-.title {
-  text-align: center;           /* Center the title horizontally */
-  font-family: "PT Serif", serif; 
-  font-size: 2rem;              /* Adjust size for better visibility */
-  font-weight: bold;
-  color: #040600;               /* Green color for consistency */
-  margin-top: 20px;             /* Add space above the title */
-  margin-bottom: 15px;          /* Add space below the title */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
-}
-
-/* Search Button Styling */
-.search-button {
-  background-color: #629B07;
-  color: white;
-  font-size: 1rem;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.search-button:hover {
-  background-color: #4e7b06;
-}
-
-/* Filter/Search Bar Container */
-.filter {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
-  margin: 20px auto;
-  padding: 10px;
-  margin-right: 120px;
-}
-
-
-/* Table Container */
-.table-container {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
-  min-height: 80vh;        /* Ensure it covers most of the screen height */
-  margin-bottom: 40px;
-}
-
-/* Table Styling */
 #table {
-  width: 80%;              /* Adjust table width */
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: 2%;
+  margin-right: 2%;
   font-family: "PT Sans", sans-serif;
+  width: 95%;
 }
 
-.mat-header-row, .mat-row {
-  display: flex;
-}
-
-.mat-table {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Header and Cell Styling */
-mat-header-cell, mat-cell {
-  display: flex;
-  justify-content: flex-start;
-  padding: 8px;
-  text-align: left;
-  border-right: 1px solid #ccc;
-  vertical-align: middle;
-}
-
-/* Header Specific Styling */
 mat-header-cell {
   font-family: "PT Serif", serif;
-  font-size: 1.1rem;
+  color: black;
+  padding-right: 1%;
+  font-size: 1vw;
   font-weight: bold;
-  color: #444;
-  background-color: #86e2c2;
+  background-color: #f9f9f9;
+}
+
+mat-header-row {
+  border-bottom-color: rgba(grey, 0.5);
+  font-size: 1.0vw;
+  padding-top: 1%;
+}
+
+mat-row {
+  border-bottom-color: #98FB98;
+}
+
+mat-cell {
+  padding-right: 2%;
+}
+
+mat-cell>a,
+mat-cell>span>a {
+  text-decoration: none;
+  color: #90EE90;
+}
+
+mat-cell>a:visited,
+mat-cell>span>a:visited {
+  color: #006400;
+}
+
+.pointer {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.seq-cell {
+  flex-wrap: wrap;
+}
+
+.seq-entry {
+  margin: 2% 0;
+}
+
+.external-link {
+  font-size: 14px;
+}
+
+.custom-hr {
+  width: 90%;
+  border: none;
+  border-top: 0.8px solid #ccc;
+  margin: 0;
+  padding: 0;
+}
+
+.left-menu .menu.active {
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: limegreen;
+}
+
+input.mat-input-element {
+  padding-right: 10%;
+}
+
+.mat-form-field {
+  width: 40%;
+  height: 45px;
+  margin-left: 2%;
+  margin-top: 2%;
+  margin-bottom: 1.5%;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
+  flex: 1;
+  margin-right: 8px;
+}
+
+.search-button {
+  background-color: #629B07;
+  justify-content: center;
+  margin-top: 2px;
+  align-items: center;
+  color: white;
+  font-size: 120%;
   text-align: center;
-  border-bottom: 2px solid #ccc;
+  width: 80px;
+  font-family: "PT Sans", sans-serif;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  height: 44px;
+  border: 10px;
+  border-radius: 3px;
+  box-shadow: -10px 0px 10px -5px rgba(128, 128, 128, 0.5), 10px 0px 10px -5px rgba(128, 128, 128, 0.5);
 }
 
-/* Adjust Column Width */
-.mat-column-loci {
-  width: 10% !important;
+mat-card::ng-deep .mat-form-field-underline {
+  display: none;
 }
 
-.mat-column-abbreviations {
-  width: 20% !important;
-}
-
-.mat-column-activities-proteins {
-  width: 50% !important;
-}
-
-.mat-column-pathways {
-  width: 20% !important;
-}
-
-/* Row Hover Effect */
-mat-row:hover {
-  background-color: #f1f1f1;
-  transition: background-color 0.2s;
-}
-
-/* Paginator Styling */
-mat-paginator {
-  margin-top: 10px;
+.filter {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  width: 60%;
+  margin-left: 6px;
 }
+.path-link {
+  
+  margin-right: 10px;
+  
+}
+
+
+
+

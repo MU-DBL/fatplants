@@ -18,6 +18,31 @@ export class LociSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadLocationSummaries(); // Load data on component initialization
+
+    // Custom filter predicate for Pathways and other columns
+    this.locationSummariesDataSource.filterPredicate = (data, filter: string) => {
+      const searchText = filter.trim().toLowerCase();
+  
+      // Ensure all fields are checked for null or undefined before calling toLowerCase()
+      const locationMatch = (data.location_name?.toLowerCase().includes(searchText)) || false;
+      
+      // Check if abbreviations is an array or string and handle accordingly
+      const abbreviationMatch = (Array.isArray(data.abbreviations) 
+        ? data.abbreviations.join(' ').toLowerCase().includes(searchText) 
+        : data.abbreviations?.toLowerCase().includes(searchText)) || false;
+  
+      // Ensure activities is an array and process accordingly
+      const activitiesMatch = (Array.isArray(data.activities) 
+        ? data.activities.some((activity: string) => activity?.toLowerCase().includes(searchText)) 
+        : false);
+  
+      // Search in pathways array, ensuring pathway fields are strings
+      const pathwaysMatch = (data.pathways?.some((pathway: any) =>
+        pathway.nameabbreviation?.toLowerCase().includes(searchText))) || false;
+  
+      // Return true if any column matches the search text
+      return locationMatch || abbreviationMatch || activitiesMatch || pathwaysMatch;
+    };
   }
 
   // Method to load data from API
@@ -35,15 +60,14 @@ export class LociSummaryComponent implements OnInit {
     );
   }
 
-  // Handle search input change
-  onSearchChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.searchQuery = inputElement.value;
-    this.applySearchQuery(); // Apply the search on input change
-  }
-
   // Apply search filter to the data source
   applySearchQuery(): void {
     this.locationSummariesDataSource.filter = this.searchQuery.trim().toLowerCase();
+  }
+
+  // Handle input change to update search query
+  onSearchInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchQuery = inputElement.value;
   }
 }
