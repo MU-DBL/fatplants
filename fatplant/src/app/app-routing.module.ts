@@ -37,6 +37,11 @@ import { ResearchPapersPageComponent } from './components/research-papers-page/r
 import { This_PageComponent } from './components/pages/aralip/about/This Page/This_Page.component';
 import {ContributionComponent} from './components/pages/aralip/about/Contribution/contribution.component';
 import { CommentsComponent } from './components/pages/aralip/comments/comments.component';
+import { EnzymePageComponent } from './components/aralip/enzyme-page/enzyme-page.component';
+import { LipidPageComponent } from './components/aralip/lipid-page/lipid-page.component';
+import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
+import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
+import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component';
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'team', component: TeamComponent},
@@ -79,6 +84,12 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path : 'contribution',component:ContributionComponent},
 { path: 'This_Page', component: This_PageComponent },
 {path:'comments',component:CommentsComponent},
+{path: 'aralip-site', component: AralipSiteComponent },
+{path: 'enzyme-page', component: EnzymePageComponent },
+{path: 'lipid-page', component: LipidPageComponent },
+{path: 'aralip-menu/:page', component: AralipMenuComponent },
+{path: 'enzymes/:id', component: EnzymesComponent },
+{path: 'aralip-menu/:page/:pathway_id', component: AralipMenuComponent },
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({
