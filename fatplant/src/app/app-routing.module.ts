@@ -81,16 +81,10 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'contact', component: ContactUsComponent },
 {path: 'latest-news', component: LatestNewsPageComponent },
 {path: 'research-papers', component: ResearchPapersPageComponent },
-{path : 'contributors',component:ContributorsComponent},
-{path: 'aralip-site', component: AralipSiteComponent },
-{path: 'enzyme-page', component: EnzymePageComponent },
-{path: 'lipid-page', component: LipidPageComponent },
 {path: 'aralip-menu/:page', component: AralipMenuComponent },
+{path: 'aralip-menu/enzymes/:id', component: EnzymesComponent },
 {path: 'enzymes/:id', component: EnzymesComponent },
 {path: 'aralip-menu/:page/:pathway_id', component: AralipMenuComponent },
-// {path:'comments',component:CommentsComponent},
-{path:'mutant',component:MutantsComponent},
-{path:'download',component:DownloadComponent},
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({

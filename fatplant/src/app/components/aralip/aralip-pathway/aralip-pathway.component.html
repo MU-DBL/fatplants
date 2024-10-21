@@ -1,25 +1,32 @@
 <mat-card>
-    <div style="margin-left:2%">
-        <h2>Pathway Viewer</h2>
+    <div style="margin:2%">
+        <h2 style="text-align: center;">Pathways</h2>
         <mat-form-field appearance="fill" class="selector">
             <mat-label>Pathways</mat-label>
-            <mat-select (selectionChange)="onChange($event.value)" value="selectedOption">
+            <mat-select (selectionChange)="onChange($event.value)" [(value)]="selectedOption" >
                 <mat-option *ngFor="let option of pathwayOptions" [value]="option">{{ option.name }}</mat-option>
             </mat-select>
         </mat-form-field>
         <h3>{{name}}</h3>
-        <b>Legend: </b>
-        <P>{{legend}}</P>
-        <div *ngIf="abbreviation != 'Unknown'">
-            <b>Abbreviations: </b>
-            <p>{{abbreviation}}</p>
+        <div style="margin-right: 2%;">
+            <div class="toggle-container">
+                <button (click)="toggleCollapse()" class="toggle-btn">
+                    {{ isCollapsed ? '+' : '-' }}
+                </button>
+                <p>Click + to expand and view the legend, abbreviations, and contributors of the pathway, or - to collapse</p>
+            </div>
+              <div *ngIf="!isCollapsed" class="collapsible-div">
+                <P> <b>Legend:</b> {{legend}} </P>
+                <div *ngIf="abbreviation != 'Unknown'">
+                    <p> <b>Abbreviations: </b> {{abbreviation}}</p>
+                </div>
+                <div *ngIf="contributor">
+                    <p> <b>Contributors:</b> {{contributor}}</p>
+                </div>
+              </div>
         </div>
-        <div *ngIf="contributor">
-            <b>Contributors: </b>
-            <p>{{contributor}}</p>
-        </div>
-        <p>Note: Click on red or purple text or colored circle for further information.</p>
-        <div id="pathway_image" style="margin-top:40px;height:900px;">
+        <p><span style="color: red;">Note:</span> Click on red or purple text or colored circle for further information.</p>
+        <div id="pathway_image" style="height:900px;">
             <img src="/static/aralip/{{path}}.GIF" border="0" [attr.usemap]="'#' + path">
             <map name="fatty_acid_synthesis">
                 <area shape="RECT" href="/enzymes/300" coords="801,446,824,459" oldtitle="PII/AtGLB1.  Binds BCCP subunits of HtACCase in a 2-oxoglutarate-dependent manner and decreases V(max) of the enzyme." title="" data-hasqtip="true">

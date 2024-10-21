@@ -1,18 +1,7 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #e9f5e8;
-    margin: 0;
-    padding: 20px;
-  }
-  
 .container {
-    width: 80%;
-    margin: 20px auto;
+    width: 90%;
+    margin: 2%;
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .highlight-note {
@@ -31,10 +20,8 @@ body {
     cursor: progress; /* Optional: changes cursor to a progress indicator when clicking */
 }
 
-
-header h1, h2 {
+header h1 {
     text-align: center;
-    color: #333;
 }
 
 main ul {

@@ -2,7 +2,7 @@
     <div class="page-title-bar">
         <p class="page-title">Enzyme & Protein Data</p>
     </div>
-    <p class="title">{{name}}</p>
+    <h2 style="color:#5F9EA0; padding: 2%; font-weight: 600;">{{name}}</h2>
     <div *ngFor="let reaction of reactions" style="padding: 2%;">
         <div *ngIf='reaction.enzymetype=="Heteromeric"; else notHeteromeric'>
             <div *ngIf='reaction.reactiontype=="Is A Subunit Of"'>

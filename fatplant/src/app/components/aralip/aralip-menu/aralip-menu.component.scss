@@ -222,24 +222,16 @@ mat-card::ng-deep .mat-form-field-underline {
     margin-left: 6px;
 }
 
-.download-card {
-    text-align: center;
-    width: 30%;
-    min-height: 40%;
-    margin-top: 0%;
-    background-color: rgba(#F9F9F9, 0.7);
-    border-radius: 5px;
-    box-shadow: 0 1px 4px;
-  }
-
-  .download-subtitle {
-    color: #205434;
+  .structure-title {
+    font-weight: normal;
   }
 
   .title {
-    margin-left: 10px;
-    margin-right: 1%;
-    margin-top: 10px;
-    margin-bottom: 0;
     font-weight: normal;
+    margin-bottom: 0;
+  }
+
+  .structure-container {
+    margin: 2%;
+    align-content: center;
   }

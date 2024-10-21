@@ -1,9 +1,5 @@
 @import "~src/variables.scss";
 
-div{
-  width:100%;
-}
-
 .imageArea{
   display: flex;
   justify-content: space-between;
@@ -45,4 +41,29 @@ mat-card {
 .loading-bar {
   width: 80%;
   text-align: left;
+}
+
+.toggle-btn {
+  cursor: pointer;
+}
+
+.collapsible-div {
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.collapsible-div.ng-animating {
+  max-height: 0;
+  opacity: 0;
+}
+
+.toggle-container button, .toggle-container p {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px; /* Optional: Add space between button and text */
+}
+
+.toggle-container p {
+  margin: 0; /* Optional: Removes default paragraph margins */
 }

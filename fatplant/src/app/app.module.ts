@@ -98,9 +98,9 @@ import { AralipSiteComponent } from './components/aralip/about/aralip-site/arali
 import { AralipPathwayComponent } from './components/aralip/aralip-pathway/aralip-pathway.component';
 import{MutantsComponent} from './components/aralip/mutant/mutant.component';
 import{DownloadComponent} from './components/aralip/download/download.component';
-//import { CommentsComponent } from './components/aralip/comments/comments.component';
 import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component';
-
+import { CommentsComponent } from './components/aralip/comments/comments.component';
+import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summary.component'
 
 
 @NgModule({
@@ -169,9 +169,10 @@ import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component'
     LipidPageComponent,
     AralipMenuComponent,
     AralipPathwayComponent,
-    EnzymesComponent
+    EnzymesComponent,
     MutantsComponent,
-    //CommentsComponent,
+    CommentsComponent,
+    LociSummaryComponent,
     DownloadComponent
   ],
   entryComponents: [
@@ -200,7 +201,6 @@ import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component'
     CommonModule,
     // CytoscapeModule,
     ReactiveFormsModule,
-    MatPaginatorModule,
     MatTabsModule,
     MatRadioModule,
     MatDividerModule,

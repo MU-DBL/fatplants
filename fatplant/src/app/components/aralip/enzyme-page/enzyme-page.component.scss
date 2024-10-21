@@ -109,32 +109,9 @@ mat-row {
     border-bottom-color: $pale-green;
 }
 
-mat-cell {
-    padding-right: 2%;
-}
-
-mat-cell>a,
-mat-cell>span>a {
-    text-decoration: none;
-    color: $light-green;
-}
-
-mat-cell>a:visited,
-mat-cell>span>a:visited {
-    color: $dark-green;
-}
-
 .pointer {
     cursor: pointer;
     padding: 5px;
-}
-
-.seq-cell {
-    flex-wrap: wrap;
-}
-
-.seq-entry {
-    margin: 2% 0;
 }
 
 .external-link {

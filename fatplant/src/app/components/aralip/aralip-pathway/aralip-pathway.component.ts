@@ -9,6 +9,7 @@ import { APIService } from '../../../services/api/api.service';
 })
 export class AralipPathwayComponent implements OnInit {
   selectedOption;
+  isCollapsed = true;
   id="2";
   name="";
   path="";
@@ -16,6 +17,9 @@ export class AralipPathwayComponent implements OnInit {
   abbreviation=""
   contributor=""
 
+  toggleCollapse() {
+    this.isCollapsed = !this.isCollapsed;  // Toggle the collapse state
+  }
 
   pathwayOptions = [
   {
@@ -126,7 +130,6 @@ export class AralipPathwayComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedOption = this.pathwayOptions[0];
-    //this.img = new Image();
     this.onChange(this.pathwayOptions[parseInt(this.id)-2])
   }
 
