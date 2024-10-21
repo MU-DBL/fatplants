@@ -86,4 +86,24 @@ export class APIService {
   pathwayEnzyme(id: string) {
     return this.http.get(environment.BASE_API_URL+"enzyme_pathway/?id="+id);
   }
+  
+  pathwayAralip(id: string) {
+    return this.http.get(environment.BASE_API_URL+"aralip_pathway/?id="+id);
+  }
+
+  getEnzymeName(id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_name/?id="+id);
+  }
+
+  getEnzymeReaction(enzyme_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_reactions/?enzyme_id="+enzyme_id);
+  }
+
+  getEnzymePathway(enzyme_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_pathways/?enzyme_id="+enzyme_id);
+  }
+
+  getEnzymeLocus(enzyme_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_locus/?enzyme_id="+enzyme_id);
+  }
 }

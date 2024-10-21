@@ -10,10 +10,14 @@
         <h3>{{name}}</h3>
         <b>Legend: </b>
         <P>{{legend}}</P>
-        <b>Abbreviations: </b>
-        <p>{{abbreviation}}</p>
-        <b>Contributors: </b>
-        <p>TBD</p>
+        <div *ngIf="abbreviation != 'Unknown'">
+            <b>Abbreviations: </b>
+            <p>{{abbreviation}}</p>
+        </div>
+        <div *ngIf="contributor">
+            <b>Contributors: </b>
+            <p>{{contributor}}</p>
+        </div>
         <p>Note: Click on red or purple text or colored circle for further information.</p>
         <div id="pathway_image" style="margin-top:40px;height:900px;">
             <img src="/static/aralip/{{path}}.GIF" border="0" [attr.usemap]="'#' + path">

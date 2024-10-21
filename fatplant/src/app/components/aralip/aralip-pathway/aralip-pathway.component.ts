@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 import { APIService } from '../../../services/api/api.service';
 
 @Component({
@@ -13,12 +14,12 @@ export class AralipPathwayComponent implements OnInit {
   path="";
   legend="";
   abbreviation=""
+  contributor=""
 
 
   pathwayOptions = [
   {
     id: "2",
-    //img: "/app/assets/pathwayImages/aralip/fatty_acid_synthesis.GIF",
     name: "Fatty Acid Synth"
   },
   {
@@ -111,26 +112,35 @@ export class AralipPathwayComponent implements OnInit {
   },
 ];
 
-  constructor(private apiService: APIService) { }
+  constructor(private route: ActivatedRoute, private apiService: APIService) { 
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('pathway_id');
+      if(!this.id){
+        this.id="2"
+      }else if(parseInt(this.id)<2 || parseInt(this.id)>24){
+        this.id="2"
+      }
+      console.log('pathway_id:',params.get('pathway_id'));
+    });
+  }
 
   ngOnInit(): void {
     this.selectedOption = this.pathwayOptions[0];
     //this.img = new Image();
-    this.onChange(this.pathwayOptions[0])
+    this.onChange(this.pathwayOptions[parseInt(this.id)-2])
   }
 
   onChange(newOption) {
     console.log('entered onChange',newOption);
     this.selectedOption = newOption;
-    this.apiService.pathwayEnzyme(newOption.id).subscribe((data: any[]) => {
-      //this.soybeanDataSource = new MatTableDataSource(data);
+    this.apiService.pathwayAralip(newOption.id).subscribe((data: any[]) => {
       this.path=data[0].path;//TO DO:if data is empty?
       this.id=newOption.id;
       this.name=data[0].name;
       this.legend=data[0].legend;
       this.abbreviation=data[0].abbreviation;
+      this.contributor=data[0].contributor;
     }, error => {
-      //this.soybeanDataSource = new MatTableDataSource([]);
     });
   }
 
