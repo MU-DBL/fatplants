@@ -72,4 +72,10 @@ export class EnzymesComponent implements OnInit {
     this.ref_selected=null;
     this.est_selected=true;
   }
+
+  convertToHtml(input: String): String {
+    let htmlString = input.replace(/~(.*?)~/g, '<sub>$1</sub>');
+    htmlString = htmlString.replace(/\^(.*?)\^/g, '<sup>$1</sup>');
+    return htmlString;
+  }
 }
