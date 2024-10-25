@@ -93,7 +93,7 @@ export class APIService {
   }
 
   getEnzymeName(id: string) {
-    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_name/?id="+id);
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_name/?enzyme_id="+id);
   }
 
   getEnzymeReaction(enzyme_id: string) {
@@ -118,5 +118,21 @@ export class APIService {
 
   get_enzyme_from_location_id(location_id: string) {
     return this.http.get(environment.BASE_API_URL + "enzyme_for_locus/?locus_id="+location_id);
+  }
+
+  getHehoName(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_name/?heho_id="+heho_id);
+  }
+
+  getHehoReaction(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_reactions/?heho_id="+heho_id);
+  }
+
+  getHehoPathway(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_pathways/?heho_id="+heho_id);
+  }
+  
+  getHehoLocus(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_locus/?heho_id="+heho_id);
   }
 }

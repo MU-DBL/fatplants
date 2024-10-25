@@ -4,18 +4,17 @@ import { ActivatedRoute} from '@angular/router';
 import { APIService } from '../../../services/api/api.service';
 
 @Component({
-  selector: 'app-enzymes',
-  templateUrl: './enzymes.component.html',
-  styleUrls: ['./enzymes.component.scss']
+  selector: 'app-hehos',
+  templateUrl: './hehos.component.html',
+  styleUrls: ['./hehos.component.scss']
 })
-export class EnzymesComponent implements OnInit {
+export class HehosComponent implements OnInit {
   locusDataSource: MatTableDataSource<any>;
   id="2";
   name="";
   reactions=[];
   pathways=[];
   locus=[];
-  //test="";
   ref_selected=null;
   mutant_selected=null;
   est_selected=false;
@@ -32,23 +31,22 @@ export class EnzymesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.getEnzymeName(this.id).subscribe((data: any[]) => {
+    this.apiService.getHehoName(this.id).subscribe((data: any[]) => {
       this.name=data[0].name;//TO DO:if data is empty?
     }, error => {
     });
 
-    this.apiService.getEnzymeReaction(this.id).subscribe((data: any[]) => {
+    this.apiService.getHehoReaction(this.id).subscribe((data: any[]) => {
       this.reactions=data;
-      //this.test=this.reactions[0].ecnumber;
     }, error => {
     });
 
-    this.apiService.getEnzymePathway(this.id).subscribe((data: any[]) => {
+    this.apiService.getHehoPathway(this.id).subscribe((data: any[]) => {
       this.pathways=data;
     }, error => {
     });
 
-    this.apiService.getEnzymeLocus(this.id).subscribe((data: any[]) => {
+    this.apiService.getHehoLocus(this.id).subscribe((data: any[]) => {
       this.locus=data;
       this.locusDataSource = new MatTableDataSource(data);
     }, error => {

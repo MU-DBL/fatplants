@@ -100,7 +100,8 @@ import{MutantsComponent} from './components/aralip/mutant/mutant.component';
 import{DownloadComponent} from './components/aralip/download/download.component';
 import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component';
 import { CommentsComponent } from './components/aralip/comments/comments.component';
-import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summary.component'
+import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summary.component';
+import { HehosComponent } from './components/aralip/hehos/hehos.component'
 
 
 @NgModule({
@@ -173,7 +174,8 @@ import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summ
     MutantsComponent,
     CommentsComponent,
     LociSummaryComponent,
-    DownloadComponent
+    DownloadComponent,
+    HehosComponent
   ],
   entryComponents: [
     StructureViewerComponent,

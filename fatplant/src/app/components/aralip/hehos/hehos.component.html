@@ -1,28 +1,13 @@
-<mat-card id="enzyme-page">
+<mat-card id="heho-page">
     <div class="page-title-bar">
         <p class="page-title">Enzyme & Protein Data</p>
     </div>
     <h2 style="color:#5F9EA0; padding: 2%; font-weight: 600;">{{name}}</h2>
+    <img *ngIf='id=="1"' src="/static/spt.GIF" height="500" width="630" border="0" style="padding: 2%;">
+    <img *ngIf='id=="2"' src="/static/graph_1.GIF" height="500" width="630" border="0" style="padding: 2%;">
+    <img *ngIf='id=="4"' src="/static/graph_2.GIF" height="500" width="630" border="0" style="padding: 2%;">
     <div *ngFor="let reaction of reactions" style="padding: 2%;">
-        <div *ngIf='reaction.enzymetype=="Heteromeric"; else notHeteromeric'>
-            <div *ngIf='reaction.reactiontype=="Is A Subunit Of"'>
-                <p></p>
-            </div>
-            <div
-                *ngIf='reaction.reactiontype=="Overall Reaction" || reaction.reactiontype=="Subunit & Overall Reaction"'>
-                <p>Is A Subunit Of <a href="/hehos/{{reaction.heho_id}}"
-                        target="_blank">{{reaction.heho_name}}</a> Reaction</p>
-            </div>
-        </div>
-        <ng-template #notHeteromeric>
-            <div *ngIf='reaction.reactiontype=="Is A Subunit Of"'>
-                <p>A Domain Of The {{reaction.enzyme_name}} With {{reaction.domain}} Activity</p>
-            </div>
-            <div *ngIf='reaction.reactiontype=="Overall Reaction"'>
-                <p>{{reaction.enzyme_name}} Overall Reaction</p>
-            </div>
-        </ng-template>
-
+        <p>{{reaction.name}}</p>
         <div
             *ngIf="reaction.s1.trim() && reaction.s2.trim() && reaction.p1.trim() && reaction.p2.trim(); else notAllFour">
             <tr>
@@ -165,11 +150,11 @@
                 <mat-cell *matCellDef="let elem"> {{ elem.subcelles }} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="evidence">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Key References </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Evidence for function </mat-header-cell>
                 <mat-cell *matCellDef="let elem"> {{ elem.evidence }} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="references">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Evidence for function </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Key References </mat-header-cell>
                 <mat-cell *matCellDef="let elem"> <u style="color:blue;" (click)='showRef(elem.references)'>Ref</u>
                 </mat-cell>
             </ng-container>
