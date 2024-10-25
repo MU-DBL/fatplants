@@ -10,7 +10,7 @@
             </div>
             <div
                 *ngIf='reaction.reactiontype=="Overall Reaction" || reaction.reactiontype=="Subunit & Overall Reaction"'>
-                <p>Is A Subunit Of <a href="http://aralip.plantbiology.msu.edu/hehos/{{reaction.heho_id}}"
+                <p>Is A Subunit Of <a href="/hehos/{{reaction.heho_id}}"
                         target="_blank">{{reaction.heho_name}}</a> Reaction</p>
             </div>
         </div>
@@ -22,28 +22,26 @@
                 <p>{{reaction.enzyme_name}} Overall Reaction</p>
             </div>
         </ng-template>
-        <!--<div *ngIf="!reaction.s1 || !reaction.s2 || !reaction.p1 || !reaction.p2; else allFour">-->
 
         <div
             *ngIf="reaction.s1.trim() && reaction.s2.trim() && reaction.p1.trim() && reaction.p2.trim(); else notAllFour">
-            <!--<table border="0" cellspacing="4" cellpadding="0">-->
             <tr>
                 <td
                     style="font-size: 10pt; font-weight:bold ;color: green; width:300px;text-align: right; vertical-align: middle;">
-                    {{reaction.s2}}</td>
+                    <div [innerHTML]="convertToHtml(reaction.s2)"></div></td>
                 <td></td>
                 <td
                     style="font-size: 10pt;font-weight:bold ; color: green; width:300px;text-align: left; vertical-align: middle;">
-                    {{reaction.p2}}</td>
+                    <div [innerHTML]="convertToHtml(reaction.p2)"></div></td>
             </tr>
             <tr>
                 <td
                     style="font-size: 10pt; font-weight:bold ;color: red; width:300px; text-align: right;vertical-align: middle;">
-                    {{reaction.s1}}</td>
+                    <div [innerHTML]="convertToHtml(reaction.s1)"></div></td>
                 <td><img src="/static/reaction.gif" border="=0"></td>
                 <td
                     style="font-size: 10pt; font-weight:bold ;color:red; width:300px; vertical-align: middle;text-align: left;">
-                    {{reaction.p1}}</td>
+                    <div [innerHTML]="convertToHtml(reaction.p1)"></div></td>
                 <td style="font-size: 10pt; vertical-align: top;text-align: right;">Brenda:
                     <span *ngFor="let num of reaction.ecnumber">
                         <a href="http://www.brenda-enzymes.info/php/result_flat.php4?ecno={{num.ecnumber}}"
@@ -75,30 +73,31 @@
         </div>
         <ng-template #notAllFour>
             <div *ngIf="reaction.s1.trim() || reaction.s2.trim() || reaction.p1.trim() || reaction.p2.trim()">
-                <!--<table border="0" cellspacing="4" cellpadding="0">-->
                 <tr>
-                    <td style="vertical-align: middle;"><span *ngIf="reaction.s2.trim()"
-                            style="font-size: 10pt; font-weight:bold ;color: green; width:300px;text-align: right;">{{reaction.s2}}</span><span
-                            *ngIf="reaction.s1.trim() && reaction.s2.trim()"
-                            style="font-size: 10pt; font-weight:bold ;color: green; width:300px;text-align: right;">+</span><br><span
-                            *ngIf="reaction.s1.trim()"
-                            style="font-size: 10pt; font-weight:bold ;color: red; width:300px;text-align: right;">{{reaction.s1}}</span>
+                    <td style="vertical-align: middle; width:300px;">
+                        <span *ngIf="reaction.s2.trim()" style="font-size: 10pt; font-weight:bold ;color: green;text-align: right;">
+                            <div [innerHTML]="convertToHtml(reaction.s2)+'+'"></div>
+                        </span>
+                        <span *ngIf="reaction.s1.trim()" style="font-size: 10pt; font-weight:bold ;color: red; text-align: right;">
+                            <div [innerHTML]="convertToHtml(reaction.s1)"></div>
+                        </span>
                     </td>
                     <td style="vertical-align: middle;"><img src="/static/reaction_.gif" border="=0"></td>
-                    <td style="vertical-align: middle;"><span *ngIf="reaction.p2.trim()"
-                            style="font-size: 10pt; font-weight:bold ;color: green; width:300px;text-align: right;">{{reaction.p2}}</span><span
-                            *ngIf="reaction.p1.trim() && reaction.p2.trim()"
-                            style="font-size: 10pt; font-weight:bold ;color: green; width:300px;text-align: right;">+</span><br><span
-                            *ngIf="reaction.p1.trim()"
-                            style="font-size: 10pt; font-weight:bold ;color: red; width:300px;text-align: right;">{{reaction.p1}}</span>
+                    <td style="vertical-align: middle; width:300px;">
+                        <span *ngIf="reaction.p1.trim()" style="font-size: 10pt; font-weight:bold ;color: red; text-align: left;">
+                            <div [innerHTML]="convertToHtml(reaction.p1)"></div>
+                        </span>
+                        <span *ngIf="reaction.p2.trim()" style="font-size: 10pt; font-weight:bold ;color: green; text-align: left;">
+                            <div [innerHTML]="convertToHtml('+'+reaction.p2)"></div>
+                        </span>
                     </td>
                     <td style="font-size: 10pt; vertical-align: top;text-align: right;">Brenda:
                         <span *ngFor="let num of reaction.ecnumber">
-                            <a href="http://www.brenda-enzymes.info/php/result_flat.php4?ecno={{num.ecnumber}}"
+                            <a href="http://www.brenda-enzymes.info/enzyme.php?ecno={{num.ecnumber}}"
                                 target="_blank">[{{num.ecnumber}}]</a>&nbsp;</span>
                         <br>IUBMB:
                         <span *ngFor="let num of reaction.ecnumber">
-                            <a href="http://www.chem.qmul.ac.uk/iubmb/enzyme/EC{{num.ecnumber.replaceAll('.', '/')}}.html"
+                            <a href="http://www.chem.qmul.ac.uk/iubmb/enzyme/EC{{(num.ecnumber.replaceAll('.', '/')+'.html').replace('*.html', '')}}"
                                 target="_blank">[{{num.ecnumber}}]</a>&nbsp;</span>
                         <br>ExPASy:
                         <span *ngFor="let num of reaction.ecnumber">
@@ -110,7 +109,7 @@
                                 target="_blank">[{{num.ecnumber}}]</a>&nbsp;</span>
                         <br>PDB:
                         <span *ngFor="let num of reaction.ecnumber">
-                            <a href="http://www.ebi.ac.uk/thornton-srv/databases/cgi-bin/enzymes/GetPage.pl?ec_number={{num.ecnumber}}"
+                            <a href="http://www.ebi.ac.uk/thornton-srv/databases/cgi-bin/enzymes/GetPage.pl?ec_number={{num.ecnumber.replaceAll('.*','')}}"
                                 target="_blank">[{{num.ecnumber}}]</a>&nbsp;</span>
                     </td>
                 </tr>
@@ -145,7 +144,7 @@
             <ng-container matColumnDef="abbrev">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Abbrev. </mat-header-cell>
                 <mat-cell *matCellDef="let elem">
-                    {{elem.abbrev}}
+                    <div [innerHTML]="elem.abbrev"></div>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="mutant">
@@ -166,7 +165,7 @@
                 <mat-cell *matCellDef="let elem"> {{ elem.subcelles }} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="evidence">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Evidence for function </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Key References </mat-header-cell>
                 <mat-cell *matCellDef="let elem"> {{ elem.evidence }} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="references">
@@ -176,7 +175,7 @@
             </ng-container>
             <ng-container matColumnDef="comments">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Comments </mat-header-cell>
-                <mat-cell *matCellDef="let elem"> {{ elem.comments }} </mat-cell>
+                <mat-cell *matCellDef="let elem"><div [innerHTML]="elem.comments"></div></mat-cell>
             </ng-container>
             <ng-container matColumnDef="microarray">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Microarray Expression </mat-header-cell>
