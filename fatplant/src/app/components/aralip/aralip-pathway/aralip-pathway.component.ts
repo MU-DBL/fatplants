@@ -16,6 +16,8 @@ export class AralipPathwayComponent implements OnInit {
   legend="";
   abbreviation=""
   contributor=""
+  tabTitle=""
+  tabLink=""
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;  // Toggle the collapse state
@@ -79,7 +81,7 @@ export class AralipPathwayComponent implements OnInit {
     name: "Mito LipoPolySach"
   },
   {
-    id: "15",
+    id: "16",
     name: "Trafficking"
   },
   {
@@ -143,6 +145,8 @@ export class AralipPathwayComponent implements OnInit {
       this.legend=data[0].legend;
       this.abbreviation=data[0].abbreviation;
       this.contributor=data[0].contributor;
+      this.tabTitle=data[0].tabTitle;
+      this.tabLink=data[0].tabLink;
     }, error => {
     });
   }
