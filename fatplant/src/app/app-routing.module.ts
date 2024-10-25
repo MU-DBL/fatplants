@@ -43,6 +43,7 @@ import { ContributorsComponent } from './components/aralip/about/contributors/co
 import{MutantsComponent} from './components/aralip/mutant/mutant.component';
 import{DownloadComponent} from './components/aralip/download/download.component';
 import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component';
+import { HehosComponent } from './components/aralip/hehos/hehos.component'
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'team', component: TeamComponent},
@@ -85,6 +86,7 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'aralip-menu/enzymes/:id', component: EnzymesComponent },
 {path: 'enzymes/:id', component: EnzymesComponent },
 {path: 'aralip-menu/:page/:pathway_id', component: AralipMenuComponent },
+{path: 'hehos/:id', component: HehosComponent },
 {path: '**', redirectTo: '/home'}];
 
 @NgModule({
