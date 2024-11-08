@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +78,61 @@ export class APIService {
 
   askChatGPT(query: string) {
     return this.http.get(environment.BASE_API_URL+"chatgpt/?content=" + encodeURIComponent(query));
+  }
+
+  searchEnzyme(query: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme_search/?query="+ query);
+  }
+
+  pathwayEnzyme(id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme_pathway/?id="+id);
+  }
+  
+  pathwayAralip(id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme_pathway/?id="+id);
+  }
+
+  getEnzymeName(id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_name/?enzyme_id="+id);
+  }
+
+  getEnzymeReaction(enzyme_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_reactions/?enzyme_id="+enzyme_id);
+  }
+
+  getEnzymePathway(enzyme_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_pathways/?enzyme_id="+enzyme_id);
+  }
+
+  getEnzymeLocus(enzyme_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_locus/?enzyme_id="+enzyme_id);
+  }
+
+  submitComment(commentData: any) {
+    return this.http.post(environment.BASE_API_URL + "submitform/", commentData);
+  }
+
+  get_location_summary(): Observable<any> {
+    return this.http.get(environment.BASE_API_URL + 'locations_summary/');
+  }
+
+  get_enzyme_from_location_id(location_id: string) {
+    return this.http.get(environment.BASE_API_URL + "enzyme_for_locus/?locus_id="+location_id);
+  }
+
+  getHehoName(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_name/?heho_id="+heho_id);
+  }
+
+  getHehoReaction(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_reactions/?heho_id="+heho_id);
+  }
+
+  getHehoPathway(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_pathways/?heho_id="+heho_id);
+  }
+  
+  getHehoLocus(heho_id: string) {
+    return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_locus/?heho_id="+heho_id);
   }
 }

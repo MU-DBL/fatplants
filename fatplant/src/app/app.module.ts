@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DataAnalysisComponent } from './components/pages/onestopsearch/data-analysis/data-analysis.component';
@@ -90,6 +90,18 @@ import { CounterComponent } from './components/home-page/counter/counter.compone
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
+import { EnzymePageComponent } from './components/aralip/enzyme-page/enzyme-page.component';
+import { LipidPageComponent } from './components/aralip/lipid-page/lipid-page.component';
+import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
+import { ContributorsComponent } from './components/aralip/about/contributors/contributors.component'; 
+import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
+import { AralipPathwayComponent } from './components/aralip/aralip-pathway/aralip-pathway.component';
+import{MutantsComponent} from './components/aralip/mutant/mutant.component';
+import{DownloadComponent} from './components/aralip/download/download.component';
+import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component';
+import { CommentsComponent } from './components/aralip/comments/comments.component';
+import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summary.component';
+import { HehosComponent } from './components/aralip/hehos/hehos.component'
 
 
 @NgModule({
@@ -151,7 +163,19 @@ import { LatestNewsPageComponent } from './components/latest-news-page/latest-ne
     GoCytoscapeNetworkComponent,
     CounterComponent,
     ResearchPapersPageComponent,
-    LatestNewsPageComponent
+    LatestNewsPageComponent,
+    ContributorsComponent,
+    AralipSiteComponent,
+    EnzymePageComponent,
+    LipidPageComponent,
+    AralipMenuComponent,
+    AralipPathwayComponent,
+    EnzymesComponent,
+    MutantsComponent,
+    CommentsComponent,
+    LociSummaryComponent,
+    DownloadComponent,
+    HehosComponent
   ],
   entryComponents: [
     StructureViewerComponent,
@@ -176,9 +200,9 @@ import { LatestNewsPageComponent } from './components/latest-news-page/latest-ne
     CdkTableModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
     // CytoscapeModule,
     ReactiveFormsModule,
-    MatPaginatorModule,
     MatTabsModule,
     MatRadioModule,
     MatDividerModule,
@@ -206,6 +230,7 @@ import { LatestNewsPageComponent } from './components/latest-news-page/latest-ne
     MatDialogModule,
     MatSnackBarModule,
     ClipboardModule,
+
     MatSliderModule 
   ],
   providers: [],
