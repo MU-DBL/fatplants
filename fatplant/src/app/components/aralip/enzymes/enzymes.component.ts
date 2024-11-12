@@ -19,6 +19,7 @@ export class EnzymesComponent implements OnInit {
   ref_selected=null;
   mutant_selected=null;
   est_selected=false;
+  isPopupOpen = false;
 
   constructor(private route: ActivatedRoute, private apiService: APIService) { 
     this.route.paramMap.subscribe(params => {
@@ -53,6 +54,18 @@ export class EnzymesComponent implements OnInit {
       this.locusDataSource = new MatTableDataSource(data);
     }, error => {
     });
+  }
+
+  closeRefPopup() {
+    this.ref_selected=null;
+  }
+
+  closeMutantPopup() {
+    this.mutant_selected=null;
+  }
+
+  closeEstPopup() {
+    this.est_selected=false;
   }
 
   showRef(data: any): void{

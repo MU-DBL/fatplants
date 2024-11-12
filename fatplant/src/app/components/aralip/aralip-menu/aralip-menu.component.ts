@@ -18,10 +18,13 @@ export class AralipMenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  changePage(newPage: string) {
-  
-    console.log("aralip-menu/" + newPage);
-    this.router.navigate(["aralip-menu/" + newPage]);
+  changePage(newPage: any) {
+    const numericPage = Number(newPage);
+    if (Number.isInteger(numericPage)) {
+      // console.log(newPage)
+      this.router.navigate(["aralip-menu/pathway/" + newPage]);
+    } else {
+      this.router.navigate(["aralip-menu/" + newPage]);
+    }
   }
-
 }

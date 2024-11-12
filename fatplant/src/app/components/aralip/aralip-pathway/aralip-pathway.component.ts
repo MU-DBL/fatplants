@@ -127,6 +127,7 @@ export class AralipPathwayComponent implements OnInit {
         this.id="2"
       }
       console.log('pathway_id:',params.get('pathway_id'));
+      this.onChange(this.pathwayOptions[parseInt(this.id)-2])
     });
   }
 

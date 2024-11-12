@@ -33,15 +33,8 @@ import { ContactUsComponent } from './components/contact-page/contactus.componen
 import { GoCytoscapeComponent } from './components/go-cytoscape-page/go-cytoscape.component';
 import { LatestNewsPageComponent } from './components/latest-news-page/latest-news-page.component';
 import { ResearchPapersPageComponent } from './components/research-papers-page/research-papers-page.component';
-
-import { EnzymePageComponent } from './components/aralip/enzyme-page/enzyme-page.component';
-import { LipidPageComponent } from './components/aralip/lipid-page/lipid-page.component';
 import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
-import { AralipSiteComponent } from './components/aralip/about/aralip-site/aralip-site.component';
-import { ContributorsComponent } from './components/aralip/about/contributors/contributors.component';
 // import { CommentsComponent } from './components/aralip/comments/comments.component';
-import{MutantsComponent} from './components/aralip/mutant/mutant.component';
-import{DownloadComponent} from './components/aralip/download/download.component';
 import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component';
 import { HehosComponent } from './components/aralip/hehos/hehos.component'
 
