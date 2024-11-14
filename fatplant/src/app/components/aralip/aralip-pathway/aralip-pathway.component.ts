@@ -14,10 +14,10 @@ export class AralipPathwayComponent implements OnInit {
   name="";
   path="";
   legend="";
-  abbreviation=""
-  contributor=""
-  tabTitle=""
-  tabLink=""
+  abbreviation="";
+  contributor="";
+  tabTitle=[];
+  tabLink=[];
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;  // Toggle the collapse state
@@ -145,9 +145,12 @@ export class AralipPathwayComponent implements OnInit {
       this.name=data[0].name;
       this.legend=data[0].legend;
       this.abbreviation=data[0].abbreviation;
-      this.contributor=data[0].contributor;
-      this.tabTitle=data[0].tabTitle;
-      this.tabLink=data[0].tabLink;
+      //this.contributor=data[0].contributor;
+      //this.tabTitle=data[0].tabTitle;
+      //this.tabLink=data[0].tabLink;
+      this.contributor=data.map(data => data.contributor).join(", ");
+      this.tabTitle=data.map(data => data.tabTitle);
+      this.tabLink=data.map(data => data.tabLink);
     }, error => {
     });
   }
