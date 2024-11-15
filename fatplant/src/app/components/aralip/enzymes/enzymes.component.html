@@ -42,7 +42,7 @@
                 <td
                     style="font-size: 10pt; font-weight:bold ;color:red; width:300px; vertical-align: middle;text-align: left;">
                     <div [innerHTML]="convertToHtml(reaction.p1)"></div></td>
-                <td style="font-size: 10pt; vertical-align: top;text-align: right;">Brenda:
+                <td *ngIf="reaction.ecnumber.length" style="font-size: 10pt; vertical-align: top;text-align: right;">Brenda:
                     <span *ngFor="let num of reaction.ecnumber">
                         <a href="http://www.brenda-enzymes.info/php/result_flat.php4?ecno={{num.ecnumber}}"
                             target="_blank">[{{num.ecnumber}}]</a>&nbsp;</span>
@@ -64,7 +64,7 @@
                             target="_blank">[{{num.ecnumber}}]</a>&nbsp;</span>
                 </td>
             </tr>
-            <tr *ngIf="reaction.comment">
+            <tr *ngIf="reaction.comment.trim()">
                 <td style="font-size: 10pt;font-weight:bold ; width:300px; text-align: right; vertical-align: middle;">
                     Comments:</td>
                 <td colspan="4" style="font-size: 10pt; width:300px; text-align: left; vertical-align: middle;">
@@ -125,9 +125,12 @@
         </ng-template>
     </div>
     <p class="subtitle">Enzyme Pathways</p>
-    <span *ngFor="let pathway of pathways">
-        | <a href="/aralip-menu/pathway/{{pathway.pathway_id}}" target="_blank"
-            style="margin-left: 1%;">{{pathway.nameabbreviation}}</a>
+    <span *ngFor="let pathway of pathways; let i=index">
+        <span *ngIf="pathway.nameabbreviation!='Unknown'">
+            <span *ngIf="i">|</span>
+            <a href="/aralip-menu/pathway/{{pathway.pathway_id}}" target="_blank"
+                style="margin-left: 1%;margin-right: 1%;">{{pathway.nameabbreviation}}</a>
+            </span>
     </span>
     <p class="subtitle">Locus Data & Links </p>
     <div id='table' style="margin-left: 2%; margin-right: 2%;">

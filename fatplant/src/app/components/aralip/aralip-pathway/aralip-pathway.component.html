@@ -16,7 +16,13 @@
                 <p>Click + to expand and view the legend, abbreviations, and contributors of the pathway, or - to collapse</p>
             </div>
               <div *ngIf="!isCollapsed" class="collapsible-div">
-                <P> <b>Legend:</b> {{legend}} </P>
+                <div *ngIf="!legend.includes('Beisson et al'); else beisson">
+                    <P> <b>Legend:</b> {{legend}} </P>
+                </div>
+                <ng-template #beisson>
+                    <P> <b>Legend:</b> This pathway has not been updated in the current project. For more up-to-date information, please see: Iván F. Acosta   and   Edward E. Farmer <a href="http://www.bioone.org/doi/full/10.1199/tab.0129" target="_blank">Jasmonates</a> in "The Arabidopsis Book", <a href="http://www.oxylipins.uni-goettingen.de/" target="_blank">Oxylipin Profiling Database</a> website, and <a href="http://www.springer.com/life+sciences/biochemistry+%26+biophysics/book/978-3-642-03872-3?changeHeader" target="_blank">Lipid Signaling in Plants</a>. Series: Plant Cell Monographs, Vol. 16,  Munnik, T (Ed.) 2010 </P>
+                    <P> <b>Reference:</b> Based on <a href="http://www.plantphysiol.org/cgi/content/abstract/132/2/681" target="_blank">Beisson et al (2003)</a> </P>
+                </ng-template>
                 <div *ngIf="abbreviation != 'Unknown'">
                     <p> <b>Abbreviations: </b> {{abbreviation}}</p>
                 </div>
@@ -27,7 +33,11 @@
         </div>
         <p><span style="color: red;">Note:</span> Click on red or purple text or colored circle for further information.</p>
         <p>Update 2015: Information on mutants has been <a href="/aralip-menu/mutant">updated and expanded</a></p>
-        <p *ngIf="tabTitle">Acyl-Lipid Chapter link: <a href="{{tabLink}}"><i>{{tabTitle}}</i></a></p>
+        <p><span *ngIf="tabTitle[0]">Acyl-Lipid Chapter link: {{tabTitle.length}}</span><!--Tried to use *ngIf="tabTitle.length!=0", but the length is 1 even no tabTitle exist. Use *ngIf="tabTitle[0]" to fix it.-->
+            <span *ngFor="let title of tabTitle; let i = index">
+                <a href="{{tabLink[i]}}"><i>{{title}}</i></a>&nbsp;
+            </span>
+        </p>
         <div id="pathway_image" style="height:900px;">
             <img src="/static/aralip/{{path}}.GIF" border="0" [attr.usemap]="'#' + path">
             <map name="fatty_acid_synthesis">
