@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable ,throwError} from 'rxjs';
+
+import { catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -108,10 +111,7 @@ export class APIService {
     return this.http.get(environment.BASE_API_URL+"enzyme/get_enzyme_locus/?enzyme_id="+enzyme_id);
   }
 
-  submitComment(commentData: any) {
-    return this.http.post(environment.BASE_API_URL + "submitform/", commentData);
-  }
-
+ 
   get_location_summary(): Observable<any> {
     return this.http.get(environment.BASE_API_URL + 'locations_summary/');
   }
@@ -134,5 +134,24 @@ export class APIService {
   
   getHehoLocus(heho_id: string) {
     return this.http.get(environment.BASE_API_URL+"enzyme/get_heho_locus/?heho_id="+heho_id);
+  }
+  submitComment(commentData: any): Observable<any> {
+    return this.http.post(environment.BASE_API_URL + "submitform/", commentData).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+      return throwError('A client-side or network error occurred. Please try again.');
+    } else {
+      // The backend returned an unsuccessful response code.
+      // Extract specific error details from the HTTP response.
+      const errorDetails = error.error?.detail || 'Unknown error';
+      console.error(`Backend returned code ${error.status}, body was: ${errorDetails}`);
+      return throwError(`Error: ${errorDetails}`);
+    }
   }
 }

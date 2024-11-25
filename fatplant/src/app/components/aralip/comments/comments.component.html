@@ -25,6 +25,7 @@
           <li *ngFor="let error of errorMessages">{{ error }}</li>
         </ul>
       </div>
+      <!-- Inside your comments.component.html -->
 
       <!-- Name Field -->
       <div class="form-group" [class.invalid]="!formData.name.trim() && showFormError">

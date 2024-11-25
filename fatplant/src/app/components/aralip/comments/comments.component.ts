@@ -69,16 +69,18 @@ export class CommentsComponent {
 
       this.commentsService.submitComment(this.formData).subscribe(
         (data) => {
+          console.log('Submission successful:', data); // Log success message
           this.clearButton.nativeElement.click(); // Clear the form
           window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top
         },
         (error) => {
-          console.error('Error submitting form:', error);
+          this.errorMessages = [error]; 
+          this.showFormError = true; // Show error message
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       );
     } else {
-      console.log('Form is invalid.');
-      this.showFormError = true; // Show error message
+      this.showFormError = true; 
       this.scrollToErrorMessage(); // Scroll to the error message section
     }
   }
