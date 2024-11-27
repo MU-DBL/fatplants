@@ -324,7 +324,7 @@
                         </ng-container>
                         <ng-container matColumnDef="abbrev">
                             <th mat-header-cell *matHeaderCellDef>Abbrev.</th>
-                            <td mat-cell *matCellDef="let elem"> {{elem.abbrev}} </td>
+                            <td mat-cell *matCellDef="let elem"> <div [innerHTML]="elem.abbrev"></div> </td>
                         </ng-container>
                         <ng-container matColumnDef="brem1">
                             <th mat-header-cell *matHeaderCellDef>Em I 14-20 DAF</th>
