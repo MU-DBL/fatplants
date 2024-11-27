@@ -102,7 +102,8 @@ import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component'
 import { CommentsComponent } from './components/aralip/comments/comments.component';
 import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summary.component';
 import { HehosComponent } from './components/aralip/hehos/hehos.component';
-import { AralipPathwayMainComponent } from './components/aralip/aralip-pathway-main/aralip-pathway-main.component'
+import { AralipPathwayMainComponent } from './components/aralip/aralip-pathway-main/aralip-pathway-main.component';
+import { DownloadPageComponent } from './components/download-page/download-page.component'
 
 
 @NgModule({
@@ -177,7 +178,8 @@ import { AralipPathwayMainComponent } from './components/aralip/aralip-pathway-m
     LociSummaryComponent,
     DownloadComponent,
     HehosComponent,
-    AralipPathwayMainComponent
+    AralipPathwayMainComponent,
+    DownloadPageComponent
   ],
   entryComponents: [
     StructureViewerComponent,
