@@ -33,7 +33,8 @@
       <ng-container matColumnDef="abbreviations">
         <mat-header-cell *matHeaderCellDef style="width: 20%"> Abbreviations </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{element.abbreviations}}
+          <!--{{element.abbreviations}}-->
+          <div [innerHTML]="element.abbreviations"></div>
         </mat-cell>
       </ng-container>
 
@@ -41,7 +42,8 @@
       <ng-container matColumnDef="activities-proteins">
         <mat-header-cell *matHeaderCellDef style="width: 50%"> Activities/Proteins </mat-header-cell>
         <mat-cell *matCellDef="let element" style="width: 50%">
-          {{ element.activities.join(', ') }}
+          <!--{{ element.activities.join(', ') }}-->
+          <div [innerHTML]="element.activities.join(', ')"></div>
         </mat-cell>
       </ng-container>
 

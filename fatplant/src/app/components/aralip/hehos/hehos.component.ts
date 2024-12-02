@@ -53,6 +53,18 @@ export class HehosComponent implements OnInit {
     });
   }
 
+  closeRefPopup() {
+    this.ref_selected=null;
+  }
+
+  closeMutantPopup() {
+    this.mutant_selected=null;
+  }
+
+  closeEstPopup() {
+    this.est_selected=false;
+  }
+
   showRef(data: any): void{
     this.mutant_selected=null;
     this.ref_selected=data;
