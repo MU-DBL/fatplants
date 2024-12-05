@@ -132,7 +132,7 @@
                 style="margin-left: 1%;margin-right: 1%;">{{pathway.nameabbreviation}}</a>
             </span>
     </span>
-    <div *ngIf="locusDataSource.data.length>0">
+    <div *ngIf="locus.length > 0">
         <p class="subtitle">Locus Data & Links </p>
         <div id='table' style="margin-left: 2%; margin-right: 2%;">
             <mat-table [dataSource]='locusDataSource' style="width:100%">
@@ -202,7 +202,8 @@
                 </ng-container> -->
                 <ng-container matColumnDef="estexpression">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> ESTexpression in other oilseeds </mat-header-cell>
-                    <mat-cell *matCellDef="let elem"> <u style="color:blue; cursor: pointer;" (click)='showEst()'>Data</u>
+                    <mat-cell *matCellDef="let elem"> 
+                        <u *ngIf="elem.brem1 || elem.brem2 || elem.brem3 || elem.brem4 || elem.caen1 || elem.caen2 || elem.caen3|| elem.caen4 || elem.euen1 || elem.euen2 || elem.euen3 || elem.euen4 || elem.naem1|| elem.naem2 || elem.naem3 || elem.naem4 " style="color:blue;cursor: pointer;" (click)='showEst()'>Data</u>
                     </mat-cell>
                 </ng-container>
                 <mat-header-row
