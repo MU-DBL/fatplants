@@ -41,6 +41,12 @@ export class EnzymesComponent implements OnInit {
     this.apiService.getEnzymeReaction(this.id).subscribe((data: any[]) => {
       this.reactions=data;
       //this.test=this.reactions[0].ecnumber;
+      if(this.id == "1" || this.id == "270")
+        this.reactions.sort((a, b) => b.domain.localeCompare(a.domain));  
+      else{
+        this.reactions.sort((a, b) => a.reactiontype.localeCompare(b.reactiontype)); 
+      }
+      // console.log(this.reactions)
     }, error => {
     });
 
@@ -51,7 +57,12 @@ export class EnzymesComponent implements OnInit {
 
     this.apiService.getEnzymeLocus(this.id).subscribe((data: any[]) => {
       this.locus=data;
-      this.locusDataSource = new MatTableDataSource(data);
+      console.log(this.locus)
+      if(this.locus.length==0){
+        this.locusDataSource == null
+      }else{
+        this.locusDataSource = new MatTableDataSource(this.locus);
+      }
     }, error => {
     });
   }
@@ -75,6 +86,7 @@ export class EnzymesComponent implements OnInit {
   }
 
   showMutant(data: any): void{
+    console.log(data)
     this.mutant_selected=data;
     this.ref_selected=null;
     this.est_selected=false;

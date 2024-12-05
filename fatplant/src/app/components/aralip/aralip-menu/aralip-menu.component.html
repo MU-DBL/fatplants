@@ -4,34 +4,14 @@
 <mat-card id="base">
     <div class="left-menu">
         <a class="menu active" [class.active]='this.page == "pathways"' (click)='changePage("pathways")'>Pathways</a>
-        <!-- <div *ngIf='this.page === "pathways" || this.page === "2" || this.page === "3" || this.page === "4" || this.page === "5" || this.page === "6" || this.page === "7" || this.page === "8" 
-        || this.page === "9" || this.page === "10" || this.page === "11" || this.page === "12" || this.page === "13" 
-        || this.page === "14" || this.page === "15" || this.page === "16" || this.page === "17"|| this.page === "18" 
-        || this.page === "19" || this.page === "20" || this.page === "21"|| this.page === "22" || this.page === "23" || this.page === "24"'> -->
-        <a class="submenu" [class.subactive]='this.page == "2"' (click)='changePage("2")'>Fatty Acid Synth</a>
-        <a class="submenu" [class.subactive]='this.page == "3"' (click)='changePage("3")'>Plast FAE & Desat</a>
-        <a class="submenu" [class.subactive]='this.page == "4"' (click)='changePage("4")'>Prok Gal/Sulpho I</a>
-        <a class="submenu" [class.subactive]='this.page == "5"' (click)='changePage("5")'>Prok Gal/Sulpho II</a>
-        <a class="submenu" [class.subactive]='this.page == "6"' (click)='changePage("6")'>Prok Gal/Sulpho II</a>
-        <a class="submenu" [class.subactive]='this.page == "7"' (click)='changePage("7")'>TAG Synthesis</a>
-        <a class="submenu" [class.subactive]='this.page == "8"' (click)='changePage("8")'>Euk Phospholipid</a>
-        <a class="submenu" [class.subactive]='this.page == "9"' (click)='changePage("9")'>TAG Degradation</a>
-        <a class="submenu" [class.subactive]='this.page == "10"' (click)='changePage("10")'>FA Elong & Wax</a>
-        <a class="submenu" [class.subactive]='this.page == "11"' (click)='changePage("11")'>Sphingolipid I</a>
-        <a class="submenu" [class.subactive]='this.page == "12"' (click)='changePage("12")'>Sphingolipid II</a>
-        <a class="submenu" [class.subactive]='this.page == "13"' (click)='changePage("13")'>Mito FAS & Lipoic</a>
-        <a class="submenu" [class.subactive]='this.page == "14"' (click)='changePage("14")'>Mito Phospholipid</a>
-        <a class="submenu" [class.subactive]='this.page == "15"' (click)='changePage("15")'>Mito LipoPolySach</a>
-        <a class="submenu" [class.subactive]='this.page == "16"' (click)='changePage("16")'>Trafficking</a>
-        <a class="submenu" [class.subactive]='this.page == "17"' (click)='changePage("17")'>Cutin I</a>
-        <a class="submenu" [class.subactive]='this.page == "18"' (click)='changePage("18")'>Cutin II</a>
-        <a class="submenu" [class.subactive]='this.page == "19"' (click)='changePage("19")'>Suberin I</a>
-        <a class="submenu" [class.subactive]='this.page == "20"' (click)='changePage("20")'>Suberin II</a>
-        <a class="submenu" [class.subactive]='this.page == "21"' (click)='changePage("21")'>Suberin III</a>
-        <a class="submenu" [class.subactive]='this.page == "22"' (click)='changePage("22")'>Oxylipin I</a>
-        <a class="submenu" [class.subactive]='this.page == "23"' (click)='changePage("23")'>Oxylipin II</a>
-        <a class="submenu" [class.subactive]='this.page == "24"' (click)='changePage("24")'>Signaling</a>
-        <!-- </div> -->
+        <div *ngIf="page === 'pathways' || (page === 'pathway' && allowedPathwayIds.includes(pathway_id))">
+            <a *ngFor="let pathway of pathways"
+               class="submenu"
+               [class.subactive]="page === 'pathway' && pathway_id == pathway.id"
+               (click)="changePage(pathway.id)">
+              {{ pathway.name }}
+            </a>
+        </div>
         <a class="menu" [class.active]='this.page == "enzyme"' (click)='changePage("enzyme")'>Enzyme/Protein<br>Summary</a>
         <a class="menu" [class.active]='this.page == "loci-summary"' (click)='changePage("loci-summary")'>Loci Summary</a>
         <a class="menu" [class.active]='this.page === "structure" || this.page === "fatty" || this.page === "phospholipids" || this.page === "glycolipids" || this.page === "main" || this.page === "sphingolipid" || this.page === "acc" || this.page === "pdc"' (click)='changePage("fatty")'>Structures & Schemas</a>

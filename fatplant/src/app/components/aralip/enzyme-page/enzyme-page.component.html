@@ -25,7 +25,8 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> Enzymes/Proteins </mat-header-cell>
             <mat-cell *matCellDef="let elem" style="padding-right: 5px;">
                 <a href="/enzymes/{{elem.id}}" target="_blank">
-                    {{elem.name}} 
+                    <!--{{elem.name}} -->
+                    <div [innerHTML]="elem.name"></div>
                 </a>
             </mat-cell>
         </ng-container>
@@ -33,8 +34,8 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> Abbreviations </mat-header-cell>
             <mat-cell *matCellDef="let elem" style="padding-right: 5px;"> 
                 <ng-container *ngIf='elem.abbreviation !== null'>
-                    {{ elem.abbreviation.replaceAll(';', '').replaceAll('&alpha',
-                'α').replaceAll('&beta', 'β') }}
+                    <div [innerHTML]="elem.abbreviation"></div>
+                    <!--{{ elem.abbreviation.replaceAll(';', '').replaceAll('&alpha', 'α').replaceAll('&beta', 'β') }}-->
                 </ng-container>
             </mat-cell>
         </ng-container>

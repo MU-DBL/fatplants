@@ -100,6 +100,11 @@ export class ExtendedPathwayComponent implements OnInit {
       link: "/app/assets/pathwayImages/extendedImages/pathway3.png",
       data: "/app/assets/pathwayImages/extendedImages/pathway3.json",
       name: "Image 3"
+    },
+    {
+      link: "/app/assets/pathwayImages/extendedImages/pathway4.png",
+      data: "/app/assets/pathwayImages/extendedImages/pathway4.json",
+      name: "Image 4"
     }
   ];
 
