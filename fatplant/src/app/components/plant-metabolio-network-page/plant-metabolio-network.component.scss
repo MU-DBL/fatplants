@@ -203,8 +203,22 @@ mat-card::ng-deep .mat-form-field-underline {
 }
 
 .description {
-    padding: 20px; /* 增加内边距 */
-    margin: 10px 0; /* 让内容与其他部分有适当间距 */
-    border-radius: 5px; /* 让边角更柔和 */
-    //background-color: #f9f9f9; /* 给背景加一点浅色，增加层次感 */
+    padding: 20px; /* add some distance */
+    margin: 10px 0; /* get some content distance */
+    border-radius: 5px; /* round boarder */
+}
+
+
+
+.subtitle{
+    font-size: 48px;
+    font-weight: bold; 
+    color: #2E8B57; 
+    text-align: center; 
+    margin: 20px 0; 
+    padding: 10px; 
+    background: linear-gradient(to right, #d4edda, #fff); 
+    border-radius: 8px; 
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
+    display: inline-block; 
 }
