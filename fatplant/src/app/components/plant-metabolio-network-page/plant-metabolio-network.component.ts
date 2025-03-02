@@ -11,7 +11,7 @@ export class PlantMetabolioNetworkComponent {
 
   ngOnInit(): void {
     this.loadWGpackage();
-    this.changeDataset('glycolipid_desaturation');
+    this.changeDataset('fatty_acid_biosynthesis_initiation');
   }
 
   changeDataset(newDataset: string) {
@@ -105,7 +105,7 @@ export class PlantMetabolioNetworkComponent {
         this.loadWGjson("pwy-5129");
         break;
       }
-      case "cholesterol_iosynthesis":{
+      case "cholesterol_biosynthesis":{
         this.loadWGjson("pwy18c3-1");
         break;
       }
@@ -115,6 +115,10 @@ export class PlantMetabolioNetworkComponent {
       }
       case "phytosterol_biosynthesis ":{
         this.loadWGjson("pwy-2541");
+        break;
+      }
+      case "poly-hydroxy_fatty_acids_biosynthesis":{
+        this.loadWGjson("pwy-6710");
         break;
       }
     }
