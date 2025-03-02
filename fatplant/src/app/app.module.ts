@@ -104,7 +104,8 @@ import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summ
 import { HehosComponent } from './components/aralip/hehos/hehos.component';
 import { AralipPathwayMainComponent } from './components/aralip/aralip-pathway-main/aralip-pathway-main.component';
 import { DownloadPageComponent } from './components/download-page/download-page.component';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component'
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-network-page/plant-metabolio-network.component'
 
 
 @NgModule({
@@ -181,7 +182,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     HehosComponent,
     AralipPathwayMainComponent,
     DownloadPageComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    PlantMetabolioNetworkComponent
   ],
   entryComponents: [
     StructureViewerComponent,
