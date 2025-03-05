@@ -5,7 +5,7 @@
 <mat-card id="base">
 
     <div class="left-menu">
-        <p class="subheader">Fatty Acid</p>
+        <p class="subheader">Pathways</p>
         <a class="menu" [class.active]="dataset === 'fatty_acid_biosynthesis_initiation'" (click)="changeDataset('fatty_acid_biosynthesis_initiation')">Fatty Acid Biosynthesis<br>Initiation</a>
         <a class="menu" [class.active]="dataset === 'fatty_acid_elongation'" (click)="changeDataset('fatty_acid_elongation')">Fatty Acid Elongation<br>-- saturated</a>
         <a class="menu" [class.active]="dataset === 'fatty_acid_α-oxidation_I'" (click)="changeDataset('fatty_acid_α-oxidation_I')">Fatty Acid α-oxidation I</a>
@@ -22,19 +22,19 @@
         <a class="menu" [class.active]="dataset === 'tetradecanoate_biosynthesis'" (click)="changeDataset('tetradecanoate_biosynthesis')">Tetradecanoate<br>Biosynthesis</a>
         <a class="menu" [class.active]="dataset === 'very_long_chain_fatty_acid_biosynthesis_I'" (click)="changeDataset('very_long_chain_fatty_acid_biosynthesis_I')">very long chain fatty acid<br>biosynthesis I</a>
         <a class="menu" [class.active]="dataset === 'very_long_chain_fatty_acid_biosynthesis_II'" (click)="changeDataset('very_long_chain_fatty_acid_biosynthesis_II')">Very Long Chain Fatty<br>Acid Biosynthesis II</a>
-        <hr class="custom-hr">
-        <p class="subheader">Lipid</p>
+        <!--<hr class="custom-hr">
+        <p class="subheader">Lipid</p>-->
         <a class="menu" [class.active]='this.dataset == "1D-myo-inositol_hexakisphosphate_biosynthesis_III"' (click)='changeDataset("1D-myo-inositol_hexakisphosphate_biosynthesis_III")'>1D Myo Inositol<br>Hexakisphosphate<br>Biosynthesis III </a>
         <a class="menu" [class.active]='this.dataset == "galactolipid_biosynthesis_I"' (click)='changeDataset("galactolipid_biosynthesis_I")'>Galactolipid Biosynthesis I</a>
-        <a class="menu" [class.active]='this.dataset == "glycolipid_desaturation"' (click)='changeDataset("glycolipid_desaturation")'>Glycolipid Desaturation</a>
+        <!--<a class="menu" [class.active]='this.dataset == "glycolipid_desaturation"' (click)='changeDataset("glycolipid_desaturation")'>Glycolipid Desaturation</a>-->
         <a class="menu" [class.active]='this.dataset == "lipid-dependent_phytate_biosynthesis_I"' (click)='changeDataset("lipid-dependent_phytate_biosynthesis_I")'>Lipid-dependent Phytate<br>Biosynthesis I</a>
-        <a class="menu" [class.active]='this.dataset == "phospholipid_desaturation"' (click)='changeDataset("phospholipid_desaturation")'>Phospholipid Desaturation</a>
+        <!--<a class="menu" [class.active]='this.dataset == "phospholipid_desaturation"' (click)='changeDataset("phospholipid_desaturation")'>Phospholipid Desaturation</a>-->
         <a class="menu" [class.active]='this.dataset == "phospholipid_remodeling"' (click)='changeDataset("phospholipid_remodeling")'>Phospholipid Remodeling</a>
         <a class="menu" [class.active]='this.dataset == "sphingolipid_biosynthesis"' (click)='changeDataset("sphingolipid_biosynthesis")'>Sphingolipid Biosynthesis</a>
         <a class="menu" [class.active]='this.dataset == "superpathway_of_phospholipid_biosynthesis_II"' (click)='changeDataset("superpathway_of_phospholipid_biosynthesis_II")'>Superpathway Of<br>Phospholipid<br>Biosynthesis II</a>
+        <!--<hr class="custom-hr">
         <hr class="custom-hr">
-        <hr class="custom-hr">
-        <p class="subheader">Sterol</p>
+        <p class="subheader">Sterol</p>-->
         <a class="menu" [class.active]='this.dataset == "cholesterol_biosynthesis"' (click)='changeDataset("cholesterol_biosynthesis")'>Cholesterol Biosynthesis</a>
         <a class="menu" [class.active]='this.dataset == "phytosterol_biosynthesis "' (click)='changeDataset("phytosterol_biosynthesis ")'>Phytosterol Biosynthesis </a>
         <a class="menu" [class.active]='this.dataset == "sterol:steryl_ester_interconversion"' (click)='changeDataset("sterol:steryl_ester_interconversion")'>Sterol:steryl<br>ester interconversion</a>
