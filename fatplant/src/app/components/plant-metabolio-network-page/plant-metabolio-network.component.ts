@@ -10,6 +10,8 @@ export class PlantMetabolioNetworkComponent {
   searchQuery: string = '';  // 搜索框内容
 
   ngOnInit(): void {
+    this.loadAbs();
+    this.loadYAHOO();
     this.loadWGpackage();
     this.changeDataset('fatty_acid_biosynthesis_initiation');
   }
@@ -133,12 +135,29 @@ export class PlantMetabolioNetworkComponent {
     // 可在这里添加后端 API 搜索逻辑
   }
 
-  loadWGpackage() {
+  loadWGpackage() {//this .js is copied from the original PMN site, it generates the graph from .wg files
     const node = document.createElement('script');
     node.src = '/static/pmnwg/webgraphics.js';
     node.type = 'text/javascript';
     node.async = false;
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  loadAbs() {//that css rule will be applied to the tips popup
+    const node = document.createElement('style');
+    node.innerHTML = `
+      .yui-panel-container {
+        position: absolute;
+        z-index: 2;
+        padding: 10px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #808080;
+        background-color: #f2f2f2;
+        font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+      }
+      `
+    document.getElementsByTagName('head')[0].appendChild(node);
   }
 
   loadWGjson(digid: String) {
@@ -147,5 +166,62 @@ export class PlantMetabolioNetworkComponent {
     node.type = 'text/javascript';
     node.async = false;
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  loadYAHOO() {//the original PMN site is built with YAHOO UI 2&3, without those .js files, tips popup will not work
+    const node = document.createElement('script');
+    //node.src = 'https://cdnjs.cloudflare.com/ajax/libs/yui/3.17.2/yui/yui-min.js';
+    node.src = '/static/pmnwg/yahoo/yui-min.js';
+    node.type = 'text/javascript';
+    node.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node);
+    
+    const node2 = document.createElement('script');
+    node2.src = '/static/pmnwg/yahoo/YAHOO.js';
+    node2.type = 'text/javascript';
+    node2.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node2);
+    
+    const node3 = document.createElement('script');
+    node3.src = '/static/pmnwg/yahoo/combined-early.js';
+    node3.type = 'text/javascript';
+    node3.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node3);
+
+    const node4 = document.createElement('script');
+    node4.src = '/static/pmnwg/yahoo/Config.js';
+    node4.type = 'text/javascript';
+    node4.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node4);
+
+    const node5 = document.createElement('script');
+    node5.src = '/static/pmnwg/yahoo/Module.js';
+    node5.type = 'text/javascript';
+    node5.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node5);
+    
+    const node6 = document.createElement('script');
+    node6.src = '/static/pmnwg/yahoo/Overlay.js';
+    node6.type = 'text/javascript';
+    node6.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node6);
+  
+    const node7 = document.createElement('script');
+    node7.src = '/static/pmnwg/yahoo/Panel.js';
+    node7.type = 'text/javascript';
+    node7.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node7);
+  
+    const node8 = document.createElement('script');
+    node8.src = '/static/pmnwg/yahoo/Dialog.js';
+    node8.type = 'text/javascript';
+    node8.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node8);
+  
+    const node9 = document.createElement('script');
+    node9.src = '/static/pmnwg/yahoo/SimpleDialog.js';
+    node9.type = 'text/javascript';
+    node9.async = false;
+    document.getElementsByTagName('body')[0].appendChild(node9);
   }
 }
