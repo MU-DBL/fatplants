@@ -12,10 +12,12 @@
         </div>
       </div>
       <div class="details">
-        <div class="professional_div">
+        <div class="professional_div" >
           <div class="contributor"><strong>{{ contributor.name }}</strong></div><br>
-          <span class="subs">Professional Profile:&nbsp;</span>
-          <a [href]="contributor.profile" target="_blank">{{ contributor.name }}</a>
+          <div *ngIf="contributor.profile"> 
+            <span class="subs">Professional Profile:&nbsp;</span>
+            <a [href]="contributor.profile" target="_blank">{{ contributor.name }}</a>
+          </div>
         </div>
         
         <div class="network_div" *ngIf="contributor.network">

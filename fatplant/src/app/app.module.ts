@@ -106,7 +106,7 @@ import { AralipPathwayMainComponent } from './components/aralip/aralip-pathway-m
 import { DownloadPageComponent } from './components/download-page/download-page.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-network-page/plant-metabolio-network.component'
-
+import { MemoryofjohnComponent } from './components/aralip/memoryofjohn/memoryofjohn.component'
 
 @NgModule({
   declarations: [
@@ -183,7 +183,8 @@ import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-net
     AralipPathwayMainComponent,
     DownloadPageComponent,
     PagenotfoundComponent,
-    PlantMetabolioNetworkComponent
+    PlantMetabolioNetworkComponent,
+    MemoryofjohnComponent
   ],
   entryComponents: [
     StructureViewerComponent,

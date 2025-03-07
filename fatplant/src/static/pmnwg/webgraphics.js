@@ -3062,6 +3062,7 @@ function openLink(url, evt)
 {
     let a = document.createElement("a");    
     a.href = url;
+	a.target = "_blank";
     let fakeEvt = new MouseEvent("click",
 				 {
 				     ctrlKey: evt.ctrlKey,

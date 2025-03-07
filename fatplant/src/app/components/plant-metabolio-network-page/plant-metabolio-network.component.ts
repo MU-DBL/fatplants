@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChildren, ElementRef, AfterViewInit, Renderer2, QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-plant-metabolio-network',
@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./plant-metabolio-network.component.scss']
 })
 export class PlantMetabolioNetworkComponent {
+  @ViewChildren('iframes') iframes!: QueryList<ElementRef>; // Collects all iframes
   dataset: string = 'aegilops_tauschii';  // 默认选中的数据集
   searchQuery: string = '';  // 搜索框内容
+  
+  constructor(private renderer: Renderer2) {}
+
 
   ngOnInit(): void {
     this.loadAbs();
@@ -167,6 +171,9 @@ export class PlantMetabolioNetworkComponent {
     node.async = false;
     document.getElementsByTagName('body')[0].appendChild(node);
   }
+
+
+  
 
   loadYAHOO() {//the original PMN site is built with YAHOO UI 2&3, without those .js files, tips popup will not work
     const node = document.createElement('script');
