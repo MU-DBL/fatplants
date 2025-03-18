@@ -7,8 +7,8 @@ import { Component, ViewChildren, ElementRef, AfterViewInit, Renderer2, QueryLis
 })
 export class PlantMetabolioNetworkComponent {
   @ViewChildren('iframes') iframes!: QueryList<ElementRef>; // Collects all iframes
-  dataset: string = 'aegilops_tauschii';  // 默认选中的数据集
-  searchQuery: string = '';  // 搜索框内容
+  dataset: string = 'aegilops_tauschii';  
+  searchQuery: string = '';  
   
   constructor(private renderer: Renderer2) {}
 
@@ -136,7 +136,6 @@ export class PlantMetabolioNetworkComponent {
 
   applySearchQuery() {
     console.log("Search Query Applied: ", this.searchQuery);
-    // 可在这里添加后端 API 搜索逻辑
   }
 
   loadWGpackage() {//this .js is copied from the original PMN site, it generates the graph from .wg files

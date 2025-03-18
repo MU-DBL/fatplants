@@ -39,6 +39,10 @@
         <a class="menu" [class.active]='this.dataset == "phytosterol_biosynthesis "' (click)='changeDataset("phytosterol_biosynthesis ")'>Phytosterol Biosynthesis </a>
         <a class="menu" [class.active]='this.dataset == "sterol:steryl_ester_interconversion"' (click)='changeDataset("sterol:steryl_ester_interconversion")'>Sterol:steryl<br>ester interconversion</a>
         <!--<hr class="custom-hr">-->
+        <!-- New About Page Link -->
+        <p class="menu" [class.active]="dataset === 'about_pmn'" (click)="changeDataset('about_pmn')">About PMN</p>
+
+
     </div>
 
     <!-- Right Content -->
@@ -749,5 +753,34 @@
             </div> -->
         </div>
 
+        <div *ngIf="dataset === 'about_pmn'">
+            <div class="description">
+
+                    <b>Acknowledgment</b><br>
+                    <br>
+                    <p>
+                        We gratefully acknowledge PMN for providing valuable data, developed at Michigan State University's Department of Biochemistry & Molecular Biology and the Plant Resilience Institute.
+                    </p>
+                    <br>
+                    <p>
+                        We also extend our appreciation to MetaCyc, developed and maintained by SRI International. MetaCyc serves as a vital resource for curated metabolic pathway summaries, enabling us to present accurate and detailed insights into plant fat metabolism.
+                    </p>
+                    <br>
+                    <p>
+                        In Fatplants, we identified 24 metabolic pathways related to plant fat metabolism by searching for key terms such as "fatty acid," "lipid," and "sterol" in PlantCyc. These pathways were imported into Fatplants and are now available for user reference.
+                    </p>
+                    <br>
+                    <p>
+                        Each pathway includes a summary and an interactive visualization, allowing users to explore its components and reactions. Clicking on tags within the pathway diagram redirects users to the corresponding PMN page for detailed biochemical and genetic information. Additionally, pathway summaries from MetaCyc include direct links to the MetaCyc database for further exploration.
+                    </p>
+                    <br>
+                    <p>
+                        By integrating these resources, Fatplants offers a comprehensive and reliable repository of plant lipid metabolic pathways, supporting researchers, students, and professionals in plant biochemistry and metabolic engineering.
+                    </p>
+                <br>
+            </div>
+        </div>
+        
     </div>
+    
 </mat-card>
