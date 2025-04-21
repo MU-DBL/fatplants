@@ -33,6 +33,7 @@
             <a class="submenu" [class.subactive]='this.page == "contributors"' (click)='changePage("contributors")'>Contributors</a>
         </div>
         <a class="menu" [class.active]='this.page == "comments"' (click)='changePage("comments")'>Comments</a>
+        <a class="menu" [class.active]='this.page == "memory"' (click)='changePage("memory")'>In Memory of <br>John Ohlrogge</a>
     </div>
     <div class="right-content-box">
         <div *ngIf='this.page == "pathways"'>
@@ -67,6 +68,9 @@
         </div>
         <div *ngIf='this.page == "comments"'>
             <app-comments></app-comments>
+        </div>
+        <div *ngIf='this.page == "memory"'>
+            <app-memoryofjohn></app-memoryofjohn>
         </div>
         <div *ngIf='this.page == "fatty"'>
             <div class="structure-container">

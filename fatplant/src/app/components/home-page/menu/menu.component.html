@@ -11,6 +11,12 @@
       <li class="nav-item tools" [matMenuTriggerFor]="toolsMenu" routerLinkActive="desktop-active">
         <a class="nav-link fw-bold">Tools</a>
       </li>
+      <li class="nav-item" (click)="toggleSidebar()" routerLink="/aralip-menu/pathways" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">ARALIP</a>
+      </li>
+      <li class="nav-item" (click)="toggleSidebar()" routerLink="/plmn-pathways" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">PLMN</a>
+      </li>
     </ul>
   </div>
   <div class="collapse navbar-collapse content" id="navbarNav" [class.blur]="isSidebarVisible">
@@ -31,6 +37,12 @@
         routerLinkActive="desktop-active"
       >
         <a class="nav-link fw-bold">Tools</a>
+      </li>
+      <li class="nav-item" routerLink="/aralip-menu/pathways" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">ARALIP</a>
+      </li>
+      <li class="nav-item" routerLink="/plmn-pathways" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">PLMN</a>
       </li>
     </ul>
   </div>

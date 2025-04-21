@@ -36,8 +36,11 @@ import { ResearchPapersPageComponent } from './components/research-papers-page/r
 import { AralipMenuComponent } from './components/aralip/aralip-menu/aralip-menu.component';
 // import { CommentsComponent } from './components/aralip/comments/comments.component';
 import { EnzymesComponent } from './components/aralip/enzymes/enzymes.component';
-import { HehosComponent } from './components/aralip/hehos/hehos.component'
-import { DownloadPageComponent } from './components/download-page/download-page.component'
+import { HehosComponent } from './components/aralip/hehos/hehos.component';
+import { DownloadPageComponent } from './components/download-page/download-page.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-network-page/plant-metabolio-network.component'
+
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'team', component: TeamComponent},
@@ -82,7 +85,8 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'aralip-menu/:page/:pathway_id', component: AralipMenuComponent },
 {path: 'hehos/:id', component: HehosComponent },
 {path: 'download', component: DownloadPageComponent},
-{path: '**', redirectTo: '/home'}];
+{path: 'plmn-pathways', component: PlantMetabolioNetworkComponent},
+{path: '**', pathMatch: 'full',  component: PagenotfoundComponent }]; 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{ anchorScrolling: 'enabled'})],

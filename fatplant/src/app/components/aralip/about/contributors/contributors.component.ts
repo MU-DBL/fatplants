@@ -10,15 +10,12 @@ export class ContributorsComponent {
     {
       name: 'Sébastien Baud',
       image: '/app/assets/aralip_contributors/Sebasitien-Baud.jpg', 
-      profile: '/',
-      
       email: 'sbaud@versailles.inra.fr',
       summary: 'Biotechnology scientist with broad experience in seed metabolic networks, transcriptional regulation of gene expression, and genetic engineering of Arabidopsis.'
     },
     {
       name: 'Mats Anderson',
       image: '/app/assets/aralip_contributors/Mats-Andersson.jpg',
-      profile: '/',
       summary: 'Junior professor at the University of Gothenburg, Sweden, Plant biochemist with one foot in plant-pathogen interactions and the other in associations between the ER and the chloroplast envelope.'
     },
     {
@@ -40,50 +37,45 @@ export class ContributorsComponent {
     {
       name: 'Ikuo Nishida',
       image: '/app/assets/aralip_contributors/Ikuo-Nishida.jpg', 
-      profile: '/',
       email: 'nishida@molbiol.saitama-u.ac.jp',
       summary: 'Professor, Department of Biochemistry and Molecular Biology, Graduate School of Science and Engineering, Saitama University, Japan. Plant Biologist with broad experience in lipid biochemistry and physiology. Love butterflies and aquatic small animals.'
     },
     {
       name: 'Jonathan Markham',
       image: '/app/assets/aralip_contributors/Jonathan-Markham.jpg', 
-      profile: '/',
       email: 'jmarkham@danforthcenter.org',
       summary: 'Research Scientist at the Donald Danforth Plant Science Center, Missouri, USA. Experienced in biology and analysis of sphingolipids from plants, algae, and fungi.'
     },
     {
       name: 'Kenta Katayama',
       image: '/app/assets/aralip_contributors/Kenta-Katayama.jpg', 
-      profile: '/',
       email: 'kenta@bio.c.u-tokyo.ac.jp',
       summary: 'Graduate Student at Department of Biological Sciences, Graduate School of Science, the University of Tokyo, Japan. Interested in genes involved in membrane lipids and the central roles of lipids in membrane dynamics.'
     },
     {
       name: 'Hajime Wada',
       image: '/app/assets/aralip_contributors/Hajime-Wada.jpg', 
-      profile: '/',
+
       email: 'hwada@bio.c.u-tokyo.ac.jp',
       summary: 'Professor at Department of Life Sciences, Graduate School of Arts and Sciences, The University of Tokyo, Japan. My research interest is to understand genes and enzymes that are involved in lipid metabolism in photosynthetic organisms such as higher plants and cyanobacteria, and also to understand roles of lipids in membrane biogenesis, bioenergetics, vesicular trafficking and environmental adaptation.'
     },
     {
       name: 'Tim Durrett',
       image: '/app/assets/aralip_contributors/Tim-Durrett.jpg', 
-      profile: '/',
+
       network: 'http://www.linkedin.com/in/timothydurrett',
       email: 'tdurrett@msu.edu',
       summary: 'Postdoctoral Fellow at Michigan State University. Extensive experience with lipid biochemistry, molecular biology, and plant genomics.'
     },
     {
       name: 'Xu Changcheng',
-      image: '/app/assets/aralip_contributors/Xu-Changcheng.jpg', 
-      profile: '/',
+      image: '/app/assets/aralip_contributors/Xu-Changcheng.jpg',
       email: 'cxu@bnl.gov',
       summary: 'Research scientist at Brookhaven National Laboratory, Upton, NY. Our research group seeks to dissect the regulatory network governing lipid biosynthesis and storage by a combination of molecular genetic, cell biological and biochemical approaches. We use the seed plant Arabidopsis and the unicellular microalgae Chlamydomonas as complementary experimental model systems. Specific areas of interest include the regulation of triacylglycerol assembly and deposition and the molecular basis for interorganelle lipid transfer.'
     },
     {
       name: 'David Bird',
       image: '/app/assets/aralip_contributors/David-Bird.jpg', 
-      profile: '/',
       network: 'http://www.biomedexperts.com/Profile.bme/1775754/David_Bird',
       network_name: 'BiomedExpert',
       email: 'dbird@mtroyal.ca',
@@ -100,15 +92,12 @@ export class ContributorsComponent {
     {
       name: 'Fred Beisson',
       image: '/app/assets/aralip_contributors/Fred-Beisson.jpg', 
-      profile: '/',
       email: 'frederic.beisson@cea.fr',
       summary: 'Research scientist at the Department of Plant Biology and Environmental Microbiology, CEA-CNRS-Aix Marseille University, France. Focused on the discovery of proteins involved in the biosynthesis of extracellular lipids in plants.'
     },
     {
       name: 'Yonghua Li-Beisson',
       image: '/app/assets/aralip_contributors/Yonghua-Li.jpg',
-      profile: '/',
-      network: '/',
       network_name:'www-dsv.cea.fr/lb3m',
       email: 'yonghua.li@cea.fr',
       summary: 'Research scientist at CEA (the French Atomic and Alternative Energy Commission), Center de Cadarache, France. My broad research interest is to understand genes and pathways that underline lipid metabolism in plants and microorganisms, and the further use of this knowledge to metabolic engineer organisms (plants, fungi and microalgae) for increasing oil deposition or for production of industrially important fatty acids via biotechnological means.'
@@ -116,8 +105,6 @@ export class ContributorsComponent {
     {
       name: 'Rochus Franke',
       image: '/app/assets/aralip_contributors/Rochus-Franke.jpg', 
-      profile: '/',
-      network: '/',
       network_name:'Rochus Franke',
       email: 'rochus.franke@uni-bonn.de',
       summary: 'Permanent researcher at the Institute of Cellular and Molecular Botany at Bonn University, Bonn, Germany. Expertise in plant biochemistry, bioanalytics and molecular genetics. Research fields include genomics of secondary cell wall biogenesis (cutin, suberin, lignin) and secondary metabolism and the physiology of plant-environment interactions. In the Ecophysiology Department we focus on the plant cuticles as barriers for water and solute transport across leaf surfaces and on the structure of suberized root cell walls forming the soil/root interface.'
@@ -148,7 +135,7 @@ export class ContributorsComponent {
     {
       name: 'Ian Graham',
       image: '/app/assets/aralip_contributors/Ian-Graham.jpg', 
-      profile: '/',
+
       email: 'iag1@york.ac.uk',
       summary: 'Research interests focus on the metabolic regulation of gene expression in higher plants and metabolic engineering of novel oils in oilcrops. Molecular genetic approaches in the model plant Arabidopsis are used to identify key enzymes and regulatory proteins responsible for controlling metabolism and integration of metabolism with plant development. Seed development, dormancy and germination are the major focus of study since they provide an opportunity to study the co-ordinate regulation of entire blocks of genes and biochemical pathways of lipid metabolism. Genes regulating the accumulation and breakdown of seed storage reserves have potentially important biotechnological applications.'
     },
@@ -162,22 +149,20 @@ export class ContributorsComponent {
     {
       name: 'Martine Miquel',
       image: '/app/assets/aralip_contributors/Martine-Miquel.jpg', 
-      profile: '/',
+
       email: 'Miquel@versailles.inra.fr',
       summary: 'Research scientist at CNRS (the French National Center for Scientific Research), INRA (The French National Institute for Agronomical Research) Versailles center, Versailles, France. My interest is to understand lipid accumulation and especially oil body biogenesis during seed development using genetics and genomics.'
     },
     {
       name: 'Tony Larson',
       image: '/app/assets/aralip_contributors/Tony-Larson.png', 
-      profile: '/',
+
       email: 'trl1@york.ac.uk',
       summary: 'Research scientist at CNAP (Centre for Novel Agricultural products) at the University of York, York, UK.. Broadly, I am interested in analytical and data-mining techniques obtainable from the mass-spectrometry of plant extracts (e.g. metabolomics). I have specific interests in plant lipid metabolism, especially seed oil accumulation.'
     },
     {
       name: 'Ruth Welti',
       image: '/app/assets/aralip_contributors/Ruth-Welti.jpg',
-      profile: '/',
-      network: '/',
       network_name:'ScientificCommons',
       email: 'welti@ksu.edu',
       summary: 'Professor, Division of Biology, Kansas State University, USA. Biochemist with experience in lipid analysis, mass spectrometry, and their applications to plant biology.'
@@ -185,7 +170,7 @@ export class ContributorsComponent {
     {
       name: 'Allan Debono',
       image: '/app/assets/aralip_contributors/Allan-Debono.jpg', 
-      profile: '/',
+
       network: 'http://ca.linkedin.com/in/allandebono',
       email: 'allan.debono@gmail.com',
       summary: 'Graduate student at the Department of Botany of the University of British Columbia, Canada. Research examines how lipid transfer proteins are involved in cuticular lipid export from epidermal cells.'
@@ -200,10 +185,10 @@ export class ContributorsComponent {
     {
       name: 'John Ohlrogge',
       image: '/app/assets/aralip_contributors/John-Ohlrogge.jpg', 
-      profile: '/',
-      network: '/',
+      profile: 'https://directory.natsci.msu.edu/directory/Profiles/Person/102418',
+      network: 'http://ohlroggelab.plantbiology.msu.edu/',
       network_name:"Ohlrogge's Lab",
-      email: 'Ohlrogge@msu.com',
+      email: 'ohlrogge@msu.edu',
       summary: 'Biochemist with experience in fatty acid synthesis, seed lipid metabolism, genomic strategies, and metabolic engineering.'
     },
     {

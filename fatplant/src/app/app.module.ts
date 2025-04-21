@@ -103,8 +103,10 @@ import { CommentsComponent } from './components/aralip/comments/comments.compone
 import { LociSummaryComponent } from './components/aralip/loci-summary/loci-summary.component';
 import { HehosComponent } from './components/aralip/hehos/hehos.component';
 import { AralipPathwayMainComponent } from './components/aralip/aralip-pathway-main/aralip-pathway-main.component';
-import { DownloadPageComponent } from './components/download-page/download-page.component'
-
+import { DownloadPageComponent } from './components/download-page/download-page.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-network-page/plant-metabolio-network.component'
+import { MemoryofjohnComponent } from './components/aralip/memoryofjohn/memoryofjohn.component'
 
 @NgModule({
   declarations: [
@@ -179,7 +181,10 @@ import { DownloadPageComponent } from './components/download-page/download-page.
     DownloadComponent,
     HehosComponent,
     AralipPathwayMainComponent,
-    DownloadPageComponent
+    DownloadPageComponent,
+    PagenotfoundComponent,
+    PlantMetabolioNetworkComponent,
+    MemoryofjohnComponent
   ],
   entryComponents: [
     StructureViewerComponent,
