@@ -1,5 +1,5 @@
 <div class="page-title-bar">
-    <p class="page-title">Plant Lipid Metabolic Network (PIMN)</p>
+    <p class="page-title">Plant Lipid Metabolic Network (PLMN)</p>
 </div>
 
 <mat-card id="base">
@@ -40,7 +40,7 @@
         <a class="menu" [class.active]='this.dataset == "sterol:steryl_ester_interconversion"' (click)='changeDataset("sterol:steryl_ester_interconversion")'>Sterol:steryl<br>ester interconversion</a>
         <!--<hr class="custom-hr">-->
         <!-- New About Page Link -->
-        <p class="menu" [class.active]="dataset === 'about_pmn'" (click)="changeDataset('about_pmn')">About PMN</p>
+        <p id="acknowledgment" class="menu" [class.active]="dataset === 'acknowledgment'" (click)="changeDataset('acknowledgment')">Acknowledgments</p>
 
 
     </div>
@@ -753,32 +753,27 @@
             </div> -->
         </div>
 
-        <div *ngIf="dataset === 'about_pmn'">
-            <div class="description">
-
-                    <b>Acknowledgment</b><br>
+        <div *ngIf="dataset === 'acknowledgment'">
+            <div class="description" style="margin: 3%;">
+                    <h3 style="align-items: center;">Acknowledgments</h3>
                     <br>
                     <p>
                         We gratefully acknowledge PMN for providing valuable data, developed at Michigan State University's Department of Biochemistry & Molecular Biology and the Plant Resilience Institute.
                     </p>
-                    <br>
                     <p>
                         We also extend our appreciation to MetaCyc, developed and maintained by SRI International. MetaCyc serves as a vital resource for curated metabolic pathway summaries, enabling us to present accurate and detailed insights into plant fat metabolism.
                     </p>
-                    <br>
                     <p>
                         In Fatplants, we identified 24 metabolic pathways related to plant fat metabolism by searching for key terms such as "fatty acid," "lipid," and "sterol" in PlantCyc. These pathways were imported into Fatplants and are now available for user reference.
                     </p>
-                    <br>
                     <p>
                         Each pathway includes a summary and an interactive visualization, allowing users to explore its components and reactions. Clicking on tags within the pathway diagram redirects users to the corresponding PMN page for detailed biochemical and genetic information. Additionally, pathway summaries from MetaCyc include direct links to the MetaCyc database for further exploration.
                     </p>
-                    <br>
                     <p>
                         By integrating these resources, Fatplants offers a comprehensive and reliable repository of plant lipid metabolic pathways, supporting researchers, students, and professionals in plant biochemistry and metabolic engineering.
                     </p>
                     <br>
-                    <b>References</b><br>
+                    <b>References on Plant Metabolic Network (PMN) Pathway and MetaCyc Database</b><br>
                     <br>
                     <ol style="list-style-type: decimal">
                         <li><p>Charles Hawkins, Bo Xue, Farida Yasmin, Gabrielle Wyatt, Philipp Zerbe, Seung Y Rhee, Plant Metabolic Network 16: expansion of underrepresented plant groups and experimentally supported enzyme data, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D1606–D1613, <a href="https://doi.org/10.1093/nar/gkae991" class="uri">https://doi.org/10.1093/nar/gkae991</a></p></li>
@@ -789,7 +784,6 @@
                 <br>
             </div>
         </div>
-        
     </div>
-    
 </mat-card>
+

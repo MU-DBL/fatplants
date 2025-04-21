@@ -84,7 +84,7 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'aralip-menu/:page/:pathway_id', component: AralipMenuComponent },
 {path: 'hehos/:id', component: HehosComponent },
 {path: 'download', component: DownloadPageComponent},
-{path: 'pmn-pathways', component: PlantMetabolioNetworkComponent},
+{path: 'plmn-pathways', component: PlantMetabolioNetworkComponent},
 {path: '**', pathMatch: 'full',  component: PagenotfoundComponent }]; 
 
 

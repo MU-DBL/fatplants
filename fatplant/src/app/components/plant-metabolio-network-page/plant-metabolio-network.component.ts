@@ -1,4 +1,5 @@
 import { Component, ViewChildren, ElementRef, AfterViewInit, Renderer2, QueryList } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-plant-metabolio-network',
@@ -10,14 +11,22 @@ export class PlantMetabolioNetworkComponent {
   dataset: string = 'aegilops_tauschii';  
   searchQuery: string = '';  
   
-  constructor(private renderer: Renderer2) {}
-
+  constructor(private renderer: Renderer2,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadAbs();
     this.loadYAHOO();
     this.loadWGpackage();
-    this.changeDataset('fatty_acid_biosynthesis_initiation');
+    this.route.fragment.subscribe((fragment: string) => {
+      if (fragment === 'acknowledgment') {
+        const element = document.getElementById('acknowledgment');
+        if (element) {
+          this.changeDataset('acknowledgment') 
+        }
+      }else {
+        this.changeDataset('fatty_acid_biosynthesis_initiation');
+      }
+    });
   }
 
   changeDataset(newDataset: string) {
