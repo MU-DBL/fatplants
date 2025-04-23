@@ -1,0 +1,77 @@
+<div class="analytics-container">
+  <h1 class="dashboard-title">Visitor Analytics Dashboard</h1>
+
+  <div class="timeframe-selector">
+    <h3>Select Timeframe:</h3>
+    <div class="timeframe-buttons">
+      <button class="timeframe-btn" [class.active]="selectedTimeframe === 1" (click)="changeTimeframe(1)">1 Month</button>
+      <button class="timeframe-btn" [class.active]="selectedTimeframe === 3" (click)="changeTimeframe(3)">3 Months</button>
+      <button class="timeframe-btn" [class.active]="selectedTimeframe === 6" (click)="changeTimeframe(6)">6 Months</button>
+      <button class="timeframe-btn" [class.active]="selectedTimeframe === 12" (click)="changeTimeframe(12)">12 Months</button>
+    </div>
+  </div>
+
+  <div class="analytics-section time-based">
+    <h2 class="section-title">Time-Based Visitor Analytics</h2>
+    <div class="time-periods">
+      <div class="period-card">
+        <div class="period-title">Past {{ selectedTimeframe }} {{ selectedTimeframe === 1 ? 'Month' : 'Months' }}</div>
+        <div class="visitor-count">{{ totalVisitorsInPeriod }}</div>
+        <div class="small-chart">
+          <div *ngFor="let item of filteredMonthlyData" 
+               class="chart-bar" 
+               [style.height.%]="getBarHeight(item.count, filteredMonthlyData)">
+            <div class="tooltip">{{ item.month }}: {{ item.count }} visitors</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="period-card">
+        <div class="period-title">Monthly Average</div>
+        <div class="visitor-count">{{ averageMonthlyVisitors }}</div>
+        <div class="trend-indicator" *ngIf="trendPercentage !== 0">
+          <span [class.positive]="trendPercentage > 0" [class.negative]="trendPercentage < 0">
+            <i class="fas" [class.fa-arrow-up]="trendPercentage > 0" [class.fa-arrow-down]="trendPercentage < 0"></i>
+            {{ Math.abs(trendPercentage) }}%
+          </span>
+          <span class="trend-label">from previous period</span>
+        </div>
+      </div>
+      
+      <div class="period-card">
+        <div class="period-title">Daily Average</div>
+        <div class="visitor-count">{{ averageDailyVisitors }}</div>
+        <div class="small-stat">
+          <div class="stat-label">Peak Day:</div>
+          <div class="stat-value">{{ peakDay }} ({{ peakDayVisitors }} visitors)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="analytics-section location-based">
+    <h2 class="section-title">Location-Based Visitor Analytics</h2>
+    <div class="view-toggle">
+      <button class="toggle-btn" [class.active]="!showCountryList" (click)="showCountryList = false">World Map</button>
+      <button class="toggle-btn" [class.active]="showCountryList" (click)="showCountryList = true">List View</button>
+    </div>
+    
+    <div class="world-map-container">
+      <!-- Interactive World Map -->
+      <div *ngIf="!showCountryList" id="worldMap" class="map-display" #worldMap></div>
+      
+      <!-- Country list view (alternative display) -->
+      <div *ngIf="showCountryList" class="country-list">
+        <h3 class="list-title">Top Visitor Countries (Last {{ selectedTimeframe }} {{ selectedTimeframe === 1 ? 'Month' : 'Months' }})</h3>
+        <div class="country-item" *ngFor="let country of filteredCountryData.slice(0, 10)">
+          <div class="country-flag">
+            <i class="flag-icon" [ngClass]="'flag-icon-' + country.code.toLowerCase()"></i>
+          </div>
+          <div class="country-name">{{ country.name }}</div>
+          <div class="country-count">{{ country.count }}</div>
+          <div class="country-bar" [style.width.%]="getCountryBarWidth(country.count)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
