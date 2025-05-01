@@ -17,6 +17,9 @@
       <li class="nav-item" (click)="toggleSidebar()" routerLink="/plmn-pathways" routerLinkActive="desktop-active">
         <a class="nav-link fw-bold">PLMN</a>
       </li>
+      <li class="nav-item" (click)="toggleSidebar(); openInNewTab('/plantfadb')" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">PlantFADB</a>
+      </li>
     </ul>
   </div>
   <div class="collapse navbar-collapse content" id="navbarNav" [class.blur]="isSidebarVisible">
@@ -44,6 +47,10 @@
       <li class="nav-item" routerLink="/plmn-pathways" routerLinkActive="desktop-active">
         <a class="nav-link fw-bold">PLMN</a>
       </li>
+      <li class="nav-item" (click)="openInNewTab('/plantfadb')" routerLinkActive="desktop-active">
+        <a class="nav-link fw-bold">PlantFADB</a>
+      </li>
+  
     </ul>
   </div>
   <div class="navbar-header">
