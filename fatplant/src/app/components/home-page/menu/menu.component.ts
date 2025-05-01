@@ -22,4 +22,7 @@ export class MenuComponent implements OnInit {
     this.isSidebarVisible = false;
     this.showHamburgerIcon = true;
   }
+  openInNewTab(route: string) {
+    window.open(route, '_blank');
+  }
 }
