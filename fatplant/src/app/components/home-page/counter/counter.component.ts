@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-counter',
@@ -17,7 +17,7 @@ export class CounterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCount();
-    
+
   }
 
   getCount(): void {
@@ -25,11 +25,20 @@ export class CounterComponent implements OnInit {
       .subscribe(response => {
         this.clientIp = response.ip;
         //console.log(this.clientIp)
-        this.http.get<{ res: string }>(environment.BASE_API_URL+"visit/?info="+this.clientIp)
-          .subscribe(response => {
-            //console.log(response)
-            this.count = response.toString().padStart(6, '0');
-          })
+        //console.log("pathname");
+        //console.log(location.pathname);
+        if (location.pathname == "/home") {//count home page visit only
+          this.http.get<{ res: string }>(environment.BASE_API_URL + "visit/?info=" + this.clientIp)
+            .subscribe(response => {
+              //console.log(response)
+              this.count = response.toString().padStart(6, '0');
+            })
+        }else{
+          this.http.get<{ res: string }>(environment.BASE_API_URL + "count")
+            .subscribe(response => {
+              this.count = response.toString().padStart(6, '0');
+            })
+        }
       }, error => {
         //console.error('Error fetching IP address:', error);
         this.clientIp = 'Unable to fetch IP address';
