@@ -30,43 +30,46 @@ export class ContactUsComponent{
 
     let isValid = true;
 
-    if (firstName === '') {
-      this.showErrorMessage(form.querySelector('#firstName'), 'Required');
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(firstName)) {
-      this.showErrorMessage(form.querySelector('#firstName'), 'Only alphabets allowed');
-      isValid = false;
+    // Only validate firstName format if it's not empty
+    if (firstName !== '') {
+      if (!/^[a-zA-Z]+$/.test(firstName)) {
+        this.showErrorMessage(form.querySelector('#firstName'), 'Only alphabets allowed');
+        isValid = false;
+      } else {
+        this.hideErrorMessage(form.querySelector('#firstName'));
+      }
     } else {
       this.hideErrorMessage(form.querySelector('#firstName'));
     }
 
-    if (lastName === '') {
-      this.showErrorMessage(form.querySelector('#lastName'), 'Required');
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(lastName)) {
-      this.showErrorMessage(form.querySelector('#lastName'), 'Only alphabets allowed');
-      isValid = false;
+    // Only validate lastName format if it's not empty
+    if (lastName !== '') {
+      if (!/^[a-zA-Z]+$/.test(lastName)) {
+        this.showErrorMessage(form.querySelector('#lastName'), 'Only alphabets allowed');
+        isValid = false;
+      } else {
+        this.hideErrorMessage(form.querySelector('#lastName'));
+      }
     } else {
       this.hideErrorMessage(form.querySelector('#lastName'));
     }
 
-    if (email === '') {
-      this.showErrorMessage(form.querySelector('#email'), 'Required');
-      isValid = false;
-    } else if (!this.isValidEmail(email)) {
-      this.showErrorMessage(form.querySelector('#email'), 'Invalid email format');
-      isValid = false;
+    // Only validate email format if it's not empty
+    if (email !== '') {
+      if (!this.isValidEmail(email)) {
+        this.showErrorMessage(form.querySelector('#email'), 'Invalid email format');
+        isValid = false;
+      } else {
+        this.hideErrorMessage(form.querySelector('#email'));
+      }
     } else {
       this.hideErrorMessage(form.querySelector('#email'));
     }
 
-    if (subject === '') {
-      this.showErrorMessage(form.querySelector('#subject'), 'Required');
-      isValid = false;
-    } else {
-      this.hideErrorMessage(form.querySelector('#subject'));
-    }
+    // Subject can be empty, no validation needed
+    this.hideErrorMessage(form.querySelector('#subject'));
 
+    // Message is still required
     if (message === '') {
       this.showErrorMessage(form.querySelector('#message'), 'Required');
       isValid = false;

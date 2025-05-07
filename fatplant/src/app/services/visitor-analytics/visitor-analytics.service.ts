@@ -5,15 +5,14 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 export interface MonthlyVisitor {
-  month: string;
-  count: number;
+  month_id: number; // 1-12
+  hits: number;
 }
 
-export interface CountryVisitor {
-  name: string;
-  count: number;
-  path?: string;
-  code: string;
+export interface LocationVisitor {
+  country: string;
+  city: string;
+  hits: number;
 }
 
 @Injectable({
@@ -23,17 +22,17 @@ export class VisitorAnalyticsService {
 
   constructor(private http: HttpClient) { }
 
-  getMonthlyVisitors(months: number = 12): Observable<MonthlyVisitor[]> {
-    return this.http.get<MonthlyVisitor[]>(`${environment.BASE_API_URL}analytics/monthly?months=${months}`)
-      .pipe(
-        catchError(this.handleError<MonthlyVisitor[]>('getMonthlyVisitors', []))
-      );
-  }
+getMonthlyVisitors(): Observable<MonthlyVisitor[]> {
+  return this.http.get<MonthlyVisitor[]>(`${environment.BASE_API_URL}visitor/monthly-hits`)
+    .pipe(
+      catchError(this.handleError<MonthlyVisitor[]>('getMonthlyVisitors', []))
+    );
+}
 
-  getCountryVisitors(months: number = 12): Observable<CountryVisitor[]> {
-    return this.http.get<CountryVisitor[]>(`${environment.BASE_API_URL}analytics/countries?months=${months}`)
+  getLocationVisitors(): Observable<LocationVisitor[]> {
+    return this.http.get<LocationVisitor[]>(`${environment.BASE_API_URL}visitor/location-hits`)
       .pipe(
-        catchError(this.handleError<CountryVisitor[]>('getCountryVisitors', []))
+        catchError(this.handleError<LocationVisitor[]>('getLocationVisitors', []))
       );
   }
 

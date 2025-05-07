@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { VisitorAnalyticsService, MonthlyVisitor, CountryVisitor } from 'src/app/services/visitor-analytics/visitor-analytics.service';
+import { VisitorAnalyticsService, MonthlyVisitor, LocationVisitor } from 'src/app/services/visitor-analytics/visitor-analytics.service';
 
 // Declare amCharts variables to avoid TypeScript errors
 declare var am4core: any;
@@ -53,8 +53,11 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
   peakDayVisitors: number = 0;
 
   // Location-based analytics data
-  countryData: CountryVisitor[] = [];
-  filteredCountryData: CountryVisitor[] = [];
+  locationData: LocationVisitor[] = [];
+  filteredLocationData: LocationVisitor[] = [];
+
+  // Add a new property for the nested structure
+  countryCityMap: { [country: string]: { totalHits: number, cities: { [city: string]: number } } } = {};
 
   constructor(
     private analyticsService: VisitorAnalyticsService,
@@ -84,10 +87,8 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selectedTimeframe = months;
     this.filterDataByTimeframe();
     
-    // Update map if it's active
-    if (!this.showCountryList && this.map) {
-      this.updateMapData();
-    }
+    // No need to update map data when timeframe changes
+    // as location data is now independent of timeframe
   }
   
   private disposeMap(): void {
@@ -145,6 +146,17 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
         // Configure series
         const polygonTemplate = polygonSeries.mapPolygons.template;
         polygonTemplate.tooltipText = "{name}: {value} visitors";
+        polygonTemplate.adapter.add("tooltipText", (text, target) => {
+          const countryName = target.dataItem.dataContext.name;
+          const countryData = this.filteredLocationData.filter(loc => loc.country === countryName);
+          if (countryData.length === 0) return text;
+          const totalHits = countryData.reduce((sum, loc) => sum + loc.hits, 0);
+          let tooltip = `${countryName}: ${totalHits} visitors\n`;
+          tooltip += countryData.map(loc => `${loc.city}: ${loc.hits}`).join('\n');
+          return tooltip;
+        });
+        
+        // Set default fill color
         polygonTemplate.fill = am4core.color("#CCCCCC");
         polygonTemplate.stroke = am4core.color("#FFFFFF");
         polygonTemplate.strokeWidth = 0.5;
@@ -153,13 +165,14 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
         const hs = polygonTemplate.states.create("hover");
         hs.properties.fill = am4core.color("#84c209");
         
-        // Set up heat rules
+        // Set up heat rules with proper color scheme
         polygonSeries.heatRules.push({
           property: "fill",
           target: polygonTemplate,
           min: am4core.color("#CCCCCC"),
           max: am4core.color("#629B07"),
-          maxValue: Math.max(...this.filteredCountryData.map(country => country.count))
+          minValue: 0,
+          maxValue: 1 // This will be updated in updateMapData
         });
         
         // Data fields
@@ -196,7 +209,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
         heatLegend.marginRight = 20;
         heatLegend.marginBottom = 20;
         heatLegend.minValue = 0;
-        heatLegend.maxValue = Math.max(...this.filteredCountryData.map(country => country.count));
+        heatLegend.maxValue = 1; // This will be updated in updateMapData
         
         this.map.events.on("ready", () => {
           this.zone.run(() => {
@@ -217,26 +230,45 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.map) return;
     
     try {
-      const mapData = this.filteredCountryData.map(country => ({
-        id: country.code,
-        name: country.name,
-        value: country.count
+      // Get all country codes from the map data
+      const allCountryCodes = this.map.geodata.features.map((feature: any) => ({
+        code: feature.id,
+        name: feature.properties.name // Get the country name from the map data
       }));
+      
+      // Create a map of country data with aggregated hits
+      const countryDataMap = new Map<string, number>();
+      this.filteredLocationData.forEach(location => {
+        const currentHits = countryDataMap.get(location.country) || 0;
+        countryDataMap.set(location.country, currentHits + location.hits);
+      });
+      
+      // Create data for all countries, including those with 0 visitors
+      const mapData = allCountryCodes.map((country: { code: string, name: string }) => {
+        return {
+          id: country.code,
+          name: country.name,
+          value: countryDataMap.get(country.name) || 0
+        };
+      });
       
       // Get the polygon series
       const polygonSeries = this.map.series.getIndex(0);
       if (polygonSeries) {
         polygonSeries.data = mapData;
         
+        // Calculate max value for heat rules
+        const maxValue = Math.max(...Array.from(countryDataMap.values()));
+        
         // Update heat rule
         if (polygonSeries.heatRules && polygonSeries.heatRules.length > 0) {
-          polygonSeries.heatRules[0].maxValue = Math.max(...this.filteredCountryData.map(country => country.count));
+          polygonSeries.heatRules[0].maxValue = maxValue;
         }
         
         // Update heat legend
         const heatLegend = this.map.children.values.find((child: any) => child instanceof am4maps.HeatLegend);
         if (heatLegend) {
-          heatLegend.maxValue = Math.max(...this.filteredCountryData.map(country => country.count));
+          heatLegend.maxValue = maxValue;
         }
       }
     } catch (error) {
@@ -253,7 +285,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.filteredMonthlyData = this.monthlyData.slice(-monthsToShow);
     
     // Calculate total visitors for the selected period
-    this.totalVisitorsInPeriod = this.filteredMonthlyData.reduce((sum, item) => sum + item.count, 0);
+    this.totalVisitorsInPeriod = this.filteredMonthlyData.reduce((sum, item) => sum + item.hits, 0);
     
     // Calculate monthly average
     this.averageMonthlyVisitors = Math.round(this.totalVisitorsInPeriod / this.filteredMonthlyData.length);
@@ -264,7 +296,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     // Calculate trend percentage (comparing with previous period of same length)
     if (this.monthlyData.length > monthsToShow * 2) {
       const previousPeriodData = this.monthlyData.slice(-monthsToShow * 2, -monthsToShow);
-      const previousTotal = previousPeriodData.reduce((sum, item) => sum + item.count, 0);
+      const previousTotal = previousPeriodData.reduce((sum, item) => sum + item.hits, 0);
       if (previousTotal > 0) {
         this.trendPercentage = Math.round(((this.totalVisitorsInPeriod - previousTotal) / previousTotal) * 100);
       } else {
@@ -279,16 +311,8 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.peakDay = daysOfWeek[Math.floor(Math.random() * 7)];
     this.peakDayVisitors = Math.round(this.averageDailyVisitors * (1.5 + Math.random()));
     
-    // Filter country data - in a real implementation, you would refetch from API
-    // For now, we'll just recalculate the visitor counts based on the timeframe
-    const timeframeFactor = monthsToShow / 12; // Adjust country data based on timeframe
-    this.filteredCountryData = this.countryData.map(country => ({
-      ...country,
-      count: Math.round(country.count * timeframeFactor)
-    }));
-    
-    // Re-sort to ensure highest counts are first
-    this.filteredCountryData.sort((a, b) => b.count - a.count);
+    // Location-based analytics is now independent of timeframe
+    // No need to filter or modify country data based on timeframe
   }
 
   fetchTimeBasedAnalytics(): void {
@@ -307,29 +331,54 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   fetchLocationBasedAnalytics(): void {
-    this.analyticsService.getCountryVisitors()
-      .subscribe(
-        data => {
-          if (data && data.length > 0) {
-            this.countryData = data;
-          } else {
-            // Fallback to mock data if empty response
-            this.generateMockCountryData();
+    this.analyticsService.getLocationVisitors()
+      .subscribe(data => {
+        if (data && data.length > 0) {
+          // Build the nested countryCityMap structure
+          const map: { [country: string]: { totalHits: number, cities: { [city: string]: number } } } = {};
+          data.forEach(entry => {
+            if (!map[entry.country]) {
+              map[entry.country] = { totalHits: 0, cities: {} };
+            }
+            if (!map[entry.country].cities[entry.city]) {
+              map[entry.country].cities[entry.city] = 0;
+            }
+            map[entry.country].cities[entry.city] += entry.hits;
+            map[entry.country].totalHits += entry.hits;
+          });
+          this.countryCityMap = map;
+
+          // Flatten for list view: each city as a row, sorted by country and city
+          const grouped: LocationVisitor[] = [];
+          Object.keys(map).sort().forEach(country => {
+            Object.keys(map[country].cities).sort().forEach(city => {
+              grouped.push({ country, city, hits: map[country].cities[city] });
+            });
+          });
+          this.locationData = grouped;
+          this.filteredLocationData = [...grouped].sort((a, b) => b.hits - a.hits);
+
+          // If you want the world map to use the grouped data:
+          if (!this.showCountryList) {
+            this.updateMapData();
           }
-          this.filterDataByTimeframe();
+        } else {
+          // Fallback to mock data if empty response
+          this.generateMockLocationData();
+          this.filteredLocationData = [...this.locationData].sort((a, b) => b.hits - a.hits);
         }
-      );
+      });
   }
 
   // Helper methods
-  getBarHeight(count: number, data: MonthlyVisitor[]): number {
-    const maxValue = Math.max(...data.map(item => item.count));
-    return maxValue > 0 ? (count / maxValue) * 100 : 0;
+  getBarHeight(hits: number, data: MonthlyVisitor[]): number {
+    const maxValue = Math.max(...data.map(item => item.hits));
+    return maxValue > 0 ? (hits / maxValue) * 100 : 0;
   }
 
-  getCountryBarWidth(count: number): number {
-    const maxCount = Math.max(...this.filteredCountryData.map(country => country.count));
-    return maxCount > 0 ? (count / maxCount) * 100 : 0;
+  getCountryBarWidth(hits: number): number {
+    const maxHits = Math.max(...this.filteredLocationData.map(location => location.hits));
+    return maxHits > 0 ? (hits / maxHits) * 100 : 0;
   }
 
   private generateMockMonthlyData(): void {
@@ -354,8 +403,8 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
       const multiplier = i < 12 ? (1 + (11 - i) * 0.1) : 0.7; 
       
       this.monthlyData.push({
-        month: months[monthIndex],
-        count: Math.floor(baseLine * multiplier + Math.random() * 100)
+        month_id: monthIndex + 1, // 1-based month_id
+        hits: Math.floor(baseLine * multiplier + Math.random() * 100)
       });
     }
     
@@ -363,39 +412,13 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.monthlyData = this.monthlyData.slice(-12);
   }
 
-  private generateMockCountryData(): void {
-    // Sample country data for development purposes
-    this.countryData = [
-      { name: 'United States', count: 1245, code: 'US' },
-      { name: 'China', count: 890, code: 'CN' },
-      { name: 'India', count: 756, code: 'IN' },
-      { name: 'United Kingdom', count: 543, code: 'GB' },
-      { name: 'Germany', count: 498, code: 'DE' },
-      { name: 'France', count: 387, code: 'FR' },
-      { name: 'Canada', count: 345, code: 'CA' },
-      { name: 'Australia', count: 301, code: 'AU' },
-      { name: 'Japan', count: 289, code: 'JP' },
-      { name: 'Brazil', count: 245, code: 'BR' },
-      { name: 'South Korea', count: 201, code: 'KR' },
-      { name: 'Russia', count: 189, code: 'RU' },
-      { name: 'Spain', count: 176, code: 'ES' },
-      { name: 'Italy', count: 165, code: 'IT' },
-      { name: 'Mexico', count: 142, code: 'MX' },
-      { name: 'Indonesia', count: 135, code: 'ID' },
-      { name: 'Netherlands', count: 128, code: 'NL' },
-      { name: 'Turkey', count: 120, code: 'TR' },
-      { name: 'Switzerland', count: 115, code: 'CH' },
-      { name: 'Saudi Arabia', count: 110, code: 'SA' },
-      { name: 'Sweden', count: 98, code: 'SE' },
-      { name: 'Poland', count: 95, code: 'PL' },
-      { name: 'Belgium', count: 92, code: 'BE' },
-      { name: 'Thailand', count: 85, code: 'TH' },
-      { name: 'Argentina', count: 82, code: 'AR' },
-      { name: 'Austria', count: 78, code: 'AT' },
-      { name: 'Norway', count: 76, code: 'NO' },
-      { name: 'Denmark', count: 72, code: 'DK' },
-      { name: 'Malaysia', count: 68, code: 'MY' },
-      { name: 'Singapore', count: 65, code: 'SG' }
+  private generateMockLocationData(): void {
+    this.locationData = [
+      { country: 'United States', city: 'New York', hits: 250 },
+      { country: 'United States', city: 'San Francisco', hits: 180 },
+      { country: 'India', city: 'Mumbai', hits: 300 },
+      { country: 'Germany', city: 'Berlin', hits: 150 },
+      { country: 'Japan', city: 'Tokyo', hits: 220 }
     ];
   }
 } 

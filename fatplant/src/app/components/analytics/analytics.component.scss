@@ -1,17 +1,17 @@
 // Variables for the new professional color palette
-$primary-color: #3e7d8f;
-$primary-light: #5b9ead;
-$primary-dark: #2b5f6f;
-$secondary-color: #6da87a;
-$secondary-light: #8bc098;
-$secondary-dark: #4d8659;
+$primary-color: #629b07;
+$primary-light: lighten($primary-color, 10%);
+$primary-dark: darken($primary-color, 10%);
+$secondary-color: darken($primary-color, 5%);
+$secondary-light: lighten($primary-color, 20%);
+$secondary-dark: darken($primary-color, 15%);
 $accent-color: #d68c45;
-$neutral-dark: #373f51;
-$neutral-medium: #8b97a3;
+$neutral-dark: #000000;
+$neutral-medium: #333333;
 $neutral-light: #e6ecf2;
 $white: #ffffff;
-$text-color: #333333;
-$light-text: #666666;
+$text-color: #000000;
+$light-text: #333333;
 $gradient-start: lighten($primary-color, 10%);
 $gradient-end: darken($primary-color, 10%);
 $success-color: #4caf50;
@@ -48,7 +48,7 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   color: $text-color;
   
   .dashboard-title {
-    color: $primary-dark;
+    color: $neutral-dark;
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 24px;
@@ -115,7 +115,7 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   @include section-container;
   
   .section-title {
-    color: $primary-color;
+    color: $neutral-dark;
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -159,7 +159,7 @@ $shadow-color: rgba(0, 0, 0, 0.1);
       .visitor-count {
         font-size: 32px;
         font-weight: 700;
-        color: $primary-dark;
+        color: $primary-color;
         margin-bottom: 16px;
       }
       
@@ -313,7 +313,7 @@ $shadow-color: rgba(0, 0, 0, 0.1);
       overflow-y: auto;
       
       .list-title {
-        color: $primary-dark;
+        color: $neutral-dark;
         font-size: 18px;
         font-weight: 500;
         margin-bottom: 16px;
@@ -348,7 +348,7 @@ $shadow-color: rgba(0, 0, 0, 0.1);
         .country-count {
           margin: 0 15px;
           font-weight: 600;
-          color: $primary-dark;
+          color: $primary-color;
         }
         
         .country-bar {
@@ -416,5 +416,66 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   
   .world-map-container {
     height: 250px !important;
+  }
+} 
+
+.visitor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  border-radius: 8px;
+  overflow: hidden;
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  th {
+    background: #f5f7fa;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e6ecf2;
+  }
+
+  tr:not(:last-child) td {
+    border-bottom: 1px solid #e6ecf2;
+  }
+
+  th.visitors-header, td.country-count {
+    text-align: right;
+  }
+
+  th.visitors-header {
+    min-width: 120px;
+  }
+
+  .country-name {
+    font-weight: 500;
+    color: #2d6a3f;
+  }
+  .city-name {
+    color: #333;
+  }
+  .country-count {
+    color: #4a8c5e;
+    font-weight: 600;
+    text-align: right;
+    min-width: 120px;
+  }
+  .hits {
+    color: #7a9e6b;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .visitor-table th, .visitor-table td {
+    padding: 8px 6px;
+    font-size: 14px;
   }
 } 

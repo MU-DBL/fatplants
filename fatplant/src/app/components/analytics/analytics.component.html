@@ -20,8 +20,8 @@
         <div class="small-chart">
           <div *ngFor="let item of filteredMonthlyData" 
                class="chart-bar" 
-               [style.height.%]="getBarHeight(item.count, filteredMonthlyData)">
-            <div class="tooltip">{{ item.month }}: {{ item.count }} visitors</div>
+               [style.height.%]="getBarHeight(item.hits, filteredMonthlyData)">
+            <div class="tooltip">{{ item.month_id }}: {{ item.hits }} visitors</div>
           </div>
         </div>
       </div>
@@ -61,16 +61,24 @@
       <div *ngIf="!showCountryList" id="worldMap" class="map-display" #worldMap></div>
       
       <!-- Country list view (alternative display) -->
-      <div *ngIf="showCountryList" class="country-list">
-        <h3 class="list-title">Top Visitor Countries (Last {{ selectedTimeframe }} {{ selectedTimeframe === 1 ? 'Month' : 'Months' }})</h3>
-        <div class="country-item" *ngFor="let country of filteredCountryData.slice(0, 10)">
-          <div class="country-flag">
-            <i class="flag-icon" [ngClass]="'flag-icon-' + country.code.toLowerCase()"></i>
-          </div>
-          <div class="country-name">{{ country.name }}</div>
-          <div class="country-count">{{ country.count }}</div>
-          <div class="country-bar" [style.width.%]="getCountryBarWidth(country.count)"></div>
-        </div>
+      <div class="country-list" *ngIf="showCountryList">
+        <h3 class="list-title">Visitor Distribution by Country</h3>
+        <table class="visitor-table">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>City</th>
+              <th class="visitors-header">Total Visitors</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let location of filteredLocationData">
+              <td class="country-name">{{location.country}}</td>
+              <td class="city-name">{{location.city}}</td>
+              <td class="country-count"><span class="hits">{{location.hits}}</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
