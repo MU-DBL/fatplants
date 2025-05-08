@@ -23,14 +23,14 @@ export class VisitorAnalyticsService {
   constructor(private http: HttpClient) { }
 
 getMonthlyVisitors(): Observable<MonthlyVisitor[]> {
-  return this.http.get<MonthlyVisitor[]>(`${environment.BASE_API_URL}visitor/monthly-hits`)
+  return this.http.get<MonthlyVisitor[]>(`${environment.BASE_API_URL}monthly-hits`)
     .pipe(
       catchError(this.handleError<MonthlyVisitor[]>('getMonthlyVisitors', []))
     );
 }
 
   getLocationVisitors(): Observable<LocationVisitor[]> {
-    return this.http.get<LocationVisitor[]>(`${environment.BASE_API_URL}visitor/location-hits`)
+    return this.http.get<LocationVisitor[]>(`${environment.BASE_API_URL}location-hits`)
       .pipe(
         catchError(this.handleError<LocationVisitor[]>('getLocationVisitors', []))
       );
