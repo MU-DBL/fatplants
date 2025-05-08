@@ -107,6 +107,7 @@ import { DownloadPageComponent } from './components/download-page/download-page.
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-network-page/plant-metabolio-network.component'
 import { MemoryofjohnComponent } from './components/aralip/memoryofjohn/memoryofjohn.component'
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 @NgModule({
   declarations: [
@@ -184,7 +185,8 @@ import { MemoryofjohnComponent } from './components/aralip/memoryofjohn/memoryof
     DownloadPageComponent,
     PagenotfoundComponent,
     PlantMetabolioNetworkComponent,
-    MemoryofjohnComponent
+    MemoryofjohnComponent,
+    AnalyticsComponent
   ],
   entryComponents: [
     StructureViewerComponent,

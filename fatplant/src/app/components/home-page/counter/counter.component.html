@@ -1,1 +1,6 @@
-<div class="hit-counter">{{ count }}</div>
+<div class="hit-counter" (click)="navigateToAnalytics()" title="Click to view analytics">
+  <div class="counter-text">{{ count }}</div>
+  <div class="analytics-icon">
+    <i class="fas fa-chart-line"></i>
+  </div>
+</div>

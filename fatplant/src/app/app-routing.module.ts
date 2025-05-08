@@ -40,6 +40,7 @@ import { HehosComponent } from './components/aralip/hehos/hehos.component';
 import { DownloadPageComponent } from './components/download-page/download-page.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-network-page/plant-metabolio-network.component'
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 
 const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -86,6 +87,7 @@ const routes: Routes = [{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'hehos/:id', component: HehosComponent },
 {path: 'download', component: DownloadPageComponent},
 {path: 'plmn-pathways', component: PlantMetabolioNetworkComponent},
+{path: 'analytics', component: AnalyticsComponent},
 {path: '**', pathMatch: 'full',  component: PagenotfoundComponent }]; 
 
 @NgModule({

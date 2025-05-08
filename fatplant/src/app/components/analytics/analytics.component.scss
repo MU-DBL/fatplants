@@ -1,0 +1,481 @@
+// Variables for the new professional color palette
+$primary-color: #629b07;
+$primary-light: lighten($primary-color, 10%);
+$primary-dark: darken($primary-color, 10%);
+$secondary-color: darken($primary-color, 5%);
+$secondary-light: lighten($primary-color, 20%);
+$secondary-dark: darken($primary-color, 15%);
+$accent-color: #d68c45;
+$neutral-dark: #000000;
+$neutral-medium: #333333;
+$neutral-light: #e6ecf2;
+$white: #ffffff;
+$text-color: #000000;
+$light-text: #333333;
+$gradient-start: lighten($primary-color, 10%);
+$gradient-end: darken($primary-color, 10%);
+$success-color: #4caf50;
+$error-color: #f44336;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin card-shadow {
+  box-shadow: 0 4px 12px $shadow-color;
+}
+
+@mixin hover-effect {
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@mixin section-container {
+  background-color: $white;
+  border-radius: 10px;
+  @include card-shadow;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+// Layout & Container Styles
+.analytics-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: $text-color;
+  
+  .dashboard-title {
+    color: $neutral-dark;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, $gradient-start, $gradient-end);
+      margin: 12px auto 0;
+      border-radius: 3px;
+    }
+  }
+}
+
+// Timeframe Selector Styles
+.timeframe-selector {
+  @include section-container;
+  background: linear-gradient(to bottom right, $primary-light, $primary-color);
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  
+  h3 {
+    color: $white;
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+  
+  .timeframe-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    
+    .timeframe-btn {
+      background-color: rgba($white, 0.2);
+      color: $white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: rgba($white, 0.3);
+      }
+      
+      &.active {
+        background-color: $white;
+        color: $primary-color;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Analytics Sections
+.analytics-section {
+  @include section-container;
+  
+  .section-title {
+    color: $neutral-dark;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: $secondary-color;
+      border-radius: 3px;
+    }
+  }
+}
+
+// Time-Based Analytics
+.time-based {
+  .time-periods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    
+    .period-card {
+      background-color: $neutral-light;
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+      @include hover-effect;
+      
+      .period-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: $neutral-dark;
+        margin-bottom: 12px;
+      }
+      
+      .visitor-count {
+        font-size: 32px;
+        font-weight: 700;
+        color: $primary-color;
+        margin-bottom: 16px;
+      }
+      
+      .small-chart {
+        height: 80px;
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        
+        .chart-bar {
+          flex: 1;
+          background-color: $secondary-color;
+          border-radius: 4px 4px 0 0;
+          min-height: 2px;
+          position: relative;
+          
+          &:hover .tooltip {
+            opacity: 1;
+            transform: translateY(-5px);
+          }
+          
+          .tooltip {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: $neutral-dark;
+            color: $white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            
+            &::after {
+              content: '';
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              margin-left: -5px;
+              border-width: 5px;
+              border-style: solid;
+              border-color: $neutral-dark transparent transparent transparent;
+            }
+          }
+        }
+      }
+      
+      .trend-indicator {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+        
+        span {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          
+          &.positive {
+            color: $success-color;
+          }
+          
+          &.negative {
+            color: $error-color;
+          }
+          
+          i {
+            font-size: 14px;
+          }
+        }
+        
+        .trend-label {
+          color: $light-text;
+          font-size: 12px;
+          margin-top: 3px;
+        }
+      }
+      
+      .small-stat {
+        margin-top: 15px;
+        border-top: 1px solid rgba($neutral-medium, 0.3);
+        padding-top: 10px;
+        
+        .stat-label {
+          font-size: 14px;
+          color: $light-text;
+          margin-bottom: 5px;
+        }
+        
+        .stat-value {
+          font-size: 16px;
+          font-weight: 500;
+          color: $neutral-dark;
+        }
+      }
+    }
+  }
+}
+
+// Location-Based Analytics
+.location-based {
+  .view-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+    .toggle-btn {
+      background-color: $neutral-light;
+      color: $neutral-dark;
+      border: none;
+      padding: 8px 18px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:first-child {
+        border-radius: 6px 0 0 6px;
+      }
+      
+      &:last-child {
+        border-radius: 0 6px 6px 0;
+      }
+      
+      &:hover {
+        background-color: darken($neutral-light, 5%);
+      }
+      
+      &.active {
+        background-color: $primary-color;
+        color: $white;
+      }
+    }
+  }
+  
+  .world-map-container {
+    height: 400px;
+    margin-top: 20px;
+    
+    .map-display {
+      height: 100%;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .country-list {
+      max-height: 400px;
+      overflow-y: auto;
+      
+      .list-title {
+        color: $neutral-dark;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      
+      .country-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        position: relative;
+        border-bottom: 1px solid $neutral-light;
+        
+        &:hover {
+          background-color: rgba($neutral-light, 0.5);
+        }
+        
+        .country-flag {
+          width: 30px;
+          margin-right: 12px;
+          
+          .flag-icon {
+            font-size: 24px;
+          }
+        }
+        
+        .country-name {
+          flex: 1;
+          font-weight: 500;
+        }
+        
+        .country-count {
+          margin: 0 15px;
+          font-weight: 600;
+          color: $primary-color;
+        }
+        
+        .country-bar {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 3px;
+          background-color: $secondary-color;
+          transition: width 0.5s ease;
+          z-index: 1;
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .analytics-container {
+    padding: 15px;
+    
+    .dashboard-title {
+      font-size: 24px;
+    }
+  }
+  
+  .time-based .time-periods {
+    grid-template-columns: 1fr;
+  }
+  
+  .timeframe-selector .timeframe-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .timeframe-btn {
+      width: 100%;
+    }
+  }
+  
+  .world-map-container {
+    height: 300px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .analytics-container {
+    padding: 10px;
+    
+    .dashboard-title {
+      font-size: 22px;
+    }
+  }
+  
+  .analytics-section {
+    padding: 15px;
+    
+    .section-title {
+      font-size: 20px;
+    }
+  }
+  
+  .period-card .visitor-count {
+    font-size: 28px !important;
+  }
+  
+  .world-map-container {
+    height: 250px !important;
+  }
+} 
+
+.visitor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  border-radius: 8px;
+  overflow: hidden;
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  th {
+    background: #f5f7fa;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e6ecf2;
+  }
+
+  tr:not(:last-child) td {
+    border-bottom: 1px solid #e6ecf2;
+  }
+
+  th.visitors-header, td.country-count {
+    text-align: right;
+  }
+
+  th.visitors-header {
+    min-width: 120px;
+  }
+
+  .country-name {
+    font-weight: 500;
+    color: #2d6a3f;
+  }
+  .city-name {
+    color: #333;
+  }
+  .country-count {
+    color: #4a8c5e;
+    font-weight: 600;
+    text-align: right;
+    min-width: 120px;
+  }
+  .hits {
+    color: #7a9e6b;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .visitor-table th, .visitor-table td {
+    padding: 8px 6px;
+    font-size: 14px;
+  }
+} 

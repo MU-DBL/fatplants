@@ -8,7 +8,7 @@
     background-color:  #629B07;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     color: white;
@@ -18,4 +18,28 @@
     // Creating a black stroke
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    
+    &:hover {
+      background-color: #84c209;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .counter-text {
+      margin-right: 10px;
+    }
+
+    .analytics-icon {
+      font-size: 0.8em;
+      opacity: 0.8;
+    }
   }
