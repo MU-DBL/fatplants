@@ -107,6 +107,9 @@ import { DownloadPageComponent } from './components/download-page/download-page.
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { PlantMetabolioNetworkComponent } from './components/plant-metabolio-network-page/plant-metabolio-network.component'
 import { MemoryofjohnComponent } from './components/aralip/memoryofjohn/memoryofjohn.component'
+import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
+import { NgxMatomoRouterModule } from '@ngx-matomo/router';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -239,7 +242,11 @@ import { MemoryofjohnComponent } from './components/aralip/memoryofjohn/memoryof
     MatDialogModule,
     MatSnackBarModule,
     ClipboardModule,
-
+    NgxMatomoTrackerModule.forRoot({
+      trackerUrl: environment.matomo_url,
+      siteId: environment.matomo_site_id
+    }),
+    NgxMatomoRouterModule,
     MatSliderModule 
   ],
   providers: [],
