@@ -110,6 +110,9 @@ import { MemoryofjohnComponent } from './components/aralip/memoryofjohn/memoryof
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 import { environment } from 'src/environments/environment';
+import { VisitDashboardComponent } from './components/visit-dashboard/visit-dashboard.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -187,7 +190,8 @@ import { environment } from 'src/environments/environment';
     DownloadPageComponent,
     PagenotfoundComponent,
     PlantMetabolioNetworkComponent,
-    MemoryofjohnComponent
+    MemoryofjohnComponent,
+    VisitDashboardComponent
   ],
   entryComponents: [
     StructureViewerComponent,
@@ -247,6 +251,8 @@ import { environment } from 'src/environments/environment';
       siteId: environment.matomo_site_id
     }),
     NgxMatomoRouterModule,
+    LeafletModule,
+    NgxChartsModule,
     MatSliderModule 
   ],
   providers: [],

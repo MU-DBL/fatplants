@@ -17,7 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/fatplant",
+            "allowedCommonJsDependencies": [
+              "@asymmetrik/ngx-leaflet"
+            ],
+            "outputPath": "dist/fatplants",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -32,6 +35,7 @@
             "styles": [
               "src/custom-theme.scss",
               "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/leaflet/dist/leaflet.css",
               "src/styles.scss"
             ],
             "scripts": [

@@ -40,5 +40,14 @@
   "/get": {
     "target": "http://rest.kegg.jp",
     "secure": false
+  },
+  "/matomo": {
+    "target": "https://fatplants.net/matomo",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/matomo": ""
+    },
+    "logLevel": "debug"
   }
 }

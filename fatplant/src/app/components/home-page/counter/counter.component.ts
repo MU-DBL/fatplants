@@ -16,7 +16,7 @@ export class CounterComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getCount();
+    // this.getCount();
 
   }
 
