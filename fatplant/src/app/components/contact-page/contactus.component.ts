@@ -30,53 +30,40 @@ export class ContactUsComponent{
 
     let isValid = true;
 
-    if (firstName === '') {
-      this.showErrorMessage(form.querySelector('#firstName'), 'Required');
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(firstName)) {
-      this.showErrorMessage(form.querySelector('#firstName'), 'Only alphabets allowed');
-      isValid = false;
-    } else {
-      this.hideErrorMessage(form.querySelector('#firstName'));
-    }
 
-    if (lastName === '') {
-      this.showErrorMessage(form.querySelector('#lastName'), 'Required');
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(lastName)) {
-      this.showErrorMessage(form.querySelector('#lastName'), 'Only alphabets allowed');
-      isValid = false;
-    } else {
-      this.hideErrorMessage(form.querySelector('#lastName'));
-    }
+  if (firstName && !/^[a-zA-Z]+$/.test(firstName)) {
+    this.showErrorMessage(form.querySelector('#firstName'), 'Only alphabets allowed');
+    isValid = false;
+  } else {
+    this.hideErrorMessage(form.querySelector('#firstName'));
+  }
 
-    if (email === '') {
-      this.showErrorMessage(form.querySelector('#email'), 'Required');
-      isValid = false;
-    } else if (!this.isValidEmail(email)) {
-      this.showErrorMessage(form.querySelector('#email'), 'Invalid email format');
-      isValid = false;
-    } else {
-      this.hideErrorMessage(form.querySelector('#email'));
-    }
+  if (lastName && !/^[a-zA-Z]+$/.test(lastName)) {
+    this.showErrorMessage(form.querySelector('#lastName'), 'Only alphabets allowed');
+    isValid = false;
+  } else {
+    this.hideErrorMessage(form.querySelector('#lastName'));
+  }
 
-    if (subject === '') {
-      this.showErrorMessage(form.querySelector('#subject'), 'Required');
-      isValid = false;
-    } else {
-      this.hideErrorMessage(form.querySelector('#subject'));
-    }
+  if (email && !this.isValidEmail(email)) {
+    this.showErrorMessage(form.querySelector('#email'), 'Invalid email format');
+    isValid = false;
+  } else {
+    this.hideErrorMessage(form.querySelector('#email'));
+  }
 
-    if (message === '') {
-      this.showErrorMessage(form.querySelector('#message'), 'Required');
-      isValid = false;
-    } else {
-      this.hideErrorMessage(form.querySelector('#message'));
-    }
+  this.hideErrorMessage(form.querySelector('#subject'));
 
-    if (isValid) {
-      this.sendEmail();
-    }
+  if (message === '') {
+    this.showErrorMessage(form.querySelector('#message'), 'Required');
+    isValid = false;
+  } else {
+    this.hideErrorMessage(form.querySelector('#message'));
+  }
+
+  if (isValid) {
+    this.sendEmail();
+  }
   }
 
   isValidEmail(email: string): boolean {
