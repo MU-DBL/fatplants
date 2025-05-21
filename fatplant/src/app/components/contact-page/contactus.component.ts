@@ -30,20 +30,14 @@ export class ContactUsComponent{
 
     let isValid = true;
 
-    if (firstName === '') {
-      this.showErrorMessage(form.querySelector('#firstName'), 'Required');
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(firstName)) {
+    if (firstName && !/^[a-zA-Z]+$/.test(firstName)) {
       this.showErrorMessage(form.querySelector('#firstName'), 'Only alphabets allowed');
       isValid = false;
     } else {
       this.hideErrorMessage(form.querySelector('#firstName'));
     }
 
-    if (lastName === '') {
-      this.showErrorMessage(form.querySelector('#lastName'), 'Required');
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(lastName)) {
+    if (lastName && !/^[a-zA-Z]+$/.test(lastName)) {
       this.showErrorMessage(form.querySelector('#lastName'), 'Only alphabets allowed');
       isValid = false;
     } else {
@@ -60,12 +54,7 @@ export class ContactUsComponent{
       this.hideErrorMessage(form.querySelector('#email'));
     }
 
-    if (subject === '') {
-      this.showErrorMessage(form.querySelector('#subject'), 'Required');
-      isValid = false;
-    } else {
-      this.hideErrorMessage(form.querySelector('#subject'));
-    }
+    this.hideErrorMessage(form.querySelector('#subject'));
 
     if (message === '') {
       this.showErrorMessage(form.querySelector('#message'), 'Required');
