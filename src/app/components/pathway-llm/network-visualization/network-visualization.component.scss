@@ -1,0 +1,51 @@
+:host {
+  position: relative;  /* make this component the positioning context */
+}
+
+// the details box
+.node-details {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  z-index: 1000;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+// optional: headers a bit bolder
+.node-details strong {
+  color: #222;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.close-btn:focus {
+  outline: 2px solid #4CAF50;
+  outline-offset: 2px;
+}

@@ -1,0 +1,461 @@
+// Make sure you import Material Icons in your index.html or global styles
+// <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+input[type='range'] {
+  -webkit-appearance: none; /* Override default look */
+  accent-color: lightgrey;
+  height: 10px; /* Specified height */
+  border-radius: 5px;  
+  opacity: 0.7;
+  background-color: #248f8f; 
+  --range-color: #a8739d;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; 
+  outline: 3px solid #98c2c2;
+  background: white;
+  cursor: pointer;
+}
+
+
+.custom-search-option {
+  height: auto !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  .search-input-wrapper {
+    position: relative; // Establish a positioning context for the icon
+    display: flex; // Use flexbox to align items if needed
+    align-items: center; // Vertically center the icon and input
+    width: 100%; // Ensure the wrapper takes full width
+  }
+
+  .search-icon {
+    position: absolute; // Position the icon absolutely within the wrapper
+    left: 8px; // Adjust this value to control icon's distance from left edge
+    color: rgba(0, 0, 0, 0.54); // Standard Material text secondary color
+    font-size: 20px; // Adjust icon size if needed
+    margin-right:5px
+  }
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 16px 0 38px; // Crucial: Add left padding to make space for the icon
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    border-bottom: 1px solid #03aa3b;
+    line-height: 1.125; // Adjust line-height to vertically align text
+  }
+}
+
+
+::ng-deep .mat-mdc-form-field-infix {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    min-height: unset !important; 
+}
+
+.graph-container {
+  width: 100%;
+  height: 580px; 
+}
+
+button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding-left: 20px ;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chat-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.chat-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-btn, .dropdown-btn, .save-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.save-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.right-align{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1%;
+  margin-bottom: 2px;
+}
+
+select {
+  padding: 2px 2px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.chat-input-container {
+  display: flex;
+  align-items: flex-end; /* Align items to the bottom, useful for multi-line textareas */
+  border: 1px solid #00796b; /* Green border color from image */
+  border-radius: 8px; /* Slightly rounded corners */
+  padding: 8px;
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-bottom: 5px; /* Example margin, adjust as needed */
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.chat-input-container textarea {
+  flex-grow: 1; /* Allows textarea to take up available space */
+  border: none; /* Remove default textarea border */
+  outline: none; /* Remove outline on focus */
+  resize: none; /* Disable manual resizing by user */
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 5px; /* Padding inside the textarea */
+  min-height: 24px; /* Adjust based on your font-size and line-height for a single line */
+  max-height: 150px; /* Max height before scrolling, adjust as needed */
+  overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
+  background-color: transparent; /* Ensure transparent background */
+  color: #333; /* Text color */
+}
+
+.chat-input-container textarea::placeholder {
+  color: #888; /* Placeholder text color */
+}
+
+.send-button {
+  min-width: 40px; /* Ensure button doesn't shrink too much */
+  height: 40px; /* Make it square */
+  border-radius: 50%; /* Make it circular if you prefer */
+  background-color: transparent; /* No background color */
+  color: #629B07; /* Blue color for the icon, matching the image */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Remove default padding */
+  margin-left: 8px; /* Space between textarea and button */
+}
+
+.send-button mat-icon {
+  font-size: 24px; /* Adjust icon size */
+  width: 24px;
+  height: 24px;
+}
+
+.send-button:disabled {
+  color: #ccc; /* Gray out icon when disabled */
+  cursor: not-allowed;
+}
+
+.disclaimer-container {
+  background-color: #f0f8ff; /* Light blueish background */
+  border: 1px solid #add8e6; /* Light blue border */
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px; /* Adjust margin as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.disclaimer-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.warning-icon {
+  color: #ffc107; /* Amber/yellow color for warning */
+  margin-right: 8px;
+}
+
+.disclaimer-title {
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.close-button {
+  margin-left: auto;
+}
+
+.disclaimer-content {
+  font-size: 0.9em;
+  color: #333;
+  line-height: 1.5;
+}
+
+.disclaimer-content a {
+  color: #629B07; /* Blue color for links */
+  text-decoration: underline;
+}
+
+.split-container {
+    position: relative;     /* Set position relative to make it a reference for absolute positioning */
+    width: 100%;            /* Ensure the parent takes up the full width */
+    height: 100%;           /* Ensure the parent takes up the full height of its container */
+}
+
+.chat-container {
+    position: absolute;
+    top: 2px;
+    bottom: 110px;
+    z-index: 1000;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.chat-header {
+    flex-shrink: 0;
+}
+
+.messages-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message-text {
+  padding: 7px;
+  border-radius: 3px;
+  max-width: 95%;
+  word-wrap: break-word;
+}
+
+.user-message {
+  justify-content:flex-end;
+}
+
+.llm-message {
+  justify-content:flex-start;
+}
+
+.user-message .message-text {
+  background-color: #d0f0fd; /* Light blue for user messages */
+  color: #000;               /* Black text for readability */
+}
+
+/* Chatbot messages */
+.llm-message .message-text {
+  background-color: #fff8d6; /* Light yellow for chatbot messages */
+  color: #000;               /* Black text for readability */
+}
+
+.streaming-text {
+  font-family: inherit;
+  font-size: inherit;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Markdown table styles — ::ng-deep needed because ngx-markdown generates HTML dynamically */
+::ng-deep .message-text {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.88em;
+    margin: 8px 0;
+    display: block;
+    overflow-x: auto;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  th {
+    background-color: #e8f4e8;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #fafafa;
+  }
+}
+
+.pan-container {
+  width: 100%;
+  height: 570px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pan-container img {
+  display: block;
+  max-width: none;
+  max-height: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.range-container{
+  display:grid;
+  grid-template-columns: 1fr auto; /* 滑杆占满，数值贴右侧 */
+  column-gap:8px; row-gap:4px; align-items:center;
+}
+.range-container input[type=range]{ width:100%; }
+.range-value{ white-space:nowrap; }
+
+.node-inline{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+.node-title{margin:0;line-height:1;}
+.color-swatch{width:22px;height:22px;border-radius:50%;display:inline-block;position:relative;box-shadow:0 0 0 1px rgba(0,0,0,.25);}
+.color-swatch input[type=color]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+
+.node-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    margin-top: 6%;
+}
+
+.range-value {
+    width: 60px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.tab-header {
+  background: #629B07;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+}
+
+.tab-button {
+  width: 300px;
+  padding: 3px;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  color: #000000;
+  transition: all 0.3s ease;
+  min-width: 140px;
+}
+
+.tab-button.active {
+  background: #efefef;
+  color: #000000;
+}
+
+.center-empty{
+  display:flex;
+  align-items:center;   /* 垂直居中 */
+  justify-content:center; /* 水平居中 */
+}
+.empty-text{ margin:0; text-align:center; }
+
+.box{
+  margin: 2%;
+  border:1px solid #d8d8d8;
+  border-radius:5px;
+  padding:12px 14px;
+}
+
+.box-name{
+  font-weight: 700;
+  font-size: 1.0em;
+  color: #444444;
+  margin-bottom: 0.2rem  !important;
+}
+
+.box-subname{
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #444444;
+  margin-bottom: 0rem  !important;
+}
+
+.click-node-message {
+  padding: 2px 5px;
+  background: #f5f5f5;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  color: #666;
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+  margin: 2px 0;
+}

@@ -1,0 +1,232 @@
+<div class="tab-header">
+    <div class="tab-nav">
+       <button class="tab-button" role="tab"
+          [attr.aria-selected]="view==='a'"
+          [class.active]="view==='a'"
+          (click)="set('a')">Network Visualization</button>
+
+        <button class="tab-button" role="tab"
+          [attr.aria-selected]="view==='b'"
+          [class.active]="view==='b'"
+          (click)="set('b')">Pathway</button>
+    </div>
+</div>
+<div style="width: 100%; height: 700px; background-color:#fbfdfa;">
+  <as-split direction="horizontal" [gutterSize]="3">
+    <as-split-area [size]="15">
+        <div>
+            <div class="box">
+                <p class="box-name">Select a Pathway</p>
+                <div>
+                    <p class="box-subname">Species</p>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedSpecies"  
+                            (selectionChange)="onSpeciesSelected($event, matSelect)" #matSelect>
+                            <mat-option *ngFor="let species of specieses" [value]="species" >
+                            {{ species.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <p class="box-subname">Pathway Name</p>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(value)]="selectedPathwayDropdown" #matSelect [panelClass]="'fit-width-select-panel'">
+                            <mat-select-trigger>
+                                {{ selectedPathwayDropdown ? selectedPathwayDropdown.source + ': ' + selectedPathwayDropdown.title :
+                                'Select Pathway' }}
+                            </mat-select-trigger>
+                            <mat-option class="custom-search-option">
+                                <div class="search-input-wrapper">
+                                    <mat-icon class="search-icon">search</mat-icon> <input #searchInput matInput
+                                        placeholder="Search Pathway" [(ngModel)]="searchPathwayTerm" (input)="filterPathways()"
+                                        (keydown)="$event.stopPropagation()" (click)="$event.stopPropagation()" />
+                                </div>
+                            </mat-option>
+                            <mat-option *ngFor="let pathway of filteredPathwayDropdowns" [value]="pathway"
+                                (onSelectionChange)="onOptionSelected($event, matSelect)">
+                                {{ pathway.source }}: {{ pathway.title }}
+                            </mat-option>
+                            <mat-option *ngIf="filterPathways.length === 0 && searchPathwayTerm" disabled>
+                                No matching pathway found
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="click-node-message">Click node to show the details</div>
+            </div>
+            <div class="box">
+                    <p class="box-name">Relationships</p>
+                    <div *ngFor="let item of relationships" class="box-subname">
+                        <span>{{ item.id }}: </span> {{ item.name }}
+                    </div>    
+            </div>
+             
+            <div class="box">
+                <div>
+                    <p class="box-name">Network Summary</p>
+                    <div class="box-subname"><span>Total Nodes:</span> {{ summary.totalNodes || 0 }}</div>
+                    <div class="box-subname"><span>Total Edges:</span> {{ summary.totalEdges || 0 }}</div>
+                    <div *ngFor="let grp of getKeys(summary.groupCounts)" class="box-subname">
+                        <span>{{ grp }}: </span> {{ summary.groupCounts[grp] || 0 }}
+                </div>
+            </div>
+            </div>
+           
+        </div>
+    </as-split-area>
+    <as-split-area [size]="70" class="split-container">
+        <section [hidden]="view!=='a'">
+            <div [ngClass]="{ 'center-empty': !selectedPathwayDropdown }" style="width:100%; height:570px;">
+                <h6 *ngIf="!selectedPathwayDropdown" class="empty-text">
+                    Select a pathway to visualize the network
+                </h6>
+
+                <app-network-visualization
+                    *ngIf="selectedPathwayDropdown"
+                    [pathwayId]="selectedPathwayDropdown.id.toString()"
+                    [species]="selectedPathwayDropdown.species.toString()"
+                    (networkSummary)="onSummaryChange($event)">
+                </app-network-visualization>
+            </div>
+        </section>
+        <section [hidden]="view!=='b'">
+            <div style="width:100%; height:570px;">
+                <div>
+                    <div #imageContainer class="pan-container">
+                        <img #imageRef src="{{imageURL}}" alt="zoomable" draggable="false" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div *ngIf="!isMinimized" class="chat-container"> 
+            <div class="chat-header">
+                <span class="chat-title">Chat with LLM</span>
+                <div class="chat-actions">
+                    <button (click)="saveConversation()" class="save-btn" title="Save conversation" [disabled]="messages.length === 0">
+                    <mat-icon>save</mat-icon>
+                    </button>
+                    <button (click)="clearChat()"class="delete-btn">
+                    <mat-icon>delete</mat-icon>
+                    </button>
+                    <button class="dropdown-btn" (click)="setIsMinimized()">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div #chatContaine #messagesList class="messages-list">
+                <div *ngFor="let message of messages" class="message" [ngClass]="{'user-message': message.sender === 'user', 'llm-message': message.sender === 'llm'}">
+                    <div class="message-text">
+                        <ng-container *ngIf="message.isLoading; else rendered">
+                            <pre class="streaming-text">{{ message.answer || 'Thinking...' }}<span class="cursor">▊</span></pre>
+                        </ng-container>
+                        <ng-template #rendered>
+                            <markdown katex [data]="formatAnswer(message.answer)"></markdown>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div *ngIf="isDisclaimerVisible" class="disclaimer-container">
+                <div class="disclaimer-header">
+                    <mat-icon class="warning-icon">warning</mat-icon>
+                    <span class="disclaimer-title">Disclaimer</span>
+                    <button mat-icon-button class="close-button" (click)="closeDisclaimerDiv()">
+                    <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <div class="disclaimer-content">
+                    <p>This AI assistant may occasionally generate incorrect or misleading information.
+                    We are not responsible for any decisions made based on the generated content.
+                    By using this service, you agree to our
+                    <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="right-align">
+                <select class="chat-model-select" [(ngModel)]="selectedLLMModelOption">
+                                <option *ngFor="let opt of llmModelOptions" [value]="opt">{{ opt }}</option>
+                            </select>
+            </div>
+            <div class="chat-input-container">  
+            <textarea [(ngModel)]="messageText" placeholder="Independent Chat Assistant — Type your message..." (focus)="onStartTypeLLMMessage()" (keydown)="onKeyDown($event)">></textarea>           
+            <button
+                    mat-icon-button
+                    class="send-button"
+                    (click)="handleSendMessage()"
+                    [disabled]="!messageText.trim()">
+                    <mat-icon>send</mat-icon>
+            </button>
+        </div>
+        </div>   
+    </as-split-area>
+    <as-split-area [size]="15">
+        <div>
+            <div class="box">
+                <p class="box-name">Network Style</p>
+                <p class="box-subname">Edge Label Font Size</p>
+                <div class="range-container">
+                    <input type="range" [value]="graphConfig.edgeLabelFontSize" (input)="updateGlobalNodeSize($event)"  min="5" max="50" step="1"/>
+                    <input type="number" 
+                        class="range-value"
+                        min="5" 
+                        max="50"
+                        [value]="graphConfig.edgeLabelFontSize"
+                        (input)="updateGlobalEdgeLabelFontSize($event)">
+                </div>
+                <p class="box-subname">Node Label Font Size</p>
+                <div class="range-container">
+                    <input type="range" [value]="graphConfig.nodeLabelFontSize" (input)="updateGlobalNodeSize($event)"  min="5" max="50" step="1"/>
+                    <input type="number" 
+                        class="range-value"
+                        min="5" 
+                        max="50"
+                        [value]="graphConfig.nodeLabelFontSize"
+                        (input)="updateGlobalNodeLabelFontSize($event)">
+                </div>
+                <p class="box-subname">Node Size</p>
+                <div class="range-container">
+                    <input type="range" [value]="graphConfig.nodeSize" (input)="updateGlobalNodeSize($event)"  min="5" max="50" step="1"/>
+                    <input type="number" 
+                        class="range-value"
+                        min="5" 
+                        max="50"
+                        [value]="graphConfig.nodeSize"
+                        (input)="updateGlobalNodeSize($event)">
+                </div>
+            </div>
+            <div class="box">
+                <p class="box-name">Node Color & Node Size</p>
+                <div *ngFor="let nodeType of ['Reaction', 'Gene', 'Compound', 'Ortholog', 'EC']">
+                   <div class="node-header">
+                        <p class="box-subname">{{ nodeType }}</p>
+                        <label class="color-swatch" [style.background]="graphConfig.nodeStyles[nodeType]?.color || '#000'">
+                            <input
+                            type="color"
+                            [value]="graphConfig.nodeStyles[nodeType]?.color || '#000000'"
+                            (input)="updateNodeColor(nodeType, $event)"
+                            />
+                        </label>
+                    </div>
+                   <div class="range-container">
+                    <input type="range" min="5" max="50" step="1"
+                            [value]="graphConfig.nodeStyles[nodeType]?.size || 15"
+                            (input)="updateNodeSize(nodeType, $event)">
+                    <input type="number" 
+                        class="range-value"
+                        min="5" 
+                        max="50"
+                        [value]="graphConfig.nodeStyles[nodeType]?.size || 15"
+                        (input)="updateNodeSize(nodeType, $event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </as-split-area>
+  </as-split>
+</div>

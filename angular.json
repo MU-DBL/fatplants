@@ -34,6 +34,7 @@
              "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/katex/dist/katex.min.css",
               "src/styles.scss",
               "src/custom-theme.scss"
             ],
@@ -45,7 +46,8 @@
               "node_modules/webcola/WebCola/cola.min.js",
               "node_modules/webcola/WebCola/cola.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/static/js/logojs.js"
+              "src/static/js/logojs.js",
+              "node_modules/neovis.js/dist/neovis.js"
             ]
           },
           "configurations": {
@@ -90,15 +92,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "fatplant:build",
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.json",
+            "buildTarget": "fatplant:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "fatplants:build:production"
+              "buildTarget": "fatplants:build:production"
             },
             "development": {
-              "browserTarget": "fatplants:build:development"
+              "buildTarget": "fatplants:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -106,7 +108,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fatplants:build"
+            "buildTarget": "fatplants:build"
           }
         },
         "test": {
